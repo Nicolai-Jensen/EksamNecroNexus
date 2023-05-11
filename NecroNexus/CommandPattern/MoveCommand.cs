@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NecroNexus.CommandPattern
+namespace NecroNexus
 {
     public class MoveCommand : ICommand
     {

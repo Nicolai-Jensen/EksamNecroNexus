@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,15 @@ using System.Threading.Tasks;
 namespace NecroNexus
 {
     //--------------------------Nicolai Jensen----------------------------//
-    class LevelOne : State
+    public class LevelOne : State
     {
         //A Texture variable for our background
         private Texture2D[] backgroundsprite;
+
+        private List<GameObject> gameObjects = new List<GameObject>();
+        private List<GameObject> addGameObjects = new List<GameObject>();
+        private List<GameObject> removedGameObjects = new List<GameObject>();
+
 
         //2 variables to control key presses
         private KeyboardState currentKey;
@@ -21,7 +27,7 @@ namespace NecroNexus
         /// <summary>
         /// The States Constructor which applies the picture that is shown
         /// </summary>
-        public LevelOne()
+        public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
 
         }
@@ -52,6 +58,34 @@ namespace NecroNexus
 
 
             spriteBatch.End();
+        }
+
+        public void AddObject(GameObject go)
+        {
+            addGameObjects.Add(go);
+        }
+
+        public void RemoveObject(GameObject go)
+        {
+            removedGameObjects.Add(go);
+        }
+
+
+        public Component FindObjectOfType<T>() where T : Component
+        {
+            foreach (GameObject gameObject in gameObjects)
+            {
+                Component c = gameObject.GetComponent<T>();
+
+                if (c != null)
+                {
+                    return c;
+                }
+            }
+
+            return null;
+
+
         }
     }
 }

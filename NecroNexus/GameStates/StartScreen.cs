@@ -1,8 +1,11 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +13,7 @@ namespace NecroNexus
 {
     //--------------------------Nicolai Jensen----------------------------//
 
-    class StartScreen : State
+    public class StartScreen : State
     {
         //A Texture variable for our background
         private Texture2D[] backgroundsprite;
@@ -22,9 +25,11 @@ namespace NecroNexus
         /// <summary>
         /// The States Constructor which applies the picture that is shown
         /// </summary>
-        public StartScreen()
+        public StartScreen(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
-
+            
+            backgroundsprite = new Texture2D[1];
+            backgroundsprite[0] = content.Load<Texture2D>("placeholdersprites/background1");
         }
 
         public override void Initialize()
@@ -51,6 +56,7 @@ namespace NecroNexus
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
 
+            spriteBatch.Draw(backgroundsprite[0], new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0.1f);
 
             spriteBatch.End();
         }
