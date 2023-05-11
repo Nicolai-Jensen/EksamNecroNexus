@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace NecroNexus
 
     //--------------------------Nicolai Jensen----------------------------//
 
-    class Menu : State
+    public class Menu : State
     {
         //A Texture variable for our background
         private Texture2D[] backgroundsprite;
@@ -23,7 +24,7 @@ namespace NecroNexus
         /// <summary>
         /// The States Constructor which applies the picture that is shown
         /// </summary>
-        public Menu()
+        public Menu(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
             
         }

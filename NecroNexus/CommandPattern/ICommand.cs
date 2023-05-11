@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NecroNexus.CommandPattern
+namespace NecroNexus
 {
+    /// <summary>
+    /// An Interface used for executing Command Patterns
+    /// </summary>
     public interface ICommand
     {
+        void Execute(Necromancer player);
     }
 }

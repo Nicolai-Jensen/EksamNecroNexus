@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NecroNexus.ComponentPattern.Summons
+namespace NecroNexus
 {
     public class Demon : Summon
     {

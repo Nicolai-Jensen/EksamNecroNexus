@@ -49,6 +49,11 @@ namespace NecroNexus
             }
         }
 
+        public LevelOne LevelOne
+        {
+            get { return levelOne; }
+        }
+
         public GameWorld()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -67,16 +72,16 @@ namespace NecroNexus
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            menu = new Menu();
-            startScreen = new StartScreen();
-            levelOne = new LevelOne();
+            menu = new Menu(this, _graphics.GraphicsDevice, Content);
+            startScreen = new StartScreen(this, _graphics.GraphicsDevice, Content);
+            levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            ChangeState(menu);
+            ChangeState(startScreen);
             // TODO: use this.Content to load your game content here
         }
 
@@ -121,7 +126,7 @@ namespace NecroNexus
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            currentState.Draw(_spriteBatch);
 
             base.Draw(gameTime);
         }
