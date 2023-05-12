@@ -39,7 +39,8 @@ namespace NecroNexus
 
         public override void LoadContent()
         {
-
+            menuSprites[0] = content.Load<Texture2D>("placeholdersprites/UI/ButtonPlaceHolderPng");//background
+            menuRec[0] = new Rectangle(Convert.ToInt32(GameWorld.ScreenSize.X / 2), Convert.ToInt32(GameWorld.ScreenSize.Y/2),500,500);
         }
 
         /// <summary>
@@ -55,6 +56,7 @@ namespace NecroNexus
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            spriteBatch.Draw(menuSprites[0], menuRec[0], Color.White);
 
 
             spriteBatch.End();
