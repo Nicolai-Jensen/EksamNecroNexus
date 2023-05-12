@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NecroNexus
+namespace NecroNexus.ComponentPattern.Summons
 {
-    public class SpriteRenderer : Component
-    
-   }
+    internal class ArcherArrow
+    {
+    }
 }
