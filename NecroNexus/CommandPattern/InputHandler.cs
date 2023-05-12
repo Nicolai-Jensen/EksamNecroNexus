@@ -38,7 +38,7 @@ namespace NecroNexus
         /// Executes the keybinds for the player object when pressing the keybinds
         /// </summary>
         /// <param name="player"></param>
-        public void Execute(Meerkat player)
+        public void Execute(Necromancer player)
         {
             //creates a keyState variable and checks the State of the key
             KeyboardState keyState = Keyboard.GetState();
