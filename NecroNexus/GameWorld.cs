@@ -83,7 +83,7 @@ namespace NecroNexus
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            ChangeState(startScreen);
+            ChangeState(menu);
             // TODO: use this.Content to load your game content here
         }
 
