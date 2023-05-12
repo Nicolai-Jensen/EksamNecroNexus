@@ -73,34 +73,29 @@ namespace NecroNexus
         /// <param name="velocity"></param>
         public void Move(Vector2 velocity)
         {
-            ////This if is here to disable movement while Jumping
-            //if (jumping == false)
-            //{
-            //    //Normalize velocity for proper movement
-            //    if (velocity != Vector2.Zero)
-            //    {
-            //        velocity.Normalize();
-            //    }
+            
+                //Normalize velocity for proper movement
+                if (velocity != Vector2.Zero)
+                {
+                    velocity.Normalize();
+                }
 
-            //    //Applies the speed to the direction
-            //    velocity *= speed;
+                //Applies the speed to the direction
+                velocity *= speed;
 
-            //    //Applies the velocity to the Meerkat
-            //    GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);
+                //Applies the velocity to the Meerkat
+                GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);
 
-            //    //Checks the direction the Meerkat is moving and applies the correct animation
-            //    if (velocity.X > 0 && jumping == false)
-            //    {
-            //        animator.PlayAnimation("Right");
-            //    }
-            //    else if (velocity.X < 0 && jumping == false)
-            //    {
-            //        animator.PlayAnimation("Left");
+                //Checks the direction the Meerkat is moving and applies the correct animation
+                if (velocity.X > 0)
+                {
+                    animator.PlayAnimation("Right");
+                }
+                else if (velocity.X < 0)
+                {
+                    animator.PlayAnimation("Left");
 
-            //    }
-            //}
-
-
+                }
 
         }
 
@@ -110,29 +105,27 @@ namespace NecroNexus
         public void ScreenJail()
         {
 
-            ////Horizontal bounds, you can walk from one side to the other 
-            //if (GameObject.Transform.Position.X < -25)
-            //{
-            //    GameObject.Transform.Position = new Vector2(GameWorld.Instance.GraphicsDevice.Viewport.Width + 24, GameObject.Transform.Position.Y);
-            //}
-            //if (GameObject.Transform.Position.X > GameWorld.Instance.GraphicsDevice.Viewport.Width + 25)
-            //{
-            //    GameObject.Transform.Position = new Vector2(-24, GameObject.Transform.Position.Y);
-            //}
+            //Horizontal bounds, you can walk from one side to the other 
+            if (GameObject.Transform.Position.X < -25)
+            {
+                GameObject.Transform.Position = new Vector2(GameWorld.ScreenSize.X + 24, GameObject.Transform.Position.Y);
+            }
+            if (GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 25)
+            {
+                GameObject.Transform.Position = new Vector2(-24, GameObject.Transform.Position.Y);
+            }
 
-            ////Vertical bounds, they stop you from proceeding out of bounds (These needed extra code to protect the integrity of the jump function so it didn't break)
-            //if (GameObject.Transform.Position.Y > GameWorld.Instance.GraphicsDevice.Viewport.Height - tileHeight)
-            //{
-            //    jumping = false;
-            //    GameObject.Transform.Position = new Vector2(GameObject.Transform.Position.X, GameWorld.Instance.GraphicsDevice.Viewport.Height - tileHeight);
-            //    previousPosition = currentPosition;
-            //}
-            //if (GameObject.Transform.Position.Y < 60)
-            //{
-            //    jumping = false;
-            //    GameObject.Transform.Position = new Vector2(GameObject.Transform.Position.X, 60);
-            //    previousPosition = currentPosition;
-            //}
+            //Vertical bounds, they stop you from proceeding out of bounds (These needed extra code to protect the integrity of the jump function so it didn't break)
+            if (GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y)
+            {
+                
+                GameObject.Transform.Position = new Vector2(GameObject.Transform.Position.X, GameWorld.ScreenSize.Y);
+            }
+            if (GameObject.Transform.Position.Y < GameWorld.ScreenSize.Y - GameWorld.ScreenSize.Y)
+            {
+                GameObject.Transform.Position = new Vector2(GameObject.Transform.Position.X, 1);
+
+            }
         }
 
         /// <summary>
