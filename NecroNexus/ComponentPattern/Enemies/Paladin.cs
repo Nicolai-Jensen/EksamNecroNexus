@@ -8,5 +8,9 @@ namespace NecroNexus
 {
     public class Paladin : Enemy, IGameListener
     {
+        public void Notify(GameEvent gameEvent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
