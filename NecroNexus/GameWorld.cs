@@ -60,6 +60,8 @@ namespace NecroNexus
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
+            Globals.Content = Content;
+
             //Sets the games ScreenSize and applies it to our variable
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
