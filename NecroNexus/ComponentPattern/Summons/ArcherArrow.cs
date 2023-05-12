@@ -7,17 +7,31 @@ using System.Threading.Tasks;
 
 namespace NecroNexus.ComponentPattern
 {
-    public class ArcherArrow
+    public class Projectile
     {
-        private Vector2 position;
-        private Vector2 direction;
-        private object attackDamage;
+        public Vector2 Position { get; set; }
+        public Vector2 Direction { get; set; }
+        public float Speed { get; set; }
+        public float Damage { get; set; }
 
-        public ArcherArrow(Vector2 position, Vector2 direction, object attackDamage)
+        public Projectile(Vector2 position, Vector2 direction, float damage)
         {
-            this.position = position;
-            this.direction = direction;
-            this.attackDamage = attackDamage;
+            Position = position;
+            Direction = direction;
+            Speed = 5.0f; // Adjust as needed
+            Damage = damage;
+        }
+
+        public void Launch()
+        {
+            Position += Direction * Speed;
+
+            Enemy enemy = CheckCollisionWithEnemy();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(Damage);
+            }
+
         }
     }
 }

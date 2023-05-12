@@ -22,31 +22,34 @@ namespace NecroNexus
 
 
 
-        //public bool IsEnemyInRange(Enemy enemy)
-        //{
-        //    float distance = Vector2.Distance(Position, enemy.Position);
-        //    return distance <= AttackRange;
-        //}
+       
 
-
-        public virtual void Awake()
+        public override void Update(List<Enemy> enemies)
         {
-
+            foreach (Enemy enemy in enemies)
+            {
+                if (IsEnemyInRange(enemy))
+                {
+                   Shoot(enemy);
+                }
+            }  
         }
 
-        public virtual void Start()
-        {
 
+
+        public bool IsEnemyInRange(Enemy enemy)
+        {
+            float distance = Vector2.Distance(Position, enemy.Position);
+            return distance <= AttackRange;
         }
 
-        public virtual void Update()
+        private void Shoot(Enemy enemy)
         {
+            Vector2 direction = enemy.Position - Position;
+            direction.Normalize();
 
-        }
-
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-
+            Projectile projectile = new Projectile, directiom, AttackDamage);
+            projectile.Launch
         }
     }
 }
