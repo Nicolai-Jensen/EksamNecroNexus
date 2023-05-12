@@ -8,5 +8,6 @@ namespace NecroNexus
 {
     public abstract class Factory
     {
+        public abstract GameObject Create(Enum type);
     }
 }
