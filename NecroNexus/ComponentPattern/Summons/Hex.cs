@@ -9,8 +9,6 @@ namespace NecroNexus
 {
     public class Hex : Summon
     {
-        public Hex(Vector2 position, float attackrange) : base(position, attackrange)
-        {
-        }
+      
     }
 }

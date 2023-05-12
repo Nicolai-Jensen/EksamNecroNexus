@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
-    public class Summon : Component
+    public abstract class Summon : Component
     {
         public Vector2 Position { get; set; }
         public float AttackRange { get; set; }
@@ -20,7 +20,7 @@ namespace NecroNexus
             AttackRange = attackrange;
         }
 
-        
+
 
         //public bool IsEnemyInRange(Enemy enemy)
         //{
@@ -28,6 +28,25 @@ namespace NecroNexus
         //    return distance <= AttackRange;
         //}
 
-        
+
+        public virtual void Awake()
+        {
+
+        }
+
+        public virtual void Start()
+        {
+
+        }
+
+        public virtual void Update()
+        {
+
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+
+        }
     }
 }

@@ -9,8 +9,6 @@ namespace NecroNexus
 {
     public class SkeletonBrute : Summon
     {
-        public SkeletonBrute(Vector2 position, float attackrange) : base(position, attackrange)
-        {
-        }
+       
     }
 }

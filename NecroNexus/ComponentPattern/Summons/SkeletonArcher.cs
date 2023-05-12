@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using NecroNexus.ComponentPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,16 @@ namespace NecroNexus
     {
         public SkeletonArcher(Vector2 position, float attackrange) : base(position, attackrange)
         {
+        }
+
+
+        private void LaunchArrow(Enemy enemy)
+        {
+            Vector2 direction = enemy.Position - Position;
+            direction.Normalize();
+
+            ArcherArrow arrow = new ArcherArrow(Position, direction, AttackDamage);
+            arrow.Launch();
         }
     }
 }
