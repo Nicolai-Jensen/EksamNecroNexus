@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -15,7 +16,9 @@ namespace NecroNexus
     public class Menu : State
     {
         //A Texture variable for our background
-        private Texture2D[] backgroundsprite;
+        private Texture2D[] menuSprites = new Texture2D[8];
+        private Rectangle[] menuRec = new Rectangle[8];
+        private bool[] clickedStuff = new bool[8];
 
         //2 variables to control key presses
         private KeyboardState currentKey;
@@ -31,7 +34,7 @@ namespace NecroNexus
 
         public override void Initialize()
         {
-
+            
         }
 
         public override void LoadContent()
