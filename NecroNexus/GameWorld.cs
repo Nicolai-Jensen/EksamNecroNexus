@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace NecroNexus
 {
@@ -62,6 +63,7 @@ namespace NecroNexus
 
             Globals.Content = Content;
 
+
             //Sets the games ScreenSize and applies it to our variable
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
@@ -74,6 +76,7 @@ namespace NecroNexus
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            Audio.LoadAudio();
             menu = new Menu(this, _graphics.GraphicsDevice, Content);
             startScreen = new StartScreen(this, _graphics.GraphicsDevice, Content);
             levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);

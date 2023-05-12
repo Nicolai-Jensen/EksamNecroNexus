@@ -37,3 +37,9 @@
 /processorParam:TextureFormat=Color
 /build:placeholdersprites/EldenRIngIcon.png
 
+#begin placeholdersprites/OverWorld.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:placeholdersprites/OverWorld.mp3
+
