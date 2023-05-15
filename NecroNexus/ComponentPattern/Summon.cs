@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using NecroNexus.ComponentPattern;
 using System;
 using System.Collections.Generic;
@@ -10,32 +11,43 @@ namespace NecroNexus
 {
     public abstract class Summon : Component
     {
+        public Texture2D SummonSprite { get; set; }
+
+
         public Vector2 Position { get; set; }
         public float AttackRange { get; set; }
+        public float AttackSpeed { get; set; }
         public int AttackDamage { get; set; }
+        public float Scale { get; set; }
 
 
-        public Summon(Vector2 position, float attackrange, int attackDamage)
+        public Summon(Texture2D summonSprite, Vector2 position, float attackrange, float attackspeed, int attackDamage)
         {
+            SummonSprite = summonSprite;
             Position = position;
             AttackRange = attackrange;
             AttackDamage = attackDamage;
+            AttackSpeed = attackspeed;
+
+            AttackSpeed = 1f;
+            Scale = 1f;
         }
         
 
+        //TODO: Ret når enemies er klar
 
-        public override void Update()
-        {
-            //TODO: tilføj den rigtige list
+        //public override void Update()
+        //{
+        //    //TODO: tilføj den rigtige list
 
-            foreach (Enemy enemy in )
-            {
-                if (IsEnemyInRange(enemy))
-                {
-                   Shoot(enemy);
-                }
-            }  
-        }
+        //    foreach (Enemy enemy in )
+        //    {
+        //        if (IsEnemyInRange(enemy))
+        //        {
+        //            Shoot(enemy);
+        //        }
+        //    }
+        //}
 
 
 
@@ -45,7 +57,7 @@ namespace NecroNexus
             return distance <= AttackRange;
         }
 
-        private void Shoot(Enemy enemy)
+        public virtual void Attack(Enemy enemy)
         {
             Vector2 direction = enemy.Position - Position;
             direction.Normalize();

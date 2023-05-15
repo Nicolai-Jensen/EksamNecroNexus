@@ -9,6 +9,8 @@ namespace NecroNexus
 {
     public class Demon : Summon
     {
-      
+        public Demon(Vector2 position, float attackrange, float attackspeed, int attackDamage) : base(position, attackrange, attackspeed, attackDamage)
+        {
+        }
     }
 }

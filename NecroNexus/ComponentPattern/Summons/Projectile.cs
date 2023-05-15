@@ -26,11 +26,11 @@ namespace NecroNexus.ComponentPattern
         {
             Position += Direction * Speed;
 
-            Enemy enemy = CheckCollisionWithEnemy();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(Damage);
-            }
+            //Enemy enemy = CheckCollisionWithEnemy();
+            //if (enemy != null)
+            //{
+            //    enemy.TakeDamage(Damage);
+            //}
 
         }
     }
