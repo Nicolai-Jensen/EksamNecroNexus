@@ -18,6 +18,7 @@ namespace NecroNexus
         private Menu menu;
         private StartScreen startScreen;
         private LevelOne levelOne;
+        private NewCharState newCharState;
 
         //A Vector2 to save our screen size on
         private static Vector2 screenSize;
@@ -48,11 +49,24 @@ namespace NecroNexus
                 return currentState;
             }
         }
+        public State NextState
+        {
+            get
+            {
+                return nextState;
+            }
+            set
+            {
+                nextState = value;
+            }
+        }
 
         public LevelOne LevelOne
         {
             get { return levelOne; }
         }
+        public NewCharState NewCharState { get { return newCharState; } }
+        public Menu Menu { get { return menu; } }
 
         public GameWorld()
         {
@@ -77,6 +91,7 @@ namespace NecroNexus
             menu = new Menu(this, _graphics.GraphicsDevice, Content);
             startScreen = new StartScreen(this, _graphics.GraphicsDevice, Content);
             levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);
+            newCharState = new NewCharState(this, _graphics.GraphicsDevice, Content);
             base.Initialize();
         }
 

@@ -49,6 +49,13 @@
 /processorParam:TextureFormat=Color
 /build:placeholdersprites/UI/ButtonPlaceHolderPng.png
 
+#begin placeholdersprites/UI/File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:placeholdersprites/UI/File.spritefont
+
 #begin placeholdersprites/UI/MenuPlaceHolderPng.png
 /importer:TextureImporter
 /processor:TextureProcessor
