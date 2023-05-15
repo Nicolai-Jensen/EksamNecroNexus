@@ -21,14 +21,14 @@ namespace NecroNexus
             AttackRange = attackrange;
             AttackDamage = attackDamage;
         }
+        
 
-
-
-       
 
         public override void Update()
         {
-            foreach (Enemy enemy in enemies)
+            //TODO: tilføj den rigtige list
+
+            foreach (Enemy enemy in )
             {
                 if (IsEnemyInRange(enemy))
                 {
