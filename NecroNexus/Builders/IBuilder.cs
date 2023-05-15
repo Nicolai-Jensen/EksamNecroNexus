@@ -8,5 +8,8 @@ namespace NecroNexus
 {
     public interface IBuilder
     {
+        void BuildGameObject();
+
+        GameObject GetResult();
     }
 }
