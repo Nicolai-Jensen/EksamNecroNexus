@@ -24,8 +24,6 @@ namespace DatabaseRepository
         {
             this.provider = provider;
             this.mapper = mapper;
-
-            CreateDatabaseTables();
         }
 
         public void CreateDatabaseTables()
@@ -48,6 +46,13 @@ namespace DatabaseRepository
             //Create Tables:
             //Fejl? prøve at sætte '+'erne sammen til enkelte linjer :)
 
+            //User:
+            cmd = new SQLiteCommand($"CREATE TABLE User (" +
+                $"UserID INT PRIMARY KEY, " +
+                $"UserName STRING);",
+                (SQLiteConnection)connection);
+            cmd.ExecuteNonQuery();
+
             //Level:
             cmd = new SQLiteCommand($"CREATE TABLE Level (" +
                 $"LevelId INT PRIMARY KEY, " +
@@ -58,7 +63,7 @@ namespace DatabaseRepository
                 $"Score FLOAT, " +
                 $"Souls FLOAT, " +
                 $"Wave INT, " +
-                $"FOREIGN KEY(UserId) references User(UserId);", 
+                $"FOREIGN KEY(UserId) references User(UserID));", 
                 (SQLiteConnection)connection);
             cmd.ExecuteNonQuery();
 
@@ -79,16 +84,11 @@ namespace DatabaseRepository
                 $"TowerLvl INT, " +
                 $"FOREIGN KEY(UserId) references User(UserId), " +
                 $"FOREIGN KEY(LevelID) references Level(LevelID), " +
-                $"FOREIGN KEY(TowerType) references Tower(TowerType);", 
+                $"FOREIGN KEY(TowerType) references Tower(TowerType));", 
                 (SQLiteConnection)connection);
             cmd.ExecuteNonQuery();
 
-            //User:
-            cmd = new SQLiteCommand($"CREATE TABLE User (" +
-                $"UserID INT PRIMARY KEY, " +
-                $"UserName STRING);", 
-                (SQLiteConnection)connection);
-            cmd.ExecuteNonQuery();
+            
         }
 
         public void CreateTowers()
