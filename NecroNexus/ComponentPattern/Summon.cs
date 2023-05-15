@@ -9,25 +9,6 @@ namespace NecroNexus
 {
     public class Summon : Component
     {
-        public Vector2 Position { get; set; }
-        public float AttackRange { get; set; }
-        public int Damage { get; set; }
-
-
-        public Summon(Vector2 position, float attackrange)
-        {
-            Position = position;
-            AttackRange = attackrange;
-        }
-
-        
-
-        //public bool IsEnemyInRange(Enemy enemy)
-        //{
-        //    float distance = Vector2.Distance(Position, enemy.Position);
-        //    return distance <= AttackRange;
-        //}
-
-        
+     
     }
 }

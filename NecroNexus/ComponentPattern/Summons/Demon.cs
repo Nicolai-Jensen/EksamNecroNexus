@@ -10,8 +10,6 @@ namespace NecroNexus
 {
     public class Demon : Summon
     {
-        public Demon(Texture2D summonSprite, Vector2 position, float attackrange, float attackspeed, int attackDamage) : base(summonSprite, position, attackrange, attackspeed, attackDamage)
-        {
-        }
+   
     }
 }
