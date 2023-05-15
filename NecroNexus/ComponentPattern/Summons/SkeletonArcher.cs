@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using NecroNexus.ComponentPattern;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,17 @@ namespace NecroNexus
 {
     public class SkeletonArcher : Summon
     {
-        public SkeletonArcher(Vector2 position, float attackrange, float attackSpeed, int attackDamage) : base(position, attackSpeed, attackrange, attackDamage)
+        public SkeletonArcher(Texture2D summonSprite, Vector2 position, float attackrange, float attackspeed, int attackDamage) : base(summonSprite, position, attackrange, attackspeed, attackDamage)
         {
-            AttackSpeed = 2.0f;
-            
         }
 
         public override void Attack(Enemy enemy)
         {
-            Vector2 direction = enemy.Position - Position;
-            direction.Normalize();
+            //Vector2 direction = enemy.Position - Position;
+            //direction.Normalize();
 
-            Projectile archerArrow = new Projectile(Position, direction, AttackDamage * 2);
-            archerArrow.Launch();
+            //Projectile archerArrow = new Projectile(Position, direction, AttackDamage * 2);
+            //archerArrow.Launch();
         }
     }
 }

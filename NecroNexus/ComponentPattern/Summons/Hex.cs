@@ -10,7 +10,7 @@ namespace NecroNexus
 {
     public class Hex : Summon
     {
-        public Hex(Vector2 position, float attackrange, float attackspeed, int attackDamage) : base(position, attackrange, attackspeed, attackDamage)
+        public Hex(Texture2D summonSprite, Vector2 position, float attackrange, float attackspeed, int attackDamage) : base(summonSprite, position, attackrange, attackspeed, attackDamage)
         {
         }
     }

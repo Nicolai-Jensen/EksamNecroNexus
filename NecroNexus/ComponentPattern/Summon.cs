@@ -51,19 +51,19 @@ namespace NecroNexus
 
 
 
-        public bool IsEnemyInRange(Enemy enemy)
-        {
-            float distance = Vector2.Distance(Position, enemy.Position);
-            return distance <= AttackRange;
-        }
+        //public bool IsEnemyInRange(Enemy enemy)
+        //{
+        //    //float distance = Vector2.Distance(Position, enemy.Position);
+        //    //return distance <= AttackRange;
+        //}
 
         public virtual void Attack(Enemy enemy)
         {
-            Vector2 direction = enemy.Position - Position;
-            direction.Normalize();
+            //Vector2 direction = enemy.Position - Position;
+            //direction.Normalize();
 
-            Projectile projectile = new Projectile(Position, direction, AttackDamage);
-            projectile.Launch();
+            //Projectile projectile = new Projectile(Position, direction, AttackDamage);
+            //projectile.Launch();
         }
     }
 }
