@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using NecroNexus.ComponentPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +12,21 @@ namespace NecroNexus
     {
         public Vector2 Position { get; set; }
         public float AttackRange { get; set; }
-        public int Damage { get; set; }
+        public int AttackDamage { get; set; }
 
 
-        public Summon(Vector2 position, float attackrange)
+        public Summon(Vector2 position, float attackrange, int attackDamage)
         {
             Position = position;
             AttackRange = attackrange;
+            AttackDamage = attackDamage;
         }
 
 
 
        
 
-        public override void Update(List<Enemy> enemies)
+        public override void Update()
         {
             foreach (Enemy enemy in enemies)
             {
@@ -48,8 +50,8 @@ namespace NecroNexus
             Vector2 direction = enemy.Position - Position;
             direction.Normalize();
 
-            Projectile projectile = new Projectile, directiom, AttackDamage);
-            projectile.Launch
+            Projectile projectile = new Projectile(Position, direction, AttackDamage);
+            projectile.Launch();
         }
     }
 }
