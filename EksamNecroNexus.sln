@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NecroNexus", "NecroNexus\NecroNexus.csproj", "{E51265AC-D9B1-4823-B003-16538ECF356F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NecroNexus", "NecroNexus\NecroNexus.csproj", "{E51265AC-D9B1-4823-B003-16538ECF356F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseRepository", "DatabaseRepository\DatabaseRepository.csproj", "{31A366CB-4AAD-4F57-8E22-DAABC35C850F}"
 EndProject

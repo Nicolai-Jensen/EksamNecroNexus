@@ -2,11 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NecroNexus
 {
@@ -14,10 +9,11 @@ namespace NecroNexus
     public class NewCharState : State
     {
         //A Texture variable for our background
-        private Texture2D[] backgroundsprite = new Texture2D [3];
+        private Texture2D[] backgroundsprite = new Texture2D[3];
         private Rectangle finalizeButRec;
         private SpriteFont spriteFont;
 
+        private MyWpfControl myWpfControl;
         //2 variables to control key presses
         private KeyboardState currentKey;
         private KeyboardState previousKey;
@@ -41,7 +37,8 @@ namespace NecroNexus
         {
             backgroundsprite[0] = content.Load<Texture2D>("placeholdersprites/UI/MenuPlaceHolderPng");
             spriteFont = content.Load<SpriteFont>("placeholdersprites/UI/File");
-            finalizeButRec = new Rectangle(250,250,200,75);
+            finalizeButRec = new Rectangle(250, 250, 200, 75);
+            myWpfControl = new MyWpfControl(spriteFont);
         }
 
         /// <summary>
@@ -49,10 +46,14 @@ namespace NecroNexus
         /// </summary>
         public override void Update()
         {
+            myWpfControl.Update();
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();//enables you to click with the currentMouse
-            if (finalizeButRec.Contains(currentMouse.X,currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+            if (finalizeButRec.Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
+                if (game.Menu.Drawdiffent == 7){game.Menu.ChangeNameLoadoneSaveone(myWpfControl.CurrentText);}
+                if (game.Menu.Drawdiffent == 8){game.Menu.ChangeNameLoadtwoSavetwo(myWpfControl.CurrentText);} 
+                if (game.Menu.Drawdiffent == 9){game.Menu.ChangeNameLoadthreeSavethree(myWpfControl.CurrentText);}
                 game.ChangeState(game.Menu);
             }
         }
@@ -62,10 +63,12 @@ namespace NecroNexus
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
-            spriteBatch.Draw(backgroundsprite[0], new Rectangle(0,0,600,400), Color.White);
-            spriteBatch.Draw(backgroundsprite[0],finalizeButRec , Color.Gray);
+            spriteBatch.Draw(backgroundsprite[0], new Rectangle(560, 270, 600, 400), Color.White);
+            spriteBatch.Draw(backgroundsprite[0], finalizeButRec, Color.Gray);
             spriteBatch.DrawString(spriteFont, "Name", new Vector2(0, 0), Color.Black);
+            myWpfControl.Draw(spriteBatch);
             spriteBatch.End();
         }
+
     }
 }

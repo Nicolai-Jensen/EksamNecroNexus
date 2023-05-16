@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Configuration;
 
 namespace NecroNexus
 {
@@ -15,6 +14,7 @@ namespace NecroNexus
         private Texture2D[] menuSprites = new Texture2D[8];
         private Rectangle[] menuRec = new Rectangle[16];
         private SpriteFont spriteFont;
+        private string[] placeHolderName = { "Empty", "Empty", "Empty" };
         private int clickedStuff = 0;
         private int WhichMenuClicked = 0;
         private int drawdiffent = 0;
@@ -23,6 +23,8 @@ namespace NecroNexus
 
         private MouseState previousMouse;
         private MouseState currentMouse;
+
+        public int Drawdiffent { get { return drawdiffent; } }
 
         /// <summary>
         /// The States Constructor which applies the picture that is shown
@@ -144,9 +146,29 @@ namespace NecroNexus
                 }
             }
         }
+
+        public void ChangeNameLoadoneSaveone(string saveName)
+        {
+            placeHolderName[0] = saveName;
+        }
+        public void ChangeNameLoadtwoSavetwo(string saveName)
+        {
+            placeHolderName[1] = saveName;
+
+        }
+        public void ChangeNameLoadthreeSavethree(string saveName)
+        {
+            placeHolderName[2] = saveName;
+
+        }
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
+            DrawingMenu(spriteBatch);
+            spriteBatch.End();
+        }
+        private void DrawingMenu(SpriteBatch spriteBatch)
+        {
             spriteBatch.Draw(menuSprites[0], menuRec[0], Color.White);
             switch (clickedStuff)//Navigating the menu
             {
@@ -163,22 +185,30 @@ namespace NecroNexus
                     {
                         spriteBatch.Draw(menuSprites[1], menuRec[i], Color.White);
                     }
-                    for (int i = 9; i < 12; i++)
+                    for (int i = 9; i < 12; i++)//Buttons
                     {
                         spriteBatch.Draw(menuSprites[1], menuRec[i], Color.White);
-                        switch (drawdiffent)
+
+                        switch (drawdiffent)//clicked button
                         {
                             case 4:
                                 spriteBatch.Draw(menuSprites[1], menuRec[9], Color.DarkGray);
+                                spriteBatch.DrawString(spriteFont, placeHolderName[0], new Vector2(menuRec[9].X + 10, menuRec[9].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
                                 break;
                             case 5:
                                 spriteBatch.Draw(menuSprites[1], menuRec[10], Color.DarkGray);
+                                spriteBatch.DrawString(spriteFont, placeHolderName[1], new Vector2(menuRec[10].X + 10, menuRec[10].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
                                 break;
                             case 6:
                                 spriteBatch.Draw(menuSprites[1], menuRec[11], Color.DarkGray);
+                                spriteBatch.DrawString(spriteFont, placeHolderName[2], new Vector2(menuRec[11].X + 10, menuRec[11].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
                                 break;
                         }
+                        spriteBatch.DrawString(spriteFont, placeHolderName[0], new Vector2(menuRec[9].X + 10, menuRec[9].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
+                        spriteBatch.DrawString(spriteFont, placeHolderName[1], new Vector2(menuRec[10].X + 10, menuRec[10].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
+                        spriteBatch.DrawString(spriteFont, placeHolderName[2], new Vector2(menuRec[11].X + 10, menuRec[11].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
                     }
+
                     break;
                 case 2://NewGame
                     spriteBatch.Draw(menuSprites[1], menuRec[5], Color.White);
@@ -187,28 +217,33 @@ namespace NecroNexus
                     for (int i = 12; i < 15; i++)
                     {
                         spriteBatch.Draw(menuSprites[1], menuRec[i], Color.White);
-
-                        switch (drawdiffent)
+                        switch (drawdiffent)//clicked button
                         {
                             case 7:
                                 spriteBatch.Draw(menuSprites[1], menuRec[12], Color.DarkGray);
+                                spriteBatch.DrawString(spriteFont, placeHolderName[0], new Vector2(menuRec[12].X + 10, menuRec[12].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
                                 break;
                             case 8:
                                 spriteBatch.Draw(menuSprites[1], menuRec[13], Color.DarkGray);
+                                spriteBatch.DrawString(spriteFont, placeHolderName[1], new Vector2(menuRec[13].X + 10, menuRec[13].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
                                 break;
                             case 9:
                                 spriteBatch.Draw(menuSprites[1], menuRec[14], Color.DarkGray);
+                                spriteBatch.DrawString(spriteFont, placeHolderName[2], new Vector2(menuRec[14].X + 10, menuRec[14].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
                                 break;
                         }
-                    }
+                        spriteBatch.DrawString(spriteFont, placeHolderName[0], new Vector2(menuRec[12].X + 10, menuRec[12].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
+                        spriteBatch.DrawString(spriteFont, placeHolderName[1], new Vector2(menuRec[13].X + 10, menuRec[13].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
+                        spriteBatch.DrawString(spriteFont, placeHolderName[2], new Vector2(menuRec[14].X + 10, menuRec[14].Y + 65), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.9f);
 
+                    }
                     break;
                 case 3://Options
                     spriteBatch.Draw(menuSprites[1], menuRec[5], Color.White);
 
                     break;
             }
-            spriteBatch.End();
+
         }
     }
 }
