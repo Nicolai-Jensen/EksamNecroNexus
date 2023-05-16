@@ -37,7 +37,7 @@ namespace NecroNexus
         {
             backgroundsprite[0] = content.Load<Texture2D>("placeholdersprites/UI/MenuPlaceHolderPng");
             spriteFont = content.Load<SpriteFont>("placeholdersprites/UI/File");
-            finalizeButRec = new Rectangle(250, 250, 200, 75);
+            finalizeButRec = new Rectangle(875, 500, 200, 75);
             myWpfControl = new MyWpfControl(spriteFont);
         }
 
@@ -63,9 +63,10 @@ namespace NecroNexus
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
-            spriteBatch.Draw(backgroundsprite[0], new Rectangle(560, 270, 600, 400), Color.White);
+            spriteBatch.Draw(backgroundsprite[0], new Rectangle(600, 270, 600, 400), Color.White);
+            spriteBatch.Draw(backgroundsprite[0], new Rectangle(800, 345, 350, 100), Color.DarkGray);
             spriteBatch.Draw(backgroundsprite[0], finalizeButRec, Color.Gray);
-            spriteBatch.DrawString(spriteFont, "Name", new Vector2(0, 0), Color.Black);
+            spriteBatch.DrawString(spriteFont, "Name", new Vector2(675, 370), Color.Black);
             myWpfControl.Draw(spriteBatch);
             spriteBatch.End();
         }

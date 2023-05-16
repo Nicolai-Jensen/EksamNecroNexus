@@ -8,7 +8,7 @@ namespace NecroNexus
     public class MyWpfControl
     {
         private SpriteFont font;
-        private string currentText = " ";
+        private string currentText = "";
         private string previousText;
         private float inputTimer;
 
@@ -66,7 +66,7 @@ namespace NecroNexus
         public void Draw(SpriteBatch spriteBatch)
         {
             // Draw the currentText using spriteBatch and the assigned font
-            spriteBatch.DrawString(font, currentText, new Vector2(25, 50), Color.Black);
+            spriteBatch.DrawString(font, currentText, new Vector2(800, 380), Color.Black,0f,new Vector2(0,0),1f,SpriteEffects.None,0.9f);
         }
     }
 }
