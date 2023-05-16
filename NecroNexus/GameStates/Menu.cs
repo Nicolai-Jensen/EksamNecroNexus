@@ -46,6 +46,11 @@ namespace NecroNexus
         {
             previousKey = currentKey;
             currentKey = Keyboard.GetState();
+
+            if (currentKey.IsKeyUp(Keys.E) && previousKey.IsKeyDown(Keys.E))
+            {
+                game.ChangeState(game.LevelOne);
+            }
         }
 
 
