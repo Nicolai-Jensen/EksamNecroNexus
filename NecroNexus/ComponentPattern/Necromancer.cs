@@ -23,10 +23,17 @@ namespace NecroNexus
         //An animator component to access animations
         private Animator animator;
 
-        private InputHandler inputHandler;
+        public int Tier { get; set; } = 0;
 
         //A Dictionary used when adding usable keys from InputHandler
         private Dictionary<Keys, BState> movementKeys = new Dictionary<Keys, BState>();
+
+        private NecroMagicFactory magic;
+
+        public NecroMagicFactory Magic
+        {
+            get { return magic; }
+        }
 
         /// <summary>
         /// The Awake method for the Meerkat
@@ -34,7 +41,9 @@ namespace NecroNexus
         public override void Awake()
         {
             //Sets its speed
-            speed = 400;
+            speed = 1000;
+
+            magic = new NecroMagicFactory();
         }
 
         /// <summary>
@@ -44,6 +53,8 @@ namespace NecroNexus
         {
             //Adds SpriteRenderer Component so we get access to drawing sprites
             SpriteRenderer sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
+            sr.SetSprite("placeholdersprites/EldenRingIcon", 0.2f, 1);
+
             
 
             //Sets the Start Position of the Meerkat and the field values needed for jumps to work
@@ -51,7 +62,10 @@ namespace NecroNexus
 
             //Adds the Animator Component and the adds the Keys to the Dictionary
             animator = (Animator)GameObject.GetComponent<Animator>();
-
+            movementKeys.Add(Keys.A, BState.Up);
+            movementKeys.Add(Keys.D, BState.Up);
+            movementKeys.Add(Keys.W, BState.Up);
+            movementKeys.Add(Keys.S, BState.Up);
         }
 
         /// <summary>
@@ -60,14 +74,17 @@ namespace NecroNexus
         public override void Update()
         {
             //Activates Inputhandlers Execute method
-            inputHandler.Execute(this);
+            InputHandler.Instance.Execute(this);
+
+            //Calls some other methods that need to be constantly used
+            ScreenJail();
 
             
 
         }
 
         /// <summary>
-        /// The Move method controls Meerkats velocity(direction) and applies a speed to it
+        /// The Move method controls the velocity(direction) and applies a speed to it
         /// It is also checking which animation it should be using
         /// </summary>
         /// <param name="velocity"></param>
@@ -83,7 +100,7 @@ namespace NecroNexus
                 //Applies the speed to the direction
                 velocity *= speed;
 
-                //Applies the velocity to the Meerkat
+                //Applies the velocity to the Object
                 GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);
 
                 //Checks the direction the Meerkat is moving and applies the correct animation

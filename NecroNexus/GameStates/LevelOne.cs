@@ -123,7 +123,7 @@ namespace NecroNexus
             addGameObjects.Clear();
         }
 
-        public Component FindObjectOfType<T>() where T : Component
+        public static Component FindObjectOfType<T>() where T : Component
         {
             foreach (GameObject gameObject in gameObjects)
             {

@@ -8,5 +8,14 @@ namespace NecroNexus
 {
     public class PaladinBuilder : IBuilder
     {
+        public void BuildGameObject()
+        {
+            throw new NotImplementedException();
+        }
+
+        public GameObject GetResult()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

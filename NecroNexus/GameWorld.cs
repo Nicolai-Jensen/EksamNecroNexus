@@ -54,6 +54,10 @@ namespace NecroNexus
         {
             get { return levelOne; }
         }
+        public Menu Menu
+        {
+            get { return menu; }
+        }
 
         public GameWorld()
         {
