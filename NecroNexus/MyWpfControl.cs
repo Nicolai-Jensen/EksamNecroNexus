@@ -62,7 +62,10 @@ namespace NecroNexus
                 keyReleased = true;
             }
         }
-
+        /// <summary>
+        /// Handels the drawing of the inputed text.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             // Draw the currentText using spriteBatch and the assigned font
