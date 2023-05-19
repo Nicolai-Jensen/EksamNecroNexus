@@ -70,6 +70,7 @@ namespace NecroNexus
                 gameObjects[i].Update();
             }
 
+            GameObjectsToRemove();
             Cleanup();
         }
 
@@ -136,8 +137,19 @@ namespace NecroNexus
             }
 
             return null;
+        }
 
+        public void GameObjectsToRemove()
+        {
+            foreach (GameObject gameObject in gameObjects)
+            {
+                Component component = gameObject.GetComponent<NecromancerMagic>(); // Replace Component with your specific component type
 
+                if (component != null && component.ToRemove)
+                {
+                    removedGameObjects.Add(gameObject);
+                }
+            }
         }
     }
 }
