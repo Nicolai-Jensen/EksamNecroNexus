@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 namespace NecroNexus
 {
 
-    //--------------------------Nicolai Jensen----------------------------//
+    //--------------------------Thorbjørn----------------------------//
 
     public class Menu : State
     {
@@ -15,8 +15,8 @@ namespace NecroNexus
         private Rectangle[] menuRec = new Rectangle[16];
         private SpriteFont spriteFont;
         private string[] placeHolderName = { "Empty", "Empty", "Empty" };
-        private int clickedStuff = 0;
-        private int WhichMenuClicked = 0;
+        private int clickedStuff = 0;// Which menu has been clicked 
+        private int WhichMenuClicked = 0;//0 for nothing pressed. 1 for Loadgame pressed. 2 for newgame pressed
         private int drawdiffent = 0;
 
         //2 variables to control key presses
@@ -95,12 +95,39 @@ namespace NecroNexus
                 clickedStuff = 1;
                 WhichMenuClicked = 1;
             }
+            // Loading the game with a user name
+            if (WhichMenuClicked == 1 && menuRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the LoadGameButton
+            {
+                switch (drawdiffent)
+                {
+                    case 4:
+                        if (placeHolderName[0] != "Empty")
+                        {
+                            game.ChangeState(game.LevelOne);
+                        }
+                        break;
+                    case 5:
+                        if (placeHolderName[1] != "Empty")
+                        {
+                            game.ChangeState(game.LevelOne);
+                        }
+                        break;
+                    case 6:
+                        if (placeHolderName[2] != "Empty")
+                        {
+                            game.ChangeState(game.LevelOne);
+                        }
+                        break;
+                }
+                return;
+            }
+
             if (WhichMenuClicked == 0 && menuRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing new game
             {
                 clickedStuff = 2;
                 WhichMenuClicked = 2;
             }
-            if (WhichMenuClicked == 0 && WhichMenuClicked == 0 && menuRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing options.
+            if (WhichMenuClicked == 0 && menuRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing options.
             {
                 clickedStuff = 3;
                 WhichMenuClicked = 3;

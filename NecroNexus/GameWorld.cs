@@ -19,6 +19,7 @@ namespace NecroNexus
         private StartScreen startScreen;
         private LevelOne levelOne;
         private NewCharState newCharState;
+        private PauseMenuState pausedMenuState;
 
         //A Vector2 to save our screen size on
         private static Vector2 screenSize;
@@ -65,6 +66,7 @@ namespace NecroNexus
         {
             get { return levelOne; }
         }
+        public PauseMenuState PauseMenuState { get { return pausedMenuState; } }
         public NewCharState NewCharState { get { return newCharState; } }
         public Menu Menu { get { return menu; } }
 
@@ -92,13 +94,14 @@ namespace NecroNexus
             startScreen = new StartScreen(this, _graphics.GraphicsDevice, Content);
             levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);
             newCharState = new NewCharState(this, _graphics.GraphicsDevice, Content);
+            pausedMenuState = new PauseMenuState(this, _graphics.GraphicsDevice, Content);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            ChangeState(levelOne);
+            ChangeState(pausedMenuState);
             // TODO: use this.Content to load your game content here
         }
         protected override void Update(GameTime gameTime)
