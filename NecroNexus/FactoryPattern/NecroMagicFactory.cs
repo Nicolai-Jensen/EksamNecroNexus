@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace NecroNexus
 
     public class NecroMagicFactory : Factory
     {
+
         public override GameObject Create(Enum type)
         {
             GameObject go = new GameObject();
@@ -17,16 +19,25 @@ namespace NecroNexus
             SpriteRenderer sr = (SpriteRenderer)go.AddComponent(new SpriteRenderer());
 
             Collider c = (Collider)go.AddComponent(new Collider());
-            c.Size1 = 2;
-            c.Size2 = 2;
-            c.Size3 = 1;
-            c.Size4 = 1;
+           
 
             switch (type)
             {
                 case MagicLevel.BaseTier:
-                    sr.SetSprite("placeholdersprites/EldenRingIcon", .5f, 0.5f);
-                    go.AddComponent(new NecromancerMagic());
+                    sr.SetSprite("placeholdersprites/EldenRingIcon", .1f, Globals.GetRotation(Globals.ReturnPlayerPosition()), 0.5f);
+                    go.AddComponent(new NecromancerMagic(0));
+                    break;
+                case MagicLevel.Tier1:
+                    sr.SetSprite("placeholdersprites/EldenRingIcon", .1f, Globals.GetRotation(Globals.ReturnPlayerPosition()), 0.5f);
+                    go.AddComponent(new NecromancerMagic(1));
+                    break;
+                case MagicLevel.Tier2:
+                    sr.SetSprite("placeholdersprites/EldenRingIcon", .3f, Globals.GetRotation(Globals.ReturnPlayerPosition()), 0.5f);
+                    go.AddComponent(new NecromancerMagic(2));
+                    break;
+                case MagicLevel.Tier3:
+                    sr.SetSprite("placeholdersprites/EldenRingIcon", .3f, Globals.GetRotation(Globals.ReturnPlayerPosition()), 0.5f);
+                    go.AddComponent(new NecromancerMagic(3));
                     break;
             }
 

@@ -30,6 +30,8 @@ namespace NecroNexus
         /// </summary>
         public float Scale { get; set; }
 
+        public float Rotation { get; set; }
+
         /// <summary>
         /// The Start method for this Component
         /// </summary>
@@ -45,11 +47,12 @@ namespace NecroNexus
         /// <param name="spriteName">This is the string that determines the sprite used</param>
         /// <param name="scale">This is the scale of the sprite that determines its size</param>
         /// <param name="sortOrder">This is the Layerdepth of the Sprite</param>
-        public void SetSprite(string spriteName, float scale, float sortOrder)
+        public void SetSprite(string spriteName, float scale, float rotation, float sortOrder)
         {
             Sprite = Globals.Content.Load<Texture2D>(spriteName);
             this.Scale = scale;
             this.SortOrder = sortOrder;
+            this.Rotation = rotation;
         }
 
         /// <summary>
@@ -58,7 +61,7 @@ namespace NecroNexus
         /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, GameObject.Transform.Position, null, Color.White, 0, Origin, Scale, SpriteEffects.None, SortOrder);
+            spriteBatch.Draw(Sprite, GameObject.Transform.Position, null, Color.White, Rotation, Origin, Scale, SpriteEffects.None, SortOrder);
         }
     }
 }
