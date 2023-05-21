@@ -13,6 +13,7 @@ namespace NecroNexus
     {
         public SkeletonArcher(Texture2D summonSprite, Vector2 position, float attackrange, float attackspeed, int attackDamage) : base(summonSprite, position, attackrange, attackspeed, attackDamage)
         {
+            
         }
 
         public override void Attack(Enemy enemy)
@@ -23,5 +24,7 @@ namespace NecroNexus
             //Projectile archerArrow = new Projectile(Position, direction, AttackDamage * 2);
             //archerArrow.Launch();
         }
+      
     }
 }
+a
