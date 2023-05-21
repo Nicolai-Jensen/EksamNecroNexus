@@ -32,7 +32,20 @@ namespace NecroNexus
             AttackSpeed = 1f;
             Scale = 1f;
         }
-        
+
+        public override void Start()
+        {
+            //Adds SpriteRenderer Component so we get access to drawing sprites
+            SpriteRenderer sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
+            sr.SetSprite("placeholdersprites/EldenRingIcon", 0.2f, 0, 1);
+            
+
+
+            GameObject.Transform.Position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
+
+           
+
+        }
 
         //TODO: Ret når enemies er klar
 
