@@ -18,7 +18,7 @@ namespace NecroNexus.ComponentPattern.Projectiles
         {
             Position = position;
             Direction = direction;
-            Speed = 5.0f; // Adjust as needed
+            Speed = 5.0f;
             Damage = damage;
         }
 
@@ -26,11 +26,7 @@ namespace NecroNexus.ComponentPattern.Projectiles
         {
             Position += Direction * Speed;
 
-            //Enemy enemy = CheckCollisionWithEnemy();
-            //if (enemy != null)
-            //{
-            //    enemy.TakeDamage(Damage);
-            //}
+         
 
         }
     }
