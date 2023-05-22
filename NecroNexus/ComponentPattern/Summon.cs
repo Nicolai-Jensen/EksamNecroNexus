@@ -34,7 +34,6 @@ namespace NecroNexus
             AttackSpeed = attackspeed;
 
             AttackSpeed = 1f;
-            Scale = 1f;
         }
 
 

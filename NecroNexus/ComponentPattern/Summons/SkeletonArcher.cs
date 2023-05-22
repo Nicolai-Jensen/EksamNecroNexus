@@ -38,6 +38,7 @@ namespace NecroNexus
             //        Attack(enemy);
             //    }
             //}
+
             KeyboardState keyboardState = Keyboard.GetState();
 
             if (keyboardState.IsKeyDown(Keys.Up))
@@ -52,8 +53,6 @@ namespace NecroNexus
 
         public override void Attack(Enemy enemy)
         {
-            
-
             base.Attack(enemy);
         }
 
