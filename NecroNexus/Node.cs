@@ -15,7 +15,10 @@ namespace NecroNexus
         public List<Edge<T>> EdgesList { get; private set; } = new List<Edge<T>>();
 
         //Constructor 
-        public Node(T data) 
+        public Node(T data)
+        {
+            this.Data = data;
+        }
 
 
     }
