@@ -32,6 +32,8 @@ namespace NecroNexus
 
         public float Rotation { get; set; }
 
+        public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
+
         /// <summary>
         /// The Start method for this Component
         /// </summary>
@@ -61,7 +63,7 @@ namespace NecroNexus
         /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, GameObject.Transform.Position, null, Color.White, Rotation, Origin, Scale, SpriteEffects.None, SortOrder);
+            spriteBatch.Draw(Sprite, GameObject.Transform.Position, null, Color.White, Rotation, Origin, Scale, SpriteEffects, SortOrder);
         }
     }
 }
