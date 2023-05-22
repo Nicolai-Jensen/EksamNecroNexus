@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
-    public class SkeletonBrute : Summon
-    {
-        public SkeletonBrute(Texture2D summonSprite, Vector2 position, float attackrange, float attackspeed, int attackDamage) : base(summonSprite, position, attackrange, attackspeed, attackDamage)
-        {
-        }
-    }
+    //public class SkeletonBrute : Summon
+    //{
+   
+    //}
 }

@@ -19,6 +19,8 @@ namespace NecroNexus
         private Menu menu;
         private StartScreen startScreen;
         private LevelOne levelOne;
+        private NewCharState newCharState;
+        private PauseMenuState pausedMenuState;
 
         //A Vector2 to save our screen size on
         private static Vector2 screenSize;
@@ -49,15 +51,26 @@ namespace NecroNexus
                 return currentState;
             }
         }
+        public State NextState
+        {
+            get
+            {
+                return nextState;
+            }
+            set
+            {
+                nextState = value;
+            }
+        }
 
         public LevelOne LevelOne
         {
             get { return levelOne; }
         }
-        public Menu Menu
-        {
-            get { return menu; }
-        }
+        
+        public PauseMenuState PauseMenuState { get { return pausedMenuState; } }
+        public NewCharState NewCharState { get { return newCharState; } }
+        public Menu Menu { get { return menu; } }
 
         public GameWorld()
         {
@@ -84,16 +97,17 @@ namespace NecroNexus
             menu = new Menu(this, _graphics.GraphicsDevice, Content);
             startScreen = new StartScreen(this, _graphics.GraphicsDevice, Content);
             levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);
+            newCharState = new NewCharState(this, _graphics.GraphicsDevice, Content);
+            pausedMenuState = new PauseMenuState(this, _graphics.GraphicsDevice, Content);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            ChangeState(startScreen);
+            ChangeState(Menu);
             // TODO: use this.Content to load your game content here
         }
-
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
