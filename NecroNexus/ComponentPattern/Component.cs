@@ -21,6 +21,7 @@ namespace NecroNexus
         /// </summary>
         public GameObject GameObject { get; set; }
 
+        public virtual bool ToRemove { get; set; }
 
         public virtual void Awake()
         {
@@ -45,3 +46,4 @@ namespace NecroNexus
 
     }
 }
+

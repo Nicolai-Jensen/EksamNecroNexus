@@ -15,6 +15,7 @@ namespace NecroNexus
         //The use of the Transform class to get and move the GameObjects Position
         public Transform Transform { get; set; } = new Transform();
 
+
         //This string Tag is used to identify certain GameObjects
         public string Tag { get; set; }
 

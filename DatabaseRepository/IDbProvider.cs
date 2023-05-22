@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DatabaseRepository
 {
-    internal interface IDbProvider
+    public interface IDbProvider
     {
+        IDbConnection CreateConnection();
+
+
     }
 }

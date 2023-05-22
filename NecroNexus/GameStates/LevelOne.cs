@@ -3,6 +3,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using SharpDX.Direct2D1;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
 
 namespace NecroNexus
 {
@@ -17,9 +24,10 @@ namespace NecroNexus
         private int whichUpgradeClicked = 0;
         private float timer;
 
-        private List<GameObject> gameObjects = new List<GameObject>();
-        private List<GameObject> addGameObjects = new List<GameObject>();
-        private List<GameObject> removedGameObjects = new List<GameObject>();
+        public static List<GameObject> gameObjects = new List<GameObject>();
+        public static List<GameObject> addGameObjects = new List<GameObject>();
+        public static List<GameObject> removedGameObjects = new List<GameObject>();
+        public static List<Collider> Colliders { get; private set; } = new List<Collider>();
 
 
         //2 variables to control key presses
@@ -39,7 +47,14 @@ namespace NecroNexus
 
         public override void Initialize()
         {
+            Director director = new Director(new NecroBuilder());
 
+            gameObjects.Add(director.Construct());
+
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                gameObjects[i].Awake();
+            }
         }
 
         public override void LoadContent()
@@ -70,6 +85,12 @@ namespace NecroNexus
             clickableButRec[17] = new Rectangle(125, 0, 500, 75);//Health,Souls,Wave
             clickableButRec[18] = new Rectangle(1845, 0, 75, 75);//PauseGame
 
+
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                gameObjects[i].Start();
+            }
+
         }
 
         /// <summary>
@@ -82,6 +103,14 @@ namespace NecroNexus
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();//enables you to click with the currentMouse
             CheckingIfClicked();
+
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                gameObjects[i].Update();
+            }
+
+            GameObjectsToRemove();
+            Cleanup();
         }
         private void CheckingIfClicked()
         {
@@ -143,10 +172,13 @@ namespace NecroNexus
         }
 
         public override void Draw(SpriteBatch spriteBatch)
-        {
+     
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
             DrawingUI(spriteBatch);
             spriteBatch.End();
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                gameObjects[i].Draw(spriteBatch);
         }
 
         private void DrawingUI(SpriteBatch spriteBatch)
@@ -205,18 +237,45 @@ namespace NecroNexus
 
         }
 
-        public void AddObject(GameObject go)
+        public static void AddObject(GameObject go)
         {
             addGameObjects.Add(go);
         }
 
-        public void RemoveObject(GameObject go)
+        public static void RemoveObject(GameObject go)
         {
             removedGameObjects.Add(go);
         }
+        private void Cleanup()
+        {
+            foreach (GameObject go in addGameObjects)
+            {
+                gameObjects.Add(go);
+                go.Awake();
+                go.Start();
 
+                Collider c = (Collider)(go).GetComponent<Collider>();
+                if (c != null)
+                {
+                    Colliders.Add(c);
+                }
+            }
 
-        public Component FindObjectOfType<T>() where T : Component
+            foreach (GameObject go in removedGameObjects)
+            {
+                Collider c = (Collider)(go).GetComponent<Collider>();
+                gameObjects.Remove(go);
+
+                if (c != null)
+                {
+                    Colliders.Remove(c);
+                }
+            }
+            removedGameObjects.Clear();
+            addGameObjects.Clear();
+        }
+
+        public static Component FindObjectOfType<T>() where T : Component
         {
             foreach (GameObject gameObject in gameObjects)
             {
@@ -229,8 +288,19 @@ namespace NecroNexus
             }
 
             return null;
+        }
 
+        public void GameObjectsToRemove()
+        {
+            foreach (GameObject gameObject in gameObjects)
+            {
+                Component component = gameObject.GetComponent<NecromancerMagic>(); // Replace Component with your specific component type
 
+                if (component != null && component.ToRemove)
+                {
+                    removedGameObjects.Add(gameObject);
+                }
+            }
         }
     }
 }

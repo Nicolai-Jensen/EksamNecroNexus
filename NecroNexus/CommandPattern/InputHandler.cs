@@ -10,7 +10,22 @@ namespace NecroNexus
 {
     public class InputHandler
     {
+        /// <summary>
+        /// A singleton for the Inputhandler to make it easier to interact with
+        /// </summary>
+        private static InputHandler instance;
 
+        public static InputHandler Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new InputHandler();
+                }
+                return instance;
+            }
+        }
         // A Dictionary for the Keybinds that we make
         private Dictionary<KeyInfo, ICommand> keybinds = new Dictionary<KeyInfo, ICommand>();
 
@@ -20,10 +35,10 @@ namespace NecroNexus
         /// <summary>
         /// The Constructor for the Inputhandler
         /// </summary>
-        private InputHandler(GameWorld game)
+        public InputHandler()
         {
-            //Creates a player variable and finds the player object within the GameWorlds list
-            Necromancer player = (Necromancer)game.LevelOne.FindObjectOfType<Necromancer>();
+            //Creates a player variable and finds the player object within the LevelOne list
+            Necromancer player = (Necromancer)LevelOne.FindObjectOfType<Necromancer>();
 
             //Attaches ButtonEvent to the player reference
             buttonEvent.Attach(player);
@@ -31,6 +46,9 @@ namespace NecroNexus
             //Creates keybinds for whatever Commands we want them attached to
             keybinds.Add(new KeyInfo(Keys.D), new MoveCommand(new Vector2(1, 0)));
             keybinds.Add(new KeyInfo(Keys.A), new MoveCommand(new Vector2(-1, 0)));
+            keybinds.Add(new KeyInfo(Keys.W), new MoveCommand(new Vector2(0, -1)));
+            keybinds.Add(new KeyInfo(Keys.S), new MoveCommand(new Vector2(0, 1)));
+            keybinds.Add(new KeyInfo(Keys.Space), new ShootCommand());
 
         }
 
@@ -62,5 +80,6 @@ namespace NecroNexus
                 }
             }
         }
+
     }
 }
