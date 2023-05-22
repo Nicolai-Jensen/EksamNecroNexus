@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NecroNexus.ComponentPattern.Projectiles
+namespace NecroNexus.ComponentPattern
 {
     public class ArcherArrow
     {
@@ -25,8 +25,6 @@ namespace NecroNexus.ComponentPattern.Projectiles
         public void Launch()
         {
             Position += Direction * Speed;
-
-         
 
         }
     }

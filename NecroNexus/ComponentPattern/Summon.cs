@@ -14,34 +14,35 @@ namespace NecroNexus
 
 
         public Vector2 Position { get; set; }
+        public Vector2 AttackRangeCenter => Position;
+
         public float AttackSpeed { get; set; }
-        public int MagicAttackDamage { get; set; }
-        public int PhysicalAttackDamage { get; set; }
+        public int MagicDamage { get; set; }
+        public int PhysicalDamage { get; set; }
         public float Scale { get; set; }
         public float AttackRangeRadius { get; set; }
-        public float AttackRangeCenter { get; set; }
 
 
 
-        public Summon(Vector2 position, float attackRangeCenter, float attackRangeRadius, float attackspeed, int physicalAttackDamage, int magicAttackDamage)
+        public Summon(Vector2 position, float attackRangeRadius, float attackspeed, int physicalDamage, int magicDamage)
         {
             
             Position = position;
-            AttackRangeCenter = attackRangeCenter;
             AttackRangeRadius = attackRangeRadius;
-            PhysicalAttackDamage = physicalAttackDamage;
+            PhysicalDamage = physicalDamage;
+            MagicDamage = magicDamage;
             AttackSpeed = attackspeed;
 
             AttackSpeed = 1f;
             Scale = 1f;
         }
 
+
         public override void Start()
         {
             //Adds SpriteRenderer Component so we get access to drawing sprites
             SpriteRenderer sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
             sr.SetSprite("placeholdersprites/EldenRingIcon", 0.2f, 0, 1);
-
 
 
             GameObject.Transform.Position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
@@ -71,7 +72,7 @@ namespace NecroNexus
 
             if(distance <= AttackRangeRadius)
             {
-                return true;
+                return true; 
             }
             return false;
         }
@@ -82,7 +83,7 @@ namespace NecroNexus
             //Vector2 direction = enemy.Position - Position;
             //direction.Normalize();
 
-            //ArcherArrow projectile = new ArcherArrow(Position, direction, MagicAttackDamage);
+            //ArcherArrow projectile = new ArcherArrow(Position, direction, MagicDamage);
             //projectile.Launch();
         }
     }
