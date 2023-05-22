@@ -11,22 +11,23 @@ namespace NecroNexus
 {
     public abstract class Summon : Component
     {
-        public Texture2D SummonSprite { get; set; }
 
 
         public Vector2 Position { get; set; }
-        public float AttackRange { get; set; }
+        public float AttackRangeCenter { get; set; }
         public float AttackSpeed { get; set; }
-        public int AttackDamage { get; set; }
+        public int MagicAttackDamage { get; set; }
+        public int PhysicalAttackDamage { get; set; }
         public float Scale { get; set; }
+        public float RangeRadius { get; set; }
 
 
-        public Summon(Texture2D summonSprite, Vector2 position, float attackrange, float attackspeed, int attackDamage)
+        public Summon(Vector2 position, float attackrange, float attackspeed, int physicalAttackDamage, int magicAttackDamage)
         {
-            SummonSprite = summonSprite;
+            
             Position = position;
-            AttackRange = attackrange;
-            AttackDamage = attackDamage;
+            AttackRangeCenter = attackrange;
+            PhysicalAttackDamage = physicalAttackDamage;
             AttackSpeed = attackspeed;
 
             AttackSpeed = 1f;
@@ -64,18 +65,24 @@ namespace NecroNexus
 
 
 
-        //public bool IsEnemyInRange(Enemy enemy)
-        //{
-        //    //float distance = Vector2.Distance(Position, enemy.Position);
-        //    //return distance <= AttackRange;
-        //}
+        public bool IsEnemyInRange(Vector2 enemyPosition)
+        {
+            float distance = Vector2.Distance(Position, enemyPosition);
+
+            if(distance <= RangeRadius)
+            {
+                return true;
+            }
+            return false;
+        }
+
 
         public virtual void Attack(Enemy enemy)
         {
             //Vector2 direction = enemy.Position - Position;
             //direction.Normalize();
 
-            //Projectile projectile = new Projectile(Position, direction, AttackDamage);
+            //ArcherArrow projectile = new ArcherArrow(Position, direction, MagicAttackDamage);
             //projectile.Launch();
         }
     }

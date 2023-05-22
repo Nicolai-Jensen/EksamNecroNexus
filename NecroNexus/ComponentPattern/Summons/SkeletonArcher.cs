@@ -11,9 +11,8 @@ namespace NecroNexus
 {
     public class SkeletonArcher : Summon
     {
-        public SkeletonArcher(Texture2D summonSprite, Vector2 position, float attackrange, float attackspeed, int attackDamage) : base(summonSprite, position, attackrange, attackspeed, attackDamage)
+        public SkeletonArcher(Vector2 position, float attackrange, float attackspeed, int attackDamage) : base(position, attackrange, attackspeed, attackDamage)
         {
-            
         }
 
         public override void Attack(Enemy enemy)
@@ -21,10 +20,9 @@ namespace NecroNexus
             //Vector2 direction = enemy.Position - Position;
             //direction.Normalize();
 
-            //Projectile archerArrow = new Projectile(Position, direction, AttackDamage * 2);
+            //ArcherArrow archerArrow = new ArcherArrow(Position, direction, MagicAttackDamage * 2);
             //archerArrow.Launch();
         }
       
     }
 }
-a
