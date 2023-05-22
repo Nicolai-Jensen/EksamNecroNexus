@@ -14,19 +14,21 @@ namespace NecroNexus
 
 
         public Vector2 Position { get; set; }
-        public float AttackRangeCenter { get; set; }
         public float AttackSpeed { get; set; }
         public int MagicAttackDamage { get; set; }
         public int PhysicalAttackDamage { get; set; }
         public float Scale { get; set; }
-        public float RangeRadius { get; set; }
+        public float AttackRangeRadius { get; set; }
+        public float AttackRangeCenter { get; set; }
 
 
-        public Summon(Vector2 position, float attackrange, float attackspeed, int physicalAttackDamage, int magicAttackDamage)
+
+        public Summon(Vector2 position, float attackRangeCenter, float attackRangeRadius, float attackspeed, int physicalAttackDamage, int magicAttackDamage)
         {
             
             Position = position;
-            AttackRangeCenter = attackrange;
+            AttackRangeCenter = attackRangeCenter;
+            AttackRangeRadius = attackRangeRadius;
             PhysicalAttackDamage = physicalAttackDamage;
             AttackSpeed = attackspeed;
 
@@ -43,8 +45,6 @@ namespace NecroNexus
 
 
             GameObject.Transform.Position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
-
-
 
         }
 
@@ -69,7 +69,7 @@ namespace NecroNexus
         {
             float distance = Vector2.Distance(Position, enemyPosition);
 
-            if(distance <= RangeRadius)
+            if(distance <= AttackRangeRadius)
             {
                 return true;
             }
