@@ -3,13 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using SharpDX.Direct2D1;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
 
 namespace NecroNexus
 {
@@ -17,7 +10,6 @@ namespace NecroNexus
     public class LevelOne : State
     {
         //A Texture variable for our background
-        private Texture2D[] backgroundsprite;
         private Rectangle[] clickableButRec = new Rectangle[24];
         private Texture2D[] UISprites = new Texture2D[24];
         private int menuButClicked = 0;
@@ -172,13 +164,16 @@ namespace NecroNexus
         }
 
         public override void Draw(SpriteBatch spriteBatch)
-     
+        {
+
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
             DrawingUI(spriteBatch);
-            spriteBatch.End();
+
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Draw(spriteBatch);
+            }
+            spriteBatch.End();
         }
 
         private void DrawingUI(SpriteBatch spriteBatch)

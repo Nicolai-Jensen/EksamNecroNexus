@@ -105,7 +105,7 @@ namespace NecroNexus
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            ChangeState(pausedMenuState);
+            ChangeState(Menu);
             // TODO: use this.Content to load your game content here
         }
         protected override void Update(GameTime gameTime)

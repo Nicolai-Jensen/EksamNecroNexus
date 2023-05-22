@@ -110,19 +110,19 @@ namespace NecroNexus
                     case 4:
                         if (placeHolderName[0] != "Empty")
                         {
-                            game.ChangeState(game.LevelOne);
+                            game.ChangeState2(game.LevelOne);
                         }
                         break;
                     case 5:
                         if (placeHolderName[1] != "Empty")
                         {
-                            game.ChangeState(game.LevelOne);
+                            game.ChangeState2(game.LevelOne);
                         }
                         break;
                     case 6:
                         if (placeHolderName[2] != "Empty")
                         {
-                            game.ChangeState(game.LevelOne);
+                            game.ChangeState2(game.LevelOne);
                         }
                         break;
                 }
