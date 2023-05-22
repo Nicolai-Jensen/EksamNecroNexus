@@ -19,6 +19,10 @@ namespace NecroNexus
         {
             speed = 100;
             this.board = board;
+            foreach (var item in board.PositionList)
+            {
+                pathList.Add(item);
+            }
         }
 
         public override void Start()
@@ -35,12 +39,13 @@ namespace NecroNexus
         {
 
             animator.PlayAnimation("Idle");
-            FindPath(board);
+            FindPath();
+            Move();
         }
 
-        public override void FindPath(Board board)
+        public override void FindPath()
         {
-            base.FindPath(board);
+            base.FindPath();
         }
 
     }

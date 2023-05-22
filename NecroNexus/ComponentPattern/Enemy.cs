@@ -15,29 +15,31 @@ namespace NecroNexus
         protected Vector2 velocity;
         protected Vector2 currentPosition;
         protected Vector2 nextPosition;
-        public virtual void FindPath(Board board)
+        protected List<Vector2> pathList = new List<Vector2>();
+
+        public virtual void FindPath()
         {
-            MoveToNextPosition(board, 0);
+            MoveToNextPosition();
         }
 
-        private void MoveToNextPosition(Board board, int currentPositionIndex)
+        private void MoveToNextPosition()
         {
-            if (currentPositionIndex >= board.PositionList.Count)
-                return;
 
-            nextPosition = board.PositionList[currentPositionIndex];
-            Vector2 outputVelocity = nextPosition - currentPosition;
-            outputVelocity.Normalize();
-            velocity = outputVelocity;
-
-            Move(); // Call the Move method to update the position
-
-            // Check if currentPosition has reached or exceeded nextPosition
-            if (Vector2.DistanceSquared(currentPosition, nextPosition) <= 1f)
+            if (pathList.Count > 0)
             {
-                currentPosition = nextPosition; // Set currentPosition to nextPosition
-                MoveToNextPosition(board, currentPositionIndex + 1); // Move to the next position index
+                nextPosition = pathList[0];
+
+                // Check if currentPosition has reached or exceeded nextPosition
+                if (Vector2.DistanceSquared(currentPosition, nextPosition) <= 1f)
+                {
+                    currentPosition = nextPosition; // Set currentPosition to nextPosition
+                    pathList.Remove(pathList[0]);
+                }
+                Vector2 outputVelocity = nextPosition - currentPosition;
+                outputVelocity.Normalize();
+                velocity = outputVelocity;
             }
+            
         }
         protected void Move()
         {
