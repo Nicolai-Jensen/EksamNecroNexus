@@ -35,14 +35,17 @@ namespace NecroNexus
 
         public override void LoadContent()
         {
-            backgroundsprite[0] = content.Load<Texture2D>("placeholdersprites/UI/MenuPlaceHolderPng");
+            backgroundsprite[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");
+            backgroundsprite[1] = content.Load<Texture2D>("placeholdersprites/UI/FinalizeBut");
+            backgroundsprite[2] = content.Load<Texture2D>("placeholdersprites/UI/EmptyBut");
             spriteFont = content.Load<SpriteFont>("placeholdersprites/UI/File");
-            finalizeButRec = new Rectangle(875, 500, 200, 75);
+            finalizeButRec = new Rectangle(800, 500, 300, 100);
             myWpfControl = new MyWpfControl(spriteFont);
         }
 
         /// <summary>
-        /// A way to ensure single key presses when taking action
+        /// Used to make sure that we can find and use the mouse position and then it calls a methode in Menu 
+        /// where it then sets the name accrodingly to what the player wrote
         /// </summary>
         public override void Update()
         {
@@ -64,9 +67,9 @@ namespace NecroNexus
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
             spriteBatch.Draw(backgroundsprite[0], new Rectangle(600, 270, 600, 400), Color.White);
-            spriteBatch.Draw(backgroundsprite[0], new Rectangle(800, 345, 350, 100), Color.DarkGray);
-            spriteBatch.Draw(backgroundsprite[0], finalizeButRec, Color.Gray);
-            spriteBatch.DrawString(spriteFont, "Name", new Vector2(675, 370), Color.Black);
+            spriteBatch.Draw(backgroundsprite[2], new Rectangle(800, 345, 350, 100), Color.Gray);
+            spriteBatch.Draw(backgroundsprite[1], finalizeButRec, Color.White);
+            spriteBatch.DrawString(spriteFont, "Name", new Vector2(675, 370), Color.White);
             myWpfControl.Draw(spriteBatch);
             spriteBatch.End();
         }

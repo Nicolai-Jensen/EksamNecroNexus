@@ -5,6 +5,10 @@ using System.Globalization;
 
 namespace NecroNexus
 {
+    //--------------------------Thorbjørn----------------------------//
+    /// <summary>
+    /// Handles the input when the player types their desiered name
+    /// </summary>
     public class MyWpfControl
     {
         private SpriteFont font;
@@ -69,7 +73,7 @@ namespace NecroNexus
         public void Draw(SpriteBatch spriteBatch)
         {
             // Draw the currentText using spriteBatch and the assigned font
-            spriteBatch.DrawString(font, currentText, new Vector2(800, 380), Color.Black,0f,new Vector2(0,0),1f,SpriteEffects.None,0.9f);
+            spriteBatch.DrawString(font, currentText, new Vector2(800, 380), Color.White,0f,new Vector2(0,0),1f,SpriteEffects.None,0.9f);
         }
     }
 }

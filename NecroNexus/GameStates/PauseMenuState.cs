@@ -35,10 +35,12 @@ namespace NecroNexus
         public override void LoadContent()
         {
             int menuXPos = 560, menuYPos = 120;
-            menuSprites[0] = content.Load<Texture2D>("placeholdersprites/UI/MenuPlaceHolderPng");//background
+            menuSprites[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");//background
             menuRec[0] = new Rectangle(menuXPos, menuYPos, 800, 900);//place for background
             spriteFont = content.Load<SpriteFont>("placeholdersprites/UI/File");
-            menuSprites[1] = content.Load<Texture2D>("placeholdersprites/UI/ButtonPlaceHolderPng");//buttons
+            menuSprites[1] = content.Load<Texture2D>("placeholdersprites/UI/BackBut");
+            menuSprites[2] = content.Load<Texture2D>("placeholdersprites/UI/OptionsBut");
+            menuSprites[3] = content.Load<Texture2D>("placeholdersprites/UI/MainMenuBut");
             int preYpos = menuYPos+50;
             for (int i = 1; i < 4; i++)//places the first 4 buttons 
             {
@@ -85,7 +87,7 @@ namespace NecroNexus
 
                     for (int i = 1; i < 4; i++)
                     {
-                        spriteBatch.Draw(menuSprites[1], menuRec[i], Color.White);
+                        spriteBatch.Draw(menuSprites[i], menuRec[i], Color.White);
                     }
                     break;
             }
