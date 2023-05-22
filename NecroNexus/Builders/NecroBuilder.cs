@@ -28,11 +28,9 @@ namespace NecroNexus
             Animator animator = (Animator)gameObject.GetComponent<Animator>();
 
             //Assigns new animations to the GameObject
-            animator.AddAnimation(BuildAnimation("Standing", new string[] { "placeholdersprites/EldenRingIcon" }));
-            animator.AddAnimation(BuildAnimation("Right", new string[] { "placeholdersprites/EldenRingIcon" }));
-            animator.AddAnimation(BuildAnimation("Left", new string[] { "placeholdersprites/EldenRingIcon" }));
-            animator.AddAnimation(BuildAnimation("JumpUp", new string[] { "placeholdersprites/EldenRingIcon" }));
-        }
+            animator.AddAnimation(BuildAnimation("Standing", new string[] { "Necromancer/Idle/tile000", "Necromancer/Idle/tile001", "Necromancer/Idle/tile002", "Necromancer/Idle/tile003", "Necromancer/Idle/tile004", "Necromancer/Idle/tile005", "Necromancer/Idle/tile006", "Necromancer/Idle/tile007" }));
+            animator.AddAnimation(BuildAnimation("Run", new string[] { "Necromancer/Run/tile000", "Necromancer/Run/tile001", "Necromancer/Run/tile002", "Necromancer/Run/tile003", "Necromancer/Run/tile004", "Necromancer/Run/tile005", "Necromancer/Run/tile006", "Necromancer/Run/tile007" }));
+            }
 
         /// <summary>
         /// A method for adding Components to our GameObject

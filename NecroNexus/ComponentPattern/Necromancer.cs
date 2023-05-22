@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,8 @@ namespace NecroNexus
 
         //An animator component to access animations
         private Animator animator;
+        private SpriteRenderer sr;
+        private string currentAnimation;
 
         private bool hasCastedMagic;
         private float castingMagicCooldown;
@@ -44,7 +48,7 @@ namespace NecroNexus
         public override void Awake()
         {
             //Sets its speed
-            speed = 1000;
+            speed = 400;
 
             magic = new NecroMagicFactory();
         }
@@ -55,10 +59,9 @@ namespace NecroNexus
         public override void Start()
         {
             //Adds SpriteRenderer Component so we get access to drawing sprites
-            SpriteRenderer sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
-            sr.SetSprite("placeholdersprites/EldenRingIcon", 0.2f, 0, 1);
+            sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
+            sr.SetSprite("Necromancer/Idle/tile000", 1f, 0, 1);
 
-            
 
             //Sets the Start Position of the Meerkat and the field values needed for jumps to work
             GameObject.Transform.Position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
@@ -80,6 +83,15 @@ namespace NecroNexus
         {
             //Activates Inputhandlers Execute method
             InputHandler.Instance.Execute(this);
+
+            //Makes sure that the Idle animation is played under the right conditions
+            if ((controlKeys[Keys.A] == BState.Up && controlKeys[Keys.D] == BState.Up && controlKeys[Keys.S] == BState.Up && controlKeys[Keys.W] == BState.Up
+                || controlKeys[Keys.A] == BState.Down && controlKeys[Keys.D] == BState.Down && controlKeys[Keys.S] == BState.Up && controlKeys[Keys.W] == BState.Up
+                || controlKeys[Keys.A] == BState.Down && controlKeys[Keys.D] == BState.Down && controlKeys[Keys.S] == BState.Down && controlKeys[Keys.W] == BState.Down
+                || controlKeys[Keys.A] == BState.Up && controlKeys[Keys.D] == BState.Up && controlKeys[Keys.S] == BState.Down && controlKeys[Keys.W] == BState.Down))
+            {
+                animator.PlayAnimation("Standing");
+            }
 
             Timer();
 
@@ -172,31 +184,41 @@ namespace NecroNexus
         /// </summary>
         /// <param name="velocity"></param>
         public void Move(Vector2 velocity)
-        {
-            
-                //Normalize velocity for proper movement
-                if (velocity != Vector2.Zero)
-                {
-                    velocity.Normalize();
-                }
+        {  
+            //Normalize velocity for proper movement
+            if (velocity != Vector2.Zero)
+            {
+                velocity.Normalize();
+            }
 
-                //Applies the speed to the direction
-                velocity *= speed;
+            //Applies the speed to the direction
+            velocity *= speed;
 
-                //Applies the velocity to the Object
-                GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);
+            //Applies the velocity to the Object
+            GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);
 
-                //Checks the direction the Meerkat is moving and applies the correct animation
-                if (velocity.X > 0)
-                {
-                    animator.PlayAnimation("Right");
-                }
-                else if (velocity.X < 0)
-                {
-                    animator.PlayAnimation("Left");
+            //Checks the direction the Necromancer is moving and applies the correct animation
+            if (velocity.X > 0)
+            {
+                sr.SpriteEffects = SpriteEffects.None;
+                animator.PlayAnimation("Run");
+            }
+            else if (velocity.X < 0)
+            {
+                sr.SpriteEffects = SpriteEffects.FlipHorizontally;
+                animator.PlayAnimation("Run");
+            }
 
-                }
+            //Checks the direction the Necromancer is moving and applies the correct animation
+            if (velocity.Y > 0)
+            {
+                animator.PlayAnimation("Run");
+            }
+            else if (velocity.Y < 0)
+            {
+                animator.PlayAnimation("Run");
 
+            }
         }
 
         /// <summary>

@@ -15,10 +15,10 @@ namespace NecroNexus
 
         //An animator component to access animations
         private Animator animator;
+        private Damage damage;
         private Vector2 velocity;
         private Vector2 startPosition;
         private int tier;
-        private float damage;
         private float timer;
         private bool homing = false;
         private bool split = false;
@@ -74,6 +74,7 @@ namespace NecroNexus
         public override void Start()
         {
             GameObject.Tag = "NecroMagic";
+
             if (hasSplit == false)
             {
                 GameObject.Transform.Position = new Vector2(Globals.ReturnPlayerPosition().X, Globals.ReturnPlayerPosition().Y);
@@ -120,20 +121,20 @@ namespace NecroNexus
         public void TierZero()
         {
             speed = 500f;
-            damage = 1f;
+            damage = new Damage(DamageType.Magical, 1f);
         }
 
         public void Tier1()
         {
             speed = 700f;
-            damage = 2f;
+            damage = new Damage(DamageType.Magical, 2f);
             homing = true;
         }
 
         public void Tier2()
         {
             speed = 250f;
-            damage = 3f;
+            damage = new Damage(DamageType.Magical, 3f);
             homing = true;
             split = true;
         }
@@ -141,7 +142,7 @@ namespace NecroNexus
         public void Tier3()
         {
             speed = 250f;
-            damage = 4f;
+            damage = new Damage(DamageType.Magical, 4f);
             homing = true;
             split = true;
             explode = true;
