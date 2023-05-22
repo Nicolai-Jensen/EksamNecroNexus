@@ -42,6 +42,8 @@ namespace NecroNexus
 
             gameObjects.Add(director.Construct());
 
+           
+
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Awake();

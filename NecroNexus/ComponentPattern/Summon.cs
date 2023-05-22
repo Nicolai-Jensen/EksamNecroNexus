@@ -11,26 +11,34 @@ namespace NecroNexus
 {
     public abstract class Summon : Component
     {
-        public Texture2D SummonSprite { get; set; }
+        public Texture2D SummonTexture { get; set; }
 
 
         public Vector2 Position { get; set; }
         public float AttackRange { get; set; }
         public float AttackSpeed { get; set; }
         public int AttackDamage { get; set; }
+        public int upgradeLevel { get; set; }
+
         public float Scale { get; set; }
 
 
-        public Summon(Texture2D summonSprite, Vector2 position, float attackrange, float attackspeed, int attackDamage)
+        public Summon(Texture2D summonTexture, Vector2 position, float attackRange, float attackSpeed, int attackDamage)
         {
-            SummonSprite = summonSprite;
+            SummonTexture = summonTexture;
             Position = position;
-            AttackRange = attackrange;
+            AttackRange = attackRange;
             AttackDamage = attackDamage;
-            AttackSpeed = attackspeed;
+            AttackSpeed = attackSpeed;
 
+            
             AttackSpeed = 1f;
             Scale = 1f;
+
+            upgradeLevel = 1;
+
+           
+
         }
         
 
@@ -65,5 +73,16 @@ namespace NecroNexus
             //Projectile projectile = new Projectile(Position, direction, AttackDamage);
             //projectile.Launch();
         }
+
+        public virtual void Upgrade()
+        {
+            
+        }
+
     }
+
+
+
+
+  
 }
