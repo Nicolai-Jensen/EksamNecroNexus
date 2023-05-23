@@ -12,8 +12,10 @@ namespace NecroNexus
 {
     public class SkeletonArcher : Summon
     {
-        
-        private const int MaxTier = 4;
+
+        private Enemy TargetEnemy; //Stores the current target
+
+        private const int MaxTier = 4; //Constant that "locks" the max tier for the tower, so the max tier variable cannot be changed elsewhere.
 
         public SkeletonArcher(Vector2 position, float attackRangeRadius, float attackspeed, int physicalDamage, int magicDamage)
             : base(position, attackRangeRadius, attackspeed, physicalDamage, magicDamage)
@@ -53,9 +55,18 @@ namespace NecroNexus
 
         public override void Attack(Enemy enemy)
         {
+            Vector2 direction = enemy.Position - Position;
+            direction.Normalize();
+
+            ArcherArrow arrow = new ArcherArrow(Position, direction, PhysicalDamage);
+            arrow.Launch
+
             base.Attack(enemy);
         }
 
+        /// <summary>
+        /// Method with a switch case that checks current tier and controls tier up
+        /// </summary>
         public void UpgradeArcher()
         {
             if(CurrentTier >= MaxTier)
@@ -78,7 +89,9 @@ namespace NecroNexus
                     break;
             }
         }
-
+        /// <summary>
+        /// Method for applying upgrades. When called the variables change. 
+        /// </summary>
         private void ApplyTier2Upgrades()
         {
             AttackRangeRadius += 20f;
@@ -100,6 +113,40 @@ namespace NecroNexus
             PhysicalDamage += 20;
             MagicDamage += 0;
         }
-      
+
+        /// <summary>
+        /// Compares how far each of the enemies inside the range is along the track. the enemy furthest in the track, becomes
+        /// </summary>
+        private Enemy FindFurthestEnemyInRange()
+        {
+            //puts all enemies in range of the tower, in a list
+            List<Enemy> enemiesInRange = GetEnemiesInRange();
+
+            //checks if there are enemies in range
+            if(enemiesInRange.Count == 0)
+            {
+                return null; //no enemies in range
+            }
+
+            Enemy furthestEnemy = enemiesInRange[0];
+            float furthestDistance = CalculateDistanceAlongTrack(furthestEnemy);
+            foreach(Enemy enemy in enemiesInRange)
+            {
+                float distance = CalculateDistanceAlongTrack(enemy);
+                if(distance > furthestDistance)
+                {
+                    furthestEnemy = enemy;
+                    furthestDistance = distance;
+                }
+            }
+            return furthestEnemy;
+        }
+
+        private float CalculateDistanceAlongTrack(Enemy enemy)
+        {
+
+        }
+
+
     }
 }
