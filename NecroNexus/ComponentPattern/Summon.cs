@@ -1,11 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using NecroNexus.ComponentPattern;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NecroNexus
 {
@@ -17,37 +10,24 @@ namespace NecroNexus
         public Vector2 AttackRangeCenter => Position;
 
         public float AttackSpeed { get; set; }
-        public int MagicDamage { get; set; }
-        public int PhysicalDamage { get; set; }
-        public float Scale { get; set; }
+        
         public float AttackRangeRadius { get; set; }
 
 
 
-        public Summon(Vector2 position, float attackRangeRadius, float attackspeed, int physicalDamage, int magicDamage)
+        public Summon(Vector2 position, float attackRangeRadius, float attackspeed)
         {
             
             Position = position;
             AttackRangeRadius = attackRangeRadius;
-            PhysicalDamage = physicalDamage;
-            MagicDamage = magicDamage;
+           
             AttackSpeed = attackspeed;
 
             AttackSpeed = 1f;
         }
 
 
-        public override void Start()
-        {
-            //Adds SpriteRenderer Component so we get access to drawing sprites
-            SpriteRenderer sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
-            sr.SetSprite("placeholdersprites/EldenRingIcon", 0.2f, 0, 1);
-
-
-            GameObject.Transform.Position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
-
-        }
-
+        
         //TODO: Ret når enemies er klar
 
         //public override void Update()
@@ -85,5 +65,38 @@ namespace NecroNexus
             //ArcherArrow projectile = new ArcherArrow(Position, direction, MagicDamage);
             //projectile.Launch();
         }
+
+        /// <summary>
+        /// Compares how far each of the enemies inside the range is along the track. the enemy furthest in the track, becomes the current target.
+        /// </summary>
+        //private Enemy FindFurthestEnemyInRange()
+        //{
+        //    //puts all enemies in range of the tower, in a list
+        //    List<Enemy> enemiesInRange = GetEnemiesInRange();
+
+        //    //checks if there are enemies in range
+        //    if(enemiesInRange.Count == 0)
+        //    {
+        //        return null; //no enemies in range
+        //    }
+
+        //    Enemy furthestEnemy = enemiesInRange[0];
+        //    float furthestDistance = CalculateDistanceAlongTrack(furthestEnemy);
+        //    foreach(Enemy enemy in enemiesInRange)
+        //    {
+        //        float distance = CalculateDistanceAlongTrack(enemy);
+        //        if(distance > furthestDistance)
+        //        {
+        //            furthestEnemy = enemy;
+        //            furthestDistance = distance;
+        //        }
+        //    }
+        //    return furthestEnemy;
+        //}
+
+        //private float CalculateDistanceAlongTrack(Enemy enemy)
+        //{
+
+        //}
     }
 }

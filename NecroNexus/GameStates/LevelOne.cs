@@ -14,6 +14,7 @@ namespace NecroNexus
         private Texture2D[] backgroundsprite;
         private Board boardOne;
         private EnemyFactory enemies;
+        private SummonFactory summons;
 
         private Rectangle[] clickableButRec = new Rectangle[24];
         private Texture2D[] UISprites = new Texture2D[24];
@@ -42,6 +43,8 @@ namespace NecroNexus
         {
             boardOne = new Board();
             enemies = new EnemyFactory(boardOne);
+            summons = new SummonFactory();
+
         }
 
         public override void Initialize()
@@ -51,6 +54,7 @@ namespace NecroNexus
 
             gameObjects.Add(director.Construct());
             gameObjects.Add(enemies.Create(EnemyType.Grunt));
+            gameObjects.Add(summons.Create(SummonType.SkeletonArcher));
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
