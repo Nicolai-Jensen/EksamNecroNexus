@@ -15,10 +15,11 @@ namespace NecroNexus
         
         public override bool ToRemove { get; set; }
 
-        public Grunt(Board board)
+        public Grunt(Board board, Vector2 pos)
         {
             speed = 100;
             this.board = board;
+            position = pos;
             foreach (var item in board.PositionList)
             {
                 pathList.Add(item);
@@ -27,7 +28,7 @@ namespace NecroNexus
 
         public override void Start()
         {
-            GameObject.Transform.Position = new Vector2(700, GameWorld.ScreenSize.Y / 2);
+            GameObject.Transform.Position = position;
             currentPosition = GameObject.Transform.Position;
             animator = (Animator)GameObject.GetComponent<Animator>();
         }
@@ -47,6 +48,8 @@ namespace NecroNexus
         {
             base.FindPath();
         }
+
+       
 
     }
 }
