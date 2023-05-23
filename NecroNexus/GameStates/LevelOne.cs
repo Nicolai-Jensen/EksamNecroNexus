@@ -10,11 +10,17 @@ namespace NecroNexus
     public class LevelOne : State
     {
         //A Texture variable for our background
+
+        private Texture2D[] backgroundsprite;
+        private Board boardOne;
+        private EnemyFactory enemies;
+
         private Rectangle[] clickableButRec = new Rectangle[24];
         private Texture2D[] UISprites = new Texture2D[24];
         private int menuButClicked = 0;
         private int whichUpgradeClicked = 0;
         private float timer;
+
 
         public static List<GameObject> gameObjects = new List<GameObject>();
         public static List<GameObject> addGameObjects = new List<GameObject>();
@@ -34,14 +40,17 @@ namespace NecroNexus
         /// </summary>
         public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
-
+            boardOne = new Board();
+            enemies = new EnemyFactory(boardOne);
         }
 
         public override void Initialize()
         {
+            boardOne.LevelOneBoard();
             Director director = new Director(new NecroBuilder());
 
             gameObjects.Add(director.Construct());
+            gameObjects.Add(enemies.Create(EnemyType.Grunt));
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -289,7 +298,7 @@ namespace NecroNexus
         {
             foreach (GameObject gameObject in gameObjects)
             {
-                Component component = gameObject.GetComponent<NecromancerMagic>(); // Replace Component with your specific component type
+                Component component = gameObject.GetComponent<NecromancerMagic>(); 
 
                 if (component != null && component.ToRemove)
                 {
@@ -297,5 +306,6 @@ namespace NecroNexus
                 }
             }
         }
+
     }
 }
