@@ -16,8 +16,11 @@ namespace NecroNexus
             get { return positionList; }
         }
 
-        public Board()
+        public Vector2 SpawnPosition { get; set; }
+
+        public Board(Vector2 spawnPosition)
         {
+            SpawnPosition = spawnPosition;
         }
 
         public void LevelOneBoard()

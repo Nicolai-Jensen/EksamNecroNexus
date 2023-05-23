@@ -12,7 +12,7 @@ namespace NecroNexus
     public class NecroMagicFactory : Factory
     {
 
-        public override GameObject Create(Enum type)
+        public override GameObject Create(Enum type, Vector2 pos)
         {
             GameObject go = new GameObject();
 

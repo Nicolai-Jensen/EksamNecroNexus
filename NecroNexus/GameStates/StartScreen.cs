@@ -30,7 +30,7 @@ namespace NecroNexus
         {
             //Plays and repeats the background music
             MediaPlayer.Play(Audio.StartScreenMusic);
-            MediaPlayer.Volume = 1.0f;
+            MediaPlayer.Volume = 0.1f;
 
 
             backgroundsprite = new Texture2D[1];
