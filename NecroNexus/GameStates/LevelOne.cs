@@ -62,10 +62,15 @@ namespace NecroNexus
         {
             UISprites[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");
             clickableButRec[0] = new Rectangle(0, 880, 1920, 200);
-            UISprites[1] = content.Load<Texture2D>("placeholdersprites/UI/CharSpriteLV0");//CharImage
-            UISprites[2] = content.Load<Texture2D>("placeholdersprites/UI/SummonsLevelOne");//SummonButton
-            UISprites[3] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeLevelOne");//UpgradeButton
-            UISprites[4] = content.Load<Texture2D>("placeholdersprites/UI/NextWaveBut");//UpgradeButton
+            UISprites[1] = content.Load<Texture2D>("placeholdersprites/UI/CharSpriteLV0");//CharImagelv0
+            UISprites[2] = content.Load<Texture2D>("placeholdersprites/UI/CharSpriteLV1");//CharImagelv1
+            UISprites[3] = content.Load<Texture2D>("placeholdersprites/UI/CharSpriteLV2");//CharImagelv2
+            UISprites[4] = content.Load<Texture2D>("placeholdersprites/UI/CharSpriteLV3");//CharImagelv3
+            UISprites[5] = content.Load<Texture2D>("placeholdersprites/UI/SummonsLevelOne");//SummonButton
+            UISprites[6] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeLevelOne");//UpgradeButton
+            UISprites[7] = content.Load<Texture2D>("placeholdersprites/UI/NextWaveBut");//NextWave
+            UISprites[8] = content.Load<Texture2D>("placeholdersprites/UI/HealthSoulsWave");//Wave, Souls amount and wave count
+            UISprites[9] = content.Load<Texture2D>("placeholdersprites/UI/PauseGameBut");//ActivLevelPauseButton
             clickableButRec[1] = new Rectangle(5, 885, 320, 190);//Rec for Char image
             clickableButRec[2] = new Rectangle(330, 885, 687, 190);//Rec for Summons Button
             clickableButRec[3] = new Rectangle(1022, 885, 697, 190);//Rec for Upgrade Button
@@ -87,7 +92,7 @@ namespace NecroNexus
             clickableButRec[15] = new Rectangle(470, 469, 624, 287);//See information about upgrade rec
             clickableButRec[16] = new Rectangle(1192, 638, 180, 75);// Upgrade button
             clickableButRec[17] = new Rectangle(125, 0, 500, 75);//Health,Souls,Wave
-            clickableButRec[18] = new Rectangle(1845, 0, 75, 75);//PauseGame
+            clickableButRec[18] = new Rectangle(1800, 0, 50, 50);//PauseGame
 
 
             for (int i = 0; i < gameObjects.Count; i++)
@@ -187,60 +192,75 @@ namespace NecroNexus
             }
             spriteBatch.End();
         }
-
+        /// <summary>
+        /// When called it handels the drawing of the UI for the active level.
+        /// Thorbjørn
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         private void DrawingUI(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(UISprites[0], clickableButRec[0], Color.White);
-            spriteBatch.Draw(UISprites[0], clickableButRec[17], Color.White);
-            spriteBatch.Draw(UISprites[0], clickableButRec[18], Color.White);
-            for (int i = 1; i < 5; i++)
+            spriteBatch.Draw(UISprites[8], clickableButRec[17], Color.White);//Health, Souls and Wave count
+            spriteBatch.Draw(UISprites[9], clickableButRec[18], Color.White);//ActivLevelPauseButton
+
+            //Chang this so the player icon changes too
+            spriteBatch.Draw(UISprites[1], clickableButRec[1], Color.White);//Char Image
+
+            spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.White);//SummonBut
+            spriteBatch.Draw(UISprites[6], clickableButRec[3], Color.White);//Upgrade summon and playerBut
+            spriteBatch.Draw(UISprites[7], clickableButRec[4], Color.White);//Next WaveBut
+
+            switch (menuButClicked)
             {
-                spriteBatch.Draw(UISprites[i], clickableButRec[i], Color.White);
+                case 2://Summons
+                    spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.DarkGray);//SummonsBut
+                    spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);//Backgroundboxs for selection of summons
 
-                switch (menuButClicked)
-                {
-                    case 2://Summons
-                        spriteBatch.Draw(UISprites[2], clickableButRec[2], Color.DarkGray);
-                        spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);//Backgroundboxs for selection of summons
-                        for (int a = 6; a <= 9; a++)
-                        {
-                            spriteBatch.Draw(UISprites[1], clickableButRec[a], clickableButRec[a], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                        }
-                        break;
-                    case 3://Upgrade
-                        spriteBatch.Draw(UISprites[2], clickableButRec[3], Color.DarkGray);
-                        spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);
-                        for (int b = 10; b <= 14; b++)
-                        {
-                            spriteBatch.Draw(UISprites[1], clickableButRec[b], clickableButRec[b], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                        }
-                        spriteBatch.Draw(UISprites[1], clickableButRec[16], clickableButRec[16], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(UISprites[5], clickableButRec[6], clickableButRec[6], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);//TopLeft Summon
+                    spriteBatch.Draw(UISprites[5], clickableButRec[7], clickableButRec[7], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);//ButtomLeft Summon
+                    spriteBatch.Draw(UISprites[5], clickableButRec[8], clickableButRec[8], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);//TopRight Summon
+                    spriteBatch.Draw(UISprites[5], clickableButRec[9], clickableButRec[9], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);//ButtomRight Summon
 
-                        switch (whichUpgradeClicked)
-                        {
-                            case 1:
-                                spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                                break;
-                            case 2:
-                                spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Red, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                                break;
-                            case 3:
-                                spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Yellow, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                                break;
-                            case 4:
-                                spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Green, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                                break;
-                            case 5:
-                                spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Blue, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                                break;
-                        }
+                    break;
+                case 3://Upgrade
+                    spriteBatch.Draw(UISprites[2], clickableButRec[3], Color.DarkGray);
+                    spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);
 
-                        break;
-                    case 4://NextWave
-                        spriteBatch.Draw(UISprites[1], clickableButRec[4], Color.DarkGray);
-                        break;
-                }
+                    //10 for first image, 11 for second image, 12 for third image, 13 for fourth image and 14 for fifth image
+                    spriteBatch.Draw(UISprites[6], clickableButRec[10], clickableButRec[10], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(UISprites[6], clickableButRec[11], clickableButRec[11], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(UISprites[6], clickableButRec[12], clickableButRec[12], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(UISprites[6], clickableButRec[13], clickableButRec[13], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(UISprites[6], clickableButRec[14], clickableButRec[14], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+
+
+                    spriteBatch.Draw(UISprites[1], clickableButRec[16], clickableButRec[16], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+
+                    switch (whichUpgradeClicked)
+                    {
+                        case 1:
+                            spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                            break;
+                        case 2:
+                            spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Red, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                            break;
+                        case 3:
+                            spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Yellow, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                            break;
+                        case 4:
+                            spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Green, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                            break;
+                        case 5:
+                            spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Blue, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                            break;
+                    }
+
+                    break;
+                case 4://NextWave
+                    spriteBatch.Draw(UISprites[1], clickableButRec[4], Color.DarkGray);
+                    break;
             }
+
 
         }
 
@@ -301,7 +321,7 @@ namespace NecroNexus
         {
             foreach (GameObject gameObject in gameObjects)
             {
-                Component component = gameObject.GetComponent<NecromancerMagic>(); 
+                Component component = gameObject.GetComponent<NecromancerMagic>();
 
                 if (component != null && component.ToRemove)
                 {
