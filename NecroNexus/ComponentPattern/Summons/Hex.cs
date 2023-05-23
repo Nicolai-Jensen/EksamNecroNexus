@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
-    //public class Hex : Summon
-    //{
-       
-    //}
+    public class Hex : Summon
+    {
+        public Hex(Vector2 position, float attackRangeRadius, float attackspeed) : base(position, attackRangeRadius, attackspeed)
+        {
+        }
+    }
 }
