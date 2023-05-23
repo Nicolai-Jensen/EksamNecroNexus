@@ -59,7 +59,7 @@ namespace NecroNexus
 
             gameObjects.Add(director.Construct());
            
-            gameObjects.Add(summons.Create(SummonType.SkeletonArcher));
+            gameObjects.Add(summons.Create(SummonType.SkeletonArcher, new Vector2(0,0)));
 
             for (int i = 0; i < gameObjects.Count; i++)
             {

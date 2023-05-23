@@ -13,7 +13,7 @@ namespace NecroNexus
     public enum SummonType { SkeletonArcher, SkeletonBrute, Demon, Hex}
     public class SummonFactory : Factory
     {
-        public override GameObject Create(Enum type)
+        public override GameObject Create(Enum type, Vector2 position)
         {
             MouseState mouseState = Mouse.GetState();
             Vector2 mousePos = mouseState.Position.ToVector2();
