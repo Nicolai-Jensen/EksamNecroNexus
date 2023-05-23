@@ -70,6 +70,7 @@ namespace NecroNexus
             if (clickedStuff == 0 && menuRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//Press for going back to mainmenu
             {
                 clickedStuff = 0;
+
                 game.ChangeState(game.Menu);
             }
         }
