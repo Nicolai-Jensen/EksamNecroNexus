@@ -35,18 +35,18 @@ namespace NecroNexus
             graph1.AddNode("H"); //7
             graph1.AddNode("I"); //8 - Lair
 
-            //Main track (No walls on map)
+            //Main track (No walls on map) Nodes:(A,B,D,E,H,I)
             graph1.AddNewEdge("A", "B");
             graph1.AddNewEdge("B", "D");
             graph1.AddNewEdge("D", "E");
             graph1.AddNewEdge("E", "H");
             graph1.AddNewEdge("H", "I");
 
-            //off track Triangle (B,D Wall)
+            //off track Triangle (B,D Wall) Nodes:(C)
             graph1.AddNewEdge("B", "C");
             graph1.AddNewEdge("C", "D");
 
-            //off track Rectangle (E,H Wall)
+            //off track Rectangle (E,H Wall) Nodes: (F,G)
             graph1.AddNewEdge("E", "F");
             graph1.AddNewEdge("F", "G");
             graph1.AddNewEdge("G", "H");
@@ -57,7 +57,10 @@ namespace NecroNexus
             List<Node<string>> pathList = TrackPath<string>(n, graph1.NodesList.Find(x => x.Data == "A"));
             foreach (Node<string> pathNode in pathList)
             {
-                Console.WriteLine(pathNode.Data);
+                //Console.WriteLine(pathNode.Data);
+                // -
+                //Kan bruges til at teste hvilke noder der passeres :) ^
+
             }
         }
 
