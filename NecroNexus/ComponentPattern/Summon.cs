@@ -11,28 +11,42 @@ namespace NecroNexus
 {
     public abstract class Summon : Component
     {
-        public Texture2D SummonSprite { get; set; }
 
 
         public Vector2 Position { get; set; }
-        public float AttackRange { get; set; }
+        public Vector2 AttackRangeCenter => Position;
+
         public float AttackSpeed { get; set; }
-        public int AttackDamage { get; set; }
+        public int MagicDamage { get; set; }
+        public int PhysicalDamage { get; set; }
         public float Scale { get; set; }
+        public float AttackRangeRadius { get; set; }
 
 
-        public Summon(Texture2D summonSprite, Vector2 position, float attackrange, float attackspeed, int attackDamage)
+
+        public Summon(Vector2 position, float attackRangeRadius, float attackspeed, int physicalDamage, int magicDamage)
         {
-            SummonSprite = summonSprite;
+            
             Position = position;
-            AttackRange = attackrange;
-            AttackDamage = attackDamage;
+            AttackRangeRadius = attackRangeRadius;
+            PhysicalDamage = physicalDamage;
+            MagicDamage = magicDamage;
             AttackSpeed = attackspeed;
 
             AttackSpeed = 1f;
-            Scale = 1f;
         }
-        
+
+
+        public override void Start()
+        {
+            //Adds SpriteRenderer Component so we get access to drawing sprites
+            SpriteRenderer sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
+            sr.SetSprite("placeholdersprites/EldenRingIcon", 0.2f, 0, 1);
+
+
+            GameObject.Transform.Position = new Vector2(GameWorld.ScreenSize.X / 2, GameWorld.ScreenSize.Y / 2);
+
+        }
 
         //TODO: Ret når enemies er klar
 
@@ -51,18 +65,24 @@ namespace NecroNexus
 
 
 
-        //public bool IsEnemyInRange(Enemy enemy)
-        //{
-        //    //float distance = Vector2.Distance(Position, enemy.Position);
-        //    //return distance <= AttackRange;
-        //}
+        public bool IsEnemyInRange(Vector2 enemyPosition)
+        {
+            float distance = Vector2.Distance(Position, enemyPosition);
+
+            if(distance <= AttackRangeRadius)
+            {
+                return true; 
+            }
+            return false;
+        }
+
 
         public virtual void Attack(Enemy enemy)
         {
             //Vector2 direction = enemy.Position - Position;
             //direction.Normalize();
 
-            //Projectile projectile = new Projectile(Position, direction, AttackDamage);
+            //ArcherArrow projectile = new ArcherArrow(Position, direction, MagicDamage);
             //projectile.Launch();
         }
     }
