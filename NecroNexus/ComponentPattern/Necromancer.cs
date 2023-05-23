@@ -159,16 +159,16 @@ namespace NecroNexus
                 switch (Tier)
                 {
                     case 0:
-                        magic = Magic.Create(MagicLevel.BaseTier);
+                        magic = Magic.Create(MagicLevel.BaseTier, GameObject.Transform.Position);
                         break;
                     case 1:
-                        magic = Magic.Create(MagicLevel.Tier1);
+                        magic = Magic.Create(MagicLevel.Tier1, GameObject.Transform.Position);
                         break;
                     case 2:
-                        magic = Magic.Create(MagicLevel.Tier2);
+                        magic = Magic.Create(MagicLevel.Tier2, GameObject.Transform.Position);
                         break;
                     case 3:
-                        magic = Magic.Create(MagicLevel.Tier3);
+                        magic = Magic.Create(MagicLevel.Tier3, GameObject.Transform.Position);
                         break;
                 }
                 LevelOne.AddObject(magic);

@@ -78,7 +78,7 @@ namespace NecroNexus
         public override void Draw(SpriteBatch spriteBatch)
         {
 
-            //DrawRectangle(CollisionBox, spriteBatch);
+            DrawRectangle(CollisionBox, spriteBatch);
         }
 
         /// <summary>
