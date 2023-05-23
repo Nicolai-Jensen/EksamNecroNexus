@@ -13,7 +13,9 @@ namespace NecroNexus
 
         private Texture2D[] backgroundsprite;
         private Board boardOne;
-        private EnemyFactory enemies;
+        private GameSaveLevelOne level;
+       
+        private SummonFactory summons;
 
         private Rectangle[] clickableButRec = new Rectangle[24];
         private Texture2D[] UISprites = new Texture2D[24];
@@ -40,17 +42,24 @@ namespace NecroNexus
         /// </summary>
         public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
-            boardOne = new Board();
-            enemies = new EnemyFactory(boardOne);
+            boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2));
+            
+          
+            summons = new SummonFactory();
+
         }
 
         public override void Initialize()
         {
             boardOne.LevelOneBoard();
+            level = new GameSaveLevelOne(boardOne);
             Director director = new Director(new NecroBuilder());
 
+
+
             gameObjects.Add(director.Construct());
-            gameObjects.Add(enemies.Create(EnemyType.Grunt));
+           
+            gameObjects.Add(summons.Create(SummonType.SkeletonArcher, new Vector2(0,0)));
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -118,6 +127,8 @@ namespace NecroNexus
                 gameObjects[i].Update();
             }
 
+            level.CheckWave();
+            
             GameObjectsToRemove();
             Cleanup();
         }
@@ -141,6 +152,7 @@ namespace NecroNexus
                 timer += GameWorld.DeltaTime;
                 if (timer > 0.5f)
                 {
+                    level.StartNextWave();
                     menuButClicked = 0;
                     timer = 0;
                 }
