@@ -61,7 +61,7 @@ namespace NecroNexus
 
             gameObjects.Add(director.Construct());
 
-            gameObjects.Add(summons.Create(SummonType.SkeletonArcher, new Vector2(0, 0)));
+
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -150,7 +150,8 @@ namespace NecroNexus
             if (clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 2; }
             if (menuButClicked == 2)
             {
-                if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; }
+                if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; AddObject(summons.Create(SummonType.SkeletonArcher, new Vector2(0, 0)));
+                }
                 if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; }
                 if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; }
                 if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; }
