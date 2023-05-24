@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.DirectWrite;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace NecroNexus
 {
@@ -14,7 +16,7 @@ namespace NecroNexus
         private Texture2D[] backgroundsprite;
         private Board boardOne;
         private GameSaveLevelOne level;
-       
+
         private SummonFactory summons;
 
         private Rectangle[] clickableButRec = new Rectangle[24];
@@ -43,8 +45,8 @@ namespace NecroNexus
         public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
             boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2));
-            
-          
+
+
             summons = new SummonFactory();
 
         }
@@ -58,8 +60,8 @@ namespace NecroNexus
 
 
             gameObjects.Add(director.Construct());
-           
-            gameObjects.Add(summons.Create(SummonType.SkeletonArcher, new Vector2(0,0)));
+
+            gameObjects.Add(summons.Create(SummonType.SkeletonArcher, new Vector2(0, 0)));
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -84,6 +86,12 @@ namespace NecroNexus
             UISprites[11] = content.Load<Texture2D>("placeholdersprites/UI/SummonsHexPurchase");//HexButton
             UISprites[12] = content.Load<Texture2D>("placeholdersprites/UI/SummonsSkeletonPurchase");//SkeletonBruteButton
             UISprites[13] = content.Load<Texture2D>("placeholdersprites/UI/SummonsDemonPurchase");//DemonButton
+            UISprites[14] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeUIelements/DemonUpgradeIconBut");//DemonUpgrade
+            UISprites[15] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeUIelements/HexUpgradeIconBut");//HexUpgrade
+            UISprites[16] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeUIelements/SkeliArcherUpgradeIconBut");//ArcherUpgrade
+            UISprites[17] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeUIelements/SkeliBruteUpgradeIconBut");//BruteUpgrade
+            UISprites[18] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeUIelements/PlayerUpgradeIconBut");//PlayerUpgrade
+            UISprites[19] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeUIelements/InvetoryTitleUpgrade");//UpgradeButton
             clickableButRec[1] = new Rectangle(5, 885, 320, 190);//Rec for Char image
             clickableButRec[2] = new Rectangle(330, 885, 687, 190);//Rec for Summons Button
             clickableButRec[3] = new Rectangle(1022, 885, 697, 190);//Rec for Upgrade Button
@@ -132,7 +140,7 @@ namespace NecroNexus
             }
 
             level.CheckWave();
-            
+
             GameObjectsToRemove();
             Cleanup();
         }
@@ -169,24 +177,33 @@ namespace NecroNexus
                 if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 3; }
                 if (clickableButRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 4; }
                 if (clickableButRec[14].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 5; }
-
+                //UpgradeButtonClicked
                 if (clickableButRec[16].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
-                    //Make a check to see the if you have enough monz
-                    switch (whichUpgradeClicked)
+                    if (whichUpgradeClicked == 0)
                     {
-                        case 1:
-                            break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            break;
+                        return;
                     }
-                    menuButClicked = 0;
+                    else //Make a check to see the if you have enough monz
+                    {
+                        menuButClicked = 0;
+                        switch (whichUpgradeClicked)
+                        {
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                break;
+                        }
+
+                    }
+                    
+                    
                 }
 
             }
@@ -229,28 +246,30 @@ namespace NecroNexus
             switch (menuButClicked)
             {
                 case 2://Summons
-                    spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.DarkGray);//SummonsBut
-                    spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);//Backgroundboxs for selection of summons
+                       spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.DarkGray);//SummonsBut
+                        spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);//Backgroundboxs for selection of summons
 
-                    spriteBatch.Draw(UISprites[9], clickableButRec[6], clickableButRec[6], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);//TopLeft Summon
-                    spriteBatch.Draw(UISprites[12], clickableButRec[7], clickableButRec[7], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);//ButtomLeft Summon
-                    spriteBatch.Draw(UISprites[11], clickableButRec[8], clickableButRec[8], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);//TopRight Summon
-                    spriteBatch.Draw(UISprites[13], clickableButRec[9], clickableButRec[9], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);//ButtomRight Summon
+                    spriteBatch.Draw(UISprites[10], clickableButRec[6],null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//TopLeft.
+                    spriteBatch.Draw(UISprites[11], clickableButRec[7],null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ButtomLeft.
+                    spriteBatch.Draw(UISprites[12], clickableButRec[8],null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//Topright.
+                    spriteBatch.Draw(UISprites[13], clickableButRec[9],null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ButtomRight.
+                   
+
 
                     break;
                 case 3://Upgrade
                     spriteBatch.Draw(UISprites[6], clickableButRec[3], Color.DarkGray);
                     spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);
 
-                    //10 for first image, 11 for second image, 12 for third image, 13 for fourth image and 14 for fifth image
-                    spriteBatch.Draw(UISprites[9], clickableButRec[10], clickableButRec[10], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                    spriteBatch.Draw(UISprites[9], clickableButRec[11], clickableButRec[11], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                    spriteBatch.Draw(UISprites[9], clickableButRec[12], clickableButRec[12], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                    spriteBatch.Draw(UISprites[9], clickableButRec[13], clickableButRec[13], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
-                    spriteBatch.Draw(UISprites[9], clickableButRec[14], clickableButRec[14], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    //clickableButRec 10 for first image, 11 for second image, 12 for third image, 13 for fourth image and 14 for fifth image
+                    spriteBatch.Draw(UISprites[14], clickableButRec[10], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(UISprites[15], clickableButRec[11], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(UISprites[16], clickableButRec[12], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(UISprites[17], clickableButRec[13], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(UISprites[18], clickableButRec[14], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
 
 
-                    spriteBatch.Draw(UISprites[1], clickableButRec[16], clickableButRec[16], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(UISprites[19], clickableButRec[16], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.9f);//Upgrade Button
 
                     switch (whichUpgradeClicked)
                     {
