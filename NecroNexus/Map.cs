@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,15 +26,15 @@ namespace NecroNexus
 
             //nye nodes bundet op på den nye instans:
             
-            graph1.AddNode("A"); //0 - Spawn
-            graph1.AddNode("B"); //1
-            graph1.AddNode("C"); //2
-            graph1.AddNode("D"); //3
-            graph1.AddNode("E"); //4
-            graph1.AddNode("F"); //5
-            graph1.AddNode("G"); //6
-            graph1.AddNode("H"); //7
-            graph1.AddNode("I"); //8 - Lair
+            graph1.AddNode("A", new Vector2(1768, -10)); //0 - Spawn
+            graph1.AddNode("B", new Vector2(1633, 214)); //1
+            graph1.AddNode("C", new Vector2(1837, 491)); //2 (off track triangle)
+            graph1.AddNode("D", new Vector2(1516, 237)); //3
+            graph1.AddNode("E", new Vector2(676, 237)); //4
+            graph1.AddNode("F", new Vector2(300, 237)); //5 (off track rectangle)
+            graph1.AddNode("G", new Vector2(300, 700)); //6 (off track rectangle)
+            graph1.AddNode("H", new Vector2(676, 700)); //7
+            graph1.AddNode("I", new Vector2(1516, 700)); //8 - Lair
 
             //Main track (No walls on map) Nodes:(A,B,D,E,H,I)
             graph1.AddNewEdge("A", "B");
@@ -58,8 +59,10 @@ namespace NecroNexus
             foreach (Node<string> pathNode in pathList)
             {
                 //Console.WriteLine(pathNode.Data);
-                // -
-                //Kan bruges til at teste hvilke noder der passeres :) ^
+                //Console.WriteLine(pathNode.NodePosition);
+                //Console.WriteLine();
+                
+                //Kan bruges i testprogram til at teste hvilke noder der passeres :) ^
 
             }
         }
