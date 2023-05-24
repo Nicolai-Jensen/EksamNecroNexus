@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,12 +17,15 @@ namespace NecroNexus
 
         public bool Discovered { get; set; } = false;
 
+        public Vector2 NodePosition { get; private set; }
+
         public Node<T> Parent { get; set; }
 
         //Constructor 
-        public Node(T data)
+        public Node(T data, Vector2 nodePosition)
         {
             this.Data = data;
+            this.NodePosition = nodePosition;
         }
 
         /// <summary>
