@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,9 +25,9 @@ namespace NecroNexus
         /// Denne har vi lavet generisk lige som resten af klassen, 
         /// for at gøre den mere compatible med resten af spillet.
         /// </summary>
-        public void AddNode(T data)
+        public void AddNode(T data, Vector2 nodePosition)
         {
-            NodesList.Add(new Node<T>(data));
+            NodesList.Add(new Node<T>(data, nodePosition));
         }
 
         /// <summary>
