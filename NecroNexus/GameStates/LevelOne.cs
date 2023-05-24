@@ -22,6 +22,8 @@ namespace NecroNexus
         private int menuButClicked = 0;
         private int whichUpgradeClicked = 0;
         private float timer;
+        private bool[] presseddowntopleft = { false, false, false, false };
+
 
 
         public static List<GameObject> gameObjects = new List<GameObject>();
@@ -89,6 +91,10 @@ namespace NecroNexus
             UISprites[17] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeUIelements/SkeliBruteUpgradeIconBut");//BruteUpgrade
             UISprites[18] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeUIelements/PlayerUpgradeIconBut");//PlayerUpgrade
             UISprites[19] = content.Load<Texture2D>("placeholdersprites/UI/UpgradeUIelements/InvetoryTitleUpgrade");//UpgradeButton
+            UISprites[20] = content.Load<Texture2D>("Summons/SkeletonArcher/tile000");//SkeliArcher HoverIcon
+            UISprites[21] = content.Load<Texture2D>("Summons/Hex/tile000");//Hex HoverIcon
+            UISprites[22] = content.Load<Texture2D>("Summons/SkeletonBrute/tile000");//SkeliBrute HoverIcon
+            UISprites[23] = content.Load<Texture2D>("Summons/Demon/tile000");//Demon HoverIcon
             clickableButRec[1] = new Rectangle(5, 885, 320, 190);//Rec for Char image
             clickableButRec[2] = new Rectangle(330, 885, 687, 190);//Rec for Summons Button
             clickableButRec[3] = new Rectangle(1022, 885, 697, 190);//Rec for Upgrade Button
@@ -144,32 +150,37 @@ namespace NecroNexus
         private void CheckingIfClicked()
         {
             //Open the summons menu
-            if (clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 2; }
+            if (clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+            { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { menuButClicked = 2; } else return; }
             if (menuButClicked == 2)
             {
                 if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     menuButClicked = 0;
-                    summons.Create(SummonType.SkeletonArcher, new Vector2(0, 0));
+                    presseddowntopleft[0] = true;
                 }
-                if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) 
-                { 
+                if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                {
                     menuButClicked = 0;
-                    summons.Create(SummonType.Hex, new Vector2(0, 0));
+                    presseddowntopleft[1] = true;
                 }
-                if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) 
-                { 
+                if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                {
                     menuButClicked = 0;
-                    summons.Create(SummonType.SkeletonBrute, new Vector2(0, 0));
+                    presseddowntopleft[2] = true;
                 }
-                if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) 
-                { 
+                if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                {
                     menuButClicked = 0;
-                    summons.Create(SummonType.Demon, new Vector2(0, 0));
+                    presseddowntopleft[3] = true;
                 }
             }
+
+            HoveringSummons();
+
             //Open the upgrade menu
-            if (clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 3; }
+            if (clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+            { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { menuButClicked = 3; } else return; }
             if (menuButClicked == 4 || clickableButRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
                 //Start next wave
@@ -224,6 +235,52 @@ namespace NecroNexus
             if (clickableButRec[18].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
                 game.ChangeState(game.PauseMenuState);
+            }
+        }
+        private void HoveringSummons()
+        {
+            if (currentMouse.Y <= 880)
+            {
+                if (presseddowntopleft[0] == true)
+                {
+                    timer += GameWorld.DeltaTime;
+                    if (timer >= 0.5f && currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
+                    {
+                        presseddowntopleft[0] = false;
+                        timer = 0f;
+                        summons.Create(SummonType.SkeletonArcher, new Vector2(currentMouse.X, currentMouse.Y));
+                    }
+                }
+                if (presseddowntopleft[1] == true)
+                {
+                    timer += GameWorld.DeltaTime;
+                    if (timer >= 0.5f && currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
+                    {
+                        presseddowntopleft[1] = false;
+                        timer = 0f;
+                        summons.Create(SummonType.Hex, new Vector2(currentMouse.X, currentMouse.Y));
+                    }
+                }
+                if (presseddowntopleft[2] == true)
+                {
+                    timer += GameWorld.DeltaTime;
+                    if (timer >= 0.5f && currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
+                    {
+                        presseddowntopleft[2] = false;
+                        timer = 0f;
+                        summons.Create(SummonType.SkeletonBrute, new Vector2(currentMouse.X, currentMouse.Y));
+                    }
+                }
+                if (presseddowntopleft[3] == true)
+                {
+                    timer += GameWorld.DeltaTime;
+                    if (timer >= 0.5f && currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
+                    {
+                        presseddowntopleft[3] = false;
+                        timer = 0f;
+                        summons.Create(SummonType.Demon, new Vector2(currentMouse.X, currentMouse.Y));
+                    }
+                }
             }
         }
 
@@ -309,7 +366,22 @@ namespace NecroNexus
                     spriteBatch.Draw(UISprites[7], clickableButRec[4], Color.DarkGray);
                     break;
             }
-
+            if (presseddowntopleft[0] == true)
+            {
+                spriteBatch.Draw(UISprites[20], new Vector2(currentMouse.X, currentMouse.Y), Color.White);
+            }
+            else if (presseddowntopleft[1] == true)
+            {
+                spriteBatch.Draw(UISprites[21], new Vector2(currentMouse.X, currentMouse.Y), Color.White);
+            }
+            else if (presseddowntopleft[2] == true)
+            {
+                spriteBatch.Draw(UISprites[22], new Vector2(currentMouse.X, currentMouse.Y), Color.White);
+            }
+            else if (presseddowntopleft[3] == true)
+            {
+                spriteBatch.Draw(UISprites[23], new Vector2(currentMouse.X, currentMouse.Y), Color.White);
+            }
 
         }
 
