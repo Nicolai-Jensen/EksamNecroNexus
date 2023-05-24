@@ -19,6 +19,9 @@
   <ItemGroup>
     <ProjectReference Include="..\DatabaseRepository\DatabaseRepository.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\NexoAudio\" />
+  </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
     <Exec Command="dotnet tool restore" />

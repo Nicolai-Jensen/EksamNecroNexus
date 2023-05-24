@@ -46,7 +46,7 @@ namespace NecroNexus
             //Audio
             WaveCleared = Globals.Content.Load<Song>("NexoAudio/WaveCleared");
             NewSoul = Globals.Content.Load<Song>("NexoAudio/NewSoul");
-            StartScreenMusic = Globals.Content.Load<Song>("NexoAudio/BackgroundMusic");
+            StartScreenMusic = Globals.Content.Load<Song>("NexoAudio/BetweenWaves2");
             WaveActiveMusic = Globals.Content.Load<Song>("NexoAudio/WaveBackground");
             SpawnTurret1 = Globals.Content.Load<Song>("NexoAudio/SpawnTurret1");
             SpawnTurret2 = Globals.Content.Load<Song>("NexoAudio/SpawnTurret2");

@@ -997,6 +997,78 @@
 /processorParam:TextureFormat=Color
 /build:Necromancer/Run/tile007.png
 
+#begin NexoAudio/BetweenWaves.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/BetweenWaves.mp3
+
+#begin NexoAudio/BetweenWaves2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/BetweenWaves2.mp3
+
+#begin NexoAudio/GameLost.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/GameLost.mp3
+
+#begin NexoAudio/GameLostPart2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/GameLostPart2.mp3
+
+#begin NexoAudio/NewSoul.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/NewSoul.mp3
+
+#begin NexoAudio/SpawnTurret1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/SpawnTurret1.mp3
+
+#begin NexoAudio/SpawnTurret2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/SpawnTurret2.mp3
+
+#begin NexoAudio/TurretShotSound1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/TurretShotSound1.mp3
+
+#begin NexoAudio/TurretShotSound2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/TurretShotSound2.mp3
+
+#begin NexoAudio/TurretShotSound3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/TurretShotSound3.mp3
+
+#begin NexoAudio/WaveBackground.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/WaveBackground.mp3
+
+#begin NexoAudio/WaveCleared.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/WaveCleared.mp3
+
 #begin Pixel.png
 /importer:TextureImporter
 /processor:TextureProcessor
