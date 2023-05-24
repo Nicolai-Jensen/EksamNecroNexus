@@ -59,11 +59,7 @@ namespace NecroNexus
 
             gameObjects.Add(director.Construct());
 
-<<<<<<< Updated upstream
 
-
-=======
->>>>>>> Stashed changes
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Awake();
@@ -151,13 +147,6 @@ namespace NecroNexus
             if (clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 2; }
             if (menuButClicked == 2)
             {
-<<<<<<< Updated upstream
-                if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; AddObject(summons.Create(SummonType.SkeletonArcher, new Vector2(0, 0)));
-                }
-                if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; }
-                if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; }
-                if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; }
-=======
                 if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     menuButClicked = 0;
@@ -178,7 +167,6 @@ namespace NecroNexus
                     menuButClicked = 0;
                     summons.Create(SummonType.Demon, new Vector2(0, 0));
                 }
->>>>>>> Stashed changes
             }
             //Open the upgrade menu
             if (clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 3; }
