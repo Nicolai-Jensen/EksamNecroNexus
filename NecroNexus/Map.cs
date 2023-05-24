@@ -59,8 +59,10 @@ namespace NecroNexus
             foreach (Node<string> pathNode in pathList)
             {
                 //Console.WriteLine(pathNode.Data);
-                // -
-                //Kan bruges til at teste hvilke noder der passeres :) ^
+                //Console.WriteLine(pathNode.NodePosition);
+                //Console.WriteLine();
+                
+                //Kan bruges i testprogram til at teste hvilke noder der passeres :) ^
 
             }
         }
