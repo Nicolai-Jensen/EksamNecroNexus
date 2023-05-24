@@ -26,15 +26,15 @@ namespace NecroNexus
 
             //nye nodes bundet op på den nye instans:
             
-            graph1.AddNode("A", new Vector2(1641, 85)); //0 - Spawn
-            graph1.AddNode("B", new Vector2(1440, 250)); //1
-            graph1.AddNode("C", new Vector2(1500, 300)); //2 (off track triangle)
-            graph1.AddNode("D", new Vector2(1200, 330)); //3
-            graph1.AddNode("E", new Vector2(460, 330)); //4
-            graph1.AddNode("F", new Vector2(130, 330)); //5 (off track rectangle)
-            graph1.AddNode("G", new Vector2(130, 760)); //6 (off track rectangle)
-            graph1.AddNode("H", new Vector2(460, 760)); //7
-            graph1.AddNode("I", new Vector2(1200, 760)); //8 - Lair
+            graph1.AddNode("A", new Vector2(1768, -10)); //0 - Spawn
+            graph1.AddNode("B", new Vector2(1633, 214)); //1
+            graph1.AddNode("C", new Vector2(1837, 491)); //2 (off track triangle)
+            graph1.AddNode("D", new Vector2(1516, 237)); //3
+            graph1.AddNode("E", new Vector2(676, 237)); //4
+            graph1.AddNode("F", new Vector2(300, 237)); //5 (off track rectangle)
+            graph1.AddNode("G", new Vector2(300, 700)); //6 (off track rectangle)
+            graph1.AddNode("H", new Vector2(676, 700)); //7
+            graph1.AddNode("I", new Vector2(1516, 700)); //8 - Lair
 
             //Main track (No walls on map) Nodes:(A,B,D,E,H,I)
             graph1.AddNewEdge("A", "B");
