@@ -997,78 +997,6 @@
 /processorParam:TextureFormat=Color
 /build:Necromancer/Run/tile007.png
 
-#begin NexoAudio/BackgroundMusic.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/BackgroundMusic.mp3
-
-#begin NexoAudio/BetweenWaves.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/BetweenWaves.mp3
-
-#begin NexoAudio/GameLost.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/GameLost.mp3
-
-#begin NexoAudio/GameLostPart2.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/GameLostPart2.mp3
-
-#begin NexoAudio/NewSoul.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/NewSoul.mp3
-
-#begin NexoAudio/SpawnTurret1.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/SpawnTurret1.mp3
-
-#begin NexoAudio/SpawnTurret2.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/SpawnTurret2.mp3
-
-#begin NexoAudio/TurretShotSound1.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/TurretShotSound1.mp3
-
-#begin NexoAudio/TurretShotSound2.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/TurretShotSound2.mp3
-
-#begin NexoAudio/TurretShotSound3.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/TurretShotSound3.mp3
-
-#begin NexoAudio/WaveBackground.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/WaveBackground.mp3
-
-#begin NexoAudio/WaveCleared.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:NexoAudio/WaveCleared.mp3
-
 #begin Pixel.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1358,6 +1286,30 @@
 /processorParam:TextureFormat=Color
 /build:placeholdersprites/UI/QuitBut.png
 
+#begin placeholdersprites/UI/SummonsDemonPurchase.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/SummonsDemonPurchase.png
+
+#begin placeholdersprites/UI/SummonsHexPurchase.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/SummonsHexPurchase.png
+
 #begin placeholdersprites/UI/SummonsLevelOne.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1370,6 +1322,30 @@
 /processorParam:TextureFormat=Color
 /build:placeholdersprites/UI/SummonsLevelOne.png
 
+#begin placeholdersprites/UI/SummonsSkeletonArcherPurchase.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/SummonsSkeletonArcherPurchase.png
+
+#begin placeholdersprites/UI/SummonsSkeletonPurchase.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/SummonsSkeletonPurchase.png
+
 #begin placeholdersprites/UI/UpgradeLevelOne.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1381,6 +1357,78 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:placeholdersprites/UI/UpgradeLevelOne.png
+
+#begin placeholdersprites/UI/UpgradeUIelements/DemonUpgradeIconBut.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UpgradeUIelements/DemonUpgradeIconBut.png
+
+#begin placeholdersprites/UI/UpgradeUIelements/HexUpgradeIconBut.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UpgradeUIelements/HexUpgradeIconBut.png
+
+#begin placeholdersprites/UI/UpgradeUIelements/InvetoryTitleUpgrade.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UpgradeUIelements/InvetoryTitleUpgrade.png
+
+#begin placeholdersprites/UI/UpgradeUIelements/PlayerUpgradeIconBut.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UpgradeUIelements/PlayerUpgradeIconBut.png
+
+#begin placeholdersprites/UI/UpgradeUIelements/SkeliArcherUpgradeIconBut.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UpgradeUIelements/SkeliArcherUpgradeIconBut.png
+
+#begin placeholdersprites/UI/UpgradeUIelements/SkeliBruteUpgradeIconBut.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UpgradeUIelements/SkeliBruteUpgradeIconBut.png
 
 #begin Summons/Demon/tile000.png
 /importer:TextureImporter
