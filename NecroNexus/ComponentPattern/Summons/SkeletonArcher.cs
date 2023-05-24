@@ -41,7 +41,6 @@ namespace NecroNexus
 
         public override void Attack(Enemy enemy)
         {
-       
             base.Attack(enemy);
         }
 
