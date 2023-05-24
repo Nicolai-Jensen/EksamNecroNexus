@@ -28,24 +28,28 @@ namespace NecroNexus
                     sr.SetSprite("Summons/SkeletonArcher/tile000", 2.5f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/SkeletonArcher/tile000", "Summons/SkeletonArcher/tile001", "Summons/SkeletonArcher/tile002", "Summons/SkeletonArcher/tile003" }));
                     go.AddComponent(new SkeletonArcher(mousePos, 100f, 3f));
+                    LevelOne.AddObject(go);
                     break;
 
                 case SummonType.SkeletonBrute:
                     sr.SetSprite("Enemies/Valkyrie/tile000", 5f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/SkeletonBrute/tile000", "Summons/SkeletonBrute/tile001", "Summons/SkeletonBrute/tile002", "Summons/SkeletonBrute/tile003" }));
                     go.AddComponent(new SkeletonBrute(mousePos, 100f, 2f));
+                    LevelOne.AddObject(go);
                     break;
 
                 case SummonType.Hex:
                     sr.SetSprite("Enemies/Valkyrie/tile000", 5f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Enemies/Valkyrie/tile000", "Enemies/Valkyrie/tile001", "Enemies/Valkyrie/tile002", "Enemies/Valkyrie/tile003" }));
                     go.AddComponent(new Hex(mousePos, 100f, 3f));
+                    LevelOne.AddObject(go);
                     break;
 
                 case SummonType.Demon:
                     sr.SetSprite("Enemies/Valkyrie/tile000", 3f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/Demon/tile000", "Summons/Demon/tile001", "Summons/Demon/tile002", "Summons/Demon/tile003", "Summons/Demon/tile004", "Summons/Demon/tile005", "Summons/Demon/tile005", "Summons/Demon/tile006", "Summons/Demon/tile007" }));
                     go.AddComponent(new Demon(mousePos, 100f, 3f));
+                    LevelOne.AddObject(go);
                     break;
 
 

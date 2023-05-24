@@ -2,9 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.DirectWrite;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace NecroNexus
 {
@@ -61,8 +59,11 @@ namespace NecroNexus
 
             gameObjects.Add(director.Construct());
 
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Awake();
@@ -150,11 +151,34 @@ namespace NecroNexus
             if (clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 2; }
             if (menuButClicked == 2)
             {
+<<<<<<< Updated upstream
                 if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; AddObject(summons.Create(SummonType.SkeletonArcher, new Vector2(0, 0)));
                 }
                 if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; }
                 if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; }
                 if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; }
+=======
+                if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                {
+                    menuButClicked = 0;
+                    summons.Create(SummonType.SkeletonArcher, new Vector2(0, 0));
+                }
+                if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) 
+                { 
+                    menuButClicked = 0;
+                    summons.Create(SummonType.Hex, new Vector2(0, 0));
+                }
+                if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) 
+                { 
+                    menuButClicked = 0;
+                    summons.Create(SummonType.SkeletonBrute, new Vector2(0, 0));
+                }
+                if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) 
+                { 
+                    menuButClicked = 0;
+                    summons.Create(SummonType.Demon, new Vector2(0, 0));
+                }
+>>>>>>> Stashed changes
             }
             //Open the upgrade menu
             if (clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 3; }
@@ -173,7 +197,8 @@ namespace NecroNexus
             }
             if (menuButClicked == 3)//Choose upgrade
             {
-                if (clickableButRec[10].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 1; }
+                if (clickableButRec[10].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                { whichUpgradeClicked = 1; }
                 if (clickableButRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 2; }
                 if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 3; }
                 if (clickableButRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 4; }
@@ -203,8 +228,8 @@ namespace NecroNexus
                         }
 
                     }
-                    
-                    
+
+
                 }
 
             }
@@ -247,14 +272,14 @@ namespace NecroNexus
             switch (menuButClicked)
             {
                 case 2://Summons
-                       spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.DarkGray);//SummonsBut
-                        spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);//Backgroundboxs for selection of summons
+                    spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.DarkGray);//SummonsBut
+                    spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);//Backgroundboxs for selection of summons
 
-                    spriteBatch.Draw(UISprites[10], clickableButRec[6],null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//TopLeft.
-                    spriteBatch.Draw(UISprites[11], clickableButRec[7],null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ButtomLeft.
-                    spriteBatch.Draw(UISprites[12], clickableButRec[8],null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//Topright.
-                    spriteBatch.Draw(UISprites[13], clickableButRec[9],null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ButtomRight.
-                   
+                    spriteBatch.Draw(UISprites[10], clickableButRec[6], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//TopLeft.
+                    spriteBatch.Draw(UISprites[11], clickableButRec[7], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ButtomLeft.
+                    spriteBatch.Draw(UISprites[12], clickableButRec[8], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//Topright.
+                    spriteBatch.Draw(UISprites[13], clickableButRec[9], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ButtomRight.
+
 
 
                     break;
