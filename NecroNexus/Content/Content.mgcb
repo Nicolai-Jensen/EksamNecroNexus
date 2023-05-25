@@ -1009,6 +1009,30 @@
 /processorParam:Quality=Best
 /build:NexoAudio/BetweenWaves2.mp3
 
+#begin NexoAudio/ButtonPressed.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/ButtonPressed.mp3
+
+#begin NexoAudio/Explosion1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/Explosion1.mp3
+
+#begin NexoAudio/Explosion2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/Explosion2.mp3
+
+#begin NexoAudio/Explosion3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:NexoAudio/Explosion3.mp3
+
 #begin NexoAudio/GameLost.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
