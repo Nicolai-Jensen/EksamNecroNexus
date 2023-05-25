@@ -35,7 +35,7 @@ namespace NecroNexus
         public static Song GameLostOverlay; // <  A scream of death leading into :
         public static Song GameLostBackgroundMusic; //  <  The 'GameLost' Music
 
-        public static Song SubtleBlast1; //Used for turrets or the necromancer. Up to u
+        public static Song SubtleBlast1; //Used for turrets, the necromancer, buttons. Up to u
         public static Song SubtleBlast2; 
         public static Song SubtleBlast3;
 
