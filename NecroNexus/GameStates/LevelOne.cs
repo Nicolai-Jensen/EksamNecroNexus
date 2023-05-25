@@ -19,10 +19,15 @@ namespace NecroNexus
 
         private Rectangle[] clickableButRec = new Rectangle[24];
         private Texture2D[] UISprites = new Texture2D[24];
+        private SpriteFont showLevelInfo;
         private int menuButClicked = 0;
         private int whichUpgradeClicked = 0;
         private float timer;
         private bool[] presseddowntopleft = { false, false, false, false };
+        private bool[] isHoveringOverIcon = { false, false, false, false };
+        public int GetCriptHealth { get; set; }
+        public int GetSouls { get; set; }
+        public int GetWaveCount { get; set; }
 
 
 
@@ -45,10 +50,7 @@ namespace NecroNexus
         public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
             boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2));
-
-
             summons = new SummonFactory();
-
         }
 
         public override void Initialize()
@@ -118,6 +120,7 @@ namespace NecroNexus
             clickableButRec[17] = new Rectangle(125, 0, 500, 75);//Health,Souls,Wave
             clickableButRec[18] = new Rectangle(1800, 0, 50, 50);//PauseGame
 
+            showLevelInfo = content.Load<SpriteFont>("placeholdersprites/UI/UITextElements/File");
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -282,6 +285,17 @@ namespace NecroNexus
                     }
                 }
             }
+            if (menuButClicked == 2)
+            {
+                if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y)) { isHoveringOverIcon[0] = true; }
+                else { isHoveringOverIcon[0] = false; }
+                if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y)) { isHoveringOverIcon[1] = true; }
+                else { isHoveringOverIcon[1] = false; }
+                if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y)) { isHoveringOverIcon[2] = true; }
+                else { isHoveringOverIcon[2] = false; }
+                if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y)) { isHoveringOverIcon[3] = true; }
+                else { isHoveringOverIcon[3] = false; }
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -305,26 +319,49 @@ namespace NecroNexus
         {
             spriteBatch.Draw(UISprites[0], clickableButRec[0], Color.White);
             spriteBatch.Draw(UISprites[8], clickableButRec[17], Color.White);//Health, Souls and Wave count
+            spriteBatch.DrawString(showLevelInfo, GetCriptHealth.ToString(), new Vector2(205, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(showLevelInfo, GetSouls.ToString(), new Vector2(315, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(showLevelInfo, GetWaveCount.ToString() + "/ 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+
             spriteBatch.Draw(UISprites[9], clickableButRec[18], Color.White);//ActivLevelPauseButton
 
-            //Chang this so the player icon changes too
+            //Chance this so the player icon changes with the level
             spriteBatch.Draw(UISprites[1], clickableButRec[1], Color.White);//Char Image
 
-            spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.White);//SummonBut
-            spriteBatch.Draw(UISprites[6], clickableButRec[3], Color.White);//Upgrade summon and playerBut
+            if (menuButClicked == 2) { }
+            else { spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.White); }//SummonsBut
+            if (menuButClicked == 3) { }
+            else { spriteBatch.Draw(UISprites[6], clickableButRec[3], Color.White); }//Upgrade summon and playerBut
+
             spriteBatch.Draw(UISprites[7], clickableButRec[4], Color.White);//Next WaveBut
 
             switch (menuButClicked)
             {
                 case 2://Summons
-                    spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.DarkGray);//SummonsBut
+
+                    spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.DarkGray);//SummonBut
                     spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);//Backgroundboxs for selection of summons
 
                     spriteBatch.Draw(UISprites[10], clickableButRec[6], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//TopLeft.
                     spriteBatch.Draw(UISprites[11], clickableButRec[7], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ButtomLeft.
                     spriteBatch.Draw(UISprites[12], clickableButRec[8], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//Topright.
                     spriteBatch.Draw(UISprites[13], clickableButRec[9], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ButtomRight.
-
+                    if (isHoveringOverIcon[0] == true)
+                    {
+                        spriteBatch.DrawString(showLevelInfo, "Price", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    }
+                    if (isHoveringOverIcon[1] == true)
+                    {
+                        spriteBatch.DrawString(showLevelInfo, "Price", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    }
+                    if (isHoveringOverIcon[2] == true)
+                    {
+                        spriteBatch.DrawString(showLevelInfo, "Price", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    }
+                    if (isHoveringOverIcon[3] == true)
+                    {
+                        spriteBatch.DrawString(showLevelInfo, "Price", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    }
 
 
                     break;
