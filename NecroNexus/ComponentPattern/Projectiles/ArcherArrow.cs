@@ -20,10 +20,10 @@ namespace NecroNexus
         private int tier;
         
 
-        public ArcherArrow(int tier)
+        public ArcherArrow(int tier,Vector2 position, Vector2 velocity)
         {
             this.tier = tier;
-
+            this.position = position;
             switch (this.tier)
             {
                 case (0):
@@ -43,7 +43,10 @@ namespace NecroNexus
 
         }
 
-        
+        public override void Start()
+        {
+            GameObject.Transform.Translate(position);
+        }
 
         public override void Update()
         {
