@@ -47,7 +47,7 @@ namespace NecroNexus
             int thing = 10;
             for (int i = 0; i < thing; i++)
             {
-                wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
+                wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(1725, -10)));
             }
             
 
@@ -55,18 +55,18 @@ namespace NecroNexus
 
             wave = new Wave();
 
-            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
-            wave.AddEnemyToWave(enemies.Create(EnemyType.Knight, new Vector2(-100, GameWorld.ScreenSize.Y / 2)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Knight, new Vector2(1725, -10)));
 
             WavesLvlOne.Add(wave);
         }

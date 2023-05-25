@@ -12,14 +12,18 @@ namespace NecroNexus
 
         /* HOW TO USE :)
           
-           Pick the sound you need, (ex StartScreenMusic) 
-           and use this following code in your class: 
+           Pick the sound you need, (ex ButtonPressed) 
+           and use this following code in your class:
+
          
-                MediaPlayer.Play(Audio.StartScreenMusic);
+                MediaPlayer.Play(Audio.ButtonPressed);
                 MediaPlayer.Volume = 0.2f;
 
 
-           NOTE: The audio don't automatically loop.          
+           NOTE: The audio don't automatically loop. 
+
+           - B
+
          */
 
         public static Song WaveCleared;
@@ -39,7 +43,7 @@ namespace NecroNexus
         public static Song SubtleBlast2; 
         public static Song SubtleBlast3;
 
-        public static Song Explosion1;
+        public static Song Explosion1; //Lookin for a more demonic sound? try the "spawn turret" above.
         public static Song Explosion2;
         public static Song Explosion3;
 

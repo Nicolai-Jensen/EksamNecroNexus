@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
-    internal class Map
+    public class Map
     {
         
 
@@ -19,22 +19,22 @@ namespace NecroNexus
 
             
         */
-        public void Graph1()
+        public List<Node<string>> Graph1()
         {
             //instans af graph:
             Graph<string> graph1 = new Graph<string>();
 
             //nye nodes bundet op på den nye instans:
             
-            graph1.AddNode("A", new Vector2(1768, -10)); //0 - Spawn
-            graph1.AddNode("B", new Vector2(1633, 214)); //1
-            graph1.AddNode("C", new Vector2(1837, 491)); //2 (off track triangle)
-            graph1.AddNode("D", new Vector2(1516, 237)); //3
-            graph1.AddNode("E", new Vector2(676, 237)); //4
-            graph1.AddNode("F", new Vector2(300, 237)); //5 (off track rectangle)
-            graph1.AddNode("G", new Vector2(300, 700)); //6 (off track rectangle)
-            graph1.AddNode("H", new Vector2(676, 700)); //7
-            graph1.AddNode("I", new Vector2(1516, 700)); //8 - Lair
+            graph1.AddNode("A", new Vector2(1725, 0)); //0 - Spawn
+            graph1.AddNode("B", new Vector2(1575, 175)); //1
+            graph1.AddNode("C", new Vector2(1700, 500)); //2 (off track triangle)
+            graph1.AddNode("D", new Vector2(1400, 225)); //3
+            graph1.AddNode("E", new Vector2(700, 225)); //4
+            graph1.AddNode("F", new Vector2(375, 225)); //5 (off track rectangle)
+            graph1.AddNode("G", new Vector2(375, 625)); //6 (off track rectangle)
+            graph1.AddNode("H", new Vector2(700, 625)); //7
+            graph1.AddNode("I", new Vector2(1400, 625)); //8 - Lair
 
             //Main track (No walls on map) Nodes:(A,B,D,E,H,I)
             graph1.AddNewEdge("A", "B");
@@ -65,6 +65,19 @@ namespace NecroNexus
                 //Kan bruges i testprogram til at teste hvilke noder der passeres :) ^
 
             }
+            return pathList;
+        }
+
+        public List<Vector2> ReturnPos(List<Node<string>> list)
+        {
+            List<Vector2> result = new List<Vector2>();
+
+            foreach (Node<string> node in list)
+            {
+                result.Add(node.NodePosition);
+            }
+
+            return result; ;
         }
 
         private static Node<T> BFS<T>(Node<T> start, Node<T> goal)

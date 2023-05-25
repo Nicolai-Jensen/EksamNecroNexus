@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace NecroNexus
 {
-    internal class Edge<T>
+    public class Edge<T>
     {
         public Node<T> From { get; private set; }
 
