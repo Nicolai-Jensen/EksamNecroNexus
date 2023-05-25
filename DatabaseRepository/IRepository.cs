@@ -34,7 +34,7 @@ namespace DatabaseRepository
 
 
         //Update Level & TowerSave (NOTE:without tower & user)
-        
+        void UpdateUser(int userId, string nameNew);
         void UpdateLevel(int levelId, int userId, int pLvlNew, float baseHpNew, float scoreNew, float soulsNew, int waveNew);
 
         void UpdateTowerSave(int userId, int levelId, string towerTypeNew, float towerPosXNew, float towerPosYNew, int towerLvlNew);

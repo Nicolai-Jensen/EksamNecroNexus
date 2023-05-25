@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DatabaseRepository;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -25,6 +26,15 @@ namespace NecroNexus
         //A Vector2 to save our screen size on
         private static Vector2 screenSize;
 
+        protected Mapper mapper;
+        protected DbProvider provider;
+        protected Repository repository;
+
+        public Repository Repository
+        {
+            get { return repository; }
+            set { repository = value; }
+        }
         //A property variable for DeltaTime
         public static float DeltaTime { get; private set; }
 
@@ -66,6 +76,7 @@ namespace NecroNexus
         public LevelOne LevelOne
         {
             get { return levelOne; }
+            set { levelOne = value; }
         }
         
         public PauseMenuState PauseMenuState { get { return pausedMenuState; } }
@@ -79,7 +90,9 @@ namespace NecroNexus
             IsMouseVisible = true;
 
             Globals.Content = Content;
-
+            mapper = new Mapper();
+            provider = new DbProvider("Data Source=NNDatabase.db; Version=3; New=False");
+            repository = new Repository(provider, mapper);
 
             //Sets the games ScreenSize and applies it to our variable
             _graphics.PreferredBackBufferWidth = 1920;
@@ -105,13 +118,17 @@ namespace NecroNexus
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            ChangeState(levelOne);
+            ChangeState(menu);
             // TODO: use this.Content to load your game content here
         }
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                repository.Close();
                 Exit();
+            }
+                
 
             // Applies a simulation of time to DeltaTime
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;

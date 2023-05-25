@@ -47,8 +47,8 @@ namespace DatabaseRepository
             //Fejl? prøve at sætte '+'erne sammen til enkelte linjer :)
 
             //User:
-            cmd = new SQLiteCommand($"CREATE TABLE User (" +
-                $"UserID INT PRIMARY KEY, " +
+             cmd = new SQLiteCommand($"CREATE TABLE User (" +
+                $"UserID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 $"UserName STRING);",
                 (SQLiteConnection)connection);
             cmd.ExecuteNonQuery();
@@ -120,7 +120,7 @@ namespace DatabaseRepository
         {
             //tilføj UserId ved New Game;
             var cmd = new SQLiteCommand($"INSERT INTO User (UserName) " +
-                $"values ( '{userName}')", (SQLiteConnection)connection);
+                $"values ('{userName}')", (SQLiteConnection)connection);
             
             cmd.ExecuteNonQuery();
 
@@ -221,6 +221,13 @@ namespace DatabaseRepository
         }
 
         //Update LEVEL
+
+        public void UpdateUser(int userId, string nameNew)
+        {
+            var cmd = new SQLiteCommand($"UPDATE User SET UserName='{nameNew}' WHERE UserID = '{userId}'", (SQLiteConnection)connection);
+            cmd.ExecuteNonQuery();
+        }
+
         public void UpdateLevel(int levelId, int userId, int pLvlNew, float baseHpNew, float scoreNew, float soulsNew, int waveNew)
         {
             
@@ -272,6 +279,6 @@ namespace DatabaseRepository
             cmd.ExecuteNonQuery();
         }
 
-
+        
     }
 }
