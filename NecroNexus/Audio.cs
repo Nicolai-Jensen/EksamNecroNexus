@@ -35,9 +35,15 @@ namespace NecroNexus
         public static Song GameLostOverlay; // <  A scream of death leading into :
         public static Song GameLostBackgroundMusic; //  <  The 'GameLost' Music
 
-        public static Song SubtleBlast1; //Used for turrets, the necromancer, buttons. Up to u
+        public static Song SubtleBlast1; //Used for turrets, the necromancer, Up to u
         public static Song SubtleBlast2; 
         public static Song SubtleBlast3;
+
+        public static Song Explosion1;
+        public static Song Explosion2;
+        public static Song Explosion3;
+
+        public static Song ButtonPressed;
 
         // Method to load audio files and assign them to the struct members
         public static void LoadAudio()
@@ -55,7 +61,10 @@ namespace NecroNexus
             SubtleBlast1 = Globals.Content.Load<Song>("NexoAudio/TurretShotSound1");
             SubtleBlast2 = Globals.Content.Load<Song>("NexoAudio/TurretShotSound2");
             SubtleBlast3 = Globals.Content.Load<Song>("NexoAudio/TurretShotSound3");
-
+            Explosion1 = Globals.Content.Load<Song>("NexoAudio/Explosion1");
+            Explosion2 = Globals.Content.Load<Song>("NexoAudio/Explosion2");
+            Explosion3 = Globals.Content.Load<Song>("NexoAudio/Explosion3");
+            ButtonPressed = Globals.Content.Load<Song>("NexoAudio/ButtonPressed");
 
 
 
