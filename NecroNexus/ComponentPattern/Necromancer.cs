@@ -68,11 +68,14 @@ namespace NecroNexus
 
             //Adds the Animator Component and the adds the Keys to the Dictionary
             animator = (Animator)GameObject.GetComponent<Animator>();
-            controlKeys.Add(Keys.A, BState.Up);
-            controlKeys.Add(Keys.D, BState.Up);
-            controlKeys.Add(Keys.W, BState.Up);
-            controlKeys.Add(Keys.S, BState.Up);
-            controlKeys.Add(Keys.Space, BState.Up);
+            if (!controlKeys.ContainsKey(Keys.Space)) {
+                controlKeys.Add(Keys.A, BState.Up);
+                controlKeys.Add(Keys.D, BState.Up);
+                controlKeys.Add(Keys.W, BState.Up);
+                controlKeys.Add(Keys.S, BState.Up);
+                controlKeys.Add(Keys.Space, BState.Up);
+            }
+            
             
         }
 
