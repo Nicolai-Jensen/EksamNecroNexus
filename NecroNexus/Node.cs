@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace NecroNexus
 {
-    internal class Node<T>
+    public class Node<T>
     {
 
         public T Data { get; private set; } 

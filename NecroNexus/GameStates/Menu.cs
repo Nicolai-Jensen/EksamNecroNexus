@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DbDomain;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace NecroNexus
 {
@@ -24,6 +26,8 @@ namespace NecroNexus
         private MouseState previousMouse;
         private MouseState currentMouse;
 
+
+
         public int Drawdiffent { get { return drawdiffent; } }
 
         /// <summary>
@@ -31,16 +35,47 @@ namespace NecroNexus
         /// </summary>
         public Menu(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
+            this.game.Repository.Open();
 
         }
 
         public override void Initialize()
         {
+            try
+            {
+                game.Repository.CreateDatabaseTables();
+
+            }
+            catch (System.Exception)
+            {
+                return;
+            }
 
         }
 
         public override void LoadContent()
         {
+            List<User> userList;
+            try
+            {
+                userList = game.Repository.ReadAllUsers();
+                foreach (User user in userList)
+                {
+                    if (user.UserID <= 3)
+                    {
+                        placeHolderName[user.UserID - 1] = user.UserName;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+
+                Vector2 ip = new Vector2(0, 0);
+            }
+            
+
+            
+
             spriteFont = content.Load<SpriteFont>("placeholdersprites/UI/File");
             int menuXPos = 560, menuYPos = 120;
             menuSprites[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");//background
@@ -110,18 +145,21 @@ namespace NecroNexus
                     case 4:
                         if (placeHolderName[0] != "Empty")
                         {
-                            game.ChangeState2(game.LevelOne);
+                            game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
+                            game.ChangeState(game.LevelOne);
                         }
                         break;
                     case 5:
                         if (placeHolderName[1] != "Empty")
                         {
+                            game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
                             game.ChangeState2(game.LevelOne);
                         }
                         break;
                     case 6:
                         if (placeHolderName[2] != "Empty")
                         {
+                            game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
                             game.ChangeState2(game.LevelOne);
                         }
                         break;
@@ -184,16 +222,62 @@ namespace NecroNexus
         public void ChangeNameLoadoneSaveone(string saveName)
         {
             placeHolderName[0] = saveName;
+            User user;
+            
+            try
+            {
+                user = game.Repository.ReadUser(1);
+            }
+            catch (System.Exception)
+            {
+
+                user = null;
+            }
+            if (user != null)
+            {
+                game.Repository.UpdateUser(1, saveName);
+            }
+            else { game.Repository.AddUser(placeHolderName[0]); }
+
         }
         public void ChangeNameLoadtwoSavetwo(string saveName)
         {
             placeHolderName[1] = saveName;
+            User user;
+            try
+            {
+                user = game.Repository.ReadUser(2);
+            }
+            catch (System.Exception)
+            {
+
+                user = null;
+            }
+            if (user != null)
+            {
+                game.Repository.UpdateUser(2, saveName);
+            }
+            else { game.Repository.AddUser(placeHolderName[1]); }
 
         }
         public void ChangeNameLoadthreeSavethree(string saveName)
         {
             placeHolderName[2] = saveName;
+            User user;
+            try
+            {
+                user = game.Repository.ReadUser(3);
+            }
+            catch (System.Exception)
+            {
 
+                user = null;
+            }
+            if (user != null)
+            {
+                game.Repository.UpdateUser(3, saveName);
+            }
+            else { game.Repository.AddUser(placeHolderName[2]); }
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -218,7 +302,7 @@ namespace NecroNexus
                     spriteBatch.Draw(menuSprites[0], menuRec[8], Color.Gray);//background
                     spriteBatch.Draw(menuSprites[6], menuRec[5], Color.White);//Back
                     spriteBatch.Draw(menuSprites[7], menuRec[6], Color.White);//Load
-                    
+
                     for (int i = 9; i < 12; i++)//LoadUser
                     {
                         spriteBatch.Draw(menuSprites[5], menuRec[i], Color.White);

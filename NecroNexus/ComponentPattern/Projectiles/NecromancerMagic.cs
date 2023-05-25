@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ namespace NecroNexus
         private float speed;
 
         //An animator component to access animations
-        private Animator animator;
+        private NecroMagicFactory magicFac;
         private Damage damage;
         private Vector2 velocity;
         private Vector2 startPosition;
@@ -176,18 +178,6 @@ namespace NecroNexus
 
         }
 
-        public GameObject CreateOffSpring()
-        {
-            GameObject go = new GameObject();
-
-            SpriteRenderer sr = (SpriteRenderer)go.AddComponent(new SpriteRenderer());
-
-            Collider c = (Collider)go.AddComponent(new Collider());
-
-            sr.SetSprite("placeholdersprites/EldenRingIcon", .1f, Globals.GetRotation(GameObject.Transform.Position), 0.5f);
-
-            return go;
-        }
 
         public void SplitCheck()
         {
@@ -202,5 +192,7 @@ namespace NecroNexus
                 }
             }
         }
+
+        
     }
 }
