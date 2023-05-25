@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace NecroNexus
 {
@@ -12,6 +13,9 @@ namespace NecroNexus
         public float AttackSpeed { get; set; }
         
         public float AttackRangeRadius { get; set; }
+
+        public List<GameObject> enemiesInRange = new List<GameObject>();
+        public Enemy CurrentTarget { get; set; }
 
 
 
@@ -27,7 +31,7 @@ namespace NecroNexus
         }
 
 
-        
+
         //TODO: Ret når enemies er klar
 
         //public override void Update()
@@ -45,58 +49,20 @@ namespace NecroNexus
 
 
 
-        public bool IsEnemyInRange(Vector2 enemyPosition)
+        public void EnemyInRange(GameObject enemy)
         {
-            float distance = Vector2.Distance(Position, enemyPosition);
-
-            if(distance <= AttackRangeRadius)
-            {
-                return true; 
-            }
-            return false;
+            enemiesInRange.Add(enemy);
         }
 
 
         public virtual void Attack(Enemy enemy)
         {
-            //Vector2 direction = enemy.Position - Position;
-            //direction.Normalize();
-
-            //ArcherArrow projectile = new ArcherArrow(Position, direction, MagicDamage);
-            //projectile.Launch();
+            if(CurrentTarget != null)
+            {
+                //attack
+            }
         }
 
-        /// <summary>
-        /// Compares how far each of the enemies inside the range is along the track. the enemy furthest in the track, becomes the current target.
-        /// </summary>
-        //private Enemy FindFurthestEnemyInRange()
-        //{
-        //    //puts all enemies in range of the tower, in a list
-        //    List<Enemy> enemiesInRange = GetEnemiesInRange();
-
-        //    //checks if there are enemies in range
-        //    if(enemiesInRange.Count == 0)
-        //    {
-        //        return null; //no enemies in range
-        //    }
-
-        //    Enemy furthestEnemy = enemiesInRange[0];
-        //    float furthestDistance = CalculateDistanceAlongTrack(furthestEnemy);
-        //    foreach(Enemy enemy in enemiesInRange)
-        //    {
-        //        float distance = CalculateDistanceAlongTrack(enemy);
-        //        if(distance > furthestDistance)
-        //        {
-        //            furthestEnemy = enemy;
-        //            furthestDistance = distance;
-        //        }
-        //    }
-        //    return furthestEnemy;
-        //}
-
-        //private float CalculateDistanceAlongTrack(Enemy enemy)
-        //{
-
-        //}
+        
     }
 }

@@ -8,8 +8,15 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
-    //public class SkeletonBrute : Summon
-    //{
-   
-    //}
+    public class SkeletonBrute : Summon
+    {
+        public SkeletonBrute(Vector2 position, float attackRangeRadius, float attackspeed) : base(position, attackRangeRadius, attackspeed)
+        {
+        }
+        public override void Start()
+        {
+            GameObject.Transform.Translate(Position);
+            base.Start();
+        }
+    }
 }

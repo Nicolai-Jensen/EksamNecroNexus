@@ -1418,6 +1418,13 @@
 /processorParam:TextureFormat=Color
 /build:placeholdersprites/UI/SummonsSkeletonPurchase.png
 
+#begin placeholdersprites/UI/UITextElements/File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:placeholdersprites/UI/UITextElements/File.spritefont
+
 #begin placeholdersprites/UI/UpgradeLevelOne.png
 /importer:TextureImporter
 /processor:TextureProcessor
