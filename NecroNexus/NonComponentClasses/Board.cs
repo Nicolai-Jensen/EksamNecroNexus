@@ -23,18 +23,26 @@ namespace NecroNexus
             SpawnPosition = spawnPosition;
         }
 
-        public void LevelOneBoard()
+        public void LevelOneBoard(List<Vector2> list)
         {
-            Vector2 position1 = new Vector2(480, 427);
-            positionList.Add(position1);
-            Vector2 position2 = new Vector2(1440, 427);
-            positionList.Add(position2);
-            Vector2 position3 = new Vector2(960, 640);
-            positionList.Add(position3);
-            Vector2 position4 = new Vector2(480, 854);
-            positionList.Add(position4);
-            Vector2 position5 = new Vector2(1440, 854);
-            positionList.Add(position5);
+            foreach (var item in list)
+            {
+                positionList.Add(item);
+            }
         }
+
+        //public void LevelOneBoard()
+        //{
+        //    Vector2 position1 = new Vector2(480, 427);
+        //    positionList.Add(position1);
+        //    Vector2 position2 = new Vector2(1440, 427);
+        //    positionList.Add(position2);
+        //    Vector2 position3 = new Vector2(960, 640);
+        //    positionList.Add(position3);
+        //    Vector2 position4 = new Vector2(480, 854);
+        //    positionList.Add(position4);
+        //    Vector2 position5 = new Vector2(1440, 854);
+        //    positionList.Add(position5);
+        //}
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
-    internal class Graph<T>
+    public class Graph<T>
     {
        
         /* NODE LIST

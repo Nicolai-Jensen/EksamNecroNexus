@@ -14,6 +14,7 @@ namespace NecroNexus
         private Texture2D[] backgroundsprite;
         private Board boardOne;
         private GameSaveLevelOne level;
+        private Map map;
 
         private SummonFactory summons;
 
@@ -49,13 +50,14 @@ namespace NecroNexus
         /// </summary>
         public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
+            map = new Map();
             boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2));
             summons = new SummonFactory();
         }
 
         public override void Initialize()
-        {
-            boardOne.LevelOneBoard();
+        {          
+            boardOne.LevelOneBoard(map.ReturnPos(map.Graph1()));
             level = new GameSaveLevelOne(boardOne);
             Director director = new Director(new NecroBuilder());
 
