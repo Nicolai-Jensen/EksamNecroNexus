@@ -19,9 +19,10 @@ namespace NecroNexus
         public override float SoulDrop { get; set; }
         public ArmoredGrunt(Board board, Vector2 pos)
         {
-            speed = 120;
+            speed = 90;
             this.board = board;
             position = pos;
+            Health = 1;
             foreach (var item in board.PositionList)
             {
                 pathList.Add(item);
@@ -44,6 +45,7 @@ namespace NecroNexus
             animator.PlayAnimation("Idle");
             FindPath();
             Move();
+            Death();
         }
 
         public override void FindPath()

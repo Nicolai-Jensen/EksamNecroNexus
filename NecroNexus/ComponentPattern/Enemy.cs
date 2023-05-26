@@ -61,5 +61,14 @@ namespace NecroNexus
 
             currentPosition = GameObject.Transform.Position;
         }
+
+
+        public void Death()
+        {
+            if (Health <= 0)
+            {
+                ToRemove = true;
+            }
+        }
     }
 }
