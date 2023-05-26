@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DbDomain;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -621,8 +622,68 @@ namespace NecroNexus
 
                 if (component != null)
                 {
-                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 1000 || component.GameObject.Transform.Position.X < -1000 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 1000 || component.GameObject.Transform.Position.Y < -1000)
-                        removedGameObjects.Add(gameObject);
+                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 50 || component.GameObject.Transform.Position.X < -50 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 50 || component.GameObject.Transform.Position.Y < -50)
+                        RemoveObject(gameObject);
+                }
+
+                if (gameObject.Tag == "Enemy")
+                {
+                    if (gameObject.HasComponent<Grunt>())
+                    {
+                        Grunt enemy = (Grunt)gameObject.GetComponent<Grunt>();
+                        if (enemy.ToRemove)
+                        {
+                            RemoveObject(gameObject);
+                        }
+                    }
+                    else if (gameObject.HasComponent<ArmoredGrunt>())
+                    {
+                        ArmoredGrunt enemy = (ArmoredGrunt)gameObject.GetComponent<ArmoredGrunt>();
+                        if (enemy.ToRemove)
+                        {
+                            RemoveObject(gameObject);
+                        }
+                    }
+                    else if (gameObject.HasComponent<Knight>())
+                    {
+                        Knight enemy = (Knight)gameObject.GetComponent<Knight>();
+                        if (enemy.ToRemove)
+                        {
+                            RemoveObject(gameObject);
+                        }
+                    }
+                    else if (gameObject.HasComponent<HorseRider>())
+                    {
+                        HorseRider enemy = (HorseRider)gameObject.GetComponent<HorseRider>();
+                        if (enemy.ToRemove)
+                        {
+                            RemoveObject(gameObject);
+                        }
+                    }
+                    else if (gameObject.HasComponent<Cleric>())
+                    {
+                        Cleric enemy = (Cleric)gameObject.GetComponent<Cleric>();
+                        if (enemy.ToRemove)
+                        {
+                            RemoveObject(gameObject);
+                        }
+                    }
+                    else if (gameObject.HasComponent<Paladin>())
+                    {
+                        Paladin enemy = (Paladin)gameObject.GetComponent<Paladin>();
+                        if (enemy.ToRemove)
+                        {
+                            RemoveObject(gameObject);
+                        }
+                    }
+                    else if (gameObject.HasComponent<Valkyrie>())
+                    {
+                        Valkyrie enemy = (Valkyrie)gameObject.GetComponent<Valkyrie>();
+                        if (enemy.ToRemove)
+                        {
+                            RemoveObject(gameObject);
+                        }
+                    }
                 }
             }
         }
