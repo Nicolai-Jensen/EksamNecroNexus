@@ -29,6 +29,8 @@ namespace NecroNexus
 
 
         public int Drawdiffent { get { return drawdiffent; } }
+        public int ClickedStuff{get { return clickedStuff; } set { clickedStuff = value; }}
+        public int WhichMenuClickede { get { return WhichMenuClicked; } set { WhichMenuClicked = value; } }
 
         /// <summary>
         /// The States Constructor which applies the picture that is shown
@@ -38,7 +40,9 @@ namespace NecroNexus
             this.game.Repository.Open();
 
         }
-
+        /// <summary>
+        /// When a player starts the game up it trys to make a database if there isnt one.
+        /// </summary>
         public override void Initialize()
         {
             try
@@ -52,10 +56,14 @@ namespace NecroNexus
             }
 
         }
-
+        /// <summary>
+        /// This class loads all the sprites and basic information so that it can be used later.
+        /// It gets information from the database about which users there are.
+        /// </summary>
         public override void LoadContent()
         {
             List<User> userList;
+            //We know that an error will occurre if the user database is empty so by putting it in a try catch we can make sure it doesnt crash the game if it is empty
             try
             {
                 userList = game.Repository.ReadAllUsers();
@@ -69,13 +77,9 @@ namespace NecroNexus
             }
             catch (System.Exception)
             {
-
+                //this "Vector2 ip" is useless and is just used to make sure that the rest of load content is called.
                 Vector2 ip = new Vector2(0, 0);
             }
-            
-
-            
-
             spriteFont = content.Load<SpriteFont>("placeholdersprites/UI/File");
             int menuXPos = 560, menuYPos = 120;
             menuSprites[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");//background
@@ -121,7 +125,7 @@ namespace NecroNexus
         }
 
         /// <summary>
-        /// A way to ensure single key presses when taking action
+        /// Used to get the mouse
         /// </summary>
         public override void Update()
         {
@@ -129,7 +133,9 @@ namespace NecroNexus
             currentMouse = Mouse.GetState();//enables you to click with the currentMouse
             ClickingOnMenu();
         }
-
+        /// <summary>
+        /// Handels the 
+        /// </summary>
         private void ClickingOnMenu()
         {
             if (WhichMenuClicked == 0 && menuRec[1].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the LoadGameButton

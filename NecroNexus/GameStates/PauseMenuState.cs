@@ -71,6 +71,8 @@ namespace NecroNexus
             {
                 clickedStuff = 0;
 
+                game.Menu.ClickedStuff = 0;
+                game.Menu.WhichMenuClickede = 0;
                 game.ChangeState(game.Menu);
             }
         }
