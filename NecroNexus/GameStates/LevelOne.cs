@@ -65,9 +65,12 @@ namespace NecroNexus
             boardOne.LevelOneBoard(map.ReturnPos(map.Graph1()));
             level = new GameSaveLevelOne(boardOne);
             Director director = new Director(new NecroBuilder());
+            gameObjects.Add(summons.Create(SummonType.SkeletonArcher, new Vector2(-3000, -3000)));
+            gameObjects.Add(summons.Create(SummonType.SkeletonBrute, new Vector2(-3000, -3000)));
+            gameObjects.Add(summons.Create(SummonType.Hex, new Vector2(-3000, -3000)));
+            gameObjects.Add(summons.Create(SummonType.Demon, new Vector2(-3000, -3000)));
 
-
-
+            
             gameObjects.Add(director.Construct());
 
 
@@ -149,6 +152,8 @@ namespace NecroNexus
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();//enables you to click with the currentMouse
             CheckingIfClicked();
+
+            
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -394,25 +399,29 @@ namespace NecroNexus
                     spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.DarkGray);//SummonBut
                     spriteBatch.Draw(UISprites[0], clickableButRec[5], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//Backgroundboxs for selection of summons
 
+                    SkeletonArcher sk = (SkeletonArcher)GetSummonGo(1).GetComponent<SkeletonArcher>();
                     spriteBatch.Draw(UISprites[10], clickableButRec[6], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//TopLeft.
-                    spriteBatch.DrawString(showLevelInfo, "attack", new Vector2(765, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(showLevelInfo, "range", new Vector2(765, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(showLevelInfo, "firerate", new Vector2(765, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo,sk.skDamge.ToString() , new Vector2(765, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, sk.Range.ToString(), new Vector2(765, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, sk.FireRate.ToString(), new Vector2(765, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
+                    Hex hx = (Hex)GetSummonGo(2).GetComponent<Hex>();
                     spriteBatch.Draw(UISprites[11], clickableButRec[7], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//ButtomLeft.
-                    spriteBatch.DrawString(showLevelInfo, "attack", new Vector2(770, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(showLevelInfo, "range", new Vector2(770, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(showLevelInfo, "firerate", new Vector2(770, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, hx.skDamge.ToString(), new Vector2(770, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, hx.Range.ToString(), new Vector2(770, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, hx.FireRate.ToString(), new Vector2(770, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
+                    SkeletonBrute brute = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
                     spriteBatch.Draw(UISprites[12], clickableButRec[8], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Topright.
-                    spriteBatch.DrawString(showLevelInfo, "attack", new Vector2(1260, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(showLevelInfo, "range", new Vector2(1260, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(showLevelInfo, "firerate", new Vector2(1260, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, brute.skDamge.ToString(), new Vector2(1260, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, brute.Range.ToString(), new Vector2(1260, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, brute.FireRate.ToString(), new Vector2(1260, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
+                    Demon demon = (Demon)GetSummonGo(4).GetComponent<Demon>();
                     spriteBatch.Draw(UISprites[13], clickableButRec[9], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//ButtomRight.
-                    spriteBatch.DrawString(showLevelInfo, "attack", new Vector2(1260, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(showLevelInfo, "range", new Vector2(1260, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(showLevelInfo, "firerate", new Vector2(1260, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, demon.skDamge.ToString(), new Vector2(1260, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, demon.Range.ToString(), new Vector2(1260, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, demon.FireRate.ToString(), new Vector2(1260, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
                     if (isHoveringOverIcon[0] == true)
                     {
@@ -495,7 +504,6 @@ namespace NecroNexus
         /// <returns></returns>
         private GameObject GetChar()
         {
-            GameObject go = new GameObject();
             foreach (GameObject item in gameObjects)
             {
                 if (item.Tag == "Player")
@@ -505,7 +513,49 @@ namespace NecroNexus
             }
             return null;
         }
-
+        private GameObject GetSummonGo(int value)
+        {
+            switch (value)
+            {
+                case 1:
+                    foreach (GameObject item in gameObjects)
+                    {
+                        if (item.Tag == "Archer")
+                        {
+                            return item;
+                        }
+                    }
+                    return null;
+                case 2:
+                    foreach (GameObject item in gameObjects)
+                    {
+                        if (item.Tag == "Hex")
+                        {
+                            return item;
+                        }
+                    }
+                    return null;
+                case 3:
+                    foreach (GameObject item in gameObjects)
+                    {
+                        if (item.Tag == "Brute")
+                        {
+                            return item;
+                        }
+                    }
+                    return null;
+                case 4:
+                    foreach (GameObject item in gameObjects)
+                    {
+                        if (item.Tag == "Demon")
+                        {
+                            return item;
+                        }
+                    }
+                    return null;
+            }
+            return null;
+        }
         public static void AddObject(GameObject go)
         {
             addGameObjects.Add(go);

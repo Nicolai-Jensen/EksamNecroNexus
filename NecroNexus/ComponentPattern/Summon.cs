@@ -1,6 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 
 namespace NecroNexus
 {
@@ -14,7 +12,7 @@ namespace NecroNexus
         public float AttackSpeed { get; set; }
 
         private float attackTimer;
-        
+
         public float AttackRangeRadius { get; set; }
 
 
@@ -22,7 +20,7 @@ namespace NecroNexus
 
         public Summon(Vector2 position, float attackRangeRadius, float attackspeed)
         {
-            
+
             Position = position;
             AttackRangeRadius = attackRangeRadius;
             AttackSpeed = attackspeed;
@@ -30,19 +28,19 @@ namespace NecroNexus
         }
 
 
-       
+
 
         public virtual void ShootArrow()
         {
-           
-            
+
+
         }
 
         public override void Update()
         {
 
 
-           
+
         }
 
 
@@ -51,10 +49,10 @@ namespace NecroNexus
 
         public virtual void Attack()
         {
-          
+
 
         }
 
-        
+
     }
 }

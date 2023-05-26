@@ -5,11 +5,6 @@ namespace NecroNexus
 {
     public class SkeletonArcher : Summon
     {
-
-        private Enemy TargetEnemy; //Stores the current target
-
-        private const int MaxTier = 4; //Constant that "locks" the max tier for the tower, so the max tier variable cannot be changed elsewhere.
-
         public List<GameObject> EnemiesInRange { get; private set; }
 
         public int CurrentTier { get; private set; }
@@ -19,6 +14,9 @@ namespace NecroNexus
         ArrowFactory arrowFactory = new ArrowFactory();
         private Vector2 velocity;
         private Vector2 ePos;
+        public float skDamge { get; set; }
+        public float Range { get { return AttackRangeRadius; } }
+        public float FireRate { get{ return AttackSpeed; } }
 
         public int Tier { get; set; } = 0;
 
@@ -27,9 +25,27 @@ namespace NecroNexus
         {
             AttackRangeRadius = attackRangeRadius;
             EnemiesInRange = new List<GameObject>();
+            SetTier(0);
 
         }
-
+        public void SetValues(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    skDamge = 0.5f;
+                    break;
+                case 1:
+                    skDamge = 1f;
+                    break;
+                case 2:
+                    skDamge = 1.5f;
+                    break;
+                case 3:
+                    skDamge = 2f;
+                    break;
+            }
+        }
 
         private void SetTier(int i)
         {
@@ -39,6 +55,7 @@ namespace NecroNexus
         public override void Start()
         {
             GameObject.Transform.Translate(Position);
+            GameObject.Tag = "Archer";
             base.Start();
         }
 
@@ -48,20 +65,15 @@ namespace NecroNexus
              if (Globals.FindClosestObject(LevelOne.gameObjects, GameObject.Transform.Position) != null)
              {
 
-                  if (attackTimer >= 1f && IsEnemiesInRange(Globals.FindClosestObject(LevelOne.gameObjects, GameObject.Transform.Position).Transform.Position, 250f) == true)
+                  if (attackTimer >= AttackSpeed && IsEnemiesInRange(Globals.FindClosestObject(LevelOne.gameObjects, GameObject.Transform.Position).Transform.Position, 250f) == true)
                   {
                     velocity = Globals.Direction(Globals.FindClosestObject(LevelOne.gameObjects, GameObject.Transform.Position).Transform.Position, GameObject.Transform.Position);
                     ePos = Globals.FindClosestObject(LevelOne.gameObjects, GameObject.Transform.Position).Transform.Position;
                     Attack();
                     attackTimer = 0f;
                   }
-          
              } 
-             else
-             {
-                 return;
-             }
-
+            SetValues(Tier);
             base.Update();
         }
 
