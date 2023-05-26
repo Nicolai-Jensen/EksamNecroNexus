@@ -11,7 +11,11 @@ namespace NecroNexus
     {
         //A Texture variable for our background
 
-        private Texture2D[] backgroundsprite;
+        //private Texture2D[] backgroundsprite;
+
+        private Texture2D BackgroundFront;
+        private Texture2D BackgroundPlain;
+
         private Board boardOne;
         private GameSaveLevelOne level;
         private Map map;
@@ -74,6 +78,9 @@ namespace NecroNexus
 
         public override void LoadContent()
         {
+            BackgroundFront = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedFront");
+            BackgroundPlain = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedPlain");
+
             UISprites[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");
             clickableButRec[0] = new Rectangle(0, 880, 1920, 200);
             UISprites[1] = content.Load<Texture2D>("placeholdersprites/UI/CharSpriteLV0");//CharImagelv0
@@ -302,14 +309,21 @@ namespace NecroNexus
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            
+
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
             DrawingUI(spriteBatch);
+
+           
+            spriteBatch.Draw(BackgroundPlain, new Vector2(0, 0), null, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Draw(spriteBatch);
             }
+            spriteBatch.Draw(BackgroundFront, new Vector2(0, 0), null, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+
             spriteBatch.End();
         }
         /// <summary>
