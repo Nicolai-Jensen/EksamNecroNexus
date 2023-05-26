@@ -13,14 +13,13 @@ namespace NecroNexus
         /* HOW TO USE :)
           
            Pick the sound you need, (ex ButtonPressed) 
-           and use this following code in your class:
+           and use this following code in the statement in your class:
 
-         
-                MediaPlayer.Play(Audio.ButtonPressed);
+
+                MediaPlayer.IsRepeating = false;
                 MediaPlayer.Volume = 0.2f;
-
-
-           NOTE: The audio don't automatically loop. 
+                MediaPlayer.Play(Audio.ButtonPressed);
+                
 
            - B
 
