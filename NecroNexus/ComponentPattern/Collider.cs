@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.MediaFoundation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,19 +20,13 @@ namespace NecroNexus
         //The Collider Component needs access to the ObserverPattern CollisionEvent and this is a variable for that
         public CollisionEvent CollisionEvent { get; set; } = new CollisionEvent();
 
-        //These fields are used for the CollisionBox to determine its size in comparison to the sprite
-        private float size1 = 2;
-        private float size2 = 2;
-        private int size3 = 1;
-        private int size4 = 1;
-
         /// <summary>
         /// Some Properties for the size fields so that they can be changed individually 
         /// </summary>
-        public float Size1 { get { return size1; } set { size1 = value; } }
-        public float Size2 { get { return size2; } set { size2 = value; } }
-        public int Size3 { get { return size3; } set { size3 = value; } }
-        public int Size4 { get { return size4; } set { size4 = value; } }
+        public int OffsetX { get; set; } = 0;
+        public int OffsetY { get; set; } = 0;
+        public float WidthMultiplier { get; set; } = 1.0f;
+        public float HeightMultiplier { get; set; } = 1.0f;
 
         /// <summary>
         /// Colliders Start method
@@ -52,13 +47,13 @@ namespace NecroNexus
         {
             get
             {
-                return new Rectangle
-                    (
-                        (int)(GameObject.Transform.Position.X - spriteRenderer.Sprite.Width / Size1),
-                        (int)(GameObject.Transform.Position.Y - spriteRenderer.Sprite.Height / Size2),
-                        spriteRenderer.Sprite.Width / Size3,
-                        spriteRenderer.Sprite.Height / Size4
-                    );
+                int width = (int)(spriteRenderer.Sprite.Width * WidthMultiplier);
+                int height = (int)(spriteRenderer.Sprite.Height * HeightMultiplier);
+
+                int offsetX = (int)(GameObject.Transform.Position.X - width / 2 + OffsetX);
+                int offsetY = (int)(GameObject.Transform.Position.Y - height / 2 + OffsetY);
+
+                return new Rectangle(offsetX, offsetY, width, height);
             }
         }
 

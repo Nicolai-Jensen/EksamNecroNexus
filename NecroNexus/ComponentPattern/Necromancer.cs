@@ -49,6 +49,7 @@ namespace NecroNexus
         {
             //Sets its speed
             speed = 400;
+            this.GameObject.Tag = "Player";
 
             magic = new NecroMagicFactory();
         }
