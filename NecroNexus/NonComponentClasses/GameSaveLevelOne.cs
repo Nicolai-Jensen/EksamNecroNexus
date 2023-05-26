@@ -33,7 +33,7 @@ namespace NecroNexus
 
         public void SaveGame()
         {
-
+            LevelOne.AddObject(enemies.Create(EnemyType.Grunt, new Vector2(500, 500)));
         }
 
         public void LoadGame()
@@ -106,6 +106,14 @@ namespace NecroNexus
             
         }
 
+        public bool ReturnWaveState()
+        {
+            if (CurrentWave < WavesLvlOne.Count)
+            {
+                return WavesLvlOne[CurrentWave].Activated;
+            }
+            return true;
+        }
         
     }
 }

@@ -18,9 +18,10 @@ namespace NecroNexus
         public override float SoulDrop { get; set; }
         public Cleric(Board board, Vector2 pos)
         {
-            speed = 90;
+            speed = 60;
             this.board = board;
             position = pos;
+            Health = 1;
             foreach (var item in board.PositionList)
             {
                 pathList.Add(item);
@@ -43,6 +44,7 @@ namespace NecroNexus
             animator.PlayAnimation("Idle");
             FindPath();
             Move();
+            Death();
         }
 
         public override void FindPath()

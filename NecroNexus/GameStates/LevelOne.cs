@@ -15,6 +15,7 @@ namespace NecroNexus
         private Board boardOne;
         private GameSaveLevelOne level;
         private Map map;
+        private AutoSave autoSave;
 
         private SummonFactory summons;
 
@@ -53,18 +54,18 @@ namespace NecroNexus
             map = new Map();
             boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2));
             summons = new SummonFactory();
+            boardOne.LevelOneBoard(map.ReturnPos(map.Graph1()));
+            level = new GameSaveLevelOne(boardOne);
+            autoSave = new AutoSave(level);
         }
 
         public override void Initialize()
-        {          
-            boardOne.LevelOneBoard(map.ReturnPos(map.Graph1()));
-            level = new GameSaveLevelOne(boardOne);
+        {
+
+            autoSave.Start();
+
             Director director = new Director(new NecroBuilder());
-
-
-
             gameObjects.Add(director.Construct());
-
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
