@@ -1,29 +1,33 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace NecroNexus
 {
-    public class NecromancerMagic : Component
+    public class NecromancerMagic : Component, IGameListener
     {
         //Speed Value, used for velocity in the Move method
         private float speed;
-
         //An animator component to access animations
-        private Animator animator;
+        private NecroMagicFactory magicFac = new NecroMagicFactory();
         private Damage damage;
         private Vector2 velocity;
         private Vector2 startPosition;
         private int tier;
-        private float timer;
+        private float splitTimer;
+        private float homeTimer;
         private bool homing = false;
         private bool split = false;
         private bool explode = false;
         private bool hasSplit = false;
+        private bool willHome = false;
 
 
         public override bool ToRemove { get; set; }
@@ -31,7 +35,7 @@ namespace NecroNexus
         public NecromancerMagic(int tier)
         {
             this.tier = tier;
-            velocity = Direction(Globals.ReturnPlayerPosition());
+            velocity = DirectionToMouse(Globals.ReturnPlayerPosition());
 
             switch (this.tier)
             {
@@ -62,9 +66,11 @@ namespace NecroNexus
             {
                 case (2):
                     Tier2();
+                    willHome = true;
                     break;
                 case (3):
                     Tier3();
+                    willHome = true;
                     break;
             }
             speed = 800f;
@@ -90,6 +96,8 @@ namespace NecroNexus
         {
             Move();
             SplitCheck();
+            Homing();
+            HomeCheck();
         }
 
 
@@ -104,7 +112,7 @@ namespace NecroNexus
             GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);     
         }
 
-        protected Vector2 Direction(Vector2 playerPosition)
+        protected Vector2 DirectionToMouse(Vector2 playerPosition)
         {
             Vector2 direction;
             
@@ -135,7 +143,6 @@ namespace NecroNexus
         {
             speed = 250f;
             damage = new Damage(DamageType.Magical, 3f);
-            homing = true;
             split = true;
         }
 
@@ -143,13 +150,15 @@ namespace NecroNexus
         {
             speed = 250f;
             damage = new Damage(DamageType.Magical, 4f);
-            homing = true;
             split = true;
             explode = true;
         }
 
         public void Split()
         {
+            NecromancerMagic ml;
+            NecromancerMagic mr;
+
             // Calculate the angle of the original velocity vector
             float originalAngle = (float)Math.Atan2(velocity.Y, velocity.X);
 
@@ -164,11 +173,16 @@ namespace NecroNexus
             Vector2 leftVelocity = Globals.FromAngle(leftAngle) * velocity.Length();
             Vector2 rightVelocity = Globals.FromAngle(rightAngle) * velocity.Length();
 
-            GameObject bulletLeft = CreateOffSpring();
-            GameObject bulletRight = CreateOffSpring();
+            GameObject bulletLeft = magicFac.CreateOffSpring(GameObject.Transform.Position);
+            GameObject bulletRight = magicFac.CreateOffSpring(GameObject.Transform.Position);
 
-            bulletLeft.AddComponent(new NecromancerMagic(tier, true, leftVelocity, GameObject.Transform.Position));
-            bulletRight.AddComponent(new NecromancerMagic(tier, true, rightVelocity, GameObject.Transform.Position));
+            ml = (NecromancerMagic)bulletLeft.AddComponent(new NecromancerMagic(tier, true, leftVelocity, GameObject.Transform.Position));
+            mr = (NecromancerMagic)bulletRight.AddComponent(new NecromancerMagic(tier, true, rightVelocity, GameObject.Transform.Position));
+            Collider cl = (Collider)bulletLeft.GetComponent<Collider>();
+            Collider cr = (Collider)bulletRight.GetComponent<Collider>();
+            cl.CollisionEvent.Attach(ml);
+            cr.CollisionEvent.Attach(mr);
+
             LevelOne.AddObject(bulletLeft);
             LevelOne.AddObject(bulletRight);
 
@@ -176,29 +190,100 @@ namespace NecroNexus
 
         }
 
-        public GameObject CreateOffSpring()
+        public void Homing()
         {
-            GameObject go = new GameObject();
-
-            SpriteRenderer sr = (SpriteRenderer)go.AddComponent(new SpriteRenderer());
-
-            Collider c = (Collider)go.AddComponent(new Collider());
-
-            sr.SetSprite("placeholdersprites/EldenRingIcon", .1f, Globals.GetRotation(GameObject.Transform.Position), 0.5f);
-
-            return go;
+            if (homing == true)
+            {
+                if (Globals.FindClosestObject(LevelOne.gameObjects, GameObject.Transform.Position) != null)
+                {
+                    velocity = Globals.Direction(Globals.FindClosestObject(LevelOne.gameObjects, GameObject.Transform.Position).Transform.Position, GameObject.Transform.Position);
+                }
+                else
+                {
+                    return;
+                }    
+            }
         }
+
 
         public void SplitCheck()
         {
             if (split == true)
             {  
-                timer += GameWorld.DeltaTime;
-                if (timer >= 0.5f)
+                splitTimer += GameWorld.DeltaTime;
+                if (splitTimer >= 0.5f)
                 {
                     Split();
                     split = false;
-                    timer = 0;
+                    splitTimer = 0;
+                }
+            }
+        }
+
+        public void HomeCheck()
+        {
+            if (willHome == true)
+            {
+                homeTimer += GameWorld.DeltaTime;
+                if (homeTimer >= 0.5f)
+                {
+                    homing = true;
+                    willHome = false;
+                }
+            }
+        }
+
+        public void Notify(GameEvent gameEvent)
+        {
+            
+            if (gameEvent is CollisionEvent)
+            {
+                GameObject other = (gameEvent as CollisionEvent).Other;
+
+                if (other.Tag == "Enemy")
+                {
+                    if (other.HasComponent<Grunt>())
+                    {
+                        Grunt enemy = (Grunt)other.GetComponent<Grunt>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<ArmoredGrunt>())
+                    {
+                        ArmoredGrunt enemy = (ArmoredGrunt)other.GetComponent<ArmoredGrunt>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<Knight>())
+                    {
+                        Knight enemy = (Knight)other.GetComponent<Knight>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<HorseRider>())
+                    {
+                        HorseRider enemy = (HorseRider)other.GetComponent<HorseRider>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<Cleric>())
+                    {
+                        Cleric enemy = (Cleric)other.GetComponent<Cleric>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<Paladin>())
+                    {
+                        Paladin enemy = (Paladin)other.GetComponent<Paladin>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<Valkyrie>())
+                    {
+                        Valkyrie enemy = (Valkyrie)other.GetComponent<Valkyrie>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
                 }
             }
         }

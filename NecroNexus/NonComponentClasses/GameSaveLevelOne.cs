@@ -44,6 +44,19 @@ namespace NecroNexus
         public void ConstructWaves()
         {
             Wave wave = new Wave();
+
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Grunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.ArmoredGrunt, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Knight, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.HorseRider, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Cleric, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Paladin, new Vector2(1725, -10)));
+            wave.AddEnemyToWave(enemies.Create(EnemyType.Valkyrie, new Vector2(1725, -10)));
+
+            WavesLvlOne.Add(wave);
+
+            wave = new Wave();
+
             int thing = 10;
             for (int i = 0; i < thing; i++)
             {
