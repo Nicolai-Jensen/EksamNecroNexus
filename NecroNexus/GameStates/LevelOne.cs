@@ -56,7 +56,7 @@ namespace NecroNexus
         }
 
         public override void Initialize()
-        {          
+        {
             boardOne.LevelOneBoard(map.ReturnPos(map.Graph1()));
             level = new GameSaveLevelOne(boardOne);
             Director director = new Director(new NecroBuilder());
@@ -152,6 +152,10 @@ namespace NecroNexus
             GameObjectsToRemove();
             Cleanup();
         }
+        /// <summary>
+        /// This class handles the entire interation between the user and the UI the information here is then used down in DrawingUI
+        /// Thorbjørn
+        /// </summary>
         private void CheckingIfClicked()
         {
             //Open the summons menu
@@ -159,6 +163,9 @@ namespace NecroNexus
             { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { menuButClicked = 2; } else return; }
             if (menuButClicked == 2)
             {
+                timer += GameWorld.DeltaTime;
+                //So you can close the summons menu if clicked on again.
+                if (timer >= 0.5f && menuButClicked == 2 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released){menuButClicked = 0;timer = 0;}
                 if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     menuButClicked = 0;
@@ -199,8 +206,12 @@ namespace NecroNexus
                 }
 
             }
+
             if (menuButClicked == 3)//Choose upgrade
             {
+                timer += GameWorld.DeltaTime;
+                //So you can close the upgrade menu if clicked on again.
+                if (timer >= 0.5f && menuButClicked == 3 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; timer = 0; }
                 if (clickableButRec[10].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 { whichUpgradeClicked = 1; }
                 if (clickableButRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 2; }
@@ -242,8 +253,14 @@ namespace NecroNexus
                 game.ChangeState(game.PauseMenuState);
             }
         }
+        /// <summary>
+        /// This class is called when the player has clicked on a summon they want to buy. 
+        /// It checks the which summon has been clicked and then toggels an array that i then used in DrawingUI
+        /// Thorbjørn
+        /// </summary>
         private void HoveringSummons()
         {
+            //So you can't click in the area of the UI.
             if (currentMouse.Y <= 880)
             {
                 if (presseddowntopleft[0] == true)
@@ -287,6 +304,7 @@ namespace NecroNexus
                     }
                 }
             }
+            //makes so you can only click when the Upgrades tab has been clicked
             if (menuButClicked == 2)
             {
                 if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y)) { isHoveringOverIcon[0] = true; }
@@ -327,8 +345,27 @@ namespace NecroNexus
 
             spriteBatch.Draw(UISprites[9], clickableButRec[18], Color.White);//ActivLevelPauseButton
 
-            //Chance this so the player icon changes with the level
-            spriteBatch.Draw(UISprites[1], clickableButRec[1], Color.White);//Char Image
+            
+            Necromancer nc = (Necromancer)GetChar().GetComponent<Necromancer>();
+            switch (nc.Tier)
+            {
+                case 0:
+                    //Chance this so the player icon changes with the level
+                    spriteBatch.Draw(UISprites[1], clickableButRec[1], Color.White);//Char Image
+                    break;
+                case 1:
+                    //Chance this so the player icon changes with the level
+                    spriteBatch.Draw(UISprites[2], clickableButRec[1], Color.White);//Char Image
+                    break;
+                case 2:
+                    //Chance this so the player icon changes with the level
+                    spriteBatch.Draw(UISprites[3], clickableButRec[1], Color.White);//Char Image
+                    break;
+                case 3:
+                    //Chance this so the player icon changes with the level
+                    spriteBatch.Draw(UISprites[4], clickableButRec[1], Color.White);//Char Image
+                    break;
+            }
 
             if (menuButClicked == 2) { }
             else { spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.White); }//SummonsBut
@@ -363,6 +400,7 @@ namespace NecroNexus
                     spriteBatch.DrawString(showLevelInfo, "attack", new Vector2(1260, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, "range", new Vector2(1260, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, "firerate", new Vector2(1260, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+
                     if (isHoveringOverIcon[0] == true)
                     {
                         spriteBatch.DrawString(showLevelInfo, "Price", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
@@ -438,6 +476,22 @@ namespace NecroNexus
             }
 
         }
+        /// <summary>
+        /// When called it returns the player
+        /// </summary>
+        /// <returns></returns>
+        private GameObject GetChar()
+        {
+            GameObject go = new GameObject();
+            foreach (GameObject item in gameObjects)
+            {
+                if (item.Tag =="Player")
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
 
         public static void AddObject(GameObject go)
         {
@@ -500,8 +554,8 @@ namespace NecroNexus
 
                 if (component != null)
                 {
-                    if(component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 1000 || component.GameObject.Transform.Position.X < -1000 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 1000 || component.GameObject.Transform.Position.Y < -1000)
-                    removedGameObjects.Add(gameObject);
+                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 1000 || component.GameObject.Transform.Position.X < -1000 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 1000 || component.GameObject.Transform.Position.Y < -1000)
+                        removedGameObjects.Add(gameObject);
                 }
             }
         }
