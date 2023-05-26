@@ -10,10 +10,12 @@ namespace NecroNexus
     public class LevelOne : State
     {
         //A Texture variable for our background
+
+        //private Texture2D[] backgroundsprite;
+
         private Texture2D BackgroundFront;
         private Texture2D BackgroundPlain;
 
-        private Texture2D[] backgroundsprite;
         private Board boardOne;
         private GameSaveLevelOne level;
         private Map map;
@@ -76,6 +78,9 @@ namespace NecroNexus
 
         public override void LoadContent()
         {
+            BackgroundFront = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedFront");
+            BackgroundPlain = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedPlain");
+
             UISprites[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");
             clickableButRec[0] = new Rectangle(0, 880, 1920, 200);
             UISprites[1] = content.Load<Texture2D>("placeholdersprites/UI/CharSpriteLV0");//CharImagelv0
@@ -167,7 +172,7 @@ namespace NecroNexus
             {
                 timer += GameWorld.DeltaTime;
                 //So you can close the summons menu if clicked on again.
-                if (timer >= 0.5f && menuButClicked == 2 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released){menuButClicked = 0;timer = 0;}
+                if (timer >= 0.5f && menuButClicked == 2 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; timer = 0; }
                 if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     menuButClicked = 0;
@@ -323,10 +328,12 @@ namespace NecroNexus
         public override void Draw(SpriteBatch spriteBatch)
         {
 
+
+
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
             DrawingUI(spriteBatch);
 
-            
+
             spriteBatch.Draw(BackgroundPlain, new Vector2(0, 0), null, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.1f);
 
             for (int i = 0; i < gameObjects.Count; i++)
@@ -352,7 +359,7 @@ namespace NecroNexus
 
             spriteBatch.Draw(UISprites[9], clickableButRec[18], Color.White);//ActivLevelPauseButton
 
-            
+
             Necromancer nc = (Necromancer)GetChar().GetComponent<Necromancer>();
             switch (nc.Tier)
             {
@@ -492,7 +499,7 @@ namespace NecroNexus
             GameObject go = new GameObject();
             foreach (GameObject item in gameObjects)
             {
-                if (item.Tag =="Player")
+                if (item.Tag == "Player")
                 {
                     return item;
                 }
@@ -558,18 +565,12 @@ namespace NecroNexus
             foreach (GameObject gameObject in gameObjects)
             {
                 Component component = gameObject.GetComponent<NecromancerMagic>();
-                if (component != null)
-                {
-                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 1000 || component.GameObject.Transform.Position.X < -1000 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 1000 || component.GameObject.Transform.Position.Y < -1000)
-                        removedGameObjects.Add(gameObject);
-                }
-                component = gameObject.GetComponent<ArcherArrow>();
-                if (component != null)
-                {
-                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 1000 || component.GameObject.Transform.Position.X < -1000 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 1000 || component.GameObject.Transform.Position.Y < -1000)
-                        removedGameObjects.Add(gameObject);
-                }
 
+                if (component != null)
+                {
+                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 1000 || component.GameObject.Transform.Position.X < -1000 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 1000 || component.GameObject.Transform.Position.Y < -1000)
+                        removedGameObjects.Add(gameObject);
+                }
             }
         }
 
