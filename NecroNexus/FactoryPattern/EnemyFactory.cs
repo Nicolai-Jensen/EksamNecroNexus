@@ -22,6 +22,7 @@ namespace NecroNexus
 
         public override GameObject Create(Enum type, Vector2 pos)
         {
+
             GameObject go = new GameObject();
 
             SpriteRenderer sr = (SpriteRenderer)go.AddComponent(new SpriteRenderer());
@@ -40,6 +41,7 @@ namespace NecroNexus
                     c.WidthMultiplier = 2;
                     c.HeightMultiplier = 2;
                     c.OffsetX = -5; c.OffsetY = 0;
+                    go.Tag = "Enemy";
                     go.AddComponent(new Grunt(board, pos));
                     break;
                 case EnemyType.ArmoredGrunt:
@@ -48,6 +50,7 @@ namespace NecroNexus
                     c.WidthMultiplier = 2;
                     c.HeightMultiplier = 2;
                     c.OffsetX = -5; c.OffsetY = 0;
+                    go.Tag = "Enemy";
                     go.AddComponent(new ArmoredGrunt(board, pos));
                     break;
                 case EnemyType.Knight:
@@ -56,6 +59,7 @@ namespace NecroNexus
                     c.WidthMultiplier = 2;
                     c.HeightMultiplier = 2;
                     c.OffsetX = -5; c.OffsetY = 0;
+                    go.Tag = "Enemy";
                     go.AddComponent(new Knight(board, pos));
                     break;
                 case EnemyType.HorseRider:
@@ -66,6 +70,7 @@ namespace NecroNexus
                     c.WidthMultiplier = 1;
                     c.HeightMultiplier = 1;
                     c.OffsetX = 0; c.OffsetY = 20;
+                    go.Tag = "Enemy";
                     go.AddComponent(new HorseRider(board, pos));
                     break;
                 case EnemyType.Cleric:
@@ -74,6 +79,7 @@ namespace NecroNexus
                     c.WidthMultiplier = 2.5f;
                     c.HeightMultiplier = 2.5f;
                     c.OffsetX = 0; c.OffsetY = 0;
+                    go.Tag = "Enemy";
                     go.AddComponent(new Cleric(board, pos));
                     break;
                 case EnemyType.Paladin:
@@ -82,6 +88,7 @@ namespace NecroNexus
                     c.WidthMultiplier = 3;
                     c.HeightMultiplier = 4;
                     c.OffsetX = -10; c.OffsetY = 0;
+                    go.Tag = "Enemy";
                     go.AddComponent(new Paladin(board, pos));
                     break;
                 case EnemyType.Valkyrie:
@@ -90,12 +97,15 @@ namespace NecroNexus
                     c.WidthMultiplier = 2.5f;
                     c.HeightMultiplier = 2;
                     c.OffsetX = 0; c.OffsetY = 0;
+                    go.Tag = "Enemy";
                     go.AddComponent(new Valkyrie(board, pos));
                     break;
             }
 
             return go;
         }
+
+        
 
         /// <summary>
         /// A method used for Building our animation for when we add an animation to our animator for our GameObject

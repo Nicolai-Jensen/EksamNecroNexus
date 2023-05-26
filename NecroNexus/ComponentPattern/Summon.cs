@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
 namespace NecroNexus
@@ -11,11 +12,11 @@ namespace NecroNexus
         public Vector2 AttackRangeCenter => Position;
 
         public float AttackSpeed { get; set; }
+
+        private float attackTimer;
         
         public float AttackRangeRadius { get; set; }
 
-        public List<GameObject> enemiesInRange = new List<GameObject>();
-        public Enemy CurrentTarget { get; set; }
 
 
 
@@ -24,43 +25,34 @@ namespace NecroNexus
             
             Position = position;
             AttackRangeRadius = attackRangeRadius;
-           
             AttackSpeed = attackspeed;
+            attackTimer = 0f;
+        }
 
-            AttackSpeed = 1f;
+
+       
+
+        public virtual void ShootArrow()
+        {
+           
+            
+        }
+
+        public override void Update()
+        {
+
+
+           
         }
 
 
 
-        //TODO: Ret når enemies er klar
-
-        //public override void Update()
-        //{
-        //    //TODO: tilføj den rigtige list
-
-        //    foreach (Enemy enemy in )
-        //    {
-        //        if (IsEnemyInRange(enemy))
-        //        {
-        //            Shoot(enemy);
-        //        }
-        //    }
-        //}
 
 
-
-        public void EnemyInRange(GameObject enemy)
+        public virtual void Attack()
         {
-            enemiesInRange.Add(enemy);
-        }
+          
 
-
-        public virtual void Attack(Enemy enemy)
-        {
-            if(CurrentTarget != null)
-            {
-                //attack
-            }
         }
 
         

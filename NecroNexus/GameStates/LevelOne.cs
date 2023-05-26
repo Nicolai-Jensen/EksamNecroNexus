@@ -173,7 +173,9 @@ namespace NecroNexus
             {
                 timer += GameWorld.DeltaTime;
                 //So you can close the summons menu if clicked on again.
+
                 if (timer >= 0.25f && menuButClicked == 2 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; timer = 0; }
+
                 if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     menuButClicked = 0;

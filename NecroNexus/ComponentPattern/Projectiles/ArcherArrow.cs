@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
-    public class ArcherArrow : Component
+    public class ArcherArrow : Component, IGameListener
     {
         private float speed;
         private Vector2 position;
@@ -20,9 +20,11 @@ namespace NecroNexus
         private int tier;
         
 
-        public ArcherArrow(int tier)
+        public ArcherArrow(int tier,Vector2 position, Vector2 velocity)
         {
             this.tier = tier;
+            this.position = position;
+            this.velocity = velocity;
 
             switch (this.tier)
             {
@@ -43,7 +45,10 @@ namespace NecroNexus
 
         }
 
-        
+        public override void Start()
+        {
+            GameObject.Transform.Translate(position);
+        }
 
         public override void Update()
         {
@@ -71,28 +76,89 @@ namespace NecroNexus
         /// </summary>
         public void ApplyTierZero()
         {
-            
+            speed = 400f;
+
             damage = new Damage(DamageType.Physical, 0.5f);
         }
 
         private void ApplyTier1()
         {
+            speed = 450f;
+
             damage = new Damage(DamageType.Physical, 1f);
 
         }
 
         private void ApplyTier2()
         {
+            speed = 500f;
+
             damage = new Damage(DamageType.Physical, 1.5f);
 
         }
 
         private void ApplyTier3()
         {
+            speed = 550f;
+
             damage = new Damage(DamageType.Physical, 2f);
 
         }
 
 
+        public void Notify(GameEvent gameEvent)
+        {
+
+            if (gameEvent is CollisionEvent)
+            {
+                GameObject other = (gameEvent as CollisionEvent).Other;
+
+                if (other.Tag == "Enemy")
+                {
+                    if (other.HasComponent<Grunt>())
+                    {
+                        Grunt enemy = (Grunt)other.GetComponent<Grunt>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<ArmoredGrunt>())
+                    {
+                        ArmoredGrunt enemy = (ArmoredGrunt)other.GetComponent<ArmoredGrunt>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<Knight>())
+                    {
+                        Knight enemy = (Knight)other.GetComponent<Knight>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<HorseRider>())
+                    {
+                        HorseRider enemy = (HorseRider)other.GetComponent<HorseRider>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<Cleric>())
+                    {
+                        Cleric enemy = (Cleric)other.GetComponent<Cleric>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<Paladin>())
+                    {
+                        Paladin enemy = (Paladin)other.GetComponent<Paladin>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                    else if (other.HasComponent<Valkyrie>())
+                    {
+                        Valkyrie enemy = (Valkyrie)other.GetComponent<Valkyrie>();
+                        enemy.Health -= damage.Value;
+                        ToRemove = true;
+                    }
+                }
+            }
+        }
     }
 }
