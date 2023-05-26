@@ -29,10 +29,10 @@ namespace NecroNexus
         public StartScreen(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
             //Plays and repeats the background music
-            MediaPlayer.Play(Audio.StartScreenMusic);
-
+            
+            MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.2f;
-
+            MediaPlayer.Play(Audio.WaveActiveMusic);
 
 
             backgroundsprite = new Texture2D[1];
