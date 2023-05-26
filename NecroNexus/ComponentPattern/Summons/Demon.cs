@@ -10,12 +10,17 @@ namespace NecroNexus
 {
     public class Demon : Summon
     {
+        public float skDamge { get; set; }
+        public float Range { get { return AttackRangeRadius; } }
+        public float FireRate { get { return AttackSpeed; } }
+
         public Demon(Vector2 position, float attackRangeRadius, float attackspeed) : base(position, attackRangeRadius, attackspeed)
         {
         }
         public override void Start()
         {
             GameObject.Transform.Translate(Position);
+            GameObject.Tag = "Demon";
             base.Start();
         }
     }
