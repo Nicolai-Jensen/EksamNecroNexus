@@ -10,6 +10,8 @@ namespace NecroNexus
     public class LevelOne : State
     {
         //A Texture variable for our background
+        private Texture2D BackgroundFront;
+        private Texture2D BackgroundPlain;
 
         private Texture2D[] backgroundsprite;
         private Board boardOne;
