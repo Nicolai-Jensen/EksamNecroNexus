@@ -334,8 +334,8 @@ namespace NecroNexus
             else { spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.White); }//SummonsBut
             if (menuButClicked == 3) { }
             else { spriteBatch.Draw(UISprites[6], clickableButRec[3], Color.White); }//Upgrade summon and playerBut
-
-            spriteBatch.Draw(UISprites[7], clickableButRec[4], Color.White);//Next WaveBut
+            if (menuButClicked == 4) { }
+            else { spriteBatch.Draw(UISprites[7], clickableButRec[4], Color.White); }//Next WaveBut
 
             switch (menuButClicked)
             {
@@ -345,9 +345,24 @@ namespace NecroNexus
                     spriteBatch.Draw(UISprites[0], clickableButRec[5], Color.White);//Backgroundboxs for selection of summons
 
                     spriteBatch.Draw(UISprites[10], clickableButRec[6], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//TopLeft.
+                    spriteBatch.DrawString(showLevelInfo, "attack", new Vector2(765, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, "range", new Vector2(765, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, "firerate", new Vector2(765, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+
                     spriteBatch.Draw(UISprites[11], clickableButRec[7], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ButtomLeft.
+                    spriteBatch.DrawString(showLevelInfo, "attack", new Vector2(770, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, "range", new Vector2(770, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, "firerate", new Vector2(770, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+
                     spriteBatch.Draw(UISprites[12], clickableButRec[8], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//Topright.
+                    spriteBatch.DrawString(showLevelInfo, "attack", new Vector2(1260, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, "range", new Vector2(1260, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, "firerate", new Vector2(1260, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+
                     spriteBatch.Draw(UISprites[13], clickableButRec[9], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ButtomRight.
+                    spriteBatch.DrawString(showLevelInfo, "attack", new Vector2(1260, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, "range", new Vector2(1260, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, "firerate", new Vector2(1260, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     if (isHoveringOverIcon[0] == true)
                     {
                         spriteBatch.DrawString(showLevelInfo, "Price", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
@@ -483,8 +498,9 @@ namespace NecroNexus
             {
                 Component component = gameObject.GetComponent<NecromancerMagic>();
 
-                if (component != null && component.ToRemove)
+                if (component != null)
                 {
+                    if(component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 1000 || component.GameObject.Transform.Position.X < -1000 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 1000 || component.GameObject.Transform.Position.Y < -1000)
                     removedGameObjects.Add(gameObject);
                 }
             }

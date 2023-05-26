@@ -34,6 +34,16 @@ namespace NecroNexus
         }
 
         /// <summary>
+        /// A Method for checking a GameObject if it has a certain Component and returning a bool value 
+        /// </summary>
+        /// <typeparam name="T">The Component you want to check if the object has</typeparam>
+        /// <returns></returns>
+        public bool HasComponent<T>() where T : Component
+        {
+            return components.Any(c => c.GetType() == typeof(T));
+        }
+
+        /// <summary>
         /// A method for finding the correct Component inside the Components list when refering to them
         /// </summary>
         /// <typeparam name="T">The Type of Component</typeparam>

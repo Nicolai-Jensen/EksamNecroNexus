@@ -43,18 +43,6 @@ namespace NecroNexus
             gameObject.AddComponent(new SpriteRenderer());
             //Adds an Animator Component to our GameObject
             gameObject.AddComponent(new Animator());
-            //Adds a Collider Component to our GameObject
-            Collider c = (Collider)gameObject.AddComponent(new Collider());
-            //Attaches a CollisionEvent to our GameObject
-            c.CollisionEvent.Attach(p);
-            //Sets the Size of the GameObjects CollisionBox
-            c.Size1 = 5.5f;
-            c.Size2 = 7.5f;
-            c.Size3 = 3;
-            c.Size4 = 3;
-
-            //Attacks a CollisionEvent again to our GameObject
-            c.CollisionEvent.Attach(p);
         }
 
         /// <summary>
