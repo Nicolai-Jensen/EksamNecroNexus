@@ -13,8 +13,7 @@ namespace NecroNexus
     public class ArrowFactory : Factory
     {
 
-        //private static Vector2 positionTest;
-
+        //Bliver ikke brugt
         public override GameObject Create(Enum type, Vector2 pos)
         {
             GameObject go = new GameObject();
@@ -48,10 +47,40 @@ namespace NecroNexus
             return go;
         }
 
-        //public static void GetTurretPosition(Vector2 tPos)
-        //{
-        //    positionTest = tPos;
-        //}
+        public GameObject Create(Enum type, Vector2 pos, Vector2 enemyPosition)
+        {
+            GameObject go = new GameObject();
+
+            SpriteRenderer sr = (SpriteRenderer)go.AddComponent(new SpriteRenderer());
+
+            Collider c = (Collider)go.AddComponent(new Collider());
+
+
+            switch (type)
+            {
+                case ArrowTier.Tier0:
+                    sr.SetSprite("Projectiles/Arrows/tile002", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
+                    go.AddComponent(new ArcherArrow(0, pos, Globals.Direction(enemyPosition,pos)));
+
+                    break;
+                case ArrowTier.Tier1:
+                    sr.SetSprite("Projectiles/Arrows/tile002", 2f, Globals.GetRotationNoMouse(enemyPosition , pos), 0.5f);
+                    go.AddComponent(new ArcherArrow(1, pos, Globals.Direction(enemyPosition, pos)));
+                    break;
+                case ArrowTier.Tier2:
+                    sr.SetSprite("Projectiles/Arrows/tile005", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
+                    go.AddComponent(new ArcherArrow(2, pos, Globals.Direction(enemyPosition, pos)));
+                    break;
+                case ArrowTier.Tier3:
+                    sr.SetSprite("Projectiles/Arrows/tile006", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
+                    go.AddComponent(new ArcherArrow(3, pos, Globals.Direction(enemyPosition, pos)));
+                    break;
+            }
+
+            return go;
+        }
+
+        
 
 
     }

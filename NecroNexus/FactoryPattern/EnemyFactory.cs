@@ -105,6 +105,8 @@ namespace NecroNexus
             return go;
         }
 
+        
+
         /// <summary>
         /// A method used for Building our animation for when we add an animation to our animator for our GameObject
         /// </summary>

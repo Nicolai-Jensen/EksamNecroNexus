@@ -12,6 +12,5 @@ namespace NecroNexus
     {
         public abstract GameObject Create(Enum type, Vector2 pos);
 
-       
     }
 }

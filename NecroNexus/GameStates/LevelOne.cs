@@ -482,12 +482,18 @@ namespace NecroNexus
             foreach (GameObject gameObject in gameObjects)
             {
                 Component component = gameObject.GetComponent<NecromancerMagic>();
-
                 if (component != null)
                 {
                     if(component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 1000 || component.GameObject.Transform.Position.X < -1000 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 1000 || component.GameObject.Transform.Position.Y < -1000)
                     removedGameObjects.Add(gameObject);
                 }
+                component = gameObject.GetComponent<ArcherArrow>();
+                if (component != null)
+                {
+                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 1000 || component.GameObject.Transform.Position.X < -1000 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 1000 || component.GameObject.Transform.Position.Y < -1000)
+                        removedGameObjects.Add(gameObject);
+                }
+
             }
         }
 

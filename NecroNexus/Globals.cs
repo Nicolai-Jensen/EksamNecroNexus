@@ -70,10 +70,10 @@ namespace NecroNexus
 
             float rotation = (float)Math.Atan2(dy, dx);
 
-            if (dx < 0)
-            {
-                rotation += MathHelper.Pi;
-            }
+            //if (dx < 0)
+            //{
+            //    rotation += MathHelper.Pi;
+            //}
 
             //float rotation = (float)Math.Atan2(mousePosition.Y - objectPosition.Y, mousePosition.X - objectPosition.X) + MathHelper.PiOver2;
             return rotation;
