@@ -14,6 +14,9 @@ namespace NecroNexus
 
         public override bool ToRemove { get; set; }
 
+        public override float Health { get; set; }
+
+        public override float SoulDrop { get; set; }
         public ArmoredGrunt(Board board, Vector2 pos)
         {
             speed = 120;

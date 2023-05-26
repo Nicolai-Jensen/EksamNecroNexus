@@ -17,12 +17,16 @@ namespace NecroNexus
         public override GameObject Create(Enum type, Vector2 pos)
         {
             GameObject go = new GameObject();
-
+            Collider c;
+            NecromancerMagic m;
             SpriteRenderer sr = (SpriteRenderer)go.AddComponent(new SpriteRenderer());
 
             Animator animator = (Animator)go.AddComponent(new Animator());
 
-            Collider c = (Collider)go.AddComponent(new Collider());
+            go.Tag = "NecroMagic";
+
+            
+
             string[] frames = new string[60];
 
             for (int i = 1; i < 61; i++)
@@ -35,12 +39,16 @@ namespace NecroNexus
                 case MagicLevel.BaseTier:
                     sr.SetSprite("Necromancer/Magic/Fireball/1", 2f, Globals.GetRotation(Globals.ReturnPlayerPosition()), 0.5f);
                     animator.AddAnimation(BuildAnimation("Idle", frames));
-                    go.AddComponent(new NecromancerMagic(0));
+                    c = (Collider)go.AddComponent(new Collider());
+                    m = (NecromancerMagic)go.AddComponent(new NecromancerMagic(0));
+                    c.CollisionEvent.Attach(m);
                     break;
                 case MagicLevel.Tier1:
                     sr.SetSprite("Necromancer/Magic/Fireball/1", 2f, Globals.GetRotation(Globals.ReturnPlayerPosition()), 0.5f);
                     animator.AddAnimation(BuildAnimation("Idle", frames));
-                    go.AddComponent(new NecromancerMagic(1));
+                    c = (Collider)go.AddComponent(new Collider());
+                    m = (NecromancerMagic)go.AddComponent(new NecromancerMagic(1));
+                    c.CollisionEvent.Attach(m);
                     break;
                 case MagicLevel.Tier2:
                     sr.SetSprite("Necromancer/Magic/Fireball/1", 4f, Globals.GetRotation(Globals.ReturnPlayerPosition()), 0.5f);
@@ -57,10 +65,9 @@ namespace NecroNexus
             return go;
         }
 
-        public GameObject CreateOffSpring()
+        public GameObject CreateOffSpring(Vector2 pos)
         {
             GameObject go = new GameObject();
-
             SpriteRenderer sr = (SpriteRenderer)go.AddComponent(new SpriteRenderer());
 
             Animator animator = (Animator)go.AddComponent(new Animator());
@@ -73,7 +80,7 @@ namespace NecroNexus
                 frames[i - 1] = $"Necromancer/Magic/Fireball/{i}";
             }
 
-            sr.SetSprite("Necromancer/Magic/Fireball/1", 1f, Globals.GetRotation(GameObject.Transform.Position), 0.5f);
+            sr.SetSprite("Necromancer/Magic/Fireball/1", 1f, Globals.GetRotation(pos), 0.5f);
             animator.AddAnimation(BuildAnimation("Idle", frames));
             return go;
         }
