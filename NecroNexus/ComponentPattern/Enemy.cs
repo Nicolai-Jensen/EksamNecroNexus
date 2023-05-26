@@ -21,8 +21,9 @@ namespace NecroNexus
         protected Vector2 position;
         protected List<Vector2> pathList = new List<Vector2>();
 
-        protected float health;
-        protected float soulDrop;
+        public virtual float Health { get; set; }
+        public virtual float SoulDrop { get; set; }
+
 
         public virtual void FindPath()
         {

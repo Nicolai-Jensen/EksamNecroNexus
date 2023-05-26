@@ -14,6 +14,9 @@ namespace NecroNexus
         private Animator animator;
         
         public override bool ToRemove { get; set; }
+        public override float Health { get; set; }
+
+        public override float SoulDrop { get; set; }
 
         public Grunt(Board board, Vector2 pos)
         {

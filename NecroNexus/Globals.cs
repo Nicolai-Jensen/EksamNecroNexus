@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace NecroNexus
 {
@@ -59,6 +60,41 @@ namespace NecroNexus
             return rotation;
         }
 
+
+        public static float GetRotationNoMouse(Vector2 targetPosition, Vector2 objectPosition)
+        {
+            
+
+            float dx = targetPosition.X - objectPosition.X;
+            float dy = targetPosition.Y - objectPosition.Y;
+
+            float rotation = (float)Math.Atan2(dy, dx);
+
+            if (dx < 0)
+            {
+                rotation += MathHelper.Pi;
+            }
+
+            //float rotation = (float)Math.Atan2(mousePosition.Y - objectPosition.Y, mousePosition.X - objectPosition.X) + MathHelper.PiOver2;
+            return rotation;
+        }
+
+
+        public static Vector2 Direction(Vector2 posTarget, Vector2 yourPos)
+        {
+            //Makes a Vector2 variable
+            Vector2 direction;
+
+            //gives the Vector2 direction a value that when normalized can be used as velocity to go in the desired direction
+            direction = posTarget - yourPos;
+            direction.Normalize();
+
+            
+
+            return direction;
+        }
+
+
         /// <summary>
         /// A Method that converts a float angle into a Vector2. Typically used to get a direction from an angle of an object
         /// </summary>
@@ -68,5 +104,27 @@ namespace NecroNexus
         {
             return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
         }
+
+        public static GameObject FindClosestObject(List<GameObject> objects, Vector2 position)
+        {
+            GameObject closestObj = null;
+            float closestDistance = float.MaxValue;
+
+            foreach (GameObject obj in objects)
+            {
+                if (obj.Tag == "Enemy")
+                {
+                    float distance = Vector2.Distance(position, obj.Transform.Position);
+                    if (distance < closestDistance)
+                    {
+                        closestObj = obj;
+                        closestDistance = distance;
+                    }
+                }
+            }
+
+            return closestObj;
+        }
+
     }
 }
