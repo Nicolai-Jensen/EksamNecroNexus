@@ -7,15 +7,12 @@ namespace NecroNexus
 
 
         public Vector2 Position { get; set; }
-        public Vector2 AttackRangeCenter => Position;
 
         public float AttackSpeed { get; set; }
 
         private float attackTimer;
 
         public float AttackRangeRadius { get; set; }
-
-
 
 
         public Summon(Vector2 position, float attackRangeRadius, float attackspeed)
@@ -28,14 +25,6 @@ namespace NecroNexus
         }
 
 
-
-
-        public virtual void ShootArrow()
-        {
-
-
-        }
-
         public override void Update()
         {
 
@@ -44,15 +33,11 @@ namespace NecroNexus
         }
 
 
-
-
-
         public virtual void Attack()
         {
 
 
         }
-
 
     }
 }
