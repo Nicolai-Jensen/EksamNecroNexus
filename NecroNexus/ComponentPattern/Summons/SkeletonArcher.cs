@@ -6,10 +6,7 @@ namespace NecroNexus
     public class SkeletonArcher : Summon
     {
 
-        private Enemy TargetEnemy; //Stores the current target
-
-        private const int MaxTier = 4; //Constant that "locks" the max tier for the tower, so the max tier variable cannot be changed elsewhere.
-
+      
         public List<GameObject> EnemiesInRange { get; private set; }
 
         public int CurrentTier { get; private set; }
