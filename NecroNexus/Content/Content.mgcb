@@ -2623,7 +2623,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Projectiles/DemonBalls/tile000.png;Projectiles/DemonBalls/1.png
+/build:Projectiles/DemonBalls/tile000.png
 
 #begin Projectiles/DemonBalls/tile001.png
 /importer:TextureImporter
@@ -2635,7 +2635,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Projectiles/DemonBalls/tile001.png;Projectiles/DemonBalls/2.png
+/build:Projectiles/DemonBalls/tile001.png
 
 #begin Projectiles/DemonBalls/tile002.png
 /importer:TextureImporter
@@ -2647,7 +2647,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Projectiles/DemonBalls/tile002.png;Projectiles/DemonBalls/3.png
+/build:Projectiles/DemonBalls/tile002.png
 
 #begin Projectiles/DemonBalls/tile003.png
 /importer:TextureImporter
@@ -2659,7 +2659,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Projectiles/DemonBalls/tile003.png;Projectiles/DemonBalls/4.png
+/build:Projectiles/DemonBalls/tile003.png
 
 #begin Projectiles/DemonBalls/tile004.png
 /importer:TextureImporter
@@ -2671,7 +2671,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Projectiles/DemonBalls/tile004.png;Projectiles/DemonBalls/5.png
+/build:Projectiles/DemonBalls/tile004.png
 
 #begin Summons/Demon/tile000.png
 /importer:TextureImporter

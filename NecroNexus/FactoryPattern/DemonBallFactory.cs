@@ -65,7 +65,7 @@ namespace NecroNexus
 
             for (int i = 1; i < 5; i++)
             {
-                frames[i - 1] = $"Projectiles/DemonBalls/{i}";
+                frames[i - 1] = $"Projectiles/DemonBalls/tile00{i}";
             }
 
 
