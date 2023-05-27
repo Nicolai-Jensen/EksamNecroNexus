@@ -61,7 +61,7 @@ namespace NecroNexus
         {
             //Adds SpriteRenderer Component so we get access to drawing sprites
             sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
-            sr.SetSprite("Necromancer/Idle/tile000", 1f, 0, 1);
+            sr.SetSprite("Necromancer/Idle/tile000", 1.5f, 0, 0.8f);
 
 
             //Sets the Start Position of the Meerkat and the field values needed for jumps to work

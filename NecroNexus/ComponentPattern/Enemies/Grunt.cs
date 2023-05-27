@@ -20,9 +20,10 @@ namespace NecroNexus
 
         public Grunt(Board board, Vector2 pos)
         {
-            speed = 100;
+            speed = 70;
             this.board = board;
             position = pos;
+            Health = 1;
             foreach (var item in board.PositionList)
             {
                 pathList.Add(item);
@@ -45,6 +46,7 @@ namespace NecroNexus
             animator.PlayAnimation("Idle");
             FindPath();
             Move();
+            Death();
         }
 
         public override void FindPath()

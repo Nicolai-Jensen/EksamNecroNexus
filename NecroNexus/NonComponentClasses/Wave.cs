@@ -50,10 +50,26 @@ namespace NecroNexus
                 }
                 if (enemySpawns.Count <= 0)
                 {
-                    Finished = true;
+                   if (CheckIfEnemyExist() == false)
+                   {
+                        Finished = true;
+                   }
                 }
                 
             }         
         }
+
+        public bool CheckIfEnemyExist()
+        {
+            foreach (var item in LevelOne.gameObjects)
+            {
+                if(item.Tag == "Enemy")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

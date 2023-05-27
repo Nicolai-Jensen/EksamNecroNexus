@@ -53,6 +53,7 @@ namespace NecroNexus
         public override void Update()
         {
             Move();
+
         }
 
 
