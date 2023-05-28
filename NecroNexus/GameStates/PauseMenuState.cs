@@ -6,19 +6,26 @@ using Microsoft.Xna.Framework.Input;
 namespace NecroNexus
 {
     //--------------------------Thorbjørn----------------------------//
+    /// <summary>
+    /// when pressing the 3 lines top right corner you are showen a pause screen.
+    /// there are 3 buttons, back, options and main menu.
+    /// Back takes you back to the level. the options button is currently empty and awaits further exspansion. the main menu button takes you back to the start of the game
+    /// 
+    /// </summary>
     public class PauseMenuState : State
     {
-        //A Texture variable for our background
+        //An Texture array for the menu
         private Texture2D[] menuSprites = new Texture2D[8];
+        //Rectangel array for all the menu items used for size and placement
         private Rectangle[] menuRec = new Rectangle[16];
-        private SpriteFont spriteFont;
-        private int clickedStuff = 0;
+        private SpriteFont spriteFont;//for the text displayed
+        private int clickedStuff = 0;//is used for not being able to hit multiple 
 
 
-        //2 variables to control key presses
-
+        //2 variables to get mouse information.
         private MouseState previousMouse;
         private MouseState currentMouse;
+
         /// <summary>
         /// The States Constructor which applies the picture that is shown
         /// </summary>
@@ -26,12 +33,16 @@ namespace NecroNexus
         {
 
         }
-
+        /// <summary>
+        /// Does what ever is in it the frist time it is called.
+        /// </summary>
         public override void Initialize()
         {
 
         }
-
+        /// <summary>
+        /// This class loads all the sprites and basic information so that it can be used later.
+        /// </summary>
         public override void LoadContent()
         {
             int menuXPos = 560, menuYPos = 120;
