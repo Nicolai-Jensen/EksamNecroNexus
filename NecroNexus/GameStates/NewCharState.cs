@@ -55,7 +55,7 @@ namespace NecroNexus
             currentMouse = Mouse.GetState();//enables you to click with the currentMouse
             if (finalizeButRec.Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
-                Audio.ButtonClickingSound();
+                AudioEffect.ButtonClickingSound();
                 if (game.Menu.Drawdiffent == 7) { game.Menu.ChangeNameLoadoneSaveone(myWpfControl.CurrentText); }
                 if (game.Menu.Drawdiffent == 8) { game.Menu.ChangeNameLoadtwoSavetwo(myWpfControl.CurrentText); }
                 if (game.Menu.Drawdiffent == 9) { game.Menu.ChangeNameLoadthreeSavethree(myWpfControl.CurrentText); }

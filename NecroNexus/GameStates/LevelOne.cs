@@ -185,7 +185,7 @@ namespace NecroNexus
         {
             //Open the summons menu
             if (clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { menuButClicked = 2; } else return; }
+            { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { AudioEffect.ButtonClickingSound(); menuButClicked = 2; } else return; }
             //buy summons menu.
             if (menuButClicked == 2)
             {
@@ -196,21 +196,25 @@ namespace NecroNexus
 
                 if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
+                    AudioEffect.ButtonClickingSound();
                     if (GetSouls >= 10) { GetSouls -= 10; menuButClicked = 0; presseddowntopleft[0] = true; } else { return; }
 
                 }
                 if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
+                    AudioEffect.ButtonClickingSound();
                     if (GetSouls >= 20) { GetSouls -= 20; menuButClicked = 0; presseddowntopleft[1] = true; } else { return; }
 
                 }
                 if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
+                    AudioEffect.ButtonClickingSound();
                     if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; } else { return; }
 
                 }
                 if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
+                    AudioEffect.ButtonClickingSound();
                     if (GetSouls >= 40) { GetSouls -= 40; menuButClicked = 0; presseddowntopleft[3] = true; } else { return; }
 
                 }
@@ -220,9 +224,10 @@ namespace NecroNexus
 
             //Open the upgrade menu
             if (clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { menuButClicked = 3; } else return; }
+            { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { AudioEffect.ButtonClickingSound(); menuButClicked = 3; } else return; }
             if (menuButClicked == 4 || clickableButRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
+                AudioEffect.ButtonClickingSound();
                 //Start next wave
                 menuButClicked = 4;
                 timer += GameWorld.DeltaTime;
@@ -239,24 +244,25 @@ namespace NecroNexus
             {
                 timer += GameWorld.DeltaTime;
                 //So you can close the upgrade menu if clicked on again.
-                if (timer >= 0.5f && menuButClicked == 3 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; timer = 0; }
+                if (timer >= 0.5f && menuButClicked == 3 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); menuButClicked = 0; timer = 0; }
                 //Skeleton arhcer Upgrade icon.
-                if (clickableButRec[10].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 1; }
+                if (clickableButRec[10].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 1; }
 
                 //Hex Upgrade icon
-                if (clickableButRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 2; }
+                if (clickableButRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 2; }
 
                 //Skeleton Brute Upgrade icon.
-                if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 3; }
+                if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 3; }
                 //Demon Upgrade icon.
-                if (clickableButRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 4; }
+                if (clickableButRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 4; }
 
                 //Player Upgrade icon.
-                if (clickableButRec[14].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { whichUpgradeClicked = 5; }
+                if (clickableButRec[14].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 5; }
 
                 //UpgradeButtonClicked
                 if (clickableButRec[16].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
+                    AudioEffect.ButtonClickingSound();
                     if (whichUpgradeClicked == 0)
                     {
                         return;
@@ -295,6 +301,7 @@ namespace NecroNexus
             }
             if (clickableButRec[18].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
+                AudioEffect.ButtonClickingSound();
                 game.ChangeState(game.PauseMenuState);
             }
         }
@@ -315,6 +322,7 @@ namespace NecroNexus
                     {
                         presseddowntopleft[0] = false;
                         timer1 = 0f;
+                        AudioEffect.SummonTurret1();
                         summons.Create(SummonType.SkeletonArcher, new Vector2(currentMouse.X, currentMouse.Y));
                     }
                 }
@@ -325,6 +333,7 @@ namespace NecroNexus
                     {
                         presseddowntopleft[1] = false;
                         timer1 = 0f;
+                        AudioEffect.SummonTurret2();
                         summons.Create(SummonType.Hex, new Vector2(currentMouse.X, currentMouse.Y));
                     }
                 }
@@ -335,6 +344,7 @@ namespace NecroNexus
                     {
                         presseddowntopleft[2] = false;
                         timer1 = 0f;
+                        AudioEffect.SummonTurret1();
                         summons.Create(SummonType.SkeletonBrute, new Vector2(currentMouse.X, currentMouse.Y));
                     }
                 }
@@ -345,6 +355,7 @@ namespace NecroNexus
                     {
                         presseddowntopleft[3] = false;
                         timer1 = 0f;
+                        AudioEffect.SummonTurret2();
                         summons.Create(SummonType.Demon, new Vector2(currentMouse.X, currentMouse.Y));
                     }
                 }

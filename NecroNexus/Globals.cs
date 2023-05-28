@@ -4,9 +4,6 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace NecroNexus
 {
@@ -63,7 +60,7 @@ namespace NecroNexus
 
         public static float GetRotationNoMouse(Vector2 targetPosition, Vector2 objectPosition)
         {
-            
+
 
             float dx = targetPosition.X - objectPosition.X;
             float dy = targetPosition.Y - objectPosition.Y;
@@ -89,7 +86,7 @@ namespace NecroNexus
             direction = posTarget - yourPos;
             direction.Normalize();
 
-            
+
 
             return direction;
         }

@@ -2055,31 +2055,31 @@
 
 #begin NexoAudio/ButtonPressed.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/ButtonPressed.mp3
 
 #begin NexoAudio/Explosion1.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/Explosion1.mp3
 
 #begin NexoAudio/Explosion2.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/Explosion2.mp3
 
 #begin NexoAudio/Explosion3.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/Explosion3.mp3
 
 #begin NexoAudio/GameLost.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/GameLost.mp3
 
@@ -2091,37 +2091,37 @@
 
 #begin NexoAudio/NewSoul.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/NewSoul.mp3
 
 #begin NexoAudio/SpawnTurret1.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/SpawnTurret1.mp3
 
 #begin NexoAudio/SpawnTurret2.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/SpawnTurret2.mp3
 
 #begin NexoAudio/TurretShotSound1.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/TurretShotSound1.mp3
 
 #begin NexoAudio/TurretShotSound2.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/TurretShotSound2.mp3
 
 #begin NexoAudio/TurretShotSound3.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/TurretShotSound3.mp3
 
@@ -2133,7 +2133,7 @@
 
 #begin NexoAudio/WaveCleared.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:NexoAudio/WaveCleared.mp3
 
