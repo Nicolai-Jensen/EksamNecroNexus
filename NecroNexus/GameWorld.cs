@@ -106,7 +106,7 @@ namespace NecroNexus
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Audio.LoadAudio();
+            AudioEffect.LoadAudio();
             menu = new Menu(this, _graphics.GraphicsDevice, Content);
             startScreen = new StartScreen(this, _graphics.GraphicsDevice, Content);
             levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);

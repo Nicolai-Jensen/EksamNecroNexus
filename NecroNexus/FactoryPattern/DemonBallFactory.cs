@@ -72,7 +72,7 @@ namespace NecroNexus
             switch (type)
             {
                 case DemonBallTier.Tier0:
-                    sr.SetSprite("Projectiles/DemonBalls/1", 1.75f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
+                    sr.SetSprite("Projectiles/DemonBalls/tile000", 1.75f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
                     go.AddComponent(new DemonBall(0, pos, Globals.Direction(enemyPosition, pos)));
                     animator.AddAnimation(BuildAnimation("Idle", frames));
 

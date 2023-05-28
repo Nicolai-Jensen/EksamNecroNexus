@@ -55,9 +55,10 @@ namespace NecroNexus
             currentMouse = Mouse.GetState();//enables you to click with the currentMouse
             if (finalizeButRec.Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
-                if (game.Menu.Drawdiffent == 7){game.Menu.ChangeNameLoadoneSaveone(myWpfControl.CurrentText);}
-                if (game.Menu.Drawdiffent == 8){game.Menu.ChangeNameLoadtwoSavetwo(myWpfControl.CurrentText);} 
-                if (game.Menu.Drawdiffent == 9){game.Menu.ChangeNameLoadthreeSavethree(myWpfControl.CurrentText);}
+                AudioEffect.ButtonClickingSound();
+                if (game.Menu.Drawdiffent == 7) { game.Menu.ChangeNameLoadoneSaveone(myWpfControl.CurrentText); }
+                if (game.Menu.Drawdiffent == 8) { game.Menu.ChangeNameLoadtwoSavetwo(myWpfControl.CurrentText); }
+                if (game.Menu.Drawdiffent == 9) { game.Menu.ChangeNameLoadthreeSavethree(myWpfControl.CurrentText); }
                 game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
                 game.ChangeState(game.LevelOne);
             }
@@ -71,11 +72,13 @@ namespace NecroNexus
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
-            spriteBatch.Draw(backgroundsprite[3], new Rectangle(0,0,1920,1080), Color.White);
+            spriteBatch.Draw(backgroundsprite[3], new Rectangle(0, 0, 1920, 1080), Color.White);
             spriteBatch.Draw(backgroundsprite[0], new Rectangle(600, 270, 600, 400), Color.White);
             spriteBatch.Draw(backgroundsprite[2], new Rectangle(800, 345, 350, 100), Color.Gray);
-            spriteBatch.Draw(backgroundsprite[1], finalizeButRec, Color.White);
-            spriteBatch.DrawString(spriteFont, "Name", new Vector2(675, 370), Color.White);
+            if (finalizeButRec.Contains(currentMouse.X, currentMouse.Y))
+            {spriteBatch.Draw(backgroundsprite[1], finalizeButRec, Color.LightGray);}
+            else { spriteBatch.Draw(backgroundsprite[1], finalizeButRec, Color.White); }
+            spriteBatch.DrawString(spriteFont, "Name", new Vector2(680, 370), Color.White);//where you write your name.
             myWpfControl.Draw(spriteBatch);
             spriteBatch.End();
         }
