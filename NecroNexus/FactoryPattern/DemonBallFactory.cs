@@ -27,20 +27,20 @@ namespace NecroNexus
             switch (type)
             {
                 case ArrowTier.Tier0:
-                    sr.SetSprite("Projectiles/Arrows/tile002", 2f, 0, 1f);
+                    sr.SetSprite("", 2f, 0, 1f);
                     go.AddComponent(new DemonBall(0, pos, new Vector2(200, 200)));
                     //bliver ikke brugt
                     break;
                 case ArrowTier.Tier1:
-                    sr.SetSprite("Projectiles/Arrows/tile002", 2f, Globals.GetRotation(pos), 0.5f);
+                    sr.SetSprite("", 2f, Globals.GetRotation(pos), 0.5f);
                     go.AddComponent(new DemonBall(1, pos, new Vector2(200, 200)));
                     break;
                 case ArrowTier.Tier2:
-                    sr.SetSprite("Projectiles/Arrows/tile005", 2f, Globals.GetRotation(pos), 0.5f);
+                    sr.SetSprite("", 2f, Globals.GetRotation(pos), 0.5f);
                     go.AddComponent(new DemonBall(2, pos, new Vector2(200, 200)));
                     break;
                 case ArrowTier.Tier3:
-                    sr.SetSprite("Projectiles/Arrows/tile006", 2f, Globals.GetRotation(pos), 0.5f);
+                    sr.SetSprite("", 2f, Globals.GetRotation(pos), 0.5f);
                     go.AddComponent(new DemonBall(2, pos, new Vector2(200, 200)));
                     break;
             }
