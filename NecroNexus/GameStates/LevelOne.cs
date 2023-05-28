@@ -227,18 +227,18 @@ namespace NecroNexus
             { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { AudioEffect.ButtonClickingSound(); menuButClicked = 3; } else return; }
             if (menuButClicked == 4 || clickableButRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
-                
+
                 //Start next wave
-                menuButClicked = 4;
                 timer += GameWorld.DeltaTime;
                 if (timer > 0.5f)
                 {
+                    menuButClicked = 4;
                     level.StartNextWave();
                     menuButClicked = 0;
                     timer = 0;
                     AudioEffect.ButtonClickingSound();
                 }
-                
+
             }
 
             if (menuButClicked == 3)//Choose upgrade
@@ -392,7 +392,7 @@ namespace NecroNexus
             spriteBatch.End();
         }
         /// <summary>
-        /// When called it handels the drawing of the UI for the active level.
+        /// When called it handles the drawing of the UI for the active level.
         /// Thorbjørn
         /// </summary>
         /// <param name="spriteBatch"></param>
