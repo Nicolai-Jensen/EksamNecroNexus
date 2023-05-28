@@ -9,27 +9,33 @@ namespace NecroNexus
 {
 
     //--------------------------Thorbjørn----------------------------//
-
+    /// <summary>
+    /// The Menu class all the basic things in a menu it currently has 4 buttons, loadgame, newgame, options and Quit.
+    /// Loadgame shows you the current saves. New Game allows the user to make a new a savegame. the options button is currently empty and awaits further exspansion
+    /// Quit button closses the game
+    /// </summary>
     public class Menu : State
     {
         //A Texture variable for our background
         private Texture2D[] menuSprites = new Texture2D[17];
+        //Rectangel array for all the menu items used for size and placement
         private Rectangle[] menuRec = new Rectangle[16];
-        private SpriteFont spriteFont;
-        private string[] placeHolderName = { "Empty", "Empty", "Empty" };
+        private SpriteFont spriteFont;// for the text
+        private string[] placeHolderName = { "Empty", "Empty", "Empty" };//Where the username is stored
         private int clickedStuff = 0;// Which menu has been clicked 
         private int WhichMenuClicked = 0;//0 for nothing pressed. 1 for Loadgame pressed. 2 for newgame pressed
-        private int drawdiffent = 0;
+        private int drawdiffent = 0;//Which loadgame or new game bare has been clicked.
 
-        //2 variables to control key presses
-
+        //2 variables to get mouse information.
         private MouseState previousMouse;
         private MouseState currentMouse;
 
 
-
+        //Used to see which newgame or loadgame has been clicked
         public int Drawdiffent { get { return drawdiffent; } }
+        //Used to reset the menu when called from PauseMenuState
         public int ClickedStuff{get { return clickedStuff; } set { clickedStuff = value; }}
+        //Used to reset the menu when called from PauseMenuState
         public int WhichMenuClickede { get { return WhichMenuClicked; } set { WhichMenuClicked = value; } }
 
         /// <summary>

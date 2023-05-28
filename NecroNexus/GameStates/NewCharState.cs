@@ -6,6 +6,10 @@ using Microsoft.Xna.Framework.Input;
 namespace NecroNexus
 {
     //--------------------------Thorbjørn----------------------------//
+    /// <summary>
+    /// This class is called when you press new game and it is used for showing UI elements and hans 1 button called finalize which sends the player into levelone
+    /// and saves the typed user name.
+    /// </summary>
     public class NewCharState : State
     {
         //A Texture variable for our background
@@ -13,11 +17,10 @@ namespace NecroNexus
         private Rectangle finalizeButRec;
         private SpriteFont spriteFont;
 
+        //used to write a username.
         private MyWpfControl myWpfControl;
-        //2 variables to control key presses
-        private KeyboardState currentKey;
-        private KeyboardState previousKey;
 
+        //2 variables to get mouse information.
         private MouseState previousMouse;
         private MouseState currentMouse;
         /// <summary>
@@ -32,7 +35,9 @@ namespace NecroNexus
         {
 
         }
-
+        /// <summary>
+        /// This class loads all the sprites and basic information so that it can be used later.
+        /// </summary>
         public override void LoadContent()
         {
             backgroundsprite[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");

@@ -23,26 +23,26 @@ namespace NecroNexus
             Collider c = (Collider)go.AddComponent(new Collider());
 
 
-            switch (type)
-            {
-                case ArrowTier.Tier0:
-                    sr.SetSprite("Projectiles/Arrows/tile002", 2f,0, 1f);
-                    go.AddComponent(new ArcherArrow(0,pos,new Vector2(200,200)));
+            //switch (type)
+            //{
+            //    case ArrowTier.Tier0:
+            //        sr.SetSprite("Projectiles/Arrows/tile002", 2f,0, 0.5f);
+            //        go.AddComponent(new ArcherArrow(0,pos,new Vector2(200,200)));
 
-                    break;
-                case ArrowTier.Tier1:
-                    sr.SetSprite("Projectiles/Arrows/tile002", 2f, Globals.GetRotation(pos), 0.5f);
-                    go.AddComponent(new ArcherArrow(1, pos, new Vector2(200, 200)));
-                    break;
-                case ArrowTier.Tier2:
-                    sr.SetSprite("Projectiles/Arrows/tile005", 2f, Globals.GetRotation(pos), 0.5f);
-                    go.AddComponent(new ArcherArrow(2, pos, new Vector2(200, 200)));
-                    break;
-                case ArrowTier.Tier3:
-                    sr.SetSprite("Projectiles/Arrows/tile006", 2f, Globals.GetRotation(pos), 0.5f);
-                    go.AddComponent(new ArcherArrow(2, pos, new Vector2(200, 200)));
-                    break;
-            }
+            //        break;
+            //    case ArrowTier.Tier1:
+            //        sr.SetSprite("Projectiles/Arrows/tile002", 2f, Globals.GetRotation(pos), 0.5f);
+            //        go.AddComponent(new ArcherArrow(1, pos, new Vector2(200, 200)));
+            //        break;
+            //    case ArrowTier.Tier2:
+            //        sr.SetSprite("Projectiles/Arrows/tile005", 2f, Globals.GetRotation(pos), 0.5f);
+            //        go.AddComponent(new ArcherArrow(2, pos, new Vector2(200, 200)));
+            //        break;
+            //    case ArrowTier.Tier3:
+            //        sr.SetSprite("Projectiles/Arrows/tile006", 2f, Globals.GetRotation(pos), 0.5f);
+            //        go.AddComponent(new ArcherArrow(3, pos, new Vector2(200, 200)));
+            //        break;
+            //}
 
             return go;
         }
@@ -53,27 +53,33 @@ namespace NecroNexus
 
             SpriteRenderer sr = (SpriteRenderer)go.AddComponent(new SpriteRenderer());
 
-            Collider c = (Collider)go.AddComponent(new Collider());
+            Collider c;
+
+            ArcherArrow a;
 
 
             switch (type)
             {
                 case ArrowTier.Tier0:
                     sr.SetSprite("Projectiles/Arrows/tile002", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new ArcherArrow(0, pos, Globals.Direction(enemyPosition,pos)));
-
+                    c = (Collider)go.AddComponent(new Collider());
+                    a = (ArcherArrow)go.AddComponent(new ArcherArrow(0, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(a);
                     break;
                 case ArrowTier.Tier1:
                     sr.SetSprite("Projectiles/Arrows/tile002", 2f, Globals.GetRotationNoMouse(enemyPosition , pos), 0.5f);
-                    go.AddComponent(new ArcherArrow(1, pos, Globals.Direction(enemyPosition, pos)));
+                    c = (Collider)go.AddComponent(new Collider());
+                    a = (ArcherArrow)go.AddComponent(new ArcherArrow(1, pos, Globals.Direction(enemyPosition, pos)));
                     break;
                 case ArrowTier.Tier2:
                     sr.SetSprite("Projectiles/Arrows/tile005", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new ArcherArrow(2, pos, Globals.Direction(enemyPosition, pos)));
+                    c = (Collider)go.AddComponent(new Collider());
+                    a = (ArcherArrow)go.AddComponent(new ArcherArrow(2, pos, Globals.Direction(enemyPosition, pos)));
                     break;
                 case ArrowTier.Tier3:
                     sr.SetSprite("Projectiles/Arrows/tile006", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new ArcherArrow(3, pos, Globals.Direction(enemyPosition, pos)));
+                    c = (Collider)go.AddComponent(new Collider());
+                    a = (ArcherArrow)go.AddComponent(new ArcherArrow(3, pos, Globals.Direction(enemyPosition, pos)));
                     break;
             }
 
