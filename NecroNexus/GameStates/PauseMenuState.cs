@@ -68,11 +68,13 @@ namespace NecroNexus
             if (clickedStuff == 0 && menuRec[1].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the go back to level
             {
                 clickedStuff = 0;
+                Audio.ButtonClickingSound();
                 game.ChangeState2(game.LevelOne);
             }
             //Changes the state back to main menu state
             if (clickedStuff == 0 && menuRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//Press for going back to mainmenu
             {
+                Audio.ButtonClickingSound();
                 clickedStuff = 0;
 
                 game.Menu.ClickedStuff = 0;
@@ -104,7 +106,11 @@ namespace NecroNexus
 
                     for (int i = 1; i < 4; i++)
                     {
-                        spriteBatch.Draw(menuSprites[i], menuRec[i], Color.White);
+                        if (menuRec[i].Contains(currentMouse.X, currentMouse.Y))
+                        {
+                            spriteBatch.Draw(menuSprites[i], menuRec[i], Color.LightGray);
+                        }
+                        else { spriteBatch.Draw(menuSprites[i], menuRec[i], Color.White); }
                     }
                     break;
             }

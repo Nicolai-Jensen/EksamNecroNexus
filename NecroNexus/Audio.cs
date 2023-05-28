@@ -46,7 +46,7 @@ namespace NecroNexus
         public static Song Explosion2;
         public static Song Explosion3;
 
-        public static Song ButtonPressed;
+        private static SoundEffect ButtonPressed;
 
         // Method to load audio files and assign them to the struct members
         public static void LoadAudio()
@@ -67,11 +67,13 @@ namespace NecroNexus
             Explosion1 = Globals.Content.Load<Song>("NexoAudio/Explosion1");
             Explosion2 = Globals.Content.Load<Song>("NexoAudio/Explosion2");
             Explosion3 = Globals.Content.Load<Song>("NexoAudio/Explosion3");
-            ButtonPressed = Globals.Content.Load<Song>("NexoAudio/ButtonPressed");
+            ButtonPressed = Globals.Content.Load<SoundEffect>("NexoAudio/ButtonPressed");
+        }
+        public static void ButtonClickingSound()
+        {
 
-
-
-
+            ButtonPressed.Play(0.5f,0.0f,0.0f);
+            
         }
 
     }

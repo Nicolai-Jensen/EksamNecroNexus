@@ -142,6 +142,7 @@ namespace NecroNexus
         {
             if (WhichMenuClicked == 0 && menuRec[1].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the LoadGameButton
             {
+                Audio.ButtonClickingSound();
                 clickedStuff = 1;
                 WhichMenuClicked = 1;
             }
@@ -180,49 +181,60 @@ namespace NecroNexus
 
             if (WhichMenuClicked == 0 && menuRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing new game
             {
+                Audio.ButtonClickingSound();
                 clickedStuff = 2;
                 WhichMenuClicked = 2;
             }
             if (WhichMenuClicked == 0 && menuRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing options.
             {
+                Audio.ButtonClickingSound();
                 clickedStuff = 3;
                 WhichMenuClicked = 3;
             }
             if (WhichMenuClicked == 0 && menuRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the Quit
             {
+                Audio.ButtonClickingSound();
                 game.Exit();
             }
             if (menuRec[5].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the back Button
             {
+                Audio.ButtonClickingSound();
                 clickedStuff = 0;
                 WhichMenuClicked = 0;
             }
             if (WhichMenuClicked == 1 && menuRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//1 loadGameBut
             {
+                Audio.ButtonClickingSound();
                 drawdiffent = 4;
             }
             if (WhichMenuClicked == 1 && menuRec[10].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//2 loadGameBut
             {
+                Audio.ButtonClickingSound();
                 drawdiffent = 5;
             }
             if (WhichMenuClicked == 1 && menuRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//3 loadGamebut
             {
+                Audio.ButtonClickingSound();
                 drawdiffent = 6;
             }
             if (WhichMenuClicked == 2 && menuRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//1 newGameBut
             {
+                Audio.ButtonClickingSound();
                 drawdiffent = 7;
             }
             if (WhichMenuClicked == 2 && menuRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//2 newGameBut
             {
+                Audio.ButtonClickingSound();
                 drawdiffent = 8;
             }
             if (WhichMenuClicked == 2 && menuRec[14].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//3 newGameBut
             {
+                Audio.ButtonClickingSound();
                 drawdiffent = 9;
             }
-            if (menuRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+            if (menuRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)// when pressing new button in newgame
             {
+                Audio.ButtonClickingSound();
                 if (drawdiffent == 7 || drawdiffent == 8 || drawdiffent == 9)
                 {
                     game.ChangeState(game.NewCharState);
@@ -332,18 +344,22 @@ namespace NecroNexus
 
                     for (int i = 1; i <= 4; i++)
                     {
-                        spriteBatch.Draw(menuSprites[i], menuRec[i], Color.White);
+                        if (menuRec[i].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[i], menuRec[i], Color.LightGray); }
+                        else { spriteBatch.Draw(menuSprites[i], menuRec[i], Color.White); }
                     }
                     break;
                 #region LoadGame Button
                 case 1://LoadGame
                     spriteBatch.Draw(menuSprites[0], menuRec[8], Color.Gray);//background
-                    spriteBatch.Draw(menuSprites[6], menuRec[5], Color.White);//Back
-                    spriteBatch.Draw(menuSprites[7], menuRec[6], Color.White);//Load
+                    if (menuRec[5].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[6], menuRec[5], Color.LightGray); }//Back
+                    else { spriteBatch.Draw(menuSprites[6], menuRec[5], Color.White); }//Back
+                    if (menuRec[6].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[7], menuRec[6], Color.LightGray); }//Load
+                    else { spriteBatch.Draw(menuSprites[7], menuRec[6], Color.White); }//Load
 
                     for (int i = 9; i < 12; i++)//LoadUser
                     {
-                        spriteBatch.Draw(menuSprites[5], menuRec[i], Color.White);
+                        if (menuRec[i].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[5], menuRec[i], Color.LightGray); }
+                        else { spriteBatch.Draw(menuSprites[5], menuRec[i], Color.White); }
 
                         switch (drawdiffent)//clicked user
                         {
@@ -369,12 +385,17 @@ namespace NecroNexus
                 #endregion
                 #region NewGame Button
                 case 2://NewGame
-                    spriteBatch.Draw(menuSprites[6], menuRec[5], Color.White);//Back button
-                    spriteBatch.Draw(menuSprites[8], menuRec[7], Color.White);//New user button
+
                     spriteBatch.Draw(menuSprites[0], menuRec[8], Color.Gray);//background
+                    if (menuRec[5].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[6], menuRec[5], Color.LightGray); }//Back
+                    else { spriteBatch.Draw(menuSprites[6], menuRec[5], Color.White); }//Back
+                    if (menuRec[7].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[8], menuRec[7], Color.LightGray); }///New user button
+                    else { spriteBatch.Draw(menuSprites[8], menuRec[7], Color.White); }//New user button
+
                     for (int i = 12; i < 15; i++)//Draws 3 clickable buttons to so one can select which user slot one wants to use.
                     {
-                        spriteBatch.Draw(menuSprites[5], menuRec[i], Color.White);
+                        if (menuRec[i].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[5], menuRec[i], Color.LightGray); }
+                        else { spriteBatch.Draw(menuSprites[5], menuRec[i], Color.White); }
                         switch (drawdiffent)//clicked user
                         {
                             case 7:
