@@ -227,7 +227,7 @@ namespace NecroNexus
             { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { AudioEffect.ButtonClickingSound(); menuButClicked = 3; } else return; }
             if (menuButClicked == 4 || clickableButRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
-                AudioEffect.ButtonClickingSound();
+                
                 //Start next wave
                 menuButClicked = 4;
                 timer += GameWorld.DeltaTime;
@@ -236,8 +236,9 @@ namespace NecroNexus
                     level.StartNextWave();
                     menuButClicked = 0;
                     timer = 0;
+                    AudioEffect.ButtonClickingSound();
                 }
-
+                
             }
 
             if (menuButClicked == 3)//Choose upgrade
