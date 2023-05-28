@@ -29,7 +29,7 @@ namespace NecroNexus
 
         private bool hasCastedMagic;
         private float castingMagicCooldown;
-        public int Tier { get; set; } = 3;
+        public int Tier { get; set; } = 0;
 
         //A Dictionary used when adding usable keys from InputHandler
         private Dictionary<Keys, BState> controlKeys = new Dictionary<Keys, BState>();

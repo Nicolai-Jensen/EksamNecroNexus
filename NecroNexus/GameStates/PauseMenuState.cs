@@ -47,6 +47,7 @@ namespace NecroNexus
                 preYpos += 200;
                 menuRec[i] = new Rectangle(menuXPos + 50, preYpos, 700, 125); // 1 is for Back to game. 2 is for options. 3 is for quitbutton
             }
+            menuSprites[4] = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedPlain");
         }
 
         /// <summary>
@@ -58,6 +59,9 @@ namespace NecroNexus
             currentMouse = Mouse.GetState();//enables you to click with the currentMouse
             Clicking();
         }
+        /// <summary>
+        /// Handles the the buttons when you have paused the game.
+        /// </summary>
         private void Clicking()
         {
             //Goes back to level one state
@@ -76,15 +80,23 @@ namespace NecroNexus
                 game.ChangeState(game.Menu);
             }
         }
-
+        /// <summary>
+        /// Handels the drawing on the menu, it calls another methode, DrawingMenu for so that it can be expanded without filling the space of Draw.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
             DrawingMenu(spriteBatch);
             spriteBatch.End();
         }
+        /// <summary>
+        /// when called it draws the menu 
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         private void DrawingMenu(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(menuSprites[4], new Rectangle(0,0,1920,1080), Color.White);
             spriteBatch.Draw(menuSprites[0], menuRec[0], Color.White);
             switch (clickedStuff)
             {
