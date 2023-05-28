@@ -14,7 +14,7 @@ namespace NecroNexus
         DemonBallFactory DemonBallFactory = new DemonBallFactory();
         private Vector2 velocity;
         private Vector2 ePos;
-        public float skDamge { get; set; }
+        public float demonDamge { get; set; }
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get { return AttackSpeed; } }
 
@@ -33,16 +33,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    skDamge = 0.5f;
+                    demonDamge = 0.5f;
                     break;
                 case 1:
-                    skDamge = 1f;
+                    demonDamge = 1f;
                     break;
                 case 2:
-                    skDamge = 1.5f;
+                    demonDamge = 1.5f;
                     break;
                 case 3:
-                    skDamge = 2f;
+                    demonDamge = 2f;
                     break;
             }
         }

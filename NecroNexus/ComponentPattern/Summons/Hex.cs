@@ -11,10 +11,10 @@ namespace NecroNexus
 
         private float attackTimer;
 
-        HexBallFactory DemonBallFactory = new HexBallFactory();
+        HexBallFactory HexBallFactory = new HexBallFactory();
         private Vector2 velocity;
         private Vector2 ePos;
-        public float skDamge { get; set; }
+        public float hexDamge { get; set; }
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get { return AttackSpeed; } }
 
@@ -33,16 +33,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    skDamge = 0.2f;
+                    hexDamge = 0.2f;
                     break;
                 case 1:
-                    skDamge = 0.4f;
+                    hexDamge = 0.4f;
                     break;
                 case 2:
-                    skDamge = 0.6f;
+                    hexDamge = 0.6f;
                     break;
                 case 3:
-                    skDamge = 0.8f;
+                    hexDamge = 0.8f;
                     break;
             }
         }
@@ -100,16 +100,16 @@ namespace NecroNexus
             switch (Tier)
             {
                 case (0):
-                    hexAttack = DemonBallFactory.Create(HexBallTier.Tier0, GameObject.Transform.Position, ePos);
+                    hexAttack = HexBallFactory.Create(HexBallTier.Tier0, GameObject.Transform.Position, ePos);
                     break;
                 case (1):
-                    hexAttack = DemonBallFactory.Create(HexBallTier.Tier1, GameObject.Transform.Position, ePos);
+                    hexAttack = HexBallFactory.Create(HexBallTier.Tier1, GameObject.Transform.Position, ePos);
                     break;
                 case (2):
-                    hexAttack = DemonBallFactory.Create(HexBallTier.Tier2, GameObject.Transform.Position, ePos);
+                    hexAttack = HexBallFactory.Create(HexBallTier.Tier2, GameObject.Transform.Position, ePos);
                     break;
                 case (3):
-                    hexAttack = DemonBallFactory.Create(HexBallTier.Tier3, GameObject.Transform.Position, ePos);
+                    hexAttack = HexBallFactory.Create(HexBallTier.Tier3, GameObject.Transform.Position, ePos);
                     break;
             }
 
