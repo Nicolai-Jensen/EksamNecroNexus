@@ -708,6 +708,31 @@ namespace NecroNexus
                         RemoveObject(gameObject);
                 }
 
+
+                component = gameObject.GetComponent<ArcherArrow>();
+
+                if (component != null)
+                {
+                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 50 || component.GameObject.Transform.Position.X < -50 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 50 || component.GameObject.Transform.Position.Y < -50)
+                        RemoveObject(gameObject);
+                }
+
+                component = gameObject.GetComponent<DemonBall>();
+
+                if (component != null)
+                {
+                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 50 || component.GameObject.Transform.Position.X < -50 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 50 || component.GameObject.Transform.Position.Y < -50)
+                        RemoveObject(gameObject);
+                }
+
+                component = gameObject.GetComponent<HexBall>();
+
+                if (component != null)
+                {
+                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 50 || component.GameObject.Transform.Position.X < -50 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 50 || component.GameObject.Transform.Position.Y < -50)
+                        RemoveObject(gameObject);
+                }
+
                 if (gameObject.Tag == "Enemy")
                 {
                     if (gameObject.HasComponent<Grunt>())

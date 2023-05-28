@@ -56,7 +56,9 @@ namespace NecroNexus
 
             Animator animator = (Animator)go.AddComponent(new Animator());
 
-            Collider c = (Collider)go.AddComponent(new Collider());
+            Collider c;
+
+            HexBall h;
 
             go.Tag = "HexBall";
 
@@ -69,30 +71,36 @@ namespace NecroNexus
             }
 
 
+
             switch (type)
             {
                 case HexBallTier.Tier0:
                     sr.SetSprite("Projectiles/HexBalls/1", 1.75f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new DemonBall(0, pos, Globals.Direction(enemyPosition, pos)));
+                    c = (Collider)go.AddComponent(new Collider());
+                    h = (HexBall)go.AddComponent(new HexBall(0, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(h);
                     animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;
                 case HexBallTier.Tier1:
                     sr.SetSprite("Projectiles/DemonBalls/tile001", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new DemonBall(1, pos, Globals.Direction(enemyPosition, pos)));
-                    animator.AddAnimation(BuildAnimation("Idle", frames));
+                    c = (Collider)go.AddComponent(new Collider());
+                    h = (HexBall)go.AddComponent(new HexBall(1, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(h); animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;
                 case HexBallTier.Tier2:
                     sr.SetSprite("Projectiles/DemonBalls/tile002", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new DemonBall(2, pos, Globals.Direction(enemyPosition, pos)));
-                    animator.AddAnimation(BuildAnimation("Idle", frames));
+                    c = (Collider)go.AddComponent(new Collider());
+                    h = (HexBall)go.AddComponent(new HexBall(2, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(h); animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;
                 case HexBallTier.Tier3:
                     sr.SetSprite("Projectiles/DemonBalls/tile006", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new DemonBall(3, pos, Globals.Direction(enemyPosition, pos)));
-                    animator.AddAnimation(BuildAnimation("Idle", frames));
+                    c = (Collider)go.AddComponent(new Collider());
+                    h = (HexBall)go.AddComponent(new HexBall(3, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(h); animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;
 

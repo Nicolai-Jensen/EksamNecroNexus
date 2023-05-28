@@ -15,10 +15,13 @@ namespace NecroNexus
         private Vector2 velocity;
 
         private float Speed { get; set; }
+        public override bool ToRemove { get; set; }
+
 
         private Damage damage;
         private int tier;
 
+        
 
         public DemonBall(int tier, Vector2 position, Vector2 velocity)
         {

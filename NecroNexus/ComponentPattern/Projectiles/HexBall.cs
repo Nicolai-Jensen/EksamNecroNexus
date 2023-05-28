@@ -19,7 +19,8 @@ namespace NecroNexus
         private Damage damage;
         private int tier;
 
-        
+        public override bool ToRemove { get; set; }
+
         public HexBall(int tier, Vector2 position, Vector2 velocity)
         {
             this.tier = tier;
