@@ -19,9 +19,11 @@ namespace NecroNexus
         public Paladin(Board board, Vector2 pos)
         {
             speed = 40;
+            baseDamage = 10;
             this.board = board;
             position = pos;
-            Health = 1;
+            Health = 50;
+            SoulDrop = 20;
             foreach (var item in board.PositionList)
             {
                 pathList.Add(item);
@@ -30,6 +32,7 @@ namespace NecroNexus
 
         public override void Start()
         {
+            sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
             GameObject.Transform.Position = position;
             currentPosition = GameObject.Transform.Position;
             animator = (Animator)GameObject.GetComponent<Animator>();
@@ -44,12 +47,23 @@ namespace NecroNexus
             animator.PlayAnimation("Idle");
             FindPath();
             Move();
+            UpdateDamagedList();
             Death();
         }
 
         public override void FindPath()
         {
             base.FindPath();
+        }
+
+        public override void TakeDamage(Damage damage)
+        {
+            Damage trueValue = damage;
+            if (damage.Type == DamageType.Physical || damage.Type == DamageType.Magical)
+            {
+                trueValue.Value = damage.Value / 3;
+            }
+            base.TakeDamage(trueValue);
         }
     }
 }

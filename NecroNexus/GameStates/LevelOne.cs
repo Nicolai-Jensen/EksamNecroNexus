@@ -34,8 +34,8 @@ namespace NecroNexus
         private bool[] presseddowntopleft = { false, false, false, false };
         private bool[] isHoveringOverIcon = { false, false, false, false };
         public int MenuButClicked { get { return menuButClicked; } set { menuButClicked = value; } }
-        public int GetCriptHealth { get; set; }
-        public int GetSouls { get; set; } = 100;
+        public static int GetCriptHealth { get; set; }
+        public static int GetSouls { get; set; } = 100;
         public int GetWaveCount { get; set; }
         private Necromancer nc;
 
@@ -696,6 +696,16 @@ namespace NecroNexus
             return null;
         }
 
+        public static void UpdateSouls(float value)
+        {
+            GetSouls += (int)value;
+        }
+
+        public static void UpdateHealth(int value)
+        {
+            GetCriptHealth -= value;
+        }
+
         public void GameObjectsToRemove()
         {
             foreach (GameObject gameObject in gameObjects)
@@ -707,7 +717,6 @@ namespace NecroNexus
                     if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 50 || component.GameObject.Transform.Position.X < -50 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 50 || component.GameObject.Transform.Position.Y < -50)
                         RemoveObject(gameObject);
                 }
-
 
                 component = gameObject.GetComponent<ArcherArrow>();
 
@@ -732,6 +741,7 @@ namespace NecroNexus
                     if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 50 || component.GameObject.Transform.Position.X < -50 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 50 || component.GameObject.Transform.Position.Y < -50)
                         RemoveObject(gameObject);
                 }
+
 
                 if (gameObject.Tag == "Enemy")
                 {

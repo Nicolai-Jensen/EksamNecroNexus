@@ -30,7 +30,8 @@ namespace NecroNexus
             //Assigns new animations to the GameObject
             animator.AddAnimation(BuildAnimation("Standing", new string[] { "Necromancer/Idle/tile000", "Necromancer/Idle/tile001", "Necromancer/Idle/tile002", "Necromancer/Idle/tile003", "Necromancer/Idle/tile004", "Necromancer/Idle/tile005", "Necromancer/Idle/tile006", "Necromancer/Idle/tile007" }));
             animator.AddAnimation(BuildAnimation("Run", new string[] { "Necromancer/Run/tile000", "Necromancer/Run/tile001", "Necromancer/Run/tile002", "Necromancer/Run/tile003", "Necromancer/Run/tile004", "Necromancer/Run/tile005", "Necromancer/Run/tile006", "Necromancer/Run/tile007" }));
-            }
+            animator.AddAnimation(BuildAnimation("Shoot", new string[] { "Necromancer/AttackOne/tile000", "Necromancer/AttackOne/tile001", "Necromancer/AttackOne/tile002", "Necromancer/AttackOne/tile003", "Necromancer/AttackOne/tile004", "Necromancer/AttackOne/tile005", "Necromancer/AttackOne/tile006", "Necromancer/AttackOne/tile007", "Necromancer/AttackTwo/tile000", "Necromancer/AttackTwo/tile001", "Necromancer/AttackTwo/tile002", "Necromancer/AttackTwo/tile003", "Necromancer/AttackTwo/tile004", "Necromancer/AttackTwo/tile005", "Necromancer/AttackTwo/tile006", "Necromancer/AttackTwo/tile007" }));
+        }
 
         /// <summary>
         /// A method for adding Components to our GameObject
