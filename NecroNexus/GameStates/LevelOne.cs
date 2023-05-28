@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.MediaFoundation;
 using System.Collections.Generic;
 
 namespace NecroNexus
@@ -33,6 +34,7 @@ namespace NecroNexus
         private float timer1;
         private bool[] presseddowntopleft = { false, false, false, false };
         private bool[] isHoveringOverIcon = { false, false, false, false };
+        public int MenuButClicked { get{ return menuButClicked; } set { menuButClicked = value; } }
         public int GetCriptHealth { get; set; }
         public int GetSouls { get; set; }
         public int GetWaveCount { get; set; }
@@ -84,7 +86,9 @@ namespace NecroNexus
                 gameObjects[i].Awake();
             }
         }
-
+        /// <summary>
+        /// Loads all the sprites, set the rectangles and loads all the gameobjects used.
+        /// </summary>
         public override void LoadContent()
         {
             BackgroundFront = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedFront");
@@ -171,7 +175,10 @@ namespace NecroNexus
             Cleanup();
         }
         /// <summary>
-        /// This class handles the entire interation between the user and the UI the information here is then used down in DrawingUI
+        /// This class handles the entire interation between the user and the UI, the information here is then used down in DrawingUI
+        /// menuButClicked == 2 is for the summons menu
+        /// menuButClicked == 3 is the the upgrade menu.
+        /// menuButClicked == 4 is for the next wave button.
         /// Thorbjørn
         /// </summary>
         private void CheckingIfClicked()
@@ -179,11 +186,12 @@ namespace NecroNexus
             //Open the summons menu
             if (clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { menuButClicked = 2; } else return; }
+            //buy summons menu.
             if (menuButClicked == 2)
             {
                 timer += GameWorld.DeltaTime;
-                //So you can close the summons menu if clicked on again.
 
+                //So you can close the summons menu if clicked on again.
                 if (timer >= 0.25f && menuButClicked == 2 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; timer = 0; }
 
                 if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
@@ -271,7 +279,7 @@ namespace NecroNexus
         }
         /// <summary>
         /// This class is called when the player has clicked on a summon they want to buy. 
-        /// It checks the which summon has been clicked and then toggels an array that i then used in DrawingUI
+        /// It checks the which summon has been clicked and then toggels an array that i then used in DrawingUI for drawing the hovering icons.
         /// Thorbjørn
         /// </summary>
         private void HoveringSummons()
@@ -336,9 +344,6 @@ namespace NecroNexus
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-
-
-
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
             DrawingUI(spriteBatch);
 

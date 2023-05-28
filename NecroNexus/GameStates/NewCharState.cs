@@ -9,7 +9,7 @@ namespace NecroNexus
     public class NewCharState : State
     {
         //A Texture variable for our background
-        private Texture2D[] backgroundsprite = new Texture2D[3];
+        private Texture2D[] backgroundsprite = new Texture2D[4];
         private Rectangle finalizeButRec;
         private SpriteFont spriteFont;
 
@@ -38,6 +38,7 @@ namespace NecroNexus
             backgroundsprite[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");
             backgroundsprite[1] = content.Load<Texture2D>("placeholdersprites/UI/FinalizeBut");
             backgroundsprite[2] = content.Load<Texture2D>("placeholdersprites/UI/EmptyBut");
+            backgroundsprite[3] = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedPlain");
             spriteFont = content.Load<SpriteFont>("placeholdersprites/UI/File");
             finalizeButRec = new Rectangle(800, 500, 300, 100);
             myWpfControl = new MyWpfControl(spriteFont);
@@ -45,7 +46,7 @@ namespace NecroNexus
 
         /// <summary>
         /// Used to make sure that we can find and use the mouse position and then it calls a methode in Menu 
-        /// where it then sets the name accrodingly to what the player wrote
+        /// where it then sets the name accrodingly to what the player wrote, then it changes state to levelone
         /// </summary>
         public override void Update()
         {
@@ -62,11 +63,15 @@ namespace NecroNexus
             }
         }
 
-
+        /// <summary>
+        /// Handels the drawing of the ui
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
+            spriteBatch.Draw(backgroundsprite[3], new Rectangle(0,0,1920,1080), Color.White);
             spriteBatch.Draw(backgroundsprite[0], new Rectangle(600, 270, 600, 400), Color.White);
             spriteBatch.Draw(backgroundsprite[2], new Rectangle(800, 345, 350, 100), Color.Gray);
             spriteBatch.Draw(backgroundsprite[1], finalizeButRec, Color.White);

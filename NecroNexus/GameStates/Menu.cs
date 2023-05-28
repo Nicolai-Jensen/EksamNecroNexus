@@ -13,7 +13,7 @@ namespace NecroNexus
     public class Menu : State
     {
         //A Texture variable for our background
-        private Texture2D[] menuSprites = new Texture2D[16];
+        private Texture2D[] menuSprites = new Texture2D[17];
         private Rectangle[] menuRec = new Rectangle[16];
         private SpriteFont spriteFont;
         private string[] placeHolderName = { "Empty", "Empty", "Empty" };
@@ -122,6 +122,8 @@ namespace NecroNexus
                 menuRec[i] = new Rectangle(menuXPos + 110, loadYPos, 580, 180);
                 loadYPos += 210;
             }
+            //Background for the menu, placeholder for now, change if we get another picture.
+            menuSprites[16] = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedPlain");
         }
 
         /// <summary>
@@ -152,13 +154,15 @@ namespace NecroNexus
                         if (placeHolderName[0] != "Empty")
                         {
                             game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
-                            game.ChangeState(game.LevelOne);
+                            game.LevelOne.LoadContent();
+                            game.ChangeState2(game.LevelOne);
                         }
                         break;
                     case 5:
                         if (placeHolderName[1] != "Empty")
                         {
                             game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
+                            game.LevelOne.LoadContent();
                             game.ChangeState2(game.LevelOne);
                         }
                         break;
@@ -166,6 +170,7 @@ namespace NecroNexus
                         if (placeHolderName[2] != "Empty")
                         {
                             game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
+                            game.LevelOne.LoadContent();
                             game.ChangeState2(game.LevelOne);
                         }
                         break;
@@ -225,6 +230,12 @@ namespace NecroNexus
             }
         }
 
+        /// <summary>
+        /// When called it takes the first slot and changes the name.
+        /// By using a try catch, we read the the username with an id of 1 if there isnt a user we then set user to null and add the new user.
+        /// if there is an user, we overwrite the name with a new name.
+        /// </summary>
+        /// <param name="saveName"></param>
         public void ChangeNameLoadoneSaveone(string saveName)
         {
             placeHolderName[0] = saveName;
@@ -246,6 +257,12 @@ namespace NecroNexus
             else { game.Repository.AddUser(placeHolderName[0]); }
 
         }
+        /// <summary>
+        /// When called it takes the second slot and changes the name.
+        /// By using a try catch, we read the the username with an id of 2 if there isnt a user we then set user to null and add the new user.
+        /// if there is an user, we overwrite the name with a new name.
+        /// </summary>
+        /// <param name="saveName"></param>
         public void ChangeNameLoadtwoSavetwo(string saveName)
         {
             placeHolderName[1] = saveName;
@@ -266,6 +283,12 @@ namespace NecroNexus
             else { game.Repository.AddUser(placeHolderName[1]); }
 
         }
+        /// <summary>
+        /// When called it takes the thrid slot and changes the name.
+        /// By using a try catch, we read the the username with an id of 3 if there isnt a user we then set user to null and add the new user.
+        /// if there is an user, we overwrite the name with a new name.
+        /// </summary>
+        /// <param name="saveName"></param>
         public void ChangeNameLoadthreeSavethree(string saveName)
         {
             placeHolderName[2] = saveName;
@@ -285,14 +308,23 @@ namespace NecroNexus
             }
             else { game.Repository.AddUser(placeHolderName[2]); }
         }
+        /// <summary>
+        /// Handels the drawing of the UI. It calls another methode, DrawingMenu to make it eaiser on the eyes to read.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
             DrawingMenu(spriteBatch);
             spriteBatch.End();
         }
+        /// <summary>
+        /// When called it draws the UI for the menu.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         private void DrawingMenu(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(menuSprites[16], new Rectangle(0, 0, 1920, 1080), Color.White);
             spriteBatch.Draw(menuSprites[0], menuRec[0], Color.White);
             switch (clickedStuff)//Navigating the menu
             {
