@@ -5,21 +5,36 @@ namespace NecroNexus
 {
     public class SkeletonArcher : Summon
     {
+        //List of enemies inside the range of the summon
         public List<GameObject> EnemiesInRange { get; private set; }
 
-        public int CurrentTier { get; private set; }
+        //public int CurrentTier { get; private set; }
 
+        //Used to calculate attackspeed
         private float attackTimer;
 
+        /// <summary>
+        /// Atributes for the arrows
+        /// </summary>
         ArrowFactory arrowFactory = new ArrowFactory();
         private Vector2 velocity;
-        private Vector2 ePos;
-        public float skDamge { get; set; }
+        private Vector2 ePos; //EnemyPosition
+
+        /// <summary>
+        /// Properties that the UI gets, so the player can see the stats of the summon.
+        /// </summary>
+        public float skDamge { get; set; } //SkeletonDamage
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get{ return AttackSpeed; } }
 
         public int Tier { get; set; } = 0;
 
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="attackRangeRadius"></param>
+        /// <param name="attackspeed"></param>
         public SkeletonArcher(Vector2 position, float attackRangeRadius, float attackspeed)
             : base(position, attackRangeRadius, attackspeed)
         {
@@ -28,6 +43,11 @@ namespace NecroNexus
             SetTier(0);
 
         }
+
+        /// <summary>
+        /// Sets the Damage value, so it can be written to UI.
+        /// </summary>
+        /// <param name="i"></param>
         public void SetValues(int i)
         {
             switch (i)
@@ -47,6 +67,10 @@ namespace NecroNexus
             }
         }
 
+        /// <summary>
+        /// used to set the tier, for calling different tiers of the archer
+        /// </summary>
+        /// <param name="i"></param>
         private void SetTier(int i)
         {
             this.Tier = i;
@@ -59,6 +83,10 @@ namespace NecroNexus
             base.Start();
         }
 
+
+        /// <summary>
+        /// Updated method that contains the if statement, that checks if the summon should attack, and the summons attack timer.
+        /// </summary>
         public override void Update()
         {
             attackTimer += GameWorld.DeltaTime;
@@ -78,7 +106,13 @@ namespace NecroNexus
         }
 
 
-
+        /// <summary>
+        /// A bool that makes a float from the distance between the summon's position, and the target (enemy) position.
+        /// Then if distance is less than attackRange, return true.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="attackRangeRadius"></param>
+        /// <returns></returns>
         public bool IsEnemiesInRange(Vector2 position, float attackRangeRadius)
         {
             float distance = Vector2.Distance(position, GameObject.Transform.Position);
@@ -93,7 +127,9 @@ namespace NecroNexus
         }
 
 
-
+        /// <summary>
+        /// Method that contains a switch case of the different tiers of arrows.
+        /// </summary>
         public override void Attack()
         {
             GameObject arrow = new GameObject();
@@ -112,7 +148,6 @@ namespace NecroNexus
                     arrow = arrowFactory.Create(ArrowTier.Tier3, GameObject.Transform.Position, ePos);
                     break;
             }
-
             LevelOne.AddObject(arrow);
 
         }
