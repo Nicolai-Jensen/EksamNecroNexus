@@ -11,7 +11,7 @@ namespace NecroNexus
 
         private float attackTimer;
 
-        DemonBallFactory DemonBallFactory = new DemonBallFactory();
+        HexBallFactory DemonBallFactory = new HexBallFactory();
         private Vector2 velocity;
         private Vector2 ePos;
         public float skDamge { get; set; }
@@ -100,16 +100,16 @@ namespace NecroNexus
             switch (Tier)
             {
                 case (0):
-                    hexAttack = DemonBallFactory.Create(DemonBallTier.Tier0, GameObject.Transform.Position, ePos);
+                    hexAttack = DemonBallFactory.Create(HexBallTier.Tier0, GameObject.Transform.Position, ePos);
                     break;
                 case (1):
-                    hexAttack = DemonBallFactory.Create(DemonBallTier.Tier1, GameObject.Transform.Position, ePos);
+                    hexAttack = DemonBallFactory.Create(HexBallTier.Tier1, GameObject.Transform.Position, ePos);
                     break;
                 case (2):
-                    hexAttack = DemonBallFactory.Create(DemonBallTier.Tier2, GameObject.Transform.Position, ePos);
+                    hexAttack = DemonBallFactory.Create(HexBallTier.Tier2, GameObject.Transform.Position, ePos);
                     break;
                 case (3):
-                    hexAttack = DemonBallFactory.Create(DemonBallTier.Tier3, GameObject.Transform.Position, ePos);
+                    hexAttack = DemonBallFactory.Create(HexBallTier.Tier3, GameObject.Transform.Position, ePos);
                     break;
             }
 

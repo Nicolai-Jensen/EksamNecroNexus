@@ -9,10 +9,16 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
-
+    //Enumerations that determine which summontype is created.
     public enum SummonType { SkeletonArcher, SkeletonBrute, Demon, Hex}
     public class SummonFactory : Factory
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public override GameObject Create(Enum type, Vector2 position)
         {
             MouseState mouseState = Mouse.GetState();
