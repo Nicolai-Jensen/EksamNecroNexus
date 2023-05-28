@@ -56,7 +56,7 @@ namespace NecroNexus
             }
             else
             {
-                LevelOne.UpdateHealth(1);
+                LevelOne.UpdateHealth(baseDamage);
                 ToRemove = true;
             }
             
