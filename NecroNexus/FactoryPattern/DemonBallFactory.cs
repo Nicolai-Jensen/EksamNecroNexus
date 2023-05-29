@@ -56,7 +56,9 @@ namespace NecroNexus
 
             Animator animator = (Animator)go.AddComponent(new Animator());
 
-            Collider c = (Collider)go.AddComponent(new Collider());
+            Collider c;
+
+            DemonBall d;
 
             go.Tag = "DemonBall";
 
@@ -73,25 +75,33 @@ namespace NecroNexus
             {
                 case DemonBallTier.Tier0:
                     sr.SetSprite("Projectiles/DemonBalls/tile000", 1.75f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new DemonBall(0, pos, Globals.Direction(enemyPosition, pos)));
+                    c = (Collider)go.AddComponent(new Collider());
+                    d = (DemonBall)go.AddComponent(new DemonBall(0, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(d);
                     animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;
                 case DemonBallTier.Tier1:
                     sr.SetSprite("Projectiles/DemonBalls/tile001", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new DemonBall(1, pos, Globals.Direction(enemyPosition, pos)));
+                    c = (Collider)go.AddComponent(new Collider());
+                    d = (DemonBall)go.AddComponent(new DemonBall(1, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(d);
                     animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;
                 case DemonBallTier.Tier2:
                     sr.SetSprite("Projectiles/DemonBalls/tile002", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new DemonBall(2, pos, Globals.Direction(enemyPosition, pos)));
+                    c = (Collider)go.AddComponent(new Collider());
+                    d = (DemonBall)go.AddComponent(new DemonBall(2, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(d);
                     animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;
                 case DemonBallTier.Tier3:
                     sr.SetSprite("Projectiles/DemonBalls/tile006", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
-                    go.AddComponent(new DemonBall(3, pos, Globals.Direction(enemyPosition, pos)));
+                    c = (Collider)go.AddComponent(new Collider());
+                    d = (DemonBall)go.AddComponent(new DemonBall(3, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(d);
                     animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;

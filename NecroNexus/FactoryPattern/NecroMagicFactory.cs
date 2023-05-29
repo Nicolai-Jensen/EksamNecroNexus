@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct3D9;
 using SharpDX.MediaFoundation;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
-    public enum MagicLevel { BaseTier, Tier1, Tier2, Tier3 }
+    public enum MagicLevel { BaseTier, Tier1, Tier2, Tier3, Explosion }
 
     public class NecroMagicFactory : Factory
     {
@@ -28,10 +29,15 @@ namespace NecroNexus
             
 
             string[] frames = new string[60];
+            string[] frames2 = new string[24];
 
             for (int i = 1; i < 61; i++)
             {
                 frames[i-1] = $"Necromancer/Magic/Fireball/{i}";
+            }
+            for (int i = 1; i < 25; i++)
+            {
+                frames2[i - 1] = $"Necromancer/Magic/Explosion/1_{i+4}";
             }
 
             switch (type)
@@ -60,6 +66,14 @@ namespace NecroNexus
                     animator.AddAnimation(BuildAnimation("Idle", frames));
                     go.AddComponent(new NecromancerMagic(3));
                     break;
+                case MagicLevel.Explosion:
+                    sr.SetSprite("Necromancer/Magic/Explosion/1_5", 4f, 0, 0.5f);
+                    animator.AddAnimation(BuildAnimation("Explode", frames2));
+                    m = (NecromancerMagic)go.AddComponent(new NecromancerMagic(new Vector2(0,0), new Vector2(pos.X, pos.Y - 60)));
+                    c = (Collider)go.AddComponent(new Collider());
+                    c.OffsetY = +60;
+                    c.CollisionEvent.Attach(m);
+                    break;
             }
 
             return go;
@@ -74,10 +88,14 @@ namespace NecroNexus
 
             Collider c = (Collider)go.AddComponent(new Collider());
             string[] frames = new string[60];
-
+            string[] frames2 = new string[24];
             for (int i = 1; i < 61; i++)
             {
                 frames[i - 1] = $"Necromancer/Magic/Fireball/{i}";
+            }
+            for (int i = 1; i < 25; i++)
+            {
+                frames2[i - 1] = $"Necromancer/Magic/Explosion/1_{i + 4}";
             }
 
             sr.SetSprite("Necromancer/Magic/Fireball/1", 1f, Globals.GetRotation(pos), 0.5f);
@@ -100,7 +118,7 @@ namespace NecroNexus
                 sprites[i] = Globals.Content.Load<Texture2D>(spriteNames[i]);
             }
 
-            Animation animation = new Animation(animationName, sprites, 9);
+            Animation animation = new Animation(animationName, sprites, 18);
 
             return animation;
         }

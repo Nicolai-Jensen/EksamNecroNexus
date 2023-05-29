@@ -34,8 +34,8 @@ namespace NecroNexus
         private bool[] presseddowntopleft = { false, false, false, false };
         private bool[] isHoveringOverIcon = { false, false, false, false };
         public int MenuButClicked { get { return menuButClicked; } set { menuButClicked = value; } }
-        public int GetCriptHealth { get; set; }
-        public int GetSouls { get; set; } = 100;
+        public static int GetCriptHealth { get; set; }
+        public static int GetSouls { get; set; } = 100;
         public int GetWaveCount { get; set; }
         private Necromancer nc;
 
@@ -471,7 +471,7 @@ namespace NecroNexus
                         spriteBatch.Draw(UISprites[11], clickableButRec[7], null, Color.LightGray, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//ButtomLeft.
                     }
                     else { spriteBatch.Draw(UISprites[11], clickableButRec[7], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f); }//ButtomLeft.
-                    spriteBatch.DrawString(showLevelInfo, hx.skDamge.ToString(), new Vector2(770, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, hx.hexDamge.ToString(), new Vector2(770, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, hx.Range.ToString(), new Vector2(770, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, hx.FireRate.ToString(), new Vector2(770, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
@@ -491,7 +491,7 @@ namespace NecroNexus
                         spriteBatch.Draw(UISprites[13], clickableButRec[9], null, Color.LightGray, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//ButtomRight.
                     }
                     else { spriteBatch.Draw(UISprites[13], clickableButRec[9], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f); }//ButtomRight.
-                    spriteBatch.DrawString(showLevelInfo, demon.skDamge.ToString(), new Vector2(1260, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, demon.demonDamge.ToString(), new Vector2(1260, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, demon.Range.ToString(), new Vector2(1260, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, demon.FireRate.ToString(), new Vector2(1260, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
@@ -696,6 +696,16 @@ namespace NecroNexus
             return null;
         }
 
+        public static void UpdateSouls(float value)
+        {
+            GetSouls += (int)value;
+        }
+
+        public static void UpdateHealth(int value)
+        {
+            GetCriptHealth -= value;
+        }
+
         public void GameObjectsToRemove()
         {
             foreach (GameObject gameObject in gameObjects)
@@ -707,6 +717,31 @@ namespace NecroNexus
                     if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 50 || component.GameObject.Transform.Position.X < -50 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 50 || component.GameObject.Transform.Position.Y < -50)
                         RemoveObject(gameObject);
                 }
+
+                component = gameObject.GetComponent<ArcherArrow>();
+
+                if (component != null)
+                {
+                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 50 || component.GameObject.Transform.Position.X < -50 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 50 || component.GameObject.Transform.Position.Y < -50)
+                        RemoveObject(gameObject);
+                }
+
+                component = gameObject.GetComponent<DemonBall>();
+
+                if (component != null)
+                {
+                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 50 || component.GameObject.Transform.Position.X < -50 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 50 || component.GameObject.Transform.Position.Y < -50)
+                        RemoveObject(gameObject);
+                }
+
+                component = gameObject.GetComponent<HexBall>();
+
+                if (component != null)
+                {
+                    if (component.ToRemove || component.GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 50 || component.GameObject.Transform.Position.X < -50 || component.GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y + 50 || component.GameObject.Transform.Position.Y < -50)
+                        RemoveObject(gameObject);
+                }
+
 
                 if (gameObject.Tag == "Enemy")
                 {

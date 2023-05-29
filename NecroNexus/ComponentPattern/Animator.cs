@@ -20,7 +20,7 @@ namespace NecroNexus
         private SpriteRenderer spriteRenderer;
 
         // A Dictionary for our animations that uses the Animation class and a string
-        private Dictionary<string, Animation> animations = new Dictionary<string, Animation>();
+        public Dictionary<string, Animation> animations = new Dictionary<string, Animation>();
 
         // An Animation variable to refer to the current animation being played
         private Animation currentAnimation;

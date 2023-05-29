@@ -8,22 +8,20 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
-    public class DemonBall : Component, IGameListener
+    public class HexBall : Component, IGameListener
     {
         private float speed;
         private Vector2 position;
         private Vector2 velocity;
 
         private float Speed { get; set; }
-        public override bool ToRemove { get; set; }
-
 
         private Damage damage;
         private int tier;
 
-        
+        public override bool ToRemove { get; set; }
 
-        public DemonBall(int tier, Vector2 position, Vector2 velocity)
+        public HexBall(int tier, Vector2 position, Vector2 velocity)
         {
             this.tier = tier;
             this.position = position;
