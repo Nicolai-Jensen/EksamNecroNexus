@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using NecroNexus.GameStates;
 
 namespace NecroNexus
 {
@@ -22,6 +23,7 @@ namespace NecroNexus
         private LevelOne levelOne;
         private NewCharState newCharState;
         private PauseMenuState pausedMenuState;
+        private LostGame lostGame;
 
         //A Vector2 to save our screen size on
         private static Vector2 screenSize;
@@ -82,6 +84,7 @@ namespace NecroNexus
         public PauseMenuState PauseMenuState { get { return pausedMenuState; } }
         public NewCharState NewCharState { get { return newCharState; } }
         public Menu Menu { get { return menu; } }
+        public LostGame LostGame { get { return lostGame; } }
 
         public GameWorld()
         {
@@ -112,20 +115,21 @@ namespace NecroNexus
             levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);
             newCharState = new NewCharState(this, _graphics.GraphicsDevice, Content);
             pausedMenuState = new PauseMenuState(this, _graphics.GraphicsDevice, Content);
+            lostGame = new LostGame(this, _graphics.GraphicsDevice, Content);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            ChangeState(Menu);
+            ChangeState(menu);
             // TODO: use this.Content to load your game content here
         }
+
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                repository.Close();
                 levelOne.MenuButClicked = 0;
             }
                 

@@ -225,23 +225,25 @@ namespace NecroNexus
             //Open the upgrade menu
             if (clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { AudioEffect.ButtonClickingSound(); menuButClicked = 3; } else return; }
+
+            //Checks to see if you have clicked the nextwave
             if (menuButClicked == 4 || clickableButRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
-
+                menuButClicked = 4;
                 //Start next wave
                 timer += GameWorld.DeltaTime;
                 if (timer > 0.5f)
                 {
-                    menuButClicked = 4;
+                    AudioEffect.ButtonClickingSound();
                     level.StartNextWave();
                     menuButClicked = 0;
                     timer = 0;
-                    AudioEffect.ButtonClickingSound();
                 }
 
             }
 
-            if (menuButClicked == 3)//Choose upgrade
+            //Choose upgrade
+            if (menuButClicked == 3)
             {
                 timer += GameWorld.DeltaTime;
                 //So you can close the upgrade menu if clicked on again.
@@ -300,10 +302,16 @@ namespace NecroNexus
                     }
                 }
             }
+            //Checks to see if you click the pause button.
             if (clickableButRec[18].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
                 AudioEffect.ButtonClickingSound();
                 game.ChangeState(game.PauseMenuState);
+            }
+            //Checks to see if you have lost the game.
+            if (GetCriptHealth <= 0)
+            {
+                game.ChangeState(game.LostGame);
             }
         }
         /// <summary>

@@ -200,6 +200,7 @@ namespace NecroNexus
             if (WhichMenuClicked == 0 && menuRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the Quit
             {
                 AudioEffect.ButtonClickingSound();
+                game.Repository.Close();
                 game.Exit();
             }
             if (menuRec[5].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the back Button
