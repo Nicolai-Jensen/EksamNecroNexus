@@ -98,7 +98,7 @@ namespace NecroNexus
 
                     break;
                 case DemonBallTier.Tier3:
-                    sr.SetSprite("Projectiles/DemonBalls/tile006", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
+                    sr.SetSprite("Projectiles/DemonBalls/tile003", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
                     c = (Collider)go.AddComponent(new Collider());
                     d = (DemonBall)go.AddComponent(new DemonBall(3, pos, Globals.Direction(enemyPosition, pos)));
                     c.CollisionEvent.Attach(d);
