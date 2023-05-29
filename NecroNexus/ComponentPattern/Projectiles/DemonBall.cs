@@ -100,7 +100,7 @@ namespace NecroNexus
         {
             speed = 550f;
 
-            damage = new Damage(DamageType.Both, 30f);
+            damage = new Damage(DamageType.Both, 40f);
 
         }
 
