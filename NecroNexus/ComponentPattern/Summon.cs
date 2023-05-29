@@ -1,68 +1,47 @@
 ﻿using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 
 namespace NecroNexus
 {
+
+    /// <summary>
+    /// An abstract class that the summon inherit from.
+    /// </summary>
     public abstract class Summon : Component
     {
 
-
         public Vector2 Position { get; set; }
-        public Vector2 AttackRangeCenter => Position;
 
         public float AttackSpeed { get; set; }
-        
+
+        //Used to calculate attackspeed.
+        private float attackTimer;
+
         public float AttackRangeRadius { get; set; }
-
-        public List<GameObject> enemiesInRange = new List<GameObject>();
-        public Enemy CurrentTarget { get; set; }
-
 
 
         public Summon(Vector2 position, float attackRangeRadius, float attackspeed)
         {
-            
             Position = position;
             AttackRangeRadius = attackRangeRadius;
-           
             AttackSpeed = attackspeed;
-
-            AttackSpeed = 1f;
+            attackTimer = 0f;
         }
+        //#cb00ff
 
-
-
-        //TODO: Ret når enemies er klar
-
-        //public override void Update()
-        //{
-        //    //TODO: tilføj den rigtige list
-
-        //    foreach (Enemy enemy in )
-        //    {
-        //        if (IsEnemyInRange(enemy))
-        //        {
-        //            Shoot(enemy);
-        //        }
-        //    }
-        //}
-
-
-
-        public void EnemyInRange(GameObject enemy)
+        /// <summary>
+        /// Update that is inherited from component class. The inheriting summons are using this.
+        /// </summary>
+        public override void Update()
         {
-            enemiesInRange.Add(enemy);
+
         }
 
-
-        public virtual void Attack(Enemy enemy)
+        /// <summary>
+        /// Attack method that inherited classes can override.
+        /// </summary>
+        public virtual void Attack()
         {
-            if(CurrentTarget != null)
-            {
-                //attack
-            }
-        }
 
-        
+        }
     }
 }

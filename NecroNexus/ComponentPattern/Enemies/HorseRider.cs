@@ -18,9 +18,12 @@ namespace NecroNexus
         public override float SoulDrop { get; set; }
         public HorseRider(Board board, Vector2 pos)
         {
-            speed = 300;
+            speed = 250;
+            baseDamage = 4;
             this.board = board;
             position = pos;
+            Health = 14;
+            SoulDrop = 8;
             foreach (var item in board.PositionList)
             {
                 pathList.Add(item);
@@ -29,6 +32,7 @@ namespace NecroNexus
 
         public override void Start()
         {
+            sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
             GameObject.Transform.Position = position;
             currentPosition = GameObject.Transform.Position;
             animator = (Animator)GameObject.GetComponent<Animator>();
@@ -43,11 +47,18 @@ namespace NecroNexus
             animator.PlayAnimation("Idle");
             FindPath();
             Move();
+            UpdateDamagedList();
+            Death();
         }
 
         public override void FindPath()
         {
             base.FindPath();
+        }
+
+        public override void TakeDamage(Damage damage)
+        {
+            base.TakeDamage(damage);
         }
     }
 }

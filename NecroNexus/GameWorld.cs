@@ -106,7 +106,7 @@ namespace NecroNexus
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Audio.LoadAudio();
+            AudioEffect.LoadAudio();
             menu = new Menu(this, _graphics.GraphicsDevice, Content);
             startScreen = new StartScreen(this, _graphics.GraphicsDevice, Content);
             levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);
@@ -118,7 +118,7 @@ namespace NecroNexus
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            ChangeState(LevelOne);
+            ChangeState(Menu);
             // TODO: use this.Content to load your game content here
         }
         protected override void Update(GameTime gameTime)
@@ -126,7 +126,7 @@ namespace NecroNexus
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 repository.Close();
-                Exit();
+                levelOne.MenuButClicked = 0;
             }
                 
 

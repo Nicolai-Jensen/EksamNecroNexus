@@ -29,7 +29,7 @@ namespace NecroNexus
 
         private bool hasCastedMagic;
         private float castingMagicCooldown;
-        public int Tier { get; set; } = 3;
+        public int Tier { get; set; } = 0;
 
         //A Dictionary used when adding usable keys from InputHandler
         private Dictionary<Keys, BState> controlKeys = new Dictionary<Keys, BState>();
@@ -61,7 +61,7 @@ namespace NecroNexus
         {
             //Adds SpriteRenderer Component so we get access to drawing sprites
             sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
-            sr.SetSprite("Necromancer/Idle/tile000", 1f, 0, 1);
+            sr.SetSprite("Necromancer/Idle/tile000", 1.5f, 0, 0.8f);
 
 
             //Sets the Start Position of the Meerkat and the field values needed for jumps to work
@@ -89,13 +89,17 @@ namespace NecroNexus
             InputHandler.Instance.Execute(this);
 
             //Makes sure that the Idle animation is played under the right conditions
-            if ((controlKeys[Keys.A] == BState.Up && controlKeys[Keys.D] == BState.Up && controlKeys[Keys.S] == BState.Up && controlKeys[Keys.W] == BState.Up
-                || controlKeys[Keys.A] == BState.Down && controlKeys[Keys.D] == BState.Down && controlKeys[Keys.S] == BState.Up && controlKeys[Keys.W] == BState.Up
-                || controlKeys[Keys.A] == BState.Down && controlKeys[Keys.D] == BState.Down && controlKeys[Keys.S] == BState.Down && controlKeys[Keys.W] == BState.Down
-                || controlKeys[Keys.A] == BState.Up && controlKeys[Keys.D] == BState.Up && controlKeys[Keys.S] == BState.Down && controlKeys[Keys.W] == BState.Down))
+            if (controlKeys[Keys.Space] == BState.Up)
             {
-                animator.PlayAnimation("Standing");
+                if ((controlKeys[Keys.A] == BState.Up && controlKeys[Keys.D] == BState.Up && controlKeys[Keys.S] == BState.Up && controlKeys[Keys.W] == BState.Up
+                    || controlKeys[Keys.A] == BState.Down && controlKeys[Keys.D] == BState.Down && controlKeys[Keys.S] == BState.Up && controlKeys[Keys.W] == BState.Up
+                    || controlKeys[Keys.A] == BState.Down && controlKeys[Keys.D] == BState.Down && controlKeys[Keys.S] == BState.Down && controlKeys[Keys.W] == BState.Down
+                    || controlKeys[Keys.A] == BState.Up && controlKeys[Keys.D] == BState.Up && controlKeys[Keys.S] == BState.Down && controlKeys[Keys.W] == BState.Down))
+                {
+                    animator.PlayAnimation("Standing");
+                }
             }
+            
 
             Timer();
 
@@ -111,7 +115,7 @@ namespace NecroNexus
                     if (hasCastedMagic == true)
                     {
                         castingMagicCooldown += GameWorld.DeltaTime;
-                        if (castingMagicCooldown >= 1f)
+                        if (castingMagicCooldown >= 0.4f)
                         {
                             hasCastedMagic = false;
                             castingMagicCooldown = 0;
@@ -122,7 +126,7 @@ namespace NecroNexus
                     if (hasCastedMagic == true)
                     {
                         castingMagicCooldown += GameWorld.DeltaTime;
-                        if (castingMagicCooldown >= 0.8f)
+                        if (castingMagicCooldown >= 0.4f)
                         {
                             hasCastedMagic = false;
                             castingMagicCooldown = 0;
@@ -133,7 +137,7 @@ namespace NecroNexus
                     if (hasCastedMagic == true)
                     {
                         castingMagicCooldown += GameWorld.DeltaTime;
-                        if (castingMagicCooldown >= 0.6f)
+                        if (castingMagicCooldown >= 0.4f)
                         {
                             hasCastedMagic = false;
                             castingMagicCooldown = 0;
@@ -158,26 +162,46 @@ namespace NecroNexus
         {
             if (hasCastedMagic == false)
             {
+                //sr.Sprite == Globals.Content.Load<Texture2D>(spriteNames[i])
                 GameObject magic = new GameObject();
-
-                switch (Tier)
+                if (sr.Sprite == Globals.Content.Load<Texture2D>("Necromancer/AttackOne/tile002") || sr.Sprite == Globals.Content.Load<Texture2D>("Necromancer/AttackTwo/tile005"))
                 {
-                    case 0:
-                        magic = Magic.Create(MagicLevel.BaseTier, GameObject.Transform.Position);
-                        break;
-                    case 1:
-                        magic = Magic.Create(MagicLevel.Tier1, GameObject.Transform.Position);
-                        break;
-                    case 2:
-                        magic = Magic.Create(MagicLevel.Tier2, GameObject.Transform.Position);
-                        break;
-                    case 3:
-                        magic = Magic.Create(MagicLevel.Tier3, GameObject.Transform.Position);
-                        break;
+                    switch (Tier)
+                    {
+                        case 0:
+                            magic = Magic.Create(MagicLevel.BaseTier, GameObject.Transform.Position);
+                            break;
+                        case 1:
+                            magic = Magic.Create(MagicLevel.Tier1, GameObject.Transform.Position);
+                            break;
+                        case 2:
+                            magic = Magic.Create(MagicLevel.Tier2, GameObject.Transform.Position);
+                            break;
+                        case 3:
+                            magic = Magic.Create(MagicLevel.Tier3, GameObject.Transform.Position);
+                            break;
+                    }
+                    LevelOne.AddObject(magic);
+                    hasCastedMagic = true;
                 }
-                LevelOne.AddObject(magic);
-                hasCastedMagic = true;
             }
+
+            if (controlKeys[Keys.Space] == BState.Down)
+            {
+                MouseState mouseState = Mouse.GetState();
+                Vector2 mousePosition = mouseState.Position.ToVector2();
+                if (mousePosition.X > GameObject.Transform.Position.X)
+                {
+                    sr.SpriteEffects = SpriteEffects.None;
+                    animator.PlayAnimation("Shoot");
+                }
+                else if (mousePosition.X < GameObject.Transform.Position.X)
+                {
+                    sr.SpriteEffects = SpriteEffects.FlipHorizontally;
+                    animator.PlayAnimation("Shoot");
+                }
+            }
+
         }
     
 
@@ -188,41 +212,45 @@ namespace NecroNexus
         /// </summary>
         /// <param name="velocity"></param>
         public void Move(Vector2 velocity)
-        {  
-            //Normalize velocity for proper movement
-            if (velocity != Vector2.Zero)
+        {
+            if (controlKeys[Keys.Space] == BState.Up)
             {
-                velocity.Normalize();
+                //Normalize velocity for proper movement
+                if (velocity != Vector2.Zero)
+                {
+                    velocity.Normalize();
+                }
+
+                //Applies the speed to the direction
+                velocity *= speed;
+
+                //Applies the velocity to the Object
+                GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);
+
+                //Checks the direction the Necromancer is moving and applies the correct animation
+                if (velocity.X > 0)
+                {
+                    sr.SpriteEffects = SpriteEffects.None;
+                    animator.PlayAnimation("Run");
+                }
+                else if (velocity.X < 0)
+                {
+                    sr.SpriteEffects = SpriteEffects.FlipHorizontally;
+                    animator.PlayAnimation("Run");
+                }
+
+                //Checks the direction the Necromancer is moving and applies the correct animation
+                if (velocity.Y > 0)
+                {
+                    animator.PlayAnimation("Run");
+                }
+                else if (velocity.Y < 0)
+                {
+                    animator.PlayAnimation("Run");
+
+                }
             }
 
-            //Applies the speed to the direction
-            velocity *= speed;
-
-            //Applies the velocity to the Object
-            GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);
-
-            //Checks the direction the Necromancer is moving and applies the correct animation
-            if (velocity.X > 0)
-            {
-                sr.SpriteEffects = SpriteEffects.None;
-                animator.PlayAnimation("Run");
-            }
-            else if (velocity.X < 0)
-            {
-                sr.SpriteEffects = SpriteEffects.FlipHorizontally;
-                animator.PlayAnimation("Run");
-            }
-
-            //Checks the direction the Necromancer is moving and applies the correct animation
-            if (velocity.Y > 0)
-            {
-                animator.PlayAnimation("Run");
-            }
-            else if (velocity.Y < 0)
-            {
-                animator.PlayAnimation("Run");
-
-            }
         }
 
         /// <summary>
@@ -231,25 +259,24 @@ namespace NecroNexus
         public void ScreenJail()
         {
 
-            //Horizontal bounds, you can walk from one side to the other 
-            if (GameObject.Transform.Position.X < -25)
+            
+            if (GameObject.Transform.Position.X < 50)
             {
-                GameObject.Transform.Position = new Vector2(GameWorld.ScreenSize.X + 24, GameObject.Transform.Position.Y);
+                GameObject.Transform.Position = new Vector2(50, GameObject.Transform.Position.Y);
             }
-            if (GameObject.Transform.Position.X > GameWorld.ScreenSize.X + 25)
+            if (GameObject.Transform.Position.X > GameWorld.ScreenSize.X - 50)
             {
-                GameObject.Transform.Position = new Vector2(-24, GameObject.Transform.Position.Y);
+                GameObject.Transform.Position = new Vector2(GameWorld.ScreenSize.X -50, GameObject.Transform.Position.Y);
             }
 
-            //Vertical bounds, they stop you from proceeding out of bounds (These needed extra code to protect the integrity of the jump function so it didn't break)
-            if (GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y)
+            //Vertical bounds, they stop you from proceeding out of bounds
+            if (GameObject.Transform.Position.Y > GameWorld.ScreenSize.Y - 300)
             {
-                
-                GameObject.Transform.Position = new Vector2(GameObject.Transform.Position.X, GameWorld.ScreenSize.Y);
+                GameObject.Transform.Position = new Vector2(GameObject.Transform.Position.X, GameWorld.ScreenSize.Y - 300);
             }
-            if (GameObject.Transform.Position.Y < GameWorld.ScreenSize.Y - GameWorld.ScreenSize.Y)
+            if (GameObject.Transform.Position.Y < 50)
             {
-                GameObject.Transform.Position = new Vector2(GameObject.Transform.Position.X, 1);
+                GameObject.Transform.Position = new Vector2(GameObject.Transform.Position.X, 50);
 
             }
         }

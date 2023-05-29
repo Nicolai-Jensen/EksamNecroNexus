@@ -4,15 +4,13 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace NecroNexus
 {
     public static class Globals
     {
         public static ContentManager Content;
+
 
         public static Vector2 ToVector2(this Point point)
         {
@@ -63,17 +61,17 @@ namespace NecroNexus
 
         public static float GetRotationNoMouse(Vector2 targetPosition, Vector2 objectPosition)
         {
-            
+
 
             float dx = targetPosition.X - objectPosition.X;
             float dy = targetPosition.Y - objectPosition.Y;
 
             float rotation = (float)Math.Atan2(dy, dx);
 
-            if (dx < 0)
-            {
-                rotation += MathHelper.Pi;
-            }
+            //if (dx < 0)
+            //{
+            //    rotation += MathHelper.Pi;
+            //}
 
             //float rotation = (float)Math.Atan2(mousePosition.Y - objectPosition.Y, mousePosition.X - objectPosition.X) + MathHelper.PiOver2;
             return rotation;
@@ -89,7 +87,7 @@ namespace NecroNexus
             direction = posTarget - yourPos;
             direction.Normalize();
 
-            
+
 
             return direction;
         }

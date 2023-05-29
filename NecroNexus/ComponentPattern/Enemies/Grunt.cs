@@ -20,9 +20,12 @@ namespace NecroNexus
 
         public Grunt(Board board, Vector2 pos)
         {
-            speed = 100;
+            speed = 70;
+            baseDamage = 1;
             this.board = board;
             position = pos;
+            Health = 4;
+            SoulDrop = 1;
             foreach (var item in board.PositionList)
             {
                 pathList.Add(item);
@@ -31,6 +34,7 @@ namespace NecroNexus
 
         public override void Start()
         {
+            sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
             GameObject.Transform.Position = position;
             currentPosition = GameObject.Transform.Position;
             animator = (Animator)GameObject.GetComponent<Animator>();
@@ -45,6 +49,8 @@ namespace NecroNexus
             animator.PlayAnimation("Idle");
             FindPath();
             Move();
+            UpdateDamagedList();
+            Death();
         }
 
         public override void FindPath()
@@ -52,7 +58,10 @@ namespace NecroNexus
             base.FindPath();
         }
 
-       
+        public override void TakeDamage(Damage damage)
+        {
+            base.TakeDamage(damage); 
+        }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -29,10 +30,8 @@ namespace NecroNexus
         public StartScreen(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
             //Plays and repeats the background music
-            
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.2f;
-            MediaPlayer.Play(Audio.WaveActiveMusic);
+
+            AudioEffect.PlayBackgroundMus();
 
 
             backgroundsprite = new Texture2D[1];
