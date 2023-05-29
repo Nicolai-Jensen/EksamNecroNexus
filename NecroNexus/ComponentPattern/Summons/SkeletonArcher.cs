@@ -26,7 +26,6 @@ namespace NecroNexus
         public float skDamge { get; set; } //SkeletonDamage
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get{ return AttackSpeed; } }
-
         public int Tier { get; set; } = 0;
 
         /// <summary>
@@ -71,7 +70,7 @@ namespace NecroNexus
         /// used to set the tier, for calling different tiers of the archer
         /// </summary>
         /// <param name="i"></param>
-        private void SetTier(int i)
+        public void SetTier(int i)
         {
             this.Tier = i;
         }

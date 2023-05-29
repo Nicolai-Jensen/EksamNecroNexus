@@ -21,6 +21,7 @@ namespace NecroNexus
             currentSave = 900;
             thread = new Thread(ThreadMethod);
             thread.IsBackground = true;
+            currentSave = this.lvlOne.CurrentWave;
         }
 
         public void Start()
