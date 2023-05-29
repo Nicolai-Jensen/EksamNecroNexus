@@ -33,16 +33,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    demonDamge = 0.5f;
+                    demonDamge = 5f;
                     break;
                 case 1:
-                    demonDamge = 1f;
+                    demonDamge = 10f;
                     break;
                 case 2:
-                    demonDamge = 1.5f;
+                    demonDamge = 15f;
                     break;
                 case 3:
-                    demonDamge = 2f;
+                    demonDamge = 20f;
                     break;
             }
         }

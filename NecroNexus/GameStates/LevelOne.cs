@@ -223,12 +223,12 @@ namespace NecroNexus
                     if (GetSouls >= 20) { GetSouls -= 20; menuButClicked = 0; presseddowntopleft[1] = true; } else { return; }
 
                 }
-                if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-                {
-                    AudioEffect.ButtonClickingSound();
-                    if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; } else { return; }
+                //if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                //{
+                //    AudioEffect.ButtonClickingSound();
+                //    if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; } else { return; }
 
-                }
+                //}
                 if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     AudioEffect.ButtonClickingSound();
@@ -272,7 +272,7 @@ namespace NecroNexus
                 if (clickableButRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 2; }
 
                 //Skeleton Brute Upgrade icon.
-                if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 3; }
+                //if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 3; }
                 //Demon Upgrade icon.
                 if (clickableButRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 4; }
 
@@ -582,7 +582,7 @@ namespace NecroNexus
             spriteBatch.Draw(UISprites[8], clickableButRec[17], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Health, Souls and Wave count
             spriteBatch.DrawString(showLevelInfo, GetCriptHealth.ToString(), new Vector2(205, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
             spriteBatch.DrawString(showLevelInfo, GetSouls.ToString(), new Vector2(315, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(showLevelInfo, level.CurrentWave+1.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(showLevelInfo, level.CurrentWave.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
             spriteBatch.Draw(UISprites[9], clickableButRec[18], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ActivLevelPauseButton
 
@@ -677,19 +677,19 @@ namespace NecroNexus
 
                     if (isHoveringOverIcon[0] == true)
                     {
-                        spriteBatch.DrawString(showLevelInfo, "10", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                        spriteBatch.DrawString(showLevelInfo, "\n10", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     }
                     else if (isHoveringOverIcon[1] == true)
                     {
-                        spriteBatch.DrawString(showLevelInfo, "20", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                        spriteBatch.DrawString(showLevelInfo, "\n20", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     }
                     else if (isHoveringOverIcon[2] == true)
                     {
-                        spriteBatch.DrawString(showLevelInfo, "30", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                        spriteBatch.DrawString(showLevelInfo, "\nUnavailable", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     }
                     else if (isHoveringOverIcon[3] == true)
                     {
-                        spriteBatch.DrawString(showLevelInfo, "40", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                        spriteBatch.DrawString(showLevelInfo, "\n40", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     }
 
 

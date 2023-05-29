@@ -45,7 +45,7 @@ namespace NecroNexus
             {
                 Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
                 repo.UpdateLevel(Level, gameLevel.CurrentUser, nc.Tier, LevelOne.GetCriptHealth, 0, LevelOne.GetSouls, CurrentWave);
-                foreach (var item in LevelOne.gameObjects)
+                foreach (var item  in LevelOne.gameObjects)
                 {
                     if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
                     {

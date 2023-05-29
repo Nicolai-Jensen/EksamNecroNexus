@@ -81,14 +81,14 @@ namespace NecroNexus
         {
             speed = 400f;
 
-            damage = new Damage(DamageType.Physical, 0.5f);
+            damage = new Damage(DamageType.Physical, 1f);
         }
 
         private void ApplyTier1()
         {
             speed = 450f;
 
-            damage = new Damage(DamageType.Physical, 1f);
+            damage = new Damage(DamageType.Physical, 2f);
 
         }
 
@@ -96,7 +96,7 @@ namespace NecroNexus
         {
             speed = 500f;
 
-            damage = new Damage(DamageType.Physical, 2f);
+            damage = new Damage(DamageType.Physical, 3f);
 
         }
 
@@ -104,7 +104,7 @@ namespace NecroNexus
         {
             speed = 550f;
 
-            damage = new Damage(DamageType.Physical, 3f);
+            damage = new Damage(DamageType.Physical, 4f);
 
         }
 
