@@ -26,7 +26,6 @@ namespace NecroNexus
         public float skDamge { get; set; } //SkeletonDamage
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get{ return AttackSpeed; } }
-
         public int Tier { get; set; } = 0;
 
         /// <summary>

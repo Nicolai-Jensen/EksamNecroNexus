@@ -14,7 +14,8 @@ namespace NecroNexus
         private static SoundEffect NewSoul; //Enemy death
 
         private static Song StartScreenMusic; //Generally used when not in battle
-        private static Song WaveActiveMusic; 
+        private static Song WaveActiveMusic;
+        private static SoundEffect HitSound;
 
         private static SoundEffect SpawnTurret1; //(sorry for the long lead-in)
         private static SoundEffect SpawnTurret2;
@@ -25,6 +26,7 @@ namespace NecroNexus
         private static SoundEffect SubtleBlast1; //Used for turrets, the necromancer, Up to u
         private static SoundEffect SubtleBlast2; 
         private static SoundEffect SubtleBlast3;
+        private static SoundEffect SubtleCast;
 
         private static SoundEffect Explosion1; //Lookin for a more demonic sound? try the "spawn turret" above.
         private static SoundEffect Explosion2;
@@ -53,6 +55,8 @@ namespace NecroNexus
             Explosion2 = Globals.Content.Load<SoundEffect>("NexoAudio/Explosion2");
             Explosion3 = Globals.Content.Load<SoundEffect>("NexoAudio/Explosion3");
             ButtonPressed = Globals.Content.Load<SoundEffect>("NexoAudio/ButtonPressed");
+            HitSound = Globals.Content.Load<SoundEffect>("NexoAudio/HitSound");
+            SubtleCast = Globals.Content.Load<SoundEffect>("NexoAudio/SubtleCast");
 
         }
         public static void PlayBackgroundMus()
@@ -105,13 +109,17 @@ namespace NecroNexus
         {
             SubtleBlast3.Play(masterVolume, 0.0f, 0.0f);
         }
+        public static void PlayCast()
+        {
+            SubtleCast.Play(masterVolume, 0.0f, 0.0f);
+        }
         public static void playExplosion1()
         {
             Explosion1.Play(masterVolume, 0.0f, 0.0f);
         }
         public static void playExplosion2()
         {
-            Explosion2.Play(masterVolume, 0.0f, 0.0f);
+            Explosion2.Play(0.1f, 0.0f, 0.0f);
         }
         public static void playExplosion3()
         {
@@ -122,6 +130,11 @@ namespace NecroNexus
 
             ButtonPressed.Play(masterVolume,0.0f,0.0f);
             
+        }
+
+        public static void HitDamageSound()
+        {
+            HitSound.Play(masterVolume, 0.0f, 0.0f);
         }
 
     }

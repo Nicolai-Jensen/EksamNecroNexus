@@ -15,9 +15,12 @@ namespace NecroNexus
 
         protected SpriteRenderer sr;
         protected int baseDamage;
+        protected bool healthModified;
+        protected bool hit;
         //Speed Value, used for velocity in the Move method
         protected float speed;
         protected float timer;
+        protected float timerForFeedBack;
         protected Board board;
         protected Vector2 velocity;
         protected Vector2 currentPosition;
@@ -94,6 +97,24 @@ namespace NecroNexus
                 ToRemove = true;
                 LevelOne.UpdateSouls(SoulDrop);
             }
+            if (healthModified == true)
+            {
+                hit = true;
+                sr.Color = Color.Red;
+                AudioEffect.HitDamageSound();
+                healthModified = false;
+            }
+            if (hit == true)
+            {
+                timerForFeedBack += GameWorld.DeltaTime;
+                if (timerForFeedBack > 0.1f)
+                {
+                    sr.Color = Color.White;
+                    hit = false;
+                    timerForFeedBack = 0;
+                }
+            }
+
         }
 
         public void UpdateDamagedList()
@@ -123,6 +144,7 @@ namespace NecroNexus
         public virtual void TakeDamage(Damage damage)
         {
             this.Health -= damage.Value;
+            healthModified = true;
         }
     }
 }

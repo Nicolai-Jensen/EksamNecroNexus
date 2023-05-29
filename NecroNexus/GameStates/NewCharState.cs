@@ -65,6 +65,7 @@ namespace NecroNexus
                 if (game.Menu.Drawdiffent == 8) { game.Menu.ChangeNameLoadtwoSavetwo(myWpfControl.CurrentText); }
                 if (game.Menu.Drawdiffent == 9) { game.Menu.ChangeNameLoadthreeSavethree(myWpfControl.CurrentText); }
                 game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
+                game.Repository.Close();
                 game.ChangeState(game.LevelOne);
             }
         }
