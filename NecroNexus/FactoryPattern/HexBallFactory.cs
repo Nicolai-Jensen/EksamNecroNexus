@@ -83,24 +83,27 @@ namespace NecroNexus
 
                     break;
                 case HexBallTier.Tier1:
-                    sr.SetSprite("Projectiles/DemonBalls/tile001", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
+                    sr.SetSprite("Projectiles/HexBalls/1", 1.75f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
                     c = (Collider)go.AddComponent(new Collider());
                     h = (HexBall)go.AddComponent(new HexBall(1, pos, Globals.Direction(enemyPosition, pos)));
-                    c.CollisionEvent.Attach(h); animator.AddAnimation(BuildAnimation("Idle", frames));
+                    c.CollisionEvent.Attach(h);
+                    animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;
                 case HexBallTier.Tier2:
-                    sr.SetSprite("Projectiles/DemonBalls/tile002", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
+                    sr.SetSprite("Projectiles/HexBalls/1", 1.75f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
                     c = (Collider)go.AddComponent(new Collider());
                     h = (HexBall)go.AddComponent(new HexBall(2, pos, Globals.Direction(enemyPosition, pos)));
-                    c.CollisionEvent.Attach(h); animator.AddAnimation(BuildAnimation("Idle", frames));
+                    c.CollisionEvent.Attach(h);
+                    animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;
                 case HexBallTier.Tier3:
-                    sr.SetSprite("Projectiles/DemonBalls/tile006", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
+                    sr.SetSprite("Projectiles/HexBalls/1", 1.75f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
                     c = (Collider)go.AddComponent(new Collider());
                     h = (HexBall)go.AddComponent(new HexBall(3, pos, Globals.Direction(enemyPosition, pos)));
-                    c.CollisionEvent.Attach(h); animator.AddAnimation(BuildAnimation("Idle", frames));
+                    c.CollisionEvent.Attach(h);
+                    animator.AddAnimation(BuildAnimation("Idle", frames));
 
                     break;
 

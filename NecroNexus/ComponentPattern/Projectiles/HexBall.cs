@@ -75,14 +75,14 @@ namespace NecroNexus
         {
             speed = 400f;
 
-            damage = new Damage(DamageType.Magical, 1f);
+            damage = new Damage(DamageType.Magical, 3f);
         }
 
         private void ApplyTier1()
         {
             speed = 450f;
 
-            damage = new Damage(DamageType.Magical, 2f);
+            damage = new Damage(DamageType.Magical, 6f);
 
         }
 
@@ -90,7 +90,7 @@ namespace NecroNexus
         {
             speed = 500f;
 
-            damage = new Damage(DamageType.Magical, 3f);
+            damage = new Damage(DamageType.Magical, 9);
 
         }
 
@@ -98,61 +98,75 @@ namespace NecroNexus
         {
             speed = 550f;
 
-            damage = new Damage(DamageType.Magical, 4f);
+            damage = new Damage(DamageType.Magical, 12f);
 
         }
 
 
         public void Notify(GameEvent gameEvent)
         {
+            GameObject other = (gameEvent as CollisionEvent).Other;
 
-            if (gameEvent is CollisionEvent)
+            if (other.Tag == "Enemy")
             {
-                GameObject other = (gameEvent as CollisionEvent).Other;
-
-                if (other.Tag == "Enemy")
+                if (other.HasComponent<Grunt>())
                 {
-                    if (other.HasComponent<Grunt>())
+                    Grunt enemy = (Grunt)other.GetComponent<Grunt>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        Grunt enemy = (Grunt)other.GetComponent<Grunt>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
                     }
-                    else if (other.HasComponent<ArmoredGrunt>())
+                }
+
+                else if (other.HasComponent<ArmoredGrunt>())
+                {
+                    ArmoredGrunt enemy = (ArmoredGrunt)other.GetComponent<ArmoredGrunt>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        ArmoredGrunt enemy = (ArmoredGrunt)other.GetComponent<ArmoredGrunt>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
+
                     }
-                    else if (other.HasComponent<Knight>())
+                }
+                else if (other.HasComponent<Knight>())
+                {
+                    Knight enemy = (Knight)other.GetComponent<Knight>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        Knight enemy = (Knight)other.GetComponent<Knight>();
-                        enemy.Health -= damage.Value;
-                        ToRemove = true;
+                        enemy.TakeDamage(damage);
                     }
-                    else if (other.HasComponent<HorseRider>())
+                }
+                else if (other.HasComponent<HorseRider>())
+                {
+                    HorseRider enemy = (HorseRider)other.GetComponent<HorseRider>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        HorseRider enemy = (HorseRider)other.GetComponent<HorseRider>();
-                        enemy.Health -= damage.Value;
-                        ToRemove = true;
+                        enemy.TakeDamage(damage);
                     }
-                    else if (other.HasComponent<Cleric>())
+                }
+                else if (other.HasComponent<Cleric>())
+                {
+                    Cleric enemy = (Cleric)other.GetComponent<Cleric>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        Cleric enemy = (Cleric)other.GetComponent<Cleric>();
-                        enemy.Health -= damage.Value;
-                        ToRemove = true;
+                        enemy.TakeDamage(damage);
                     }
-                    else if (other.HasComponent<Paladin>())
+                }
+                else if (other.HasComponent<Paladin>())
+                {
+                    Paladin enemy = (Paladin)other.GetComponent<Paladin>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        Paladin enemy = (Paladin)other.GetComponent<Paladin>();
-                        enemy.Health -= damage.Value;
-                        ToRemove = true;
+                        enemy.TakeDamage(damage);
                     }
-                    else if (other.HasComponent<Valkyrie>())
+                }
+                else if (other.HasComponent<Valkyrie>())
+                {
+                    Valkyrie enemy = (Valkyrie)other.GetComponent<Valkyrie>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        Valkyrie enemy = (Valkyrie)other.GetComponent<Valkyrie>();
-                        enemy.Health -= damage.Value;
-                        ToRemove = true;
+                        enemy.TakeDamage(damage);
                     }
                 }
             }

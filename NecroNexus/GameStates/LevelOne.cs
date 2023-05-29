@@ -332,7 +332,7 @@ namespace NecroNexus
                                 break;
 
                             case 2: //Hex Upgrade.
-                                hx = (Hex)GetSummonGo(1).GetComponent<Hex>();
+                                hx = (Hex)GetSummonGo(2).GetComponent<Hex>();
                                 switch (hx.Tier)
                                 {
 
@@ -387,7 +387,7 @@ namespace NecroNexus
                             case 3: //Skeleton Brute Upgrade.
                                 break;
                             case 4: //Demon Upgrade.
-                                dm = (Demon)GetSummonGo(1).GetComponent<Demon>();
+                                dm = (Demon)GetSummonGo(4).GetComponent<Demon>();
                                 switch (dm.Tier)
                                 {
 
