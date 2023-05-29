@@ -70,16 +70,22 @@ namespace NecroNexus
                     sr.SetSprite("Projectiles/Arrows/tile002", 2f, Globals.GetRotationNoMouse(enemyPosition , pos), 0.5f);
                     c = (Collider)go.AddComponent(new Collider());
                     a = (ArcherArrow)go.AddComponent(new ArcherArrow(1, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(a);
+
                     break;
                 case ArrowTier.Tier2:
                     sr.SetSprite("Projectiles/Arrows/tile005", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
                     c = (Collider)go.AddComponent(new Collider());
                     a = (ArcherArrow)go.AddComponent(new ArcherArrow(2, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(a);
+
                     break;
                 case ArrowTier.Tier3:
                     sr.SetSprite("Projectiles/Arrows/tile006", 2f, Globals.GetRotationNoMouse(enemyPosition, pos), 0.5f);
                     c = (Collider)go.AddComponent(new Collider());
                     a = (ArcherArrow)go.AddComponent(new ArcherArrow(3, pos, Globals.Direction(enemyPosition, pos)));
+                    c.CollisionEvent.Attach(a);
+
                     break;
             }
 

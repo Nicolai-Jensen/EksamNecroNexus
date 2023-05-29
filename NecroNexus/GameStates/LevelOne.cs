@@ -283,53 +283,158 @@ namespace NecroNexus
 
 
                                     case 0: //level 0 to 1.
-                                        if (GetSouls >= 10) { GetSouls -= 10; sk.Tier = 1; } else { menuButClicked = 0; }
+                                        if (GetSouls >= 10) 
+                                        { 
+                                            GetSouls -= 10;
+                                            foreach (var item in gameObjects)
+                                            {
+                                                if (item.Tag == "Archer")
+                                                {
+                                                    sk = (SkeletonArcher)item.GetComponent<SkeletonArcher>();
+                                                    sk.SetTier(1);
+                                                }
+                                            }
+                                            
+                                        } 
                                         break;
                                     case 1: //level 1 to 2.
-                                        if (GetSouls >= 20) { GetSouls -= 20; sk.Tier = 2; } else { menuButClicked = 0; }
+                                        if (GetSouls >= 20)
+                                        {
+                                            GetSouls -= 20;
+                                            foreach (var item in gameObjects)
+                                            {
+                                                if (item.Tag == "Archer")
+                                                {
+                                                    sk = (SkeletonArcher)item.GetComponent<SkeletonArcher>();
+                                                    sk.SetTier(2);
+                                                }
+                                            }
+
+                                        }
+
                                         break;
                                     case 2: //level 2 to 3.
-                                        if (GetSouls >= 30) { GetSouls -= 30; sk.Tier = 3; } else { menuButClicked = 0; }
+                                        if (GetSouls >= 30)
+                                        {
+                                            GetSouls -= 30;
+                                            foreach (var item in gameObjects)
+                                            {
+                                                if (item.Tag == "Archer")
+                                                {
+                                                    sk = (SkeletonArcher)item.GetComponent<SkeletonArcher>();
+                                                    sk.SetTier(3);
+                                                }
+                                            }
 
+                                        }
                                         break;
                                 }
                                 break;
 
                             case 2: //Hex Upgrade.
-                                hx = (Hex)GetChar().GetComponent<Hex>();
+                                hx = (Hex)GetSummonGo(1).GetComponent<Hex>();
                                 switch (hx.Tier)
                                 {
 
-
                                     case 0: //level 0 to 1.
-                                        if (GetSouls >= 10) { GetSouls -= 10; hx.Tier = 1; } else { menuButClicked = 1; }
+                                        if (GetSouls >= 10)
+                                        {
+                                            GetSouls -= 10;
+                                            foreach (var item in gameObjects)
+                                            {
+                                                if (item.Tag == "Hex")
+                                                {
+                                                    hx = (Hex)item.GetComponent<Hex>();
+                                                    hx.SetTier(1);
+                                                }
+                                            }
+
+                                        }
                                         break;
                                     case 1: //level 1 to 2.
-                                        if (GetSouls >= 20) { GetSouls -= 20; hx.Tier = 2; } else { menuButClicked = 1; }
+                                        if (GetSouls >= 20)
+                                        {
+                                            GetSouls -= 20;
+                                            foreach (var item in gameObjects)
+                                            {
+                                                if (item.Tag == "Hex")
+                                                {
+                                                    hx = (Hex)item.GetComponent<Hex>();
+                                                    hx.SetTier(2);
+                                                }
+                                            }
+
+                                        }
                                         break;
                                     case 2: //level 2 to 3.
-                                        if (GetSouls >= 30) { GetSouls -= 30; hx.Tier = 3; } else { menuButClicked = 1; }
+                                        if (GetSouls >= 30)
+                                        {
+                                            GetSouls -= 30;
+                                            foreach (var item in gameObjects)
+                                            {
+                                                if (item.Tag == "Hex")
+                                                {
+                                                    hx = (Hex)item.GetComponent<Hex>();
+                                                    hx.SetTier(3);
+                                                }
+                                            }
 
+                                        }
                                         break;
+                                        
                                 }
                                 break;
                             case 3: //Skeleton Brute Upgrade.
                                 break;
                             case 4: //Demon Upgrade.
-                                dm = (Demon)GetChar().GetComponent<Demon>();
+                                dm = (Demon)GetSummonGo(1).GetComponent<Demon>();
                                 switch (dm.Tier)
                                 {
 
-
                                     case 0: //level 0 to 1.
-                                        if (GetSouls >= 10) { GetSouls -= 10; dm.Tier = 1; } else { menuButClicked = 2; }
+                                        if (GetSouls >= 20)
+                                        {
+                                            GetSouls -= 20;
+                                            foreach (var item in gameObjects)
+                                            {
+                                                if (item.Tag == "Demon")
+                                                {
+                                                    dm = (Demon)item.GetComponent<Demon>();
+                                                    dm.SetTier(1);
+                                                }
+                                            }
+
+                                        }
                                         break;
                                     case 1: //level 1 to 2.
-                                        if (GetSouls >= 20) { GetSouls -= 20; dm.Tier = 2; } else { menuButClicked = 2; }
+                                        if (GetSouls >= 30)
+                                        {
+                                            GetSouls -= 30;
+                                            foreach (var item in gameObjects)
+                                            {
+                                                if (item.Tag == "Demon")
+                                                {
+                                                    dm = (Demon)item.GetComponent<Demon>();
+                                                    dm.SetTier(2);
+                                                }
+                                            }
+
+                                        }
                                         break;
                                     case 2: //level 2 to 3.
-                                        if (GetSouls >= 30) { GetSouls -= 30; dm.Tier = 3; } else { menuButClicked = 2; }
+                                        if (GetSouls >= 50)
+                                        {
+                                            GetSouls -= 50;
+                                            foreach (var item in gameObjects)
+                                            {
+                                                if (item.Tag == "Demon")
+                                                {
+                                                    dm = (Demon)item.GetComponent<Demon>();
+                                                    dm.SetTier(3);
+                                                }
+                                            }
 
+                                        }
                                         break;
                                 }
                                 break;

@@ -71,7 +71,7 @@ namespace NecroNexus
         /// used to set the tier, for calling different tiers of the archer
         /// </summary>
         /// <param name="i"></param>
-        private void SetTier(int i)
+        public void SetTier(int i)
         {
             this.Tier = i;
         }

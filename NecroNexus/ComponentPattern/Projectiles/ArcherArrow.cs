@@ -48,6 +48,7 @@ namespace NecroNexus
 
         public override void Start()
         {
+            GameObject.Tag = "ArcherArrow";
             GameObject.Transform.Translate(position);
         }
 
@@ -87,7 +88,7 @@ namespace NecroNexus
         {
             speed = 450f;
 
-            damage = new Damage(DamageType.Physical, 2f);
+            damage = new Damage(DamageType.Physical, 20f);
 
         }
 

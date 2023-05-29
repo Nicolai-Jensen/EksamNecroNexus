@@ -33,21 +33,21 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    hexDamge = 0.2f;
+                    hexDamge = 2f;
                     break;
                 case 1:
-                    hexDamge = 0.4f;
+                    hexDamge = 4f;
                     break;
                 case 2:
-                    hexDamge = 0.6f;
+                    hexDamge = 6f;
                     break;
                 case 3:
-                    hexDamge = 0.8f;
+                    hexDamge = 8f;
                     break;
             }
         }
 
-        private void SetTier(int i)
+        public void SetTier(int i)
         {
             this.Tier = i;
         }
