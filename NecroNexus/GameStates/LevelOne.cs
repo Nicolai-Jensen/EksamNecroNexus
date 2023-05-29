@@ -30,13 +30,18 @@ namespace NecroNexus
         private int whichUpgradeClicked = 0;
         private float timer;
         private float timer1;
+        
         private byte necroUpgrade = 0;
         private bool[] presseddowntopleft = { false, false, false, false };
         private bool[] isHoveringOverIcon = { false, false, false, false };
         public int MenuButClicked { get { return menuButClicked; } set { menuButClicked = value; } }
-        public static int GetCriptHealth { get; set; } = 20;
-        public static int GetSouls { get; set; } = 100;
+
+        public static int GetCriptHealth { get; set; } = 100;
+        public static int GetSouls { get; set; } = 10;
+
         public int GetWaveCount { get; set; }
+        public int CurrentUser { get; set; }
+        public bool Loaded { get; set; }
         private Necromancer nc;
 
 
@@ -64,14 +69,23 @@ namespace NecroNexus
             summons = new SummonFactory();
 
             boardOne.LevelOneBoard(map.ReturnPos(map.Graph1()));
-            level = new GameSaveLevelOne(boardOne);
+            level = new GameSaveLevelOne(boardOne, game.Repository, this);
             autoSave = new AutoSave(level);
+            foreach (var item in gameObjects)
+            {
+                RemoveObject(item);
+            }
         }
 
 
 
         public override void Initialize()
         {
+            game.Repository.Open();
+            if (Loaded == true)
+            {
+                level.LoadGame();
+            }
             autoSave.Start();
             Director director = new Director(new NecroBuilder());
             gameObjects.Add(summons.Create(SummonType.SkeletonArcher, new Vector2(-3000, -3000)));
@@ -306,6 +320,7 @@ namespace NecroNexus
             if (clickableButRec[18].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
                 AudioEffect.ButtonClickingSound();
+                game.Repository.Close();
                 game.ChangeState(game.PauseMenuState);
             }
             //Checks to see if you have lost the game.
@@ -410,7 +425,7 @@ namespace NecroNexus
             spriteBatch.Draw(UISprites[8], clickableButRec[17], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Health, Souls and Wave count
             spriteBatch.DrawString(showLevelInfo, GetCriptHealth.ToString(), new Vector2(205, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
             spriteBatch.DrawString(showLevelInfo, GetSouls.ToString(), new Vector2(315, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(showLevelInfo, GetWaveCount.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(showLevelInfo, level.CurrentWave+1.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
             spriteBatch.Draw(UISprites[9], clickableButRec[18], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ActivLevelPauseButton
 
@@ -592,7 +607,7 @@ namespace NecroNexus
         /// When called it returns the player
         /// </summary>
         /// <returns></returns>
-        private GameObject GetChar()
+        public GameObject GetChar()
         {
             foreach (GameObject item in gameObjects)
             {
@@ -608,7 +623,7 @@ namespace NecroNexus
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        private GameObject GetSummonGo(int value)
+        public GameObject GetSummonGo(int value)
         {
             switch (value)
             {

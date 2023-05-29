@@ -12,20 +12,18 @@ namespace TestProgramNN
     {
         static void Main(string[] args)
         {
-            List<Tower> towerList;
+            List<Level> towerList;
 
             var mapper = new Mapper();
             var provider = new DbProvider("Data Source=NNDatabase.db; Version=3; New=False");
             var repository = new Repository(provider, mapper);
 
             repository.Open();
-            repository.CreateDatabaseTables();
-            repository.CreateTowers();
-            towerList = repository.ReadAllTower();
+            towerList = repository.ReadAllLevels();
 
             foreach (var item in towerList)
             {
-                Console.WriteLine($"TowerID:{item.TowerID}\n TowerType: {item.TowerType}");
+                Console.WriteLine($"LevelID:{item.LevelID}\n UserID: {item.UserID}\n BaseHp: {item.BaseHP}");
                
             }
             Console.ReadLine();
