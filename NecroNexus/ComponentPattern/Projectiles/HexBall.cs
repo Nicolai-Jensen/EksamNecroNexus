@@ -90,7 +90,7 @@ namespace NecroNexus
         {
             speed = 500f;
 
-            damage = new Damage(DamageType.Magical, 9);
+            damage = new Damage(DamageType.Magical, 10);
 
         }
 
@@ -98,7 +98,7 @@ namespace NecroNexus
         {
             speed = 550f;
 
-            damage = new Damage(DamageType.Magical, 12f);
+            damage = new Damage(DamageType.Magical, 15f);
 
         }
 
