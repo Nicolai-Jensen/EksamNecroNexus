@@ -34,7 +34,7 @@ namespace NecroNexus
         private bool[] presseddowntopleft = { false, false, false, false };
         private bool[] isHoveringOverIcon = { false, false, false, false };
         public int MenuButClicked { get { return menuButClicked; } set { menuButClicked = value; } }
-        public static int GetCriptHealth { get; set; }
+        public static int GetCriptHealth { get; set; } = 20;
         public static int GetSouls { get; set; } = 100;
         public int GetWaveCount { get; set; }
         private Necromancer nc;
