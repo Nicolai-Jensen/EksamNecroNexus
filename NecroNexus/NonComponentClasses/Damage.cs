@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace NecroNexus
 {
 
-    public enum DamageType { Physical, Magical }
+    public enum DamageType { Physical, Magical, Both }
     public class Damage
     {
         public DamageType Type { get; set; }

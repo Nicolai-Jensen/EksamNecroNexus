@@ -53,16 +53,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    skDamge = 0.5f;
-                    break;
-                case 1:
                     skDamge = 1f;
                     break;
+                case 1:
+                    skDamge = 2f;
+                    break;
                 case 2:
-                    skDamge = 1.5f;
+                    skDamge = 3f;
                     break;
                 case 3:
-                    skDamge = 2f;
+                    skDamge = 4f;
                     break;
             }
         }

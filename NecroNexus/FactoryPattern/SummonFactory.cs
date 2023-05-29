@@ -47,14 +47,14 @@ namespace NecroNexus
                 case SummonType.Hex:
                     sr.SetSprite("Summons/Hex/tile000", 2.5f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/Hex/tile000", "Summons/Hex/tile001", "Summons/Hex/tile002", "Summons/Hex/tile003" }));
-                    go.AddComponent(new Hex(position, 175f, 4f));
+                    go.AddComponent(new Hex(position, 175f, 3f));
                     LevelOne.AddObject(go);
                     break;
 
                 case SummonType.Demon:
                     sr.SetSprite("Summons/Demon/tile000", 2.5f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/Demon/tile000", "Summons/Demon/tile001", "Summons/Demon/tile002", "Summons/Demon/tile003", "Summons/Demon/tile004", "Summons/Demon/tile005", "Summons/Demon/tile005", "Summons/Demon/tile006", "Summons/Demon/tile007" }));
-                    go.AddComponent(new Demon(position, 200f, 3f));
+                    go.AddComponent(new Demon(position, 200f, 4f));
                     LevelOne.AddObject(go);
                     break;
 

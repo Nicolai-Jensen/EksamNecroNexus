@@ -59,7 +59,7 @@ namespace NecroNexus
         public override void TakeDamage(Damage damage)
         {
             Damage trueValue = damage;
-            if (damage.Type == DamageType.Magical)
+            if (damage.Type == DamageType.Magical || damage.Type == DamageType.Both)
             {
                 trueValue.Value = 0;
             }

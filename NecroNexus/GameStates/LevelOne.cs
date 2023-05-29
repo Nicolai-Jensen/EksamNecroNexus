@@ -38,6 +38,9 @@ namespace NecroNexus
         public static int GetSouls { get; set; } = 100;
         public int GetWaveCount { get; set; }
         private Necromancer nc;
+        private SkeletonArcher sk;
+        private Hex hx;
+        private Demon dm;
 
 
 
@@ -274,12 +277,61 @@ namespace NecroNexus
                         switch (whichUpgradeClicked)
                         {
                             case 1://Skeleton Archer Upgrade.
+                                sk = (SkeletonArcher)GetSummonGo(1).GetComponent <SkeletonArcher>();
+                                switch (sk.Tier)
+                                {
+
+
+                                    case 0: //level 0 to 1.
+                                        if (GetSouls >= 10) { GetSouls -= 10; sk.Tier = 1; } else { menuButClicked = 0; }
+                                        break;
+                                    case 1: //level 1 to 2.
+                                        if (GetSouls >= 20) { GetSouls -= 20; sk.Tier = 2; } else { menuButClicked = 0; }
+                                        break;
+                                    case 2: //level 2 to 3.
+                                        if (GetSouls >= 30) { GetSouls -= 30; sk.Tier = 3; } else { menuButClicked = 0; }
+
+                                        break;
+                                }
                                 break;
+
                             case 2: //Hex Upgrade.
+                                hx = (Hex)GetChar().GetComponent<Hex>();
+                                switch (hx.Tier)
+                                {
+
+
+                                    case 0: //level 0 to 1.
+                                        if (GetSouls >= 10) { GetSouls -= 10; hx.Tier = 1; } else { menuButClicked = 1; }
+                                        break;
+                                    case 1: //level 1 to 2.
+                                        if (GetSouls >= 20) { GetSouls -= 20; hx.Tier = 2; } else { menuButClicked = 1; }
+                                        break;
+                                    case 2: //level 2 to 3.
+                                        if (GetSouls >= 30) { GetSouls -= 30; hx.Tier = 3; } else { menuButClicked = 1; }
+
+                                        break;
+                                }
                                 break;
                             case 3: //Skeleton Brute Upgrade.
                                 break;
                             case 4: //Demon Upgrade.
+                                dm = (Demon)GetChar().GetComponent<Demon>();
+                                switch (dm.Tier)
+                                {
+
+
+                                    case 0: //level 0 to 1.
+                                        if (GetSouls >= 10) { GetSouls -= 10; dm.Tier = 1; } else { menuButClicked = 2; }
+                                        break;
+                                    case 1: //level 1 to 2.
+                                        if (GetSouls >= 20) { GetSouls -= 20; dm.Tier = 2; } else { menuButClicked = 2; }
+                                        break;
+                                    case 2: //level 2 to 3.
+                                        if (GetSouls >= 30) { GetSouls -= 30; dm.Tier = 3; } else { menuButClicked = 2; }
+
+                                        break;
+                                }
                                 break;
                             case 5: //Player Upgrade.
                                 nc = (Necromancer)GetChar().GetComponent<Necromancer>();
