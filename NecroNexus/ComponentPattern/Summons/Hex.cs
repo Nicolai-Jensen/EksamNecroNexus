@@ -3,23 +3,37 @@ using System.Collections.Generic;
 
 namespace NecroNexus
 {
+    //***********//KASPER KNUDSEN//***********//
+
     public class Hex : Summon
     {
+        //List of enemies inside the range of the summon
         public List<GameObject> EnemiesInRange { get; private set; }
 
-        public int CurrentTier { get; private set; }
 
+        //Used to calculate attackspeed
         private float attackTimer;
 
         HexBallFactory HexBallFactory = new HexBallFactory();
         private Vector2 velocity;
-        private Vector2 ePos;
+        private Vector2 ePos;//EnemyPosition
+
+        /// <summary>
+        /// Properties that the UI gets, so the player can see the stats of the summon.
+        /// </summary>
         public float hexDamge { get; set; }
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get { return AttackSpeed; } }
 
         public int Tier { get; set; } = 0;
 
+        /// <summary>
+        /// Constructor that makes a new list, that hold the enemies inside the range.
+        /// Sets the summon's tier to 0, when created.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="attackRangeRadius"></param>
+        /// <param name="attackspeed"></param>
         public Hex(Vector2 position, float attackRangeRadius, float attackspeed)
             : base(position, attackRangeRadius, attackspeed)
         {
@@ -28,6 +42,10 @@ namespace NecroNexus
             SetTier(0);
 
         }
+        /// <summary>
+        /// Sets the Damage value, so it can be written to UI.
+        /// </summary>
+        /// <param name="i"></param>
         public void SetValues(int i)
         {
             switch (i)
@@ -46,7 +64,10 @@ namespace NecroNexus
                     break;
             }
         }
-
+        /// <summary>
+        /// used to set the tier, for calling different tiers of the Hex
+        /// </summary>
+        /// <param name="i"></param>
         public void SetTier(int i)
         {
             this.Tier = i;
@@ -59,6 +80,10 @@ namespace NecroNexus
             base.Start();
         }
 
+        /// <summary>
+        /// Updated method that contains an if statement, that find the closest object via the FindClosestObject(),
+        /// and then sets the individual summons attack timer.
+        /// </summary>
         public override void Update()
         {
             attackTimer += GameWorld.DeltaTime;
@@ -78,7 +103,13 @@ namespace NecroNexus
         }
 
 
-
+        /// <summary>
+        /// A bool that makes a float from the distance between the summon's position, and the target (enemy) position.
+        /// Then if distance is less than attackRange, return true. This bool is used in the method above.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="attackRangeRadius"></param>
+        /// <returns></returns>
         public bool IsEnemiesInRange(Vector2 position, float attackRangeRadius)
         {
             float distance = Vector2.Distance(position, GameObject.Transform.Position);
@@ -93,7 +124,11 @@ namespace NecroNexus
         }
 
 
-
+        /// <summary>
+        /// Method that contains a switch case of Tier of the Hex.
+        /// depending on the tier, it chooses a case. so if the Hex is tier 1, it creates a tier1 HexBall.
+        /// It creates it's attack projectile via the HexBallFactory.Create() method.
+        /// </summary>
         public override void Attack()
         {
             GameObject hexAttack = new GameObject();

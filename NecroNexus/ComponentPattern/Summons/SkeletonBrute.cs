@@ -8,6 +8,13 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //***********//KASPER KNUDSEN//***********//
+
+    /// <summary>
+    /// Sadly, there was not time enough to give this summon, the functionality we wanted.
+    /// </summary>
+    /// 
+
     public class SkeletonBrute : Summon
     {
         public float skDamge { get; set; }
@@ -25,7 +32,6 @@ namespace NecroNexus
 
             base.Start();
         }
-
         public void SetTier(int i)
         {
             this.Tier = i;

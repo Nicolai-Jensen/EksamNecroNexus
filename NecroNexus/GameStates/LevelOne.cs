@@ -641,7 +641,7 @@ namespace NecroNexus
                         spriteBatch.Draw(UISprites[10], clickableButRec[6], null, Color.LightGray, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Archer TopLeft.
                     }
                     else { spriteBatch.Draw(UISprites[10], clickableButRec[6], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f); }//Archer TopLeft.
-                    spriteBatch.DrawString(showLevelInfo, sk.skDamge.ToString(), new Vector2(765, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, sk.skDamage.ToString(), new Vector2(765, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, sk.Range.ToString(), new Vector2(765, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, sk.FireRate.ToString(), new Vector2(765, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 

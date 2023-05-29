@@ -3,19 +3,17 @@ using System.Collections.Generic;
 
 namespace NecroNexus
 {
+    //***********//KASPER KNUDSEN//***********//
     public class SkeletonArcher : Summon
     {
         //List of enemies inside the range of the summon
         public List<GameObject> EnemiesInRange { get; private set; }
 
-        //public int CurrentTier { get; private set; }
 
         //Used to calculate attackspeed
         private float attackTimer;
 
-        /// <summary>
-        /// Atributes for the arrows
-        /// </summary>
+        
         ArrowFactory arrowFactory = new ArrowFactory();
         private Vector2 velocity;
         private Vector2 ePos; //EnemyPosition
@@ -23,13 +21,14 @@ namespace NecroNexus
         /// <summary>
         /// Properties that the UI gets, so the player can see the stats of the summon.
         /// </summary>
-        public float skDamge { get; set; } //SkeletonDamage
+        public float skDamage { get; set; } //skDamage = SkeletonDamage
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get{ return AttackSpeed; } }
         public int Tier { get; set; } = 0;
 
         /// <summary>
-        /// Constructor 
+        /// Constructor that makes a new list, that hold the enemies inside the range.
+        /// Sets the summon's tier to 0, when created.
         /// </summary>
         /// <param name="position"></param>
         /// <param name="attackRangeRadius"></param>
@@ -52,16 +51,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    skDamge = 1f;
+                    skDamage = 1f;
                     break;
                 case 1:
-                    skDamge = 2f;
+                    skDamage = 2f;
                     break;
                 case 2:
-                    skDamge = 3f;
+                    skDamage = 3f;
                     break;
                 case 3:
-                    skDamge = 4f;
+                    skDamage = 4f;
                     break;
             }
         }
@@ -84,7 +83,8 @@ namespace NecroNexus
 
 
         /// <summary>
-        /// Updated method that contains the if statement, that checks if the summon should attack, and the summons attack timer.
+        /// Updated method that contains an if statement, that find the closest object via the FindClosestObject(),
+        /// and then sets the individual summons attack timer.
         /// </summary>
         public override void Update()
         {
@@ -127,7 +127,9 @@ namespace NecroNexus
 
 
         /// <summary>
-        /// Method that contains a switch case of the different tiers of arrows.
+        /// Method that contains a switch case of Tier of the skeleton archer.
+        /// depending on the tier, it chooses a case. so if the skeletonarcher is tier 1, it creates a tier1 arrow.
+        /// It creates it's attack projectile via the arrowFactory.Create() method.
         /// </summary>
         public override void Attack()
         {
