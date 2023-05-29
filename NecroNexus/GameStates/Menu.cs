@@ -43,7 +43,7 @@ namespace NecroNexus
         /// </summary>
         public Menu(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
-            this.game.Repository.Open();
+            
 
         }
         /// <summary>
@@ -53,7 +53,9 @@ namespace NecroNexus
         {
             try
             {
+                this.game.Repository.Open();
                 game.Repository.CreateDatabaseTables();
+                
 
             }
             catch (System.Exception)
@@ -161,24 +163,30 @@ namespace NecroNexus
                         if (placeHolderName[0] != "Empty")
                         {
                             game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
-                            game.LevelOne.LoadContent();
-                            game.ChangeState2(game.LevelOne);
+                            game.LevelOne.CurrentUser = 1;
+                            game.LevelOne.Loaded = true;
+                            game.Repository.Close();
+                            game.ChangeState(game.LevelOne);
                         }
                         break;
                     case 5:
                         if (placeHolderName[1] != "Empty")
                         {
                             game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
-                            game.LevelOne.LoadContent();
-                            game.ChangeState2(game.LevelOne);
+                            game.LevelOne.CurrentUser = 2;
+                            game.LevelOne.Loaded = true;
+                            game.Repository.Close();
+                            game.ChangeState(game.LevelOne);
                         }
                         break;
                     case 6:
                         if (placeHolderName[2] != "Empty")
                         {
                             game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
-                            game.LevelOne.LoadContent();
-                            game.ChangeState2(game.LevelOne);
+                            game.LevelOne.CurrentUser = 3;
+                            game.LevelOne.Loaded = true;
+                            game.Repository.Close();
+                            game.ChangeState(game.LevelOne);
                         }
                         break;
                 }
@@ -244,6 +252,7 @@ namespace NecroNexus
                 AudioEffect.ButtonClickingSound();
                 if (drawdiffent == 7 || drawdiffent == 8 || drawdiffent == 9)
                 {
+                    game.Repository.Close();
                     game.ChangeState(game.NewCharState);
                 }
             }
@@ -257,6 +266,7 @@ namespace NecroNexus
         /// <param name="saveName"></param>
         public void ChangeNameLoadoneSaveone(string saveName)
         {
+            game.Repository.Open();
             placeHolderName[0] = saveName;
             User user;
             
@@ -274,7 +284,7 @@ namespace NecroNexus
                 game.Repository.UpdateUser(1, saveName);
             }
             else { game.Repository.AddUser(placeHolderName[0]); }
-
+            
         }
         /// <summary>
         /// When called it takes the second slot and changes the name.
@@ -284,6 +294,7 @@ namespace NecroNexus
         /// <param name="saveName"></param>
         public void ChangeNameLoadtwoSavetwo(string saveName)
         {
+            game.Repository.Open();
             placeHolderName[1] = saveName;
             User user;
             try
@@ -300,7 +311,7 @@ namespace NecroNexus
                 game.Repository.UpdateUser(2, saveName);
             }
             else { game.Repository.AddUser(placeHolderName[1]); }
-
+            
         }
         /// <summary>
         /// When called it takes the thrid slot and changes the name.
@@ -310,6 +321,7 @@ namespace NecroNexus
         /// <param name="saveName"></param>
         public void ChangeNameLoadthreeSavethree(string saveName)
         {
+            game.Repository.Open();
             placeHolderName[2] = saveName;
             User user;
             try
@@ -326,6 +338,7 @@ namespace NecroNexus
                 game.Repository.UpdateUser(3, saveName);
             }
             else { game.Repository.AddUser(placeHolderName[2]); }
+            
         }
         /// <summary>
         /// Handels the drawing of the UI. It calls another methode, DrawingMenu to make it eaiser on the eyes to read.

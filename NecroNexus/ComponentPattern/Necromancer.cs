@@ -182,6 +182,7 @@ namespace NecroNexus
                             break;
                     }
                     LevelOne.AddObject(magic);
+                    AudioEffect.PlayCast();
                     hasCastedMagic = true;
                 }
             }

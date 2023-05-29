@@ -117,43 +117,43 @@ namespace NecroNexus
                     if (other.HasComponent<Grunt>())
                     {
                         Grunt enemy = (Grunt)other.GetComponent<Grunt>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
                     }
                     else if (other.HasComponent<ArmoredGrunt>())
                     {
                         ArmoredGrunt enemy = (ArmoredGrunt)other.GetComponent<ArmoredGrunt>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
                     }
                     else if (other.HasComponent<Knight>())
                     {
                         Knight enemy = (Knight)other.GetComponent<Knight>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
                     }
                     else if (other.HasComponent<HorseRider>())
                     {
                         HorseRider enemy = (HorseRider)other.GetComponent<HorseRider>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
                     }
                     else if (other.HasComponent<Cleric>())
                     {
                         Cleric enemy = (Cleric)other.GetComponent<Cleric>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
                     }
                     else if (other.HasComponent<Paladin>())
                     {
                         Paladin enemy = (Paladin)other.GetComponent<Paladin>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
                     }
                     else if (other.HasComponent<Valkyrie>())
                     {
                         Valkyrie enemy = (Valkyrie)other.GetComponent<Valkyrie>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
                     }
                 }

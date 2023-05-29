@@ -47,7 +47,7 @@ namespace NecroNexus
             }
         }
 
-        private void SetTier(int i)
+        public void SetTier(int i)
         {
             this.Tier = i;
         }
