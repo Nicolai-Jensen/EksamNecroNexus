@@ -10,7 +10,7 @@ namespace NecroNexus
     public static class Globals
     {
         public static ContentManager Content;
-
+        public static readonly object lockObject = new object();
 
         public static Vector2 ToVector2(this Point point)
         {
