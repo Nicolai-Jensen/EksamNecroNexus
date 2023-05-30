@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai Jensen----------------------------//
     /// <summary>
     /// An Interface used for executing Command Patterns
     /// </summary>

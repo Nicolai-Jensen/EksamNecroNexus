@@ -26,24 +26,21 @@ namespace NecroNexus
         private Animator animator;
         private SpriteRenderer sr;
 
+        //Variables for controlling attackSpeed
         private bool hasCastedMagic;
         private float castingMagicCooldown;
+
+        //The Tier of the Necromancer
         public int Tier { get; set; } = 0;
 
         //A Dictionary used when adding usable keys from InputHandler
-        private Dictionary<Keys, BState> controlKeys;
+        private Dictionary<Keys, BState> controlKeys = new Dictionary<Keys, BState>();
         
-
+        //Makes NecromancerMagic Factory to spawn magic attacks
         private NecroMagicFactory magic;
-
         public NecroMagicFactory Magic
         {
             get { return magic; }
-        }
-
-        public Necromancer()
-        {
-            controlKeys = new Dictionary<Keys, BState>();
         }
 
         /// <summary>
@@ -111,6 +108,9 @@ namespace NecroNexus
             ScreenJail();
         }
 
+        /// <summary>
+        /// A Method that acts as an Attack cooldown between being able to attack again, it has different ifs for each tier incase of having different attackspeeds
+        /// </summary>
         public void Timer()
         {
             switch (Tier)
@@ -162,13 +162,17 @@ namespace NecroNexus
             }
             
         }
+
+        /// <summary>
+        /// Spawns a Magic Projectile that fires out from the NEcromancers Position
+        /// </summary>
         public void ActivateMagicCast()
         {
             if (hasCastedMagic == false)
             {
                 //sr.Sprite == Globals.Content.Load<Texture2D>(spriteNames[i])
                 GameObject magic = new GameObject();
-                if (sr.Sprite == Globals.Content.Load<Texture2D>("Necromancer/AttackOne/tile002") || sr.Sprite == Globals.Content.Load<Texture2D>("Necromancer/AttackTwo/tile005"))
+                if (sr.Sprite == Globals.Content.Load<Texture2D>("Necromancer/AttackOne/tile002") || sr.Sprite == Globals.Content.Load<Texture2D>("Necromancer/AttackTwo/tile005")) //Uses specific Frames of the Animation to fire off the projectile
                 {
                     switch (Tier)
                     {
@@ -191,6 +195,7 @@ namespace NecroNexus
                 }
             }
 
+            //Used to flip the sprite depending on which direction you are shooting
             if (controlKeys[Keys.Space] == BState.Down)
             {
                 MouseState mouseState = Mouse.GetState();

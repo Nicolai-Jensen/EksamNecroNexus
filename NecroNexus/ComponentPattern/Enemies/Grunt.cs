@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai Jensen----------------------------//
     public class Grunt : Enemy
     {
 
@@ -18,6 +19,12 @@ namespace NecroNexus
 
         public override float SoulDrop { get; set; }
 
+
+        /// <summary>
+        /// Applies a Speed, basedamage, health, board, souldrop and adds the boards list to the Objects pathlist
+        /// </summary>
+        /// <param name="board">The Board containing the positionLists</param>
+        /// <param name="pos">The SpawnPosition of the Object</param>
         public Grunt(Board board, Vector2 pos)
         {
             speed = 70;

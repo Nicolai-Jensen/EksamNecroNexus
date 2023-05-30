@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai Jensen----------------------------//
     public class Cleric : Enemy
     {
         //An animator component to access animations
@@ -16,6 +17,12 @@ namespace NecroNexus
         public override float Health { get; set; }
 
         public override float SoulDrop { get; set; }
+
+        /// <summary>
+        /// Applies a Speed, basedamage, health, board, souldrop and adds the boards list to the Objects pathlist
+        /// </summary>
+        /// <param name="board">The Board containing the positionLists</param>
+        /// <param name="pos">The SpawnPosition of the Object</param>
         public Cleric(Board board, Vector2 pos)
         {
             speed = 60;
@@ -56,6 +63,10 @@ namespace NecroNexus
             base.FindPath();
         }
 
+        /// <summary>
+        /// Override of the TakeDamage Method, this version prevents Magical damage from happening
+        /// </summary>
+        /// <param name="damage">A Damage variable that contains a damageType and Value</param>
         public override void TakeDamage(Damage damage)
         {
             Damage trueValue = damage;

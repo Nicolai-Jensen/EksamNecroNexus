@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai Jensen----------------------------//
     public class SpriteRenderer : Component
     {
         /// <summary>
