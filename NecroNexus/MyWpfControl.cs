@@ -13,7 +13,7 @@ namespace NecroNexus
     {
         private SpriteFont font;
         private string currentText = "";
-        private string previousText;
+        
 
 
         public string CurrentText => currentText;
@@ -29,7 +29,7 @@ namespace NecroNexus
         /// </summary>
         public void Update()
         {
-            previousText = currentText;
+
 
             KeyboardState keyboardState = Keyboard.GetState();
             Keys[] pressedKeys = keyboardState.GetPressedKeys();

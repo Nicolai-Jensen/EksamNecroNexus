@@ -12,11 +12,6 @@ namespace NecroNexus
         public static ContentManager Content;
         public static readonly object lockObject = new object();
 
-        public static Vector2 ToVector2(this Point point)
-        {
-            return new Vector2(point.X, point.Y);
-        }
-
         public static Vector2 ReturnPlayerPosition()
         {
             GameObject necroObject = LevelOne.gameObjects.FirstOrDefault(obj => obj.GetComponent<Necromancer>() != null);

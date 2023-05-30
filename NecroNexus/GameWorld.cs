@@ -16,10 +16,8 @@ namespace NecroNexus
         private State currentState;
         private State nextState;
         private State nextState2;
-        private bool gameStarted = false;
 
         private Menu menu;
-        private StartScreen startScreen;
         private LevelOne levelOne;
         private NewCharState newCharState;
         private PauseMenuState pausedMenuState;
@@ -47,12 +45,6 @@ namespace NecroNexus
             {
                 return screenSize;
             }
-        }
-
-        public bool GameStarted
-        {
-            get { return gameStarted; }
-            set { gameStarted = value; }
         }
 
         //A property used to get access to what the currentState is in other classes
@@ -111,7 +103,6 @@ namespace NecroNexus
             // TODO: Add your initialization logic here
             AudioEffect.LoadAudio();
             menu = new Menu(this, _graphics.GraphicsDevice, Content);
-            startScreen = new StartScreen(this, _graphics.GraphicsDevice, Content);
             levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);
             newCharState = new NewCharState(this, _graphics.GraphicsDevice, Content);
             pausedMenuState = new PauseMenuState(this, _graphics.GraphicsDevice, Content);

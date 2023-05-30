@@ -452,7 +452,14 @@ namespace NecroNexus
         {
             if (CurrentWave < WavesLvlOne.Count)
             {
-                return WavesLvlOne[CurrentWave].Activated;
+                try
+                {
+                    return WavesLvlOne[CurrentWave].Activated;
+                }
+                catch (Exception)
+                {
+                    return true;
+                }   
             }
             return true;
         }
