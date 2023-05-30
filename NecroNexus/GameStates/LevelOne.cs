@@ -31,7 +31,6 @@ namespace NecroNexus
         private float timer;
         private float timer1;
         
-        private byte necroUpgrade = 0;
         private bool[] presseddowntopleft = { false, false, false, false };
         private bool[] isHoveringOverIcon = { false, false, false, false };
         public int MenuButClicked { get { return menuButClicked; } set { menuButClicked = value; } }
@@ -582,7 +581,7 @@ namespace NecroNexus
             spriteBatch.Draw(UISprites[8], clickableButRec[17], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Health, Souls and Wave count
             spriteBatch.DrawString(showLevelInfo, GetCriptHealth.ToString(), new Vector2(205, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
             spriteBatch.DrawString(showLevelInfo, GetSouls.ToString(), new Vector2(315, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(showLevelInfo, level.CurrentWave.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(showLevelInfo, level.CurrentWave.ToString() + "/ 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
             spriteBatch.Draw(UISprites[9], clickableButRec[18], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ActivLevelPauseButton
 
@@ -834,31 +833,34 @@ namespace NecroNexus
         }
         private void Cleanup()
         {
-            foreach (GameObject go in addGameObjects)
+            lock (Globals.lockObject)
             {
-                gameObjects.Add(go);
-                go.Awake();
-                go.Start();
-
-                Collider c = (Collider)(go).GetComponent<Collider>();
-                if (c != null)
+                foreach (GameObject go in addGameObjects)
                 {
-                    Colliders.Add(c);
+                    gameObjects.Add(go);
+                    go.Awake();
+                    go.Start();
+
+                    Collider c = (Collider)(go).GetComponent<Collider>();
+                    if (c != null)
+                    {
+                        Colliders.Add(c);
+                    }
                 }
-            }
 
-            foreach (GameObject go in removedGameObjects)
-            {
-                Collider c = (Collider)(go).GetComponent<Collider>();
-                gameObjects.Remove(go);
-
-                if (c != null)
+                foreach (GameObject go in removedGameObjects)
                 {
-                    Colliders.Remove(c);
+                    Collider c = (Collider)(go).GetComponent<Collider>();
+                    gameObjects.Remove(go);
+
+                    if (c != null)
+                    {
+                        Colliders.Remove(c);
+                    }
                 }
+                removedGameObjects.Clear();
+                addGameObjects.Clear();
             }
-            removedGameObjects.Clear();
-            addGameObjects.Clear();
         }
 
         public static Component FindObjectOfType<T>() where T : Component

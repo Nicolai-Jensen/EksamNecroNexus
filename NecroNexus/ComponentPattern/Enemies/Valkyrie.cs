@@ -23,7 +23,7 @@ namespace NecroNexus
             this.board = board;
             position = pos;
             Health = 25;
-            SoulDrop = 10;
+            SoulDrop = 6;
             foreach (var item in board.PositionList)
             {
                 pathList.Add(item);

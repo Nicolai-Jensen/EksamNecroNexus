@@ -40,33 +40,35 @@ namespace NecroNexus
 
         public void SaveGame()
         {
-            
-            if (repo.CheckLevel(gameLevel.CurrentUser) == 1)
+            lock (Globals.lockObject)
             {
-                Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
-                repo.UpdateLevel(Level, gameLevel.CurrentUser, nc.Tier, LevelOne.GetCriptHealth, 0, LevelOne.GetSouls, CurrentWave);
-                foreach (var item   in LevelOne.gameObjects)
+                if (repo.CheckLevel(gameLevel.CurrentUser) == 1)
                 {
-                    if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
+                    Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
+                    repo.UpdateLevel(Level, gameLevel.CurrentUser, nc.Tier, LevelOne.GetCriptHealth, 0, LevelOne.GetSouls, CurrentWave);
+                    foreach (var item in LevelOne.gameObjects)
                     {
-                        repo.UpdateTowerSave(gameLevel.CurrentUser, Level, item.Tag, item.Transform.Position.X, item.Transform.Position.Y, CheckComponents(item));
+                        if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
+                        {
+                            repo.UpdateTowerSave(gameLevel.CurrentUser, Level, item.Tag, item.Transform.Position.X, item.Transform.Position.Y, CheckComponents(item));
+                        }
+                    }
+
+                }
+                else
+                {
+                    Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
+                    repo.AddLevel(Level, gameLevel.CurrentUser, LevelName, nc.Tier, LevelOne.GetCriptHealth, 0, LevelOne.GetSouls, CurrentWave);
+                    foreach (var item in LevelOne.gameObjects)
+                    {
+                        if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
+                        {
+                            repo.AddTowerSave(gameLevel.CurrentUser, Level, item.Tag, item.Transform.Position.X, item.Transform.Position.Y, CheckComponents(item));
+                        }
                     }
                 }
-                
             }
-            else
-            {
-                Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
-                repo.AddLevel(Level, gameLevel.CurrentUser, LevelName, nc.Tier, LevelOne.GetCriptHealth, 0, LevelOne.GetSouls, CurrentWave);
-                foreach (var item in LevelOne.gameObjects)
-                {
-                    if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
-                    {
-                        repo.AddTowerSave(gameLevel.CurrentUser, Level, item.Tag, item.Transform.Position.X, item.Transform.Position.Y, CheckComponents(item));
-                    }
-                }
-            }
-            
+
         }
 
         public void LoadGame()

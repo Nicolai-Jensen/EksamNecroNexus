@@ -14,7 +14,6 @@ namespace NecroNexus
         private SpriteFont font;
         private string currentText = "";
         private string previousText;
-        private float inputTimer;
 
 
         public string CurrentText => currentText;
