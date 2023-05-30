@@ -47,7 +47,7 @@ namespace NecroNexus
                 case SummonType.Hex:
                     sr.SetSprite("Summons/Hex/tile000", 2.5f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/Hex/tile000", "Summons/Hex/tile001", "Summons/Hex/tile002", "Summons/Hex/tile003" }));
-                    go.AddComponent(new Hex(position, 175f, 3f));
+                    go.AddComponent(new Hex(position, 175f, 0.1f));
                     LevelOne.AddObject(go);
                     break;
 
