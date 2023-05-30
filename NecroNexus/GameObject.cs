@@ -19,8 +19,6 @@ namespace NecroNexus
         //This string Tag is used to identify certain GameObjects
         public string Tag { get; set; }
 
-        public string Type { get; set; }
-
         /// <summary>
         /// A Method used for adding Components to the GameObject's List of Components
         /// </summary>

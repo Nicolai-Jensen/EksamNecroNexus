@@ -31,7 +31,7 @@ namespace NecroNexus
         public int Tier { get; set; } = 0;
 
         //A Dictionary used when adding usable keys from InputHandler
-        private Dictionary<Keys, BState> controlKeys = new Dictionary<Keys, BState>();
+        private Dictionary<Keys, BState> controlKeys;
         
 
         private NecroMagicFactory magic;
@@ -39,6 +39,11 @@ namespace NecroNexus
         public NecroMagicFactory Magic
         {
             get { return magic; }
+        }
+
+        public Necromancer()
+        {
+            controlKeys = new Dictionary<Keys, BState>();
         }
 
         /// <summary>

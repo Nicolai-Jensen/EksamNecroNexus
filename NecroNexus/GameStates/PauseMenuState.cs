@@ -16,9 +16,10 @@ namespace NecroNexus
     {
         //An Texture array for the menu
         private Texture2D[] menuSprites = new Texture2D[8];
+
         //Rectangel array for all the menu items used for size and placement
         private Rectangle[] menuRec = new Rectangle[16];
-        private SpriteFont spriteFont;//for the text displayed
+
         private int clickedStuff = 0;//is used for not being able to hit multiple 
 
 
@@ -48,7 +49,6 @@ namespace NecroNexus
             int menuXPos = 560, menuYPos = 120;
             menuSprites[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");//background
             menuRec[0] = new Rectangle(menuXPos, menuYPos, 800, 900);//place for background
-            spriteFont = content.Load<SpriteFont>("placeholdersprites/UI/File");
             menuSprites[1] = content.Load<Texture2D>("placeholdersprites/UI/BackBut");
             menuSprites[2] = content.Load<Texture2D>("placeholdersprites/UI/OptionsBut");
             menuSprites[3] = content.Load<Texture2D>("placeholdersprites/UI/MainMenuBut");
@@ -89,7 +89,7 @@ namespace NecroNexus
                 clickedStuff = 0;
 
                 game.Menu.ClickedStuff = 0;
-                game.Menu.WhichMenuClickede = 0;
+                game.Menu.WhichMenuClicked = 0;
                 game.ChangeState2(game.Menu);
             }
         }

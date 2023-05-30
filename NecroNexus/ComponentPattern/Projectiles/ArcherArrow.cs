@@ -16,7 +16,6 @@ namespace NecroNexus
         private Vector2 velocity;
         private Damage damage;
 
-        private float Speed { get; set; }
         public override bool ToRemove { get; set; }
 
        

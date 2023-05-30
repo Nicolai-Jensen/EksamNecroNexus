@@ -85,7 +85,7 @@ namespace NecroNexus
             this.velocity = velocity;
             this.startPosition = startPosition;
             AudioEffect.PlayExplosion2();
-            damage = new Damage(DamageType.Magical, 4f);
+            damage = new Damage(DamageType.Magical, 2f);
         }
 
         public override void Start()

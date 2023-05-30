@@ -23,7 +23,7 @@ namespace NecroNexus
         private SpriteFont spriteFont;// for the text
         private string[] placeHolderName = { "Empty", "Empty", "Empty" };//Where the username is stored
         private int clickedStuff = 0;// Which menu has been clicked 
-        private int WhichMenuClicked = 0;//0 for nothing pressed. 1 for Loadgame pressed. 2 for newgame pressed
+        private int whichMenuClicked = 0;//0 for nothing pressed. 1 for Loadgame pressed. 2 for newgame pressed
         private int drawdiffent = 0;//Which loadgame or new game bare has been clicked.
 
         //2 variables to get mouse information.
@@ -36,7 +36,7 @@ namespace NecroNexus
         //Used to reset the menu when called from PauseMenuState
         public int ClickedStuff{get { return clickedStuff; } set { clickedStuff = value; }}
         //Used to reset the menu when called from PauseMenuState
-        public int WhichMenuClickede { get { return WhichMenuClicked; } set { WhichMenuClicked = value; } }
+        public int WhichMenuClicked { get { return whichMenuClicked; } set { whichMenuClicked = value; } }
 
         /// <summary>
         /// The States Constructor which applies the picture that is shown
@@ -51,6 +51,7 @@ namespace NecroNexus
         /// </summary>
         public override void Initialize()
         {
+            AudioEffect.PlayBackgroundMus();
             try
             {
                 this.game.Repository.Open();
@@ -148,14 +149,14 @@ namespace NecroNexus
         /// </summary>
         private void ClickingOnMenu()
         {
-            if (WhichMenuClicked == 0 && menuRec[1].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the LoadGameButton
+            if (whichMenuClicked == 0 && menuRec[1].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the LoadGameButton
             {
                 AudioEffect.ButtonClickingSound();
                 clickedStuff = 1;
-                WhichMenuClicked = 1;
+                whichMenuClicked = 1;
             }
             // Loading the game with a user name
-            if (WhichMenuClicked == 1 && menuRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the LoadGameButton
+            if (whichMenuClicked == 1 && menuRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the LoadGameButton
             {
                 switch (drawdiffent)
                 {
@@ -193,19 +194,19 @@ namespace NecroNexus
                 return;
             }
 
-            if (WhichMenuClicked == 0 && menuRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing new game
+            if (whichMenuClicked == 0 && menuRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing new game
             {
                 AudioEffect.ButtonClickingSound();
                 clickedStuff = 2;
-                WhichMenuClicked = 2;
+                whichMenuClicked = 2;
             }
-            if (WhichMenuClicked == 0 && menuRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing options.
+            if (whichMenuClicked == 0 && menuRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing options.
             {
                 AudioEffect.ButtonClickingSound();
                 clickedStuff = 3;
-                WhichMenuClicked = 3;
+                whichMenuClicked = 3;
             }
-            if (WhichMenuClicked == 0 && menuRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the Quit
+            if (whichMenuClicked == 0 && menuRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//For pressing the Quit
             {
                 AudioEffect.ButtonClickingSound();
                 game.Repository.Close();
@@ -215,34 +216,34 @@ namespace NecroNexus
             {
                 AudioEffect.ButtonClickingSound();
                 clickedStuff = 0;
-                WhichMenuClicked = 0;
+                whichMenuClicked = 0;
             }
-            if (WhichMenuClicked == 1 && menuRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//1 loadGameBut
+            if (whichMenuClicked == 1 && menuRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//1 loadGameBut
             {
                 AudioEffect.ButtonClickingSound();
                 drawdiffent = 4;
             }
-            if (WhichMenuClicked == 1 && menuRec[10].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//2 loadGameBut
+            if (whichMenuClicked == 1 && menuRec[10].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//2 loadGameBut
             {
                 AudioEffect.ButtonClickingSound();
                 drawdiffent = 5;
             }
-            if (WhichMenuClicked == 1 && menuRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//3 loadGamebut
+            if (whichMenuClicked == 1 && menuRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//3 loadGamebut
             {
                 AudioEffect.ButtonClickingSound();
                 drawdiffent = 6;
             }
-            if (WhichMenuClicked == 2 && menuRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//1 newGameBut
+            if (whichMenuClicked == 2 && menuRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//1 newGameBut
             {
                 AudioEffect.ButtonClickingSound();
                 drawdiffent = 7;
             }
-            if (WhichMenuClicked == 2 && menuRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//2 newGameBut
+            if (whichMenuClicked == 2 && menuRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//2 newGameBut
             {
                 AudioEffect.ButtonClickingSound();
                 drawdiffent = 8;
             }
-            if (WhichMenuClicked == 2 && menuRec[14].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//3 newGameBut
+            if (whichMenuClicked == 2 && menuRec[14].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)//3 newGameBut
             {
                 AudioEffect.ButtonClickingSound();
                 drawdiffent = 9;
