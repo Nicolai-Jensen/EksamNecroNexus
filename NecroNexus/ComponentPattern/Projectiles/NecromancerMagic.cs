@@ -85,7 +85,7 @@ namespace NecroNexus
             hasExploded = true;
             this.velocity = velocity;
             this.startPosition = startPosition;
-
+            AudioEffect.playExplosion2();
             damage = new Damage(DamageType.Magical, 4f);
         }
 
@@ -160,14 +160,14 @@ namespace NecroNexus
         public void Tier2()
         {
             speed = 250f;
-            damage = new Damage(DamageType.Magical, 1.5f);
+            damage = new Damage(DamageType.Magical, 1f);
             split = true;
         }
 
         public void Tier3()
         {
             speed = 250f;
-            damage = new Damage(DamageType.Magical, 2f);
+            damage = new Damage(DamageType.Magical, 1.5f);
             split = true;
             explode = true;
         }

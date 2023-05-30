@@ -8,17 +8,20 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //***********//KASPER KNUDSEN//***********//
     public class DemonBall : Component, IGameListener
     {
         private float speed;
         private Vector2 position;
         private Vector2 velocity;
+        private Damage damage;
 
         private float Speed { get; set; }
         public override bool ToRemove { get; set; }
 
 
-        private Damage damage;
+        
+        //Used for determening which applytier() method to call in the switch case below.
         private int tier;
 
         
@@ -46,7 +49,9 @@ namespace NecroNexus
             }
 
         }
-
+        /// <summary>
+        /// Gives the arrow a tag, and spawnposition
+        /// </summary>
         public override void Start()
         {
             GameObject.Transform.Translate(position);
@@ -57,7 +62,9 @@ namespace NecroNexus
             Move();
 
         }
-
+        /// <summary>
+        /// if velocity is not 0, normalize(), thereafter it multiplies velocity with speed, and then uses translate to move the object.
+        /// </summary>
         public void Move()
         {
             if (velocity != Vector2.Zero)
@@ -71,20 +78,21 @@ namespace NecroNexus
 
 
         /// <summary>
-        /// Method for applying upgrades. When called the variables change. 
+        /// Method for applying upgrades. When called, variables can be changed, which in this case is speed and damage.
+        ///damage is controlled by a seperate damage class, but with the use of enums, we can select which damagetype, this object (arrow) does.
         /// </summary>
         public void ApplyTierZero()
         {
             speed = 400f;
 
-            damage = new Damage(DamageType.Both, 5f);
+            damage = new Damage(DamageType.Both, 10f);
         }
 
         private void ApplyTier1()
         {
             speed = 450f;
 
-            damage = new Damage(DamageType.Both, 10f);
+            damage = new Damage(DamageType.Both, 15f);
 
         }
 
@@ -92,7 +100,7 @@ namespace NecroNexus
         {
             speed = 500f;
 
-            damage = new Damage(DamageType.Both, 15f);
+            damage = new Damage(DamageType.Both, 20f);
 
         }
 
@@ -100,61 +108,89 @@ namespace NecroNexus
         {
             speed = 550f;
 
-            damage = new Damage(DamageType.Both, 20f);
+            damage = new Damage(DamageType.Both, 40f);
 
         }
 
-
+        /// <summary>
+        /// The Notify() method is used for collision.
+        ///if the opposing collider has the tag "Enemy", run a bunch of if's that check what enemy it is.
+        ///if the grunt is not in the "IsInDamagedList", then take damage, and remove this projectile.
+        /// </summary>
+        /// <param name="gameEvent"></param>
         public void Notify(GameEvent gameEvent)
         {
+            GameObject other = (gameEvent as CollisionEvent).Other;
 
-            if (gameEvent is CollisionEvent)
+            if (other.Tag == "Enemy")
             {
-                GameObject other = (gameEvent as CollisionEvent).Other;
-
-                if (other.Tag == "Enemy")
+                if (other.HasComponent<Grunt>())
                 {
-                    if (other.HasComponent<Grunt>())
+                    Grunt enemy = (Grunt)other.GetComponent<Grunt>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        Grunt enemy = (Grunt)other.GetComponent<Grunt>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
+
                     }
-                    else if (other.HasComponent<ArmoredGrunt>())
+                }
+
+                else if (other.HasComponent<ArmoredGrunt>())
+                {
+                    ArmoredGrunt enemy = (ArmoredGrunt)other.GetComponent<ArmoredGrunt>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        ArmoredGrunt enemy = (ArmoredGrunt)other.GetComponent<ArmoredGrunt>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
+
                     }
-                    else if (other.HasComponent<Knight>())
+                }
+                else if (other.HasComponent<Knight>())
+                {
+                    Knight enemy = (Knight)other.GetComponent<Knight>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        Knight enemy = (Knight)other.GetComponent<Knight>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
+
                     }
-                    else if (other.HasComponent<HorseRider>())
+                }
+                else if (other.HasComponent<HorseRider>())
+                {
+                    HorseRider enemy = (HorseRider)other.GetComponent<HorseRider>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        HorseRider enemy = (HorseRider)other.GetComponent<HorseRider>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
+
                     }
-                    else if (other.HasComponent<Cleric>())
+                }
+                else if (other.HasComponent<Cleric>())
+                {
+                    Cleric enemy = (Cleric)other.GetComponent<Cleric>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        Cleric enemy = (Cleric)other.GetComponent<Cleric>();
-                        enemy.Health -= damage.Value;
-                        ToRemove = true;
+                        enemy.TakeDamage(damage);
                     }
-                    else if (other.HasComponent<Paladin>())
+                }
+                else if (other.HasComponent<Paladin>())
+                {
+                    Paladin enemy = (Paladin)other.GetComponent<Paladin>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        Paladin enemy = (Paladin)other.GetComponent<Paladin>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
+
                     }
-                    else if (other.HasComponent<Valkyrie>())
+                }
+                else if (other.HasComponent<Valkyrie>())
+                {
+                    Valkyrie enemy = (Valkyrie)other.GetComponent<Valkyrie>();
+                    if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
-                        Valkyrie enemy = (Valkyrie)other.GetComponent<Valkyrie>();
-                        enemy.Health -= damage.Value;
+                        enemy.TakeDamage(damage);
                         ToRemove = true;
+
                     }
                 }
             }

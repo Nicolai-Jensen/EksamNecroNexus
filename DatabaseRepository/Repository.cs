@@ -44,7 +44,7 @@ namespace DatabaseRepository
 
 
             //Create Tables:
-            //Fejl? prøve at sætte '+'erne sammen til enkelte linjer :)
+            //Fejl? prøve at sætte '+'erne sammen til enkelte linjer:)
 
             //User:
             cmd = new SQLiteCommand($"CREATE TABLE User (" +
@@ -115,6 +115,11 @@ namespace DatabaseRepository
 
         }
 
+        public void Commit()
+        {
+            
+        }
+
         //Adding USER
         public void AddUser(string userName)
         {
@@ -130,7 +135,7 @@ namespace DatabaseRepository
         public void AddLevel(int levelId, int userId, string lvlName, int pLvl, float baseHp, float score, float souls, int wave)
         {
             //insert
-            var cmd = new SQLiteCommand($"INSERT INTO Level (LevelId, UserId, LvlName, PLvl, BaseHp, Score, Souls, Wave) " +
+            var cmd = new SQLiteCommand($"INSERT INTO Level (LevelId, UserId, LvlName, PLevel, BaseHp, Score, Souls, Wave) " +
                 $"values ( '{levelId}','{userId}','{lvlName}','{pLvl}','{baseHp}','{score}','{souls}','{wave}')", (SQLiteConnection)connection);
 
             cmd.ExecuteNonQuery();
@@ -173,7 +178,7 @@ namespace DatabaseRepository
         //Reading LEVEL
         public Level ReadLevel(int levelId, int userId)
         {
-            var cmd = new SQLiteCommand($"SELECT * FROM User WHERE UserID = '{userId}' AND LevelId = '{levelId}'", (SQLiteConnection)connection);
+            var cmd = new SQLiteCommand($"SELECT * FROM Level WHERE UserID = '{userId}' AND LevelId = '{levelId}'", (SQLiteConnection)connection);
             var reader = cmd.ExecuteReader();
             var result = mapper.MapLevelFromReader(reader).First();
             return result;
@@ -206,7 +211,7 @@ namespace DatabaseRepository
         //Reading TOWER SAVE
         public TowerSave ReadTowerSave(int userId, int levelId)
         {
-            var cmd = new SQLiteCommand($"SELECT * FROM TowerSave WHERE UserID = '{userId}' AND LevelId = '{levelId}'", (SQLiteConnection)connection);
+            var cmd = new SQLiteCommand($"SELECT * FROM TowerSave WHERE UserID = '{userId}' AND LevelID = '{levelId}'", (SQLiteConnection)connection);
             var reader = cmd.ExecuteReader();
             var result = mapper.MapTowerSaveFromReader(reader).First();
             return result;
@@ -221,6 +226,16 @@ namespace DatabaseRepository
         }
 
         //Update LEVEL
+
+        public int CheckLevel(int i)
+        {
+            int result = 0;
+            using (var cmd = new SQLiteCommand($"SELECT EXISTS(SELECT 1 FROM Level WHERE UserId = {i})", (SQLiteConnection)connection))
+            {
+                result = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            return result;
+        }
 
         public void UpdateUser(int userId, string nameNew)
         {

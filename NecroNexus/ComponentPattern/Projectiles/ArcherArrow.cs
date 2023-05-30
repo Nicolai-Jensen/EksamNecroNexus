@@ -8,18 +8,20 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //***********//KASPER KNUDSEN//***********//
     public class ArcherArrow : Component, IGameListener
     {
         private float speed;
         private Vector2 position;
         private Vector2 velocity;
+        private Damage damage;
 
         private float Speed { get; set; }
-
-        private Damage damage;
-        private int tier;
-
         public override bool ToRemove { get; set; }
+
+       
+        //Used for determening which applytier() method to call in the switch case below.
+        private int tier;
 
         public ArcherArrow(int tier,Vector2 position, Vector2 velocity)
         {
@@ -41,11 +43,12 @@ namespace NecroNexus
                 case (3):
                     ApplyTier3();
                     break;
-
             }
-
         }
 
+        /// <summary>
+        /// Gives the arrow a tag, and spawnposition
+        /// </summary>
         public override void Start()
         {
             GameObject.Tag = "ArcherArrow";
@@ -55,17 +58,17 @@ namespace NecroNexus
         public override void Update()
         {
             Move();
-
         }
 
-
+        /// <summary>
+        /// if velocity is not 0, normalize(), thereafter it multiplies velocity with speed, and then uses translate to move the object.
+        /// </summary>
         public void Move()
         {
             if (velocity != Vector2.Zero)
             {
                 velocity.Normalize();
             }
-
             velocity *= speed;
             GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);
         }
@@ -75,27 +78,25 @@ namespace NecroNexus
        
 
         /// <summary>
-        /// Method for applying upgrades. When called the variables change. 
+        /// Method for applying upgrades. When called, variables can be changed, which in this case is speed and damage.
+        ///damage is controlled by a seperate damage class, but with the use of enums, we can select which damagetype, this object (arrow) does.
         /// </summary>
         public void ApplyTierZero()
         {
             speed = 400f;
-
-            damage = new Damage(DamageType.Physical, 1.5f);
+            damage = new Damage(DamageType.Physical, 1f);
         }
 
         private void ApplyTier1()
         {
             speed = 450f;
-
-            damage = new Damage(DamageType.Physical, 20f);
+            damage = new Damage(DamageType.Physical, 2f);
 
         }
 
         private void ApplyTier2()
         {
             speed = 500f;
-
             damage = new Damage(DamageType.Physical, 3f);
 
         }
@@ -103,12 +104,17 @@ namespace NecroNexus
         private void ApplyTier3()
         {
             speed = 550f;
-
             damage = new Damage(DamageType.Physical, 4f);
 
         }
 
-
+        /// <summary>
+        /// The Notify() method is used for collision.
+        ///if the opposing collider has the tag "Enemy", run a bunch of if's that check what enemy it is.
+        ///if the grunt is not in the "IsInDamagedList", then take damage, and add the grunt to the list.
+        ///This is the only projectile that adds enemies to the list, because the arrow is piercing, and therefor not removed upon collision
+        /// </summary>
+        /// <param name="gameEvent"></param>
         public void Notify(GameEvent gameEvent)
         {
 

@@ -8,11 +8,19 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //***********//KASPER KNUDSEN//***********//
+
+    /// <summary>
+    /// Sadly, there was not time enough to give this summon, the functionality we wanted.
+    /// </summary>
+    /// 
+
     public class SkeletonBrute : Summon
     {
         public float skDamge { get; set; }
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get { return AttackSpeed; } }
+        public int Tier { get; set; } = 0;
 
         public SkeletonBrute(Vector2 position, float attackRangeRadius, float attackspeed) : base(position, attackRangeRadius, attackspeed)
         {
@@ -21,7 +29,12 @@ namespace NecroNexus
         {
             GameObject.Transform.Translate(Position);
             GameObject.Tag = "Brute";
+
             base.Start();
+        }
+        public void SetTier(int i)
+        {
+            this.Tier = i;
         }
     }
 }

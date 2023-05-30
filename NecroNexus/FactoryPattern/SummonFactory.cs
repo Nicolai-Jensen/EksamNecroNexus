@@ -9,15 +9,18 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //***********//KASPER KNUDSEN//***********//
+
     //Enumerations that determine which summontype is created.
     public enum SummonType { SkeletonArcher, SkeletonBrute, Demon, Hex}
     public class SummonFactory : Factory
     {
         /// <summary>
-        /// 
+        /// The method uses a switch case of enums, and then instanciates a gameobject, based on the enum given.
+        /// This factory decides what type of summon should be created when called.
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="position"></param>
+        /// <param name="pos"></param>
         /// <returns></returns>
         public override GameObject Create(Enum type, Vector2 position)
         {
@@ -40,14 +43,14 @@ namespace NecroNexus
                 case SummonType.SkeletonBrute:
                     sr.SetSprite("Summons/SkeletonBrute/tile000", 2f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/SkeletonBrute/tile000", "Summons/SkeletonBrute/tile001", "Summons/SkeletonBrute/tile002", "Summons/SkeletonBrute/tile003" }));
-                    go.AddComponent(new SkeletonBrute(position, 50f, 2f));
+                    go.AddComponent(new SkeletonBrute(position, 0f, 0f));
                     LevelOne.AddObject(go);
                     break;
 
                 case SummonType.Hex:
                     sr.SetSprite("Summons/Hex/tile000", 2.5f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/Hex/tile000", "Summons/Hex/tile001", "Summons/Hex/tile002", "Summons/Hex/tile003" }));
-                    go.AddComponent(new Hex(position, 175f, 0.1f));
+                    go.AddComponent(new Hex(position, 175f, 2f));
                     LevelOne.AddObject(go);
                     break;
 
@@ -63,7 +66,12 @@ namespace NecroNexus
             return go;
 
         }
-
+        /// <summary>
+        /// A method used for Building our animation for when we add an animation to our animator for our GameObject
+        /// </summary>
+        /// <param name="animationName">Refers to the Name we give the animation</param>
+        /// <param name="spriteNames">Refers to the names of the Sprites that we use in the animation</param>
+        /// <returns></returns>
         private Animation BuildAnimation(string animationName, string[] spriteNames)
         {
             Texture2D[] sprites = new Texture2D[spriteNames.Length];

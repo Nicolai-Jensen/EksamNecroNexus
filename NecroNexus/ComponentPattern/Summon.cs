@@ -26,7 +26,6 @@ namespace NecroNexus
             AttackSpeed = attackspeed;
             attackTimer = 0f;
         }
-        //#cb00ff
 
         /// <summary>
         /// Update that is inherited from component class. The inheriting summons are using this.
