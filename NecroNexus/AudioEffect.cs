@@ -33,7 +33,7 @@ namespace NecroNexus
         private static SoundEffect Explosion3;
 
         private static SoundEffect ButtonPressed;
-        private static float masterVolume = 0.2f;
+        private static readonly float masterVolume = 0.2f;
 
         // Method to load audio files and assign them to the struct members
         public static void LoadAudio()
@@ -113,15 +113,15 @@ namespace NecroNexus
         {
             SubtleCast.Play(masterVolume, 0.0f, 0.0f);
         }
-        public static void playExplosion1()
+        public static void PlayExplosion1()
         {
             Explosion1.Play(masterVolume, 0.0f, 0.0f);
         }
-        public static void playExplosion2()
+        public static void PlayExplosion2()
         {
             Explosion2.Play(0.1f, 0.0f, 0.0f);
         }
-        public static void playExplosion3()
+        public static void PlayExplosion3()
         {
             Explosion3.Play(masterVolume, 0.0f, 0.0f);
         }
@@ -134,7 +134,7 @@ namespace NecroNexus
 
         public static void HitDamageSound()
         {
-            HitSound.Play(masterVolume, 0.0f, 0.0f);
+            HitSound.Play(0.1f, 0.0f, 0.0f);
         }
 
     }

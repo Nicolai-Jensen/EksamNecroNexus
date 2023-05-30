@@ -25,7 +25,6 @@ namespace NecroNexus
         //An animator component to access animations
         private Animator animator;
         private SpriteRenderer sr;
-        private string currentAnimation;
 
         private bool hasCastedMagic;
         private float castingMagicCooldown;

@@ -13,8 +13,6 @@ namespace NecroNexus
 
         public float AttackSpeed { get; set; }
 
-        //Used to calculate attackspeed.
-        private float attackTimer;
 
         public float AttackRangeRadius { get; set; }
 
@@ -24,7 +22,6 @@ namespace NecroNexus
             Position = position;
             AttackRangeRadius = attackRangeRadius;
             AttackSpeed = attackspeed;
-            attackTimer = 0f;
         }
 
         /// <summary>

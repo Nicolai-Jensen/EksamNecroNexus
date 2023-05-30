@@ -18,7 +18,6 @@ namespace NecroNexus
         //An animator component to access animations
         private NecroMagicFactory magicFac = new NecroMagicFactory();
         private Damage damage;
-        private Animator animator;
         private SpriteRenderer sr;
         private Vector2 velocity;
         private Vector2 startPosition;
@@ -85,7 +84,7 @@ namespace NecroNexus
             hasExploded = true;
             this.velocity = velocity;
             this.startPosition = startPosition;
-            AudioEffect.playExplosion2();
+            AudioEffect.PlayExplosion2();
             damage = new Damage(DamageType.Magical, 4f);
         }
 

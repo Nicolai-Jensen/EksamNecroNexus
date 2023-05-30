@@ -148,6 +148,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        ToRemove = true;
                     }
                 }
                 else if (other.HasComponent<HorseRider>())
@@ -156,6 +157,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        ToRemove = true;
                     }
                 }
                 else if (other.HasComponent<Cleric>())
@@ -164,6 +166,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        ToRemove = true;
                     }
                 }
                 else if (other.HasComponent<Paladin>())
@@ -172,6 +175,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        ToRemove = true;
                     }
                 }
                 else if (other.HasComponent<Valkyrie>())
@@ -180,6 +184,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        ToRemove = true;
                     }
                 }
             }
