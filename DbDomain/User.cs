@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace DbDomain
 {
+    //--------------------------Nicolai Jensen----------------------------//
+
+    /// <summary>
+    /// This Class Mimics a Table in the Database
+    /// </summary>
     public class User
     {
         public int UserID { get; set; }
