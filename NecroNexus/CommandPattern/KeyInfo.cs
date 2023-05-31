@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai Jensen----------------------------//
     /// <summary>
     /// A Simple class to keep track of the information of Keys
     /// </summary>

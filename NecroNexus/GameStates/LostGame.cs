@@ -43,7 +43,7 @@ namespace NecroNexus.GameStates
             if (spritesRec[1].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
                 game.Menu.ClickedStuff = 0;
-                game.Menu.WhichMenuClickede = 0;
+                game.Menu.WhichMenuClicked = 0;
                 game.ChangeState(game.Menu);
             }
 

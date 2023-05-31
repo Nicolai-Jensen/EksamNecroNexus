@@ -8,6 +8,8 @@ namespace NecroNexus
 {
     class Animator : Component
     {
+        //--------------------------Nicolai Jensen----------------------------//
+
         /// <summary>
         /// A property used to determine which place in the animation array is being refered to
         /// </summary>

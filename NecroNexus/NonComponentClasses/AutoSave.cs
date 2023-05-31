@@ -7,6 +7,11 @@ using System.Threading;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai----------------------------//
+
+    /// <summary>
+    /// A AutoSave Class that has a thread working in it
+    /// </summary>
     public class AutoSave
     {
         private Thread thread;
@@ -16,14 +21,16 @@ namespace NecroNexus
 
         public AutoSave(GameSaveLevelOne lvlOne) 
         {
-            isRunning = false;
+            isRunning = false; 
             this.lvlOne = lvlOne;
-            currentSave = 900;
             thread = new Thread(ThreadMethod);
-            thread.IsBackground = true;
+            thread.IsBackground = true;//Sets the Thread to be a background thread so that we can close the game without needing to close this thread first
             currentSave = this.lvlOne.CurrentWave;
         }
 
+        /// <summary>
+        /// Starts the Thread
+        /// </summary>
         public void Start()
         {
             if (!isRunning)
@@ -33,6 +40,9 @@ namespace NecroNexus
             }
         }
 
+        /// <summary>
+        /// Stops the Thread
+        /// </summary>
         public void Stop()
         {
             
@@ -44,7 +54,9 @@ namespace NecroNexus
         }
 
         
-
+        /// <summary>
+        /// This method contains what the thread is running while it is active
+        /// </summary>
         private void ThreadMethod()
         {
             
@@ -54,7 +66,7 @@ namespace NecroNexus
                 {
                     if(lvlOne.CurrentWave != currentSave)
                     {
-                        lvlOne.SaveGame();
+                        lvlOne.SaveGame(); //Calls Savegame automatically when if currentwave is swapped
                         currentSave = lvlOne.CurrentWave;
                     }
                 }

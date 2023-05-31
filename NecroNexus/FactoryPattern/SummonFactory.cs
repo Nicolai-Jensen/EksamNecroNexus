@@ -9,15 +9,18 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //***********//KASPER KNUDSEN//***********//
+
     //Enumerations that determine which summontype is created.
     public enum SummonType { SkeletonArcher, SkeletonBrute, Demon, Hex}
     public class SummonFactory : Factory
     {
         /// <summary>
-        /// 
+        /// The method uses a switch case of enums, and then instanciates a gameobject, based on the enum given.
+        /// This factory decides what type of summon should be created when called.
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="position"></param>
+        /// <param name="pos"></param>
         /// <returns></returns>
         public override GameObject Create(Enum type, Vector2 position)
         {
@@ -63,7 +66,12 @@ namespace NecroNexus
             return go;
 
         }
-
+        /// <summary>
+        /// A method used for Building our animation for when we add an animation to our animator for our GameObject
+        /// </summary>
+        /// <param name="animationName">Refers to the Name we give the animation</param>
+        /// <param name="spriteNames">Refers to the names of the Sprites that we use in the animation</param>
+        /// <returns></returns>
         private Animation BuildAnimation(string animationName, string[] spriteNames)
         {
             Texture2D[] sprites = new Texture2D[spriteNames.Length];

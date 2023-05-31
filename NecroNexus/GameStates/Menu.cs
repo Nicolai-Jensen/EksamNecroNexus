@@ -23,7 +23,7 @@ namespace NecroNexus
         private SpriteFont spriteFont;// for the text
         private string[] placeHolderName = { "Empty", "Empty", "Empty" };//Where the username is stored
         private int clickedStuff = 0;// Which menu has been clicked 
-        private int WhichMenuClicked = 0;//0 for nothing pressed. 1 for Loadgame pressed. 2 for newgame pressed
+        private int whichMenuClicked = 0;//0 for nothing pressed. 1 for Loadgame pressed. 2 for newgame pressed
         private int drawdiffent = 0;//Which loadgame or new game bare has been clicked.
 
         //2 variables to get mouse information.
@@ -36,7 +36,7 @@ namespace NecroNexus
         //Used to reset the menu when called from PauseMenuState
         public int ClickedStuff{get { return clickedStuff; } set { clickedStuff = value; }}
         //Used to reset the menu when called from PauseMenuState
-        public int WhichMenuClickede { get { return WhichMenuClicked; } set { WhichMenuClicked = value; } }
+        public int WhichMenuClicked { get { return whichMenuClicked; } set { whichMenuClicked = value; } }
 
         /// <summary>
         /// The States Constructor which applies the picture that is shown
@@ -51,6 +51,7 @@ namespace NecroNexus
         /// </summary>
         public override void Initialize()
         {
+            AudioEffect.PlayBackgroundMus();
             try
             {
                 this.game.Repository.Open();
@@ -151,7 +152,7 @@ namespace NecroNexus
             {
                 AudioEffect.ButtonClickingSound();
                 clickedStuff = 1;
-                WhichMenuClicked = 1;
+                whichMenuClicked = 1;
             }
             // Loading the game with a user name and for pressing the LoadGameButton
             if (WhichMenuClicked == 1 && menuRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
@@ -197,14 +198,14 @@ namespace NecroNexus
             {
                 AudioEffect.ButtonClickingSound();
                 clickedStuff = 2;
-                WhichMenuClicked = 2;
+                whichMenuClicked = 2;
             }
             //For pressing options.
             if (WhichMenuClicked == 0 && menuRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
                 AudioEffect.ButtonClickingSound();
                 clickedStuff = 3;
-                WhichMenuClicked = 3;
+                whichMenuClicked = 3;
             }
             //For pressing the Quit
             if (WhichMenuClicked == 0 && menuRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
@@ -218,7 +219,7 @@ namespace NecroNexus
             {
                 AudioEffect.ButtonClickingSound();
                 clickedStuff = 0;
-                WhichMenuClicked = 0;
+                whichMenuClicked = 0;
             }
             //1 loadGameBut
             if (WhichMenuClicked == 1 && menuRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)

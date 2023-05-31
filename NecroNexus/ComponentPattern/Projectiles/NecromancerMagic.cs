@@ -11,19 +11,35 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai Jensen----------------------------//
+
+    /// <summary>
+    /// This class controls the functionality of the NecromancerMagic
+    /// </summary>
     public class NecromancerMagic : Component, IGameListener
     {
         //Speed Value, used for velocity in the Move method
         private float speed;
-        //An animator component to access animations
+        
+        //A Factory of itself so it can spawn itself
         private NecroMagicFactory magicFac = new NecroMagicFactory();
+
+        //A Damage and SpriteRenderer attachment
         private Damage damage;
         private SpriteRenderer sr;
+
+        //The Objects Moving Direction and its startPosition
         private Vector2 velocity;
         private Vector2 startPosition;
+
+        //Which Tier the Magic is
         private int tier;
+
+        //The Timers used by the Magic
         private float splitTimer;
         private float homeTimer;
+
+        //A ton of bools that control the functionality of the Object
         private bool homing = false;
         private bool split = false;
         private bool explode = false;
@@ -31,14 +47,21 @@ namespace NecroNexus
         private bool hasExploded = false;
         private bool willHome = false;
 
-
+        //Indicates if the Object should be removed or not
         public override bool ToRemove { get; set; }
 
+        /// <summary>
+        /// Standard Constructor that takes an int value and spawns magic with it, the Necromancer uses this one
+        /// </summary>
+        /// <param name="tier">the Tier of the Magic</param>
         public NecromancerMagic(int tier)
         {
             this.tier = tier;
+
+            //Makes the Direction the Magic is flying from the Necromancer towards the mouse
             velocity = DirectionToMouse(Globals.ReturnPlayerPosition());
 
+            //Applies a Tier
             switch (this.tier)
             {
                 case (0):
@@ -56,6 +79,13 @@ namespace NecroNexus
             }
         }
 
+        /// <summary>
+        /// This Constructor is for the 2 smaller fireballs that are spawned by the big fireball
+        /// </summary>
+        /// <param name="tier">The Tier of the Magic</param>
+        /// <param name="isSplit">A bool to indicate that the Magic is post split</param>
+        /// <param name="velocity">The direction of the new fireball</param>
+        /// <param name="startPosition">The new Fireballs StartPosition</param>
         public NecromancerMagic(int tier, bool isSplit, Vector2 velocity, Vector2 startPosition)
         {
             this.tier = tier;
@@ -76,27 +106,32 @@ namespace NecroNexus
                     break;
             }
             speed = 800f;
-            split = false;
+            split = false; //Split is set to false here as when applying tiers above it is set to true and becomes an infinite loop
         }
 
+        /// <summary>
+        /// The 3rd Consturctor for NecromancerMagic, this one is used to spawn the Explosion when the final tier small Fireballs hit an opponent
+        /// </summary>
+        /// <param name="velocity">Sets the Velocity of the fireball</param>
+        /// <param name="startPosition">Sets the StartPosition of the fireball</param>
         public NecromancerMagic(Vector2 velocity, Vector2 startPosition)
         {
             hasExploded = true;
             this.velocity = velocity;
             this.startPosition = startPosition;
             AudioEffect.PlayExplosion2();
-            damage = new Damage(DamageType.Magical, 4f);
+            damage = new Damage(DamageType.Magical, 2f);
         }
 
         public override void Start()
         {
             GameObject.Tag = "NecroMagic";
             sr = GameObject.GetComponent<SpriteRenderer>() as SpriteRenderer;
-            if (hasSplit == false && hasExploded == false)
+            if (hasSplit == false && hasExploded == false) //If it is a standard fireball made from the Necromancer apply the starting position as the Necromancers position
             {
                 GameObject.Transform.Position = new Vector2(Globals.ReturnPlayerPosition().X, Globals.ReturnPlayerPosition().Y);
             }
-            else if (hasSplit == true || hasExploded == true)
+            else if (hasSplit == true || hasExploded == true) //If it is a uniquely spawned fireball set the startPosition gotten from the constructor it used
             {
                 GameObject.Transform.Translate(startPosition);
             }
@@ -110,7 +145,7 @@ namespace NecroNexus
             Homing();
             HomeCheck();
 
-            if (sr.Sprite == Globals.Content.Load<Texture2D>("Necromancer/Magic/Explosion/1_23"))
+            if (sr.Sprite == Globals.Content.Load<Texture2D>("Necromancer/Magic/Explosion/1_23")) //Removes the explosion on a certain frame of its animation
             {
                 ToRemove = true;
             }
@@ -129,6 +164,12 @@ namespace NecroNexus
             GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);     
         }
 
+
+        /// <summary>
+        /// This returns a Vector2 that acts as the Direction towards the mouse
+        /// </summary>
+        /// <param name="playerPosition"></param>
+        /// <returns></returns>
         protected Vector2 DirectionToMouse(Vector2 playerPosition)
         {
             Vector2 direction;
@@ -142,6 +183,9 @@ namespace NecroNexus
 
             return direction;
         }
+
+
+        //METHODS FOR APPLYING VALUES TO THE DIFFERENT TIERS
 
         public void TierZero()
         {
@@ -171,42 +215,54 @@ namespace NecroNexus
             explode = true;
         }
 
+
+        /// <summary>
+        /// This Method alculates using Math.Atan2 and MathHelper the Angles and direction the 2 small fireballs fire off as
+        /// It then uses a MagicFactory to spawn the smaller fireballs before applying that direction to them
+        /// </summary>
         public void Split()
         {
             NecromancerMagic ml;
             NecromancerMagic mr;
 
-            // Calculate the angle of the original velocity vector
+            //Calculate the angle of the original velocity vector
             float originalAngle = (float)Math.Atan2(velocity.Y, velocity.X);
 
-            // Define the deviation angle for the split bullets
+            //Define the deviation angle for the split bullets
             float deviationAngle = MathHelper.ToRadians(10f); // Adjust this angle as desired
 
-            // Calculate the left and right angles based on the original angle and deviation angle
+            //Calculate the left and right angles based on the original angle and deviation angle
             float leftAngle = originalAngle + deviationAngle;
             float rightAngle = originalAngle - deviationAngle;
 
-            // Convert the angles back to velocity vectors
+            //Convert the angles back to velocity vectors
             Vector2 leftVelocity = Globals.FromAngle(leftAngle) * velocity.Length();
             Vector2 rightVelocity = Globals.FromAngle(rightAngle) * velocity.Length();
 
+            //Call the Factory to Create the smaller fireballs
             GameObject bulletLeft = magicFac.CreateOffSpring(GameObject.Transform.Position);
             GameObject bulletRight = magicFac.CreateOffSpring(GameObject.Transform.Position);
 
+            //Apply a NecromancerMagic Component with the second Constructor and applies a collider
             ml = (NecromancerMagic)bulletLeft.AddComponent(new NecromancerMagic(tier, true, leftVelocity, GameObject.Transform.Position));
             mr = (NecromancerMagic)bulletRight.AddComponent(new NecromancerMagic(tier, true, rightVelocity, GameObject.Transform.Position));
             Collider cl = (Collider)bulletLeft.GetComponent<Collider>();
             Collider cr = (Collider)bulletRight.GetComponent<Collider>();
             cl.CollisionEvent.Attach(ml);
             cr.CollisionEvent.Attach(mr);
-
+            
+            //Adds the Objects to the gameObjects list in the Level
             LevelOne.AddObject(bulletLeft);
             LevelOne.AddObject(bulletRight);
 
+            //Removes the original Fireball
             ToRemove = true;
 
         }
 
+        /// <summary>
+        /// This Method Constantly updates what the closest object is and applies the velocity to go towards them
+        /// </summary>
         public void Homing()
         {
             if (homing == true)
@@ -223,6 +279,9 @@ namespace NecroNexus
         }
 
 
+        /// <summary>
+        /// Checks if the split bool is true then applies the Split method after half a second
+        /// </summary>
         public void SplitCheck()
         {
             if (split == true)
@@ -237,6 +296,9 @@ namespace NecroNexus
             }
         }
 
+        /// <summary>
+        /// Checks if the the WillHome bool is set to true and applies homing after half a second
+        /// </summary>
         public void HomeCheck()
         {
             if (willHome == true)
@@ -250,6 +312,14 @@ namespace NecroNexus
             }
         }
 
+        /// <summary>
+        /// Notified is used to track GameEvents
+        /// The Functionality of this Notify changes if the Fireball has Explode or not
+        /// If it doesn't have explode it hits the target and gets removed
+        /// if it has Explode it spawns an explosion and gets removed
+        /// if it is an explosion it uses the Enemies damagedList to not multihit
+        /// </summary>
+        /// <param name="gameEvent"></param>
         public void Notify(GameEvent gameEvent)
         {
             
@@ -432,6 +502,9 @@ namespace NecroNexus
             }
         }
 
+        /// <summary>
+        /// This method spawns an explosion at this objects position and then removes this object
+        /// </summary>
         public void Explode()
         {
             if (explode == true)

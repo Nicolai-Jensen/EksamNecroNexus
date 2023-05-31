@@ -6,26 +6,30 @@ using System.Collections.Generic;
 
 namespace NecroNexus
 {
-    //--------------------------Nicolai Jensen----------------------------//
+    //--------------------------Nicolai Jensen & Thorbjørn----------------------------//
     public class LevelOne : State
     {
         //A Texture variable for our background
-
-        //private Texture2D[] backgroundsprite;
-
         private Texture2D BackgroundFront;
         private Texture2D BackgroundPlain;
 
+        //Adds the needed classes to LevelOne
         private Board boardOne;
         private GameSaveLevelOne level;
         private Map map;
         private AutoSave autoSave;
-
         private SummonFactory summons;
-
+        private Necromancer nc;
+        private SkeletonArcher sk;
+        private Hex hx;
+        private Demon dm;
+        
+        //Adds some Rectangles, Sprites and Fonts
         private Rectangle[] clickableButRec = new Rectangle[24];
         private Texture2D[] UISprites = new Texture2D[24];
         private SpriteFont showLevelInfo;
+
+        //Variables to track information
         private int menuButClicked = 0;
         private int whichUpgradeClicked = 0;
         private float timer;
@@ -35,29 +39,23 @@ namespace NecroNexus
         private bool[] isHoveringOverIcon = { false, false, false, false };
         public int MenuButClicked { get { return menuButClicked; } set { menuButClicked = value; } }
 
+        //These Properties are used for the Resources in the game
         public static int GetCriptHealth { get; set; } = 100;
         public static int GetSouls { get; set; } = 10;
-
-        public int GetWaveCount { get; set; }
         public int CurrentUser { get; set; }
         public bool Loaded { get; set; }
-        private Necromancer nc;
-        private SkeletonArcher sk;
-        private Hex hx;
-        private Demon dm;
+        
 
-
-
+        //The Lists used to add load and remove gameObject aswell as the Collider list
         public static List<GameObject> gameObjects = new List<GameObject>();
         public static List<GameObject> addGameObjects = new List<GameObject>();
         public static List<GameObject> removedGameObjects = new List<GameObject>();
         public static List<Collider> Colliders { get; private set; } = new List<Collider>();
 
 
-        //2 variables to control key presses
+        //2 variables to control key presses & mouse presses
         private KeyboardState currentKey;
         private KeyboardState previousKey;
-
         private MouseState previousMouse;
         private MouseState currentMouse;
 
@@ -66,14 +64,13 @@ namespace NecroNexus
         /// </summary>
         public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
-            map = new Map();
-            boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2));
-            summons = new SummonFactory();
-
-            boardOne.LevelOneBoard(map.ReturnPos(map.Graph1()));
-            level = new GameSaveLevelOne(boardOne, game.Repository, this);
-            autoSave = new AutoSave(level);
-            foreach (var item in gameObjects)
+            map = new Map(); //Adds the map
+            boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2)); //Adds a Board
+            summons = new SummonFactory(); //Adds a SummonFactory
+            boardOne.LevelOneBoard(map.ReturnPos(map.Graph1())); //Sets the the board by adding the correct vector2 list gotten through pathfinding the nodes
+            level = new GameSaveLevelOne(boardOne, game.Repository, this); //Adds the Levels save
+            autoSave = new AutoSave(level); //Instaniates the AutoSave
+            foreach (var item in gameObjects)//Removes any lasting gameObjects from previous iterations of LevelOne
             {
                 RemoveObject(item);
             }
@@ -83,12 +80,14 @@ namespace NecroNexus
 
         public override void Initialize()
         {
-            game.Repository.Open();
-            if (Loaded == true)
+            game.Repository.Open();//Opens the Repository Connection
+            if (Loaded == true) //Loads a game if you chose Load
             {
                 level.LoadGame();
             }
-            autoSave.Start();
+            autoSave.Start(); //Starts the AutoSave Thread
+
+            //Builds the Necromancer and sets one of each tower outside of the screen to reference
             Director director = new Director(new NecroBuilder());
             gameObjects.Add(summons.Create(SummonType.SkeletonArcher, new Vector2(-3000, -3000)));
             gameObjects.Add(summons.Create(SummonType.SkeletonBrute, new Vector2(-3000, -3000)));
@@ -185,10 +184,10 @@ namespace NecroNexus
                 gameObjects[i].Update();
             }
 
-            level.CheckWave();
+            level.CheckWave(); //Checks if enemies can spawn
 
-            GameObjectsToRemove();
-            Cleanup();
+            GameObjectsToRemove(); //Calls A Method to destroy ToRemove items
+            Cleanup(); //Calls cleanUp
         }
         /// <summary>
         /// This class handles the entire interation between the user and the UI, the information here is then used down in DrawingUI
@@ -581,7 +580,7 @@ namespace NecroNexus
             spriteBatch.Draw(UISprites[8], clickableButRec[17], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Health, Souls and Wave count
             spriteBatch.DrawString(showLevelInfo, GetCriptHealth.ToString(), new Vector2(205, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
             spriteBatch.DrawString(showLevelInfo, GetSouls.ToString(), new Vector2(315, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(showLevelInfo, level.CurrentWave.ToString() + "/ 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(showLevelInfo, level.CurrentWave.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
             spriteBatch.Draw(UISprites[9], clickableButRec[18], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ActivLevelPauseButton
 
@@ -640,7 +639,7 @@ namespace NecroNexus
                         spriteBatch.Draw(UISprites[10], clickableButRec[6], null, Color.LightGray, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Archer TopLeft.
                     }
                     else { spriteBatch.Draw(UISprites[10], clickableButRec[6], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f); }//Archer TopLeft.
-                    spriteBatch.DrawString(showLevelInfo, sk.skDamge.ToString(), new Vector2(765, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, sk.skDamage.ToString(), new Vector2(765, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, sk.Range.ToString(), new Vector2(765, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, sk.FireRate.ToString(), new Vector2(765, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
@@ -822,15 +821,28 @@ namespace NecroNexus
             }
             return null;
         }
+
+        /// <summary>
+        /// Adds an Object to the list of objects waiting to be added to the ObjectsList
+        /// </summary>
+        /// <param name="go">The Object you want to have added</param>
         public static void AddObject(GameObject go)
         {
             addGameObjects.Add(go);
         }
 
+        /// <summary>
+        /// Adds an Object to the list of objects waiting to be removed from the ObjectsList
+        /// </summary>
+        /// <param name="go"></param>
         public static void RemoveObject(GameObject go)
         {
             removedGameObjects.Add(go);
         }
+
+        /// <summary>
+        /// Cleans Up the Objects list by adding/removing objects from the other 2 lists and their Colliders
+        /// </summary>
         private void Cleanup()
         {
             lock (Globals.lockObject)
@@ -863,6 +875,11 @@ namespace NecroNexus
             }
         }
 
+        /// <summary>
+        /// A Method for Finding the first instance of an Object in the list that has the desired Component
+        /// </summary>
+        /// <typeparam name="T">Whichever Component you wish to find</typeparam>
+        /// <returns></returns>
         public static Component FindObjectOfType<T>() where T : Component
         {
             foreach (GameObject gameObject in gameObjects)
@@ -878,16 +895,27 @@ namespace NecroNexus
             return null;
         }
 
+        /// <summary>
+        /// A Static method for Updating the Levels Soul Count
+        /// </summary>
+        /// <param name="value">The amount added to the existing soul count</param>
         public static void UpdateSouls(float value)
         {
             GetSouls += (int)value;
         }
 
+        /// <summary>
+        /// A Static method for Updating the Health of your Base in the Level
+        /// </summary>
+        /// <param name="value">The value you want removed from the current Value</param>
         public static void UpdateHealth(int value)
         {
             GetCriptHealth -= value;
         }
 
+        /// <summary>
+        /// This Method checks through all of the gameobjects list for Projectiles and enemies to see if they have to be Added to the Remove List
+        /// </summary>
         public void GameObjectsToRemove()
         {
             foreach (GameObject gameObject in gameObjects)

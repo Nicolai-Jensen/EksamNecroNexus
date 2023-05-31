@@ -10,39 +10,49 @@ using System.Windows.Forms;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai----------------------------//
+
+    /// <summary>
+    /// This Class is used to accumulate all of the information needed for the Level to function
+    /// This includes, Summon Data, Level Data, Board and Wave spawns, Activated bools and so on
+    /// </summary>
     public class GameSaveLevelOne
     {
-        private EnemyFactory enemies;
+        private EnemyFactory enemies;//Enemy Factory for spawning enemies 
 
-        Repository repo;
-        LevelOne gameLevel;
-        public int Level { get; set; } = 1;
-        public int Save { get; set; }
-        public string LevelName { get; set; } = "GraveYard";
-        public int PlayerTier { get; set; }
-        public float Score { get; set; }
-        public float Souls { get; set; }
-        public float BaseHP { get; set; }
+        Repository repo;//Access to the Repository
+        LevelOne gameLevel;//Access to the Games Level
+        public int Level { get; set; } = 1; //A Variable meant to mimic the Primary ID of the Level in the Database
+        public int Save { get; set; } //A Variable meant to mimic the Primary ID of the User in the Database
+        public string LevelName { get; set; } = "GraveYard"; //The Name of the Level
+        public int PlayerTier { get; set; } //A Variable to save and apply the Necromancers upgrade level
+        public float Score { get; set; } //A variable to track Score with and apply a loaded score
+        public float Souls { get; set; } //A Variable to save and apply the saves souls accumulation
+        public float BaseHP { get; set; } //A Variable to mimic the BaseHP of the database and apply it to the Level
 
-        public int CurrentWave { get; set; }
+        public int CurrentWave { get; set; } //A Variable to track which Wave you are currently on
 
-        public List<Wave> WavesLvlOne { get; set; }
+        public List<Wave> WavesLvlOne { get; set; } //A List of Waves that you can fill with different waves of enemies
 
         public GameSaveLevelOne(Board board, Repository repo, LevelOne game)
         {
-            gameLevel = game;
-            this.repo = repo;
+            gameLevel = game; //Parses in game from LevelOne
+            this.repo = repo; //Parses in the Repository
             CurrentWave = 0;
             WavesLvlOne = new List<Wave>();
-            enemies = new EnemyFactory(board);
-            ConstructWaves();
+            enemies = new EnemyFactory(board); //Instantiates the EnemyFactory and applies which Board they use
+            ConstructWaves(); //Calls a method for making all of the waves
         }
 
+        /// <summary>
+        /// A Method for saving the accumulated Data into the Database
+        /// </summary>
         public void SaveGame()
         {
-            lock (Globals.lockObject)
+            lock (Globals.lockObject) //A lock to prevent crashes when the gameObjects list is accessed since it is a shared resource
             {
-                if (repo.CheckLevel(gameLevel.CurrentUser) == 1)
+                //Checks if the Save Exists already then either Updates the save or Adds a new Save
+                if (repo.CheckLevel(gameLevel.CurrentUser) == 1) //Update
                 {
                     Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
                     repo.UpdateLevel(Level, gameLevel.CurrentUser, nc.Tier, LevelOne.GetCriptHealth, 0, LevelOne.GetSouls, CurrentWave);
@@ -55,7 +65,7 @@ namespace NecroNexus
                     }
 
                 }
-                else
+                else //Add
                 {
                     Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
                     repo.AddLevel(Level, gameLevel.CurrentUser, LevelName, nc.Tier, LevelOne.GetCriptHealth, 0, LevelOne.GetSouls, CurrentWave);
@@ -71,13 +81,20 @@ namespace NecroNexus
 
         }
 
+        /// <summary>
+        /// A Method that when called access the Database and applies its values to the variables in this class, so you can then apply them to the game
+        /// </summary>
         public void LoadGame()
         {
-            
-            if (gameLevel.CurrentUser == 1)
+            //TODO: Make Loadgame Work and add Checks for user 2 and 3
+
+
+            //We start with if statements to check which savefile you are on 
+            if (gameLevel.CurrentUser == 1)//Checks user 1
             {
-                if (repo.CheckLevel(Level) == 1)
+                if (repo.CheckLevel(Level) == 1)//Checks which Level the user is playing on
                 {
+                    //Applies all of the Databases data to this classes variables
                     Level thisLevel = repo.ReadLevel(Level, gameLevel.CurrentUser);
                     PlayerTier = thisLevel.Plevel;
                     Score = thisLevel.Score;
@@ -95,6 +112,8 @@ namespace NecroNexus
                     }
                     LevelOne.GetSouls = (int)Souls;
                     LevelOne.GetCriptHealth = (int)BaseHP;
+
+                    //Reads the TowerSave Database and tries to spawn each one
                     List<TowerSave> towerList = repo.ReadTowerSaves();
                     SummonFactory fac = new SummonFactory();
                     foreach (var item in towerList)
@@ -135,6 +154,9 @@ namespace NecroNexus
             }
         }
 
+        /// <summary>
+        /// A Method for setting up all the waves of this Level
+        /// </summary>
         public void ConstructWaves()
         {
             //Wave One
@@ -425,16 +447,21 @@ namespace NecroNexus
             WavesLvlOne.Add(wave);
         }
 
-
+        /// <summary>
+        /// A Method to Start the next wave
+        /// </summary>
         public void StartNextWave()
         {
-            if (CurrentWave < WavesLvlOne.Count)
+            if (CurrentWave < WavesLvlOne.Count)//Makes sure you aren't trying to prematurely start the next wave before the previous one is finished
             {
                 WavesLvlOne[CurrentWave].Activated = true;
             }
             
         }
 
+        /// <summary>
+        /// A Method that Checks the current wave to see if it should be spawning enemies or moving on to the next one
+        /// </summary>
         public void CheckWave()
         {
             if (CurrentWave < WavesLvlOne.Count && WavesLvlOne[CurrentWave].Finished == true)
@@ -448,15 +475,31 @@ namespace NecroNexus
             
         }
 
+        /// <summary>
+        /// Returns a bool that the current wave is active or not
+        /// </summary>
+        /// <returns></returns>
         public bool ReturnWaveState()
         {
             if (CurrentWave < WavesLvlOne.Count)
             {
-                return WavesLvlOne[CurrentWave].Activated;
+                try
+                {
+                    return WavesLvlOne[CurrentWave].Activated;
+                }
+                catch (Exception)
+                {
+                    return true;
+                }   
             }
             return true;
         }
         
+        /// <summary>
+        /// A Method for checking the Tier of a Tower Object, used during saving and Loading 
+        /// </summary>
+        /// <param name="go">Refers to the GameObject you want checked</param>
+        /// <returns></returns>
         public int CheckComponents(GameObject go)
         {
             if (go.HasComponent<SkeletonArcher>())
@@ -482,6 +525,11 @@ namespace NecroNexus
             return 0;
         }
 
+        /// <summary>
+        /// A Method for converting the strings from the database into the SummonType Enums
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public SummonType CheckType(string value)
         {
             if (value == "Archer")

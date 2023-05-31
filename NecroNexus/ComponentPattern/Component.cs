@@ -21,6 +21,7 @@ namespace NecroNexus
         /// </summary>
         public GameObject GameObject { get; set; }
 
+        //A property to indicate this component should be removed from the game
         public virtual bool ToRemove { get; set; }
 
         public virtual void Awake()

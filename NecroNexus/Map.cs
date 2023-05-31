@@ -36,6 +36,7 @@ namespace NecroNexus
             graph1.AddNode("H", new Vector2(700, 625)); //7
             graph1.AddNode("I", new Vector2(1400, 625)); //8 - Lair
 
+            //Nye edges med udgangspunkt i noderne:
             //Main track (No walls on map) Nodes:(A,B,D,E,H,I)
             graph1.AddNewEdge("A", "B");
             graph1.AddNewEdge("B", "D");
@@ -68,6 +69,9 @@ namespace NecroNexus
             return pathList;
         }
 
+        /// <summary> Fylder nodepositionerne på en nodeliste lagt i parametren og returnerer denne liste med result variablen.
+        /// 
+        /// </summary>
         public List<Vector2> ReturnPos(List<Node<string>> list)
         {
             List<Vector2> result = new List<Vector2>();
@@ -77,8 +81,13 @@ namespace NecroNexus
                 result.Add(node.NodePosition);
             }
 
-            return result; ;
+            return result;
         }
+
+        /// <summary> Tilføj en start node og en slut node. 
+        /// Returnerer en bred søgningning, som fylder EdgesList med besøgte edges.
+        /// 
+        /// </summary>
 
         private static Node<T> BFS<T>(Node<T> start, Node<T> goal)
         {

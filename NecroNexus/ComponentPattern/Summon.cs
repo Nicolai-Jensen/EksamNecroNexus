@@ -23,7 +23,6 @@ namespace NecroNexus
             AttackRangeRadius = attackRangeRadius;
             AttackSpeed = attackspeed;
         }
-        //#cb00ff
 
         /// <summary>
         /// Update that is inherited from component class. The inheriting summons are using this.

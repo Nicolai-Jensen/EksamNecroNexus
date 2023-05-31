@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai Jensen----------------------------//
     public class NecroBuilder : IBuilder
     {
 
@@ -38,7 +39,7 @@ namespace NecroNexus
         /// </summary>
         private void BuildComponents()
         {
-            //Adds the Meerkat Component to our GameObject
+            //Adds the Necromancer Component to our GameObject
             Necromancer p = (Necromancer)gameObject.AddComponent(new Necromancer());
             //Adds a SpriteRenderer Component to our GameObject
             gameObject.AddComponent(new SpriteRenderer());
@@ -67,7 +68,7 @@ namespace NecroNexus
         }
 
         /// <summary>
-        /// A method used for calling our GameObject Once we've buildt it
+        /// A method used for calling our GameObject Once we've built it
         /// </summary>
         /// <returns></returns>
         public GameObject GetResult()

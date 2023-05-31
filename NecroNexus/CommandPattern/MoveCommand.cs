@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai Jensen----------------------------//
     public class MoveCommand : ICommand
     {
         //The Direction reference field

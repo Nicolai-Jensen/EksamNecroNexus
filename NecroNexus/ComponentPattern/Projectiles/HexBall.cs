@@ -8,18 +8,21 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //***********//KASPER KNUDSEN//***********//
     public class HexBall : Component, IGameListener
     {
         private float speed;
         private Vector2 position;
         private Vector2 velocity;
+        private Damage damage;
+
 
         private float Speed { get; set; }
+        public override bool ToRemove { get; set; }
 
-        private Damage damage;
+        //Used for determening which applytier() method to call in the switch case below.
         private int tier;
 
-        public override bool ToRemove { get; set; }
 
         public HexBall(int tier, Vector2 position, Vector2 velocity)
         {
@@ -44,7 +47,9 @@ namespace NecroNexus
             }
 
         }
-
+        /// <summary>
+        /// Gives the arrow a tag, and spawnposition
+        /// </summary>
         public override void Start()
         {
             GameObject.Transform.Translate(position);
@@ -55,7 +60,9 @@ namespace NecroNexus
             Move();
 
         }
-
+        /// <summary>
+        /// if velocity is not 0, normalize(), thereafter it multiplies velocity with speed, and then uses translate to move the object.
+        /// </summary>
         public void Move()
         {
             if (velocity != Vector2.Zero)
@@ -69,7 +76,8 @@ namespace NecroNexus
 
 
         /// <summary>
-        /// Method for applying upgrades. When called the variables change. 
+        /// Method for applying upgrades. When called, variables can be changed, which in this case is speed and damage.
+        ///damage is controlled by a seperate damage class, but with the use of enums, we can select which damagetype, this object (arrow) does.
         /// </summary>
         public void ApplyTierZero()
         {
@@ -102,7 +110,12 @@ namespace NecroNexus
 
         }
 
-
+        /// <summary>
+        /// The Notify() method is used for collision.
+        ///if the opposing collider has the tag "Enemy", run a bunch of if's that check what enemy it is.
+        ///if the grunt is not in the "IsInDamagedList", then take damage, and remove this projectile.
+        /// </summary>
+        /// <param name="gameEvent"></param>
         public void Notify(GameEvent gameEvent)
         {
             GameObject other = (gameEvent as CollisionEvent).Other;

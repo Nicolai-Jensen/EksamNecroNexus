@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace NecroNexus
 {
+    //--------------------------Nicolai Jensen----------------------------//
     public class Collider : Component
     {
         //This Field is used when we need to draw out our collisionBox
@@ -73,7 +74,7 @@ namespace NecroNexus
         public override void Draw(SpriteBatch spriteBatch)
         {
 
-            DrawRectangle(CollisionBox, spriteBatch);
+            //DrawRectangle(CollisionBox, spriteBatch);
         }
 
         /// <summary>
