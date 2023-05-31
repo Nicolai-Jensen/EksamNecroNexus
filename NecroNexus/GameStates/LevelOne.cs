@@ -195,7 +195,7 @@ namespace NecroNexus
         /// menuButClicked == 2 is for the summons menu
         /// menuButClicked == 3 is the the upgrade menu.
         /// menuButClicked == 4 is for the next wave button.
-        /// Thorbjørn
+        /// --------------------------Thorbjørn----------------------------//
         /// </summary>
         private void CheckingIfClicked()
         {
@@ -488,7 +488,7 @@ namespace NecroNexus
         /// <summary>
         /// This class is called when the player has clicked on a summon they want to buy. 
         /// It checks the which summon has been clicked and then toggels an array that i then used in DrawingUI for drawing the hovering icons.
-        /// Thorbjørn
+        /// --------------------------Thorbjørn----------------------------//
         /// </summary>
         private void HoveringSummons()
         {
@@ -572,7 +572,7 @@ namespace NecroNexus
         }
         /// <summary>
         /// When called it handles the drawing of the UI for the active level.
-        /// Thorbjørn
+        /// --------------------------Thorbjørn----------------------------//
         /// </summary>
         /// <param name="spriteBatch"></param>
         private void DrawingUI(SpriteBatch spriteBatch)
