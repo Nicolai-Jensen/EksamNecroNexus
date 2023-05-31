@@ -294,8 +294,7 @@ namespace NecroNexus
             {
                 game.Repository.UpdateUser(1, saveName);
             }
-            else { game.Repository.AddUser(placeHolderName[0]); }
-            
+            else { game.Repository.AddUser(placeHolderName[0]); }   
         }
         /// <summary>
         /// When called it takes the second slot and changes the name.
