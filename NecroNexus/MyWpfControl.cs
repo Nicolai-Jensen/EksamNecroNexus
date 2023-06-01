@@ -29,8 +29,6 @@ namespace NecroNexus
         /// </summary>
         public void Update()
         {
-
-
             KeyboardState keyboardState = Keyboard.GetState();
             Keys[] pressedKeys = keyboardState.GetPressedKeys();
 
