@@ -54,7 +54,7 @@ namespace NecroNexus
             boardOne.LevelOneBoard(map.ReturnPos(map.Graph1())); //Sets the the board by adding the correct vector2 list gotten through pathfinding the nodes
             level = new GameSaveLevelOne(boardOne, game.Repository, this); //Adds the Levels save
             autoSave = new AutoSave(level); //Instaniates the AutoSave
-            drawingLevel = new DrawingLevel(game);
+            drawingLevel = new DrawingLevel(game,this);
             foreach (var item in gameObjects)//Removes any lasting gameObjects from previous iterations of LevelOne
             {
                 RemoveObject(item);
@@ -127,7 +127,7 @@ namespace NecroNexus
         /// When called it returns the player
         /// </summary>
         /// <returns></returns>
-        public static GameObject GetChar()
+        public GameObject GetChar()
         {
             foreach (GameObject item in gameObjects)
             {

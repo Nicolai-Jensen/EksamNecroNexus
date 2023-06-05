@@ -10,7 +10,7 @@ namespace NecroNexus
         //Adds some Rectangles, Sprites and Fonts
         private Rectangle[] clickableButRec = new Rectangle[24];
         private Texture2D[] UISprites = new Texture2D[24];
-        private Texture2D[] upgradeSpritesArray = new Texture2D[19];
+        private Texture2D[] upgradeSpritesArray = new Texture2D[20];
 
         //Variables to track information
         private int menuButClicked = 0;
@@ -28,25 +28,26 @@ namespace NecroNexus
         private MouseState currentMouse;
 
         //private GameSaveLevelOne level;
-        protected GameWorld game;
         private Necromancer nc;
         private SkeletonArcher sk;
         private Hex hx;
         private Demon dm;
         private SummonFactory summons;
         private SpriteFont showLevelInfo;
-        private LevelOne levelOne;
+        private LevelOne levelone;
+        private GameWorld game;
 
         public int MenuButClicked { get { return menuButClicked; } set { menuButClicked = value; } }
         public static int GetCriptHealth { get; set; } = 100;
-        public static int GetSouls { get; set; } = 10;
+        public static int GetSouls { get; set; } = 1000;
 
 
-        public DrawingLevel(GameWorld game)
+        public DrawingLevel(GameWorld game, LevelOne levelone)
         {
             this.game = game;
+            this.levelone = levelone;
             summons = new SummonFactory();
-            
+
         }
         public void LoadContent(ContentManager content)
         {
@@ -101,10 +102,17 @@ namespace NecroNexus
             showLevelInfo = content.Load<SpriteFont>("placeholdersprites/UI/UITextElements/File");
             #endregion
             #region Updrage Sprite
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 20; i++)
             {
                 upgradeSpritesArray[i] = content.Load<Texture2D>($"placeholdersprites/UI/UpgradeUIelements/UpgradeSpritesTier{i}");
-                //Üse clickablebutrec 16 for size
+                /*
+                0 - 3 is Archer
+                4 - 7 is Hex
+                8 - 11 is Brute
+                12 - 15 is Demon
+                16 - 19 is player
+                 */
+                //Üse clickablebutrec 15 for size
             }
             #endregion
 
@@ -116,14 +124,14 @@ namespace NecroNexus
             currentMouse = Mouse.GetState();//enables you to click with the currentMouse
             CheckingIfClicked();
 
-            if (menuButClicked != 0 &&Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (menuButClicked != 0 && Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 menuButClicked = 0;
                 escPressed = true;
             }
-            else if (escPressed == true && Keyboard.GetState().IsKeyUp(Keys.Escape)){escPressed = false;}
+            else if (escPressed == true && Keyboard.GetState().IsKeyUp(Keys.Escape)) { escPressed = false; }
 
-            if (escPressed == false && MenuButClicked == 0 && Keyboard.GetState().IsKeyDown(Keys.Escape)){PauseingGame();}
+            if (escPressed == false && MenuButClicked == 0 && Keyboard.GetState().IsKeyDown(Keys.Escape)) { PauseingGame(); }
         }
         /// <summary>
         /// This class handles the entire interation between the user and the UI, the information here is then used down in DrawingUI
@@ -375,7 +383,7 @@ namespace NecroNexus
                                 }
                                 break;
                             case 5: //Player Upgrade.
-                                nc = (Necromancer)LevelOne.GetChar().GetComponent<Necromancer>();
+                                nc = (Necromancer)levelone.GetChar().GetComponent<Necromancer>();
                                 switch (nc.Tier)
                                 {
                                     case 0: //level 0 to 1.
@@ -494,7 +502,7 @@ namespace NecroNexus
             spriteBatch.Draw(UISprites[9], clickableButRec[18], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ActivLevelPauseButton
 
             //for showing the player level
-            nc = (Necromancer)LevelOne.GetChar().GetComponent<Necromancer>();
+            nc = (Necromancer)levelone.GetChar().GetComponent<Necromancer>();
             switch (nc.Tier)
             {
                 case 0:
@@ -538,7 +546,7 @@ namespace NecroNexus
             switch (menuButClicked)
             {
                 case 2://Summons
-
+                    #region Summons
                     spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.DarkGray);//SummonBut
                     spriteBatch.Draw(UISprites[0], clickableButRec[5], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//Backgroundboxs for selection of summons
 
@@ -598,10 +606,10 @@ namespace NecroNexus
                     {
                         spriteBatch.DrawString(showLevelInfo, "\n40", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     }
-
-
                     break;
+                #endregion
                 case 3://Upgrade
+                    #region Upgrade
                     spriteBatch.Draw(UISprites[6], clickableButRec[3], Color.DarkGray);
                     spriteBatch.Draw(UISprites[0], clickableButRec[5], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);
 
@@ -628,24 +636,145 @@ namespace NecroNexus
                     switch (whichUpgradeClicked)
                     {
                         case 1://Archer
-                            spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                            sk = (SkeletonArcher)GetSummonGo(1).GetComponent<SkeletonArcher>();
+                            spriteBatch.DrawString(showLevelInfo, sk.skDamage.ToString(), new Vector2(730, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, sk.Range.ToString(), new Vector2(730, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, sk.FireRate.ToString(), new Vector2(730, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
+                            spriteBatch.DrawString(showLevelInfo, sk.Range.ToString(), new Vector2(1030, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, sk.FireRate.ToString(), new Vector2(1030, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            switch (sk.Tier)
+                            {
+                                case 0:
+                                    spriteBatch.Draw(upgradeSpritesArray[0], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 2.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, 10.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 1:
+                                    spriteBatch.Draw(upgradeSpritesArray[1], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 3.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, 20.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 2:
+                                    spriteBatch.Draw(upgradeSpritesArray[2], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 4.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, 30.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 3:
+                                    spriteBatch.Draw(upgradeSpritesArray[3], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, sk.skDamage.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max Tier", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                            }
                             break;
                         case 2://Hex
-                            spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Red, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                            hx = (Hex)GetSummonGo(2).GetComponent<Hex>();
+                            spriteBatch.DrawString(showLevelInfo, hx.hexDamge.ToString(), new Vector2(730, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, hx.Range.ToString(), new Vector2(730, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, hx.FireRate.ToString(), new Vector2(730, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+
+                            spriteBatch.DrawString(showLevelInfo, hx.Range.ToString(), new Vector2(1030, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, hx.FireRate.ToString(), new Vector2(1030, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            switch (hx.Tier)
+                            {
+                                case 0:
+                                    spriteBatch.Draw(upgradeSpritesArray[4], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 6.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, 10.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 1:
+                                    spriteBatch.Draw(upgradeSpritesArray[5], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 10.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, 20.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 2:
+                                    spriteBatch.Draw(upgradeSpritesArray[6], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 15.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, 30.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 3:
+                                    spriteBatch.Draw(upgradeSpritesArray[7], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, hx.hexDamge.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max Tier".ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                            }
                             break;
                         case 3://Brute
-                            spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Yellow, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                            brute = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
+                            spriteBatch.DrawString(showLevelInfo, "Unavaible", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+
+                            switch (brute.Tier)
+                            {
+                                case 0:
+                                    spriteBatch.Draw(upgradeSpritesArray[8], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    break;
+                                case 1:
+                                    spriteBatch.Draw(upgradeSpritesArray[9], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    break;
+                                case 2:
+                                    spriteBatch.Draw(upgradeSpritesArray[10], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    break;
+                                case 3:
+                                    spriteBatch.Draw(upgradeSpritesArray[11], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    break;
+                            }
                             break;
                         case 4:// Demon
-                            spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Green, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                            demon = (Demon)GetSummonGo(4).GetComponent<Demon>();
+                            spriteBatch.DrawString(showLevelInfo, demon.demonDamge.ToString(), new Vector2(730, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, demon.Range.ToString(), new Vector2(730, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, demon.FireRate.ToString(), new Vector2(730, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+
+                            spriteBatch.DrawString(showLevelInfo, demon.Range.ToString(), new Vector2(1030, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, demon.FireRate.ToString(), new Vector2(1030, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            switch (demon.Tier)
+                            {
+                                case 0:
+                                    spriteBatch.Draw(upgradeSpritesArray[12], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 15.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, 20.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 1:
+                                    spriteBatch.Draw(upgradeSpritesArray[13], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 20.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, 30.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 2:
+                                    spriteBatch.Draw(upgradeSpritesArray[14], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 40.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, 50.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 3:
+                                    spriteBatch.Draw(upgradeSpritesArray[15], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, demon.demonDamge.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max Tier", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                            }
                             break;
                         case 5://Player
-                            spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Blue, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                            switch (nc.Tier)
+                            {
+                                case 0:
+                                    spriteBatch.Draw(upgradeSpritesArray[16], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 10.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 1:
+                                    spriteBatch.Draw(upgradeSpritesArray[17], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 20.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 2:
+                                    spriteBatch.Draw(upgradeSpritesArray[18], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, 30.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                                case 3:
+                                    spriteBatch.Draw(upgradeSpritesArray[19], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max Tier", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    break;
+                            }
                             break;
                     }
-
                     break;
+                #endregion
                 case 4://NextWave
                     spriteBatch.Draw(UISprites[7], clickableButRec[4], Color.DarkGray);
                     break;
@@ -668,8 +797,6 @@ namespace NecroNexus
             }
 
         }
-
-       
 
         /// <summary>
         /// When called you get back the gameobject for which summon you want to grab.
