@@ -86,7 +86,7 @@ namespace NecroNexus
             }
             else //If it has finished its path the enemy gets removed and does damage to the base
             {
-                LevelOne.UpdateHealth(baseDamage);
+                DrawingLevel.UpdateHealth(baseDamage);
                 ToRemove = true;
             }
             
@@ -128,7 +128,7 @@ namespace NecroNexus
             if (Health <= 0) //Object has Died, gets removed and drops its souls
             {
                 ToRemove = true;
-                LevelOne.UpdateSouls(SoulDrop);
+                DrawingLevel.UpdateSouls(SoulDrop);
             }
             if (healthModified == true) //Object has been hit, initiate hit feedback
             {

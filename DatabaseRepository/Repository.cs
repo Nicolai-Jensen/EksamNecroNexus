@@ -30,24 +30,25 @@ namespace DatabaseRepository
         {
             //Drop all tables:
             //ret senere så tables ikke bliver dropped ved start, men Kun ved New Game;
-            //var cmd = new SQLiteCommand($"DROP TABLE Level", (SQLiteConnection)connection);
-            //cmd.ExecuteNonQuery();
+            var cmd = new SQLiteCommand($"DROP TABLE Level", (SQLiteConnection)connection);
+            cmd.ExecuteNonQuery();
 
-            //cmd = new SQLiteCommand($"DROP TABLE Tower", (SQLiteConnection)connection);
-            //cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand($"DROP TABLE Tower", (SQLiteConnection)connection);
+            cmd.ExecuteNonQuery();
 
-            //cmd = new SQLiteCommand($"DROP TABLE TowerSave", (SQLiteConnection)connection);
-            //cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand($"DROP TABLE TowerSave", (SQLiteConnection)connection);
+            cmd.ExecuteNonQuery();
 
-            //cmd = new SQLiteCommand($"DROP TABLE User", (SQLiteConnection)connection);
-            //cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand($"DROP TABLE User", (SQLiteConnection)connection);
+            cmd.ExecuteNonQuery();
 
 
             //Create Tables:
             //Fejl? prøve at sætte '+'erne sammen til enkelte linjer:)
 
             //User:
-          var cmd = new SQLiteCommand($"CREATE TABLE User (" +
+
+            cmd = new SQLiteCommand($"CREATE TABLE User (" +
                 $"UserID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 $"UserName STRING);",
                 (SQLiteConnection)connection);

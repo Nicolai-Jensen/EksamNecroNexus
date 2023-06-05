@@ -22,6 +22,7 @@ namespace NecroNexus
 
         Repository repo;//Access to the Repository
         LevelOne gameLevel;//Access to the Games Level
+        DrawingLevel drawingLevel;
         public int Level { get; set; } = 1; //A Variable meant to mimic the Primary ID of the Level in the Database
         public int Save { get; set; } //A Variable meant to mimic the Primary ID of the User in the Database
         public string LevelName { get; set; } = "GraveYard"; //The Name of the Level
@@ -54,8 +55,8 @@ namespace NecroNexus
                 //Checks if the Save Exists already then either Updates the save or Adds a new Save
                 if (repo.CheckLevel(gameLevel.CurrentUser) == 1) //Update
                 {
-                    Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
-                    repo.UpdateLevel(Level, gameLevel.CurrentUser, nc.Tier, LevelOne.GetCriptHealth, 0, LevelOne.GetSouls, CurrentWave);
+                    Necromancer nc = (Necromancer)drawingLevel.GetChar().GetComponent<Necromancer>();
+                    repo.UpdateLevel(Level, gameLevel.CurrentUser, nc.Tier, DrawingLevel.GetCriptHealth, 0, DrawingLevel.GetSouls, CurrentWave);
                     foreach (var item in LevelOne.gameObjects)
                     {
                         if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
@@ -67,8 +68,8 @@ namespace NecroNexus
                 }
                 else //Add
                 {
-                    Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
-                    repo.AddLevel(Level, gameLevel.CurrentUser, LevelName, nc.Tier, LevelOne.GetCriptHealth, 0, LevelOne.GetSouls, CurrentWave);
+                    Necromancer nc = (Necromancer)drawingLevel.GetChar().GetComponent<Necromancer>();
+                    repo.AddLevel(Level, gameLevel.CurrentUser, LevelName, nc.Tier, DrawingLevel.GetCriptHealth, 0, DrawingLevel.GetSouls, CurrentWave);
                     foreach (var item in LevelOne.gameObjects)
                     {
                         if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
@@ -110,8 +111,8 @@ namespace NecroNexus
                             nec.Tier = PlayerTier;
                         }
                     }
-                    LevelOne.GetSouls = (int)Souls;
-                    LevelOne.GetCriptHealth = (int)BaseHP;
+                    DrawingLevel.GetSouls = (int)Souls;
+                    DrawingLevel.GetCriptHealth = (int)BaseHP;
 
                     //Reads the TowerSave Database and tries to spawn each one
                     List<TowerSave> towerList = repo.ReadTowerSaves();
