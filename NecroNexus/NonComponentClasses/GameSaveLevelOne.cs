@@ -55,7 +55,7 @@ namespace NecroNexus
                 //Checks if the Save Exists already then either Updates the save or Adds a new Save
                 if (repo.CheckLevel(gameLevel.CurrentUser) == 1) //Update
                 {
-                    Necromancer nc = (Necromancer)drawingLevel.GetChar().GetComponent<Necromancer>();
+                    Necromancer nc = (Necromancer)LevelOne.GetChar().GetComponent<Necromancer>();
                     repo.UpdateLevel(Level, gameLevel.CurrentUser, nc.Tier, DrawingLevel.GetCriptHealth, 0, DrawingLevel.GetSouls, CurrentWave);
                     foreach (var item in LevelOne.gameObjects)
                     {
@@ -68,7 +68,7 @@ namespace NecroNexus
                 }
                 else //Add
                 {
-                    Necromancer nc = (Necromancer)drawingLevel.GetChar().GetComponent<Necromancer>();
+                    Necromancer nc = (Necromancer)LevelOne.GetChar().GetComponent<Necromancer>();
                     repo.AddLevel(Level, gameLevel.CurrentUser, LevelName, nc.Tier, DrawingLevel.GetCriptHealth, 0, DrawingLevel.GetSouls, CurrentWave);
                     foreach (var item in LevelOne.gameObjects)
                     {

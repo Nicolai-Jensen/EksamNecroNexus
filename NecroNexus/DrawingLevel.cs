@@ -10,13 +10,13 @@ namespace NecroNexus
         //Adds some Rectangles, Sprites and Fonts
         private Rectangle[] clickableButRec = new Rectangle[24];
         private Texture2D[] UISprites = new Texture2D[24];
+        private Texture2D[] upgradeSpritesArray = new Texture2D[19];
 
         //Variables to track information
         private int menuButClicked = 0;
         private int whichUpgradeClicked = 0;
         private float timer;
         private float timer1;
-        private float timer2;//Controlling the pausegame
 
         private bool[] presseddowntopleft = { false, false, false, false };
         private bool[] isHoveringOverIcon = { false, false, false, false };
@@ -46,9 +46,11 @@ namespace NecroNexus
         {
             this.game = game;
             summons = new SummonFactory();
+            
         }
         public void LoadContent(ContentManager content)
         {
+            #region UI place
             UISprites[0] = content.Load<Texture2D>("placeholdersprites/UI/BackGroundWithoutEdge");
             clickableButRec[0] = new Rectangle(0, 880, 1920, 200);
             UISprites[1] = content.Load<Texture2D>("placeholdersprites/UI/CharSpriteLV0");//CharImagelv0
@@ -97,6 +99,15 @@ namespace NecroNexus
             clickableButRec[17] = new Rectangle(125, 0, 500, 75);//Health,Souls,Wave
             clickableButRec[18] = new Rectangle(1800, 0, 50, 50);//PauseGame
             showLevelInfo = content.Load<SpriteFont>("placeholdersprites/UI/UITextElements/File");
+            #endregion
+            #region Updrage Sprite
+            for (int i = 0; i < 15; i++)
+            {
+                upgradeSpritesArray[i] = content.Load<Texture2D>($"placeholdersprites/UI/UpgradeUIelements/UpgradeSpritesTier{i}");
+                //Üse clickablebutrec 16 for size
+            }
+            #endregion
+
         }
 
         public void Update()
@@ -179,7 +190,6 @@ namespace NecroNexus
                     menuButClicked = 0;
                     timer = 0;
                 }
-
             }
 
             //Choose upgrade
@@ -365,7 +375,7 @@ namespace NecroNexus
                                 }
                                 break;
                             case 5: //Player Upgrade.
-                                nc = (Necromancer)GetChar().GetComponent<Necromancer>();
+                                nc = (Necromancer)LevelOne.GetChar().GetComponent<Necromancer>();
                                 switch (nc.Tier)
                                 {
                                     case 0: //level 0 to 1.
@@ -484,7 +494,7 @@ namespace NecroNexus
             spriteBatch.Draw(UISprites[9], clickableButRec[18], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ActivLevelPauseButton
 
             //for showing the player level
-            nc = (Necromancer)GetChar().GetComponent<Necromancer>();
+            nc = (Necromancer)LevelOne.GetChar().GetComponent<Necromancer>();
             switch (nc.Tier)
             {
                 case 0:
@@ -617,19 +627,20 @@ namespace NecroNexus
 
                     switch (whichUpgradeClicked)
                     {
-                        case 1:
+                        case 1://Archer
                             spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
+
                             break;
-                        case 2:
+                        case 2://Hex
                             spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Red, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                             break;
-                        case 3:
+                        case 3://Brute
                             spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Yellow, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                             break;
-                        case 4:
+                        case 4:// Demon
                             spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Green, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                             break;
-                        case 5:
+                        case 5://Player
                             spriteBatch.Draw(UISprites[1], clickableButRec[15], clickableButRec[15], Color.Blue, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                             break;
                     }
@@ -658,21 +669,7 @@ namespace NecroNexus
 
         }
 
-        /// <summary>
-        /// When called it returns the player
-        /// </summary>
-        /// <returns></returns>
-        public GameObject GetChar()
-        {
-            foreach (GameObject item in LevelOne.gameObjects)
-            {
-                if (item.Tag == "Player")
-                {
-                    return item;
-                }
-            }
-            return null;
-        }
+       
 
         /// <summary>
         /// When called you get back the gameobject for which summon you want to grab.

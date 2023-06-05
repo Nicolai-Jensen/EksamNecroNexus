@@ -63,7 +63,7 @@ namespace NecroNexus
 
         public override void Initialize()
         {
-            OpenConnection();   
+            game.Repository.Open();//Opens the Repository Connection
             if (Loaded == true) //Loads a game if you chose Load
             {
                 level.LoadGame();
@@ -76,24 +76,13 @@ namespace NecroNexus
             gameObjects.Add(summons.Create(SummonType.SkeletonBrute, new Vector2(-3000, -3000)));
             gameObjects.Add(summons.Create(SummonType.Hex, new Vector2(-3000, -3000)));
             gameObjects.Add(summons.Create(SummonType.Demon, new Vector2(-3000, -3000)));
-
             gameObjects.Add(director.Construct());
+
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Awake();
             }
-        }
-        public void OpenConnection()
-        {
-            game.Repository.Open();//Opens the Repository Connection
-
-        }
-       
-        public void CloseConnection()
-        {
-            game.Repository.Close();
-
         }
         /// <summary>
         /// Loads all the sprites, set the rectangles and loads all the gameobjects used.
@@ -134,7 +123,21 @@ namespace NecroNexus
             GameObjectsToRemove(); //Calls A Method to destroy ToRemove items
             Cleanup(); //Calls cleanUp
         }
-
+        /// <summary>
+        /// When called it returns the player
+        /// </summary>
+        /// <returns></returns>
+        public static GameObject GetChar()
+        {
+            foreach (GameObject item in gameObjects)
+            {
+                if (item.Tag == "Player")
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
