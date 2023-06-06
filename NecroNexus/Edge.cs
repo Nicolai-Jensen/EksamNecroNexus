@@ -9,15 +9,18 @@ namespace NecroNexus
 {
     public class Edge<T>
     {
-        public Node<T> From { get; private set; }
+        public Node<T> From { get; set; }
 
-        public Node<T> To { get; private set; }
+        public Node<T> To { get; set; }
+
+        public bool WallBuilt { get; set; }
 
         //Edge constructor 
-        public Edge(Node<T> From, Node<T> To)
+        public Edge(Node<T> From, Node<T> To, bool WallBuilt)
         {
             this.From = From;
             this.To = To;
+            this.WallBuilt = WallBuilt;
         }
 
     }

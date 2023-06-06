@@ -194,7 +194,7 @@ namespace NecroNexus
                 if (timer > 0.5f)
                 {
                     AudioEffect.ButtonClickingSound();
-                    LevelOne.level.StartNextWave();
+                    levelone.level.StartNextWave();
                     menuButClicked = 0;
                     timer = 0;
                 }
@@ -497,7 +497,7 @@ namespace NecroNexus
             spriteBatch.Draw(UISprites[8], clickableButRec[17], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Health, Souls and Wave count
             spriteBatch.DrawString(showLevelInfo, GetCriptHealth.ToString(), new Vector2(205, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
             spriteBatch.DrawString(showLevelInfo, GetSouls.ToString(), new Vector2(315, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(showLevelInfo, LevelOne.level.CurrentWave.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(showLevelInfo, levelone.level.CurrentWave.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
             spriteBatch.Draw(UISprites[9], clickableButRec[18], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ActivLevelPauseButton
 
