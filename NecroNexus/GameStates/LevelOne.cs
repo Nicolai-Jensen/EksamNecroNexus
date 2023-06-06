@@ -25,7 +25,9 @@ namespace NecroNexus
 
         //Adds the needed classes to LevelOne
         public static Board boardOne;
-        public static GameSaveLevelOne level;
+        public LvlOneEnemies level;
+        public SaveSystem levelSave;
+        //public static GameSaveLevelOne level;
         private Map map;
         private AutoSave autoSave;
         private SummonFactory summons;
@@ -51,6 +53,8 @@ namespace NecroNexus
         private KeyboardState currentKey;
         private KeyboardState previousKey;
 
+        public int LevelID { get; set; } = 1;
+        public string LevelName { get; set; } = "Graveyard";
 
         /// <summary>
         /// The States Constructor which applies the picture that is shown
@@ -60,25 +64,21 @@ namespace NecroNexus
             map = new Map(); //Adds the map
             boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2)); //Adds a Board
             summons = new SummonFactory(); //Adds a SummonFactory
-            boardOne.LevelOneBoard(map.ReturnPos(map.Graph1())); //Sets the the board by adding the correct vector2 list gotten through pathfinding the nodes
-            level = new GameSaveLevelOne(boardOne, game.Repository, this); //Adds the Levels save
-            autoSave = new AutoSave(level); //Instaniates the AutoSave
+            boardOne.LevelOneBoard(map.ReturnPos(map.Graph1())); //Sets the board by adding the correct vector2 list gotten through pathfinding the nodes
+            level = new LvlOneEnemies(boardOne);
+            levelSave = new SaveSystem(level, game.Repository, this);
+            //level = new GameSaveLevelOne(boardOne, game.Repository, this); //Adds the Levels save
+            autoSave = new AutoSave(levelSave); //Instaniates the AutoSave
             drawingLevel = new DrawingLevel(game,this);
             foreach (var item in gameObjects)//Removes any lasting gameObjects from previous iterations of LevelOne
             {
                 RemoveObject(item);
             }
+            Cleanup();
         }
 
         public override void Initialize()
         {
-            game.Repository.Open();//Opens the Repository Connection
-            if (Loaded == true) //Loads a game if you chose Load
-            {
-                level.LoadGame();
-            }
-            autoSave.Start(); //Starts the AutoSave Thread
-
             //Builds the Necromancer and sets one of each tower outside of the screen to reference
             Director director = new Director(new NecroBuilder());
             gameObjects.Add(summons.Create(SummonType.SkeletonArcher, new Vector2(-3000, -3000)));
@@ -86,7 +86,18 @@ namespace NecroNexus
             gameObjects.Add(summons.Create(SummonType.Hex, new Vector2(-3000, -3000)));
             gameObjects.Add(summons.Create(SummonType.Demon, new Vector2(-3000, -3000)));
             gameObjects.Add(director.Construct());
+            InputHandler.Instance.AttachPlayer((Necromancer)FindObjectOfType<Necromancer>());
 
+            game.Repository.Open();//Opens the Repository Connection
+            if (Loaded == true) //Loads a game if you chose Load
+            {
+                levelSave.LoadGame();
+            }
+            else
+            {
+                levelSave.UpdateValues();
+            }
+            autoSave.Start(); //Starts the AutoSave Thread
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
