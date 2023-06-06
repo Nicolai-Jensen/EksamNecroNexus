@@ -47,6 +47,7 @@ namespace DatabaseRepository
             //Fejl? prøve at sætte '+'erne sammen til enkelte linjer:)
 
             //User:
+
             cmd = new SQLiteCommand($"CREATE TABLE User (" +
                 $"UserID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 $"UserName STRING);",

@@ -84,7 +84,7 @@ namespace NecroNexus
             if (finalizeButRec.Contains(currentMouse.X, currentMouse.Y))
             {spriteBatch.Draw(backgroundsprite[1], finalizeButRec, Color.LightGray);}
             else { spriteBatch.Draw(backgroundsprite[1], finalizeButRec, Color.White); }
-            spriteBatch.DrawString(spriteFont, "Name", new Vector2(680, 370), Color.White);//where you write your name.
+            spriteBatch.DrawString(spriteFont, "Name", new Vector2(685, 370), Color.White);//where you write your name.
             myWpfControl.Draw(spriteBatch);
             spriteBatch.End();
         }

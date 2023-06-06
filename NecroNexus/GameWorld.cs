@@ -24,6 +24,7 @@ namespace NecroNexus
         private NewCharState newCharState;
         private PauseMenuState pausedMenuState;
         private LostGame lostGame;
+        private DrawingLevel drawingLevel;
 
         //A Vector2 to save our screen size on
         private static Vector2 screenSize;
@@ -133,12 +134,7 @@ namespace NecroNexus
         }
 
         protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                levelOne.MenuButClicked = 0;
-            }
-                
+        {         
 
             // Applies a simulation of time to DeltaTime
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;

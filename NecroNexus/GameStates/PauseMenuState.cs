@@ -80,6 +80,7 @@ namespace NecroNexus
             {
                 clickedStuff = 0;
                 AudioEffect.ButtonClickingSound();
+                game.Repository.Open();
                 game.ChangeState2(game.LevelOne);
             }
             //Changes the state back to main menu state
