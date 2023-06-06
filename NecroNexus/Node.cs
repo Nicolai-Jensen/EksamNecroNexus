@@ -10,14 +10,14 @@ namespace NecroNexus
     public class Node<T>
     {
 
-        public T Data { get; private set; } 
+        public T Data { get; set; } 
 
         // EDGE LIST
-        public List<Edge<T>> EdgesList { get; private set; } = new List<Edge<T>>();
+        public List<Edge<T>> EdgesList { get; set; } = new List<Edge<T>>();
 
         public bool Discovered { get; set; } = false;
 
-        public Vector2 NodePosition { get; private set; }
+        public Vector2 NodePosition { get; set; }
 
         public Node<T> Parent { get; set; }
 
@@ -32,12 +32,14 @@ namespace NecroNexus
         /// ADD EDGE: 
         /// Skaber en edge fra "this" node, til noden skrevet i parametren som "other".
         /// </summary>
-        public void AddEdge(Node<T> other)
+        public void AddEdge(Node<T> other, bool wallBuilt)
         {
-            EdgesList.Add(new Edge<T>(this, other));
+            EdgesList.Add(new Edge<T>(this, other, wallBuilt));
 
         }
 
 
+
+        
     }
 }
