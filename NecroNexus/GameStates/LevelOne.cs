@@ -13,6 +13,15 @@ namespace NecroNexus
         //A Texture variable for our background
         private Texture2D BackgroundFront;
         private Texture2D BackgroundPlain;
+        private Texture2D BackgroundWall1;
+        
+
+        //Drawing walls
+
+        public Vector2 BDWallPos;
+        public Vector2 EHWallPos;
+        float amount = 0.5f;
+
 
         //Adds the needed classes to LevelOne
         public static Board boardOne;
@@ -89,8 +98,11 @@ namespace NecroNexus
         /// </summary>
         public override void LoadContent()
         {
+           
+
             BackgroundFront = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedFront");
             BackgroundPlain = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedPlain");
+            BackgroundWall1 = content.Load<Texture2D>("Backgrounds/NecroWall");
 
             drawingLevel.LoadContent(content);
 
@@ -145,6 +157,23 @@ namespace NecroNexus
             drawingLevel.DrawingUI(spriteBatch);
 
             spriteBatch.Draw(BackgroundPlain, new Vector2(0, 0), null, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.1f);
+
+            //BD wall
+            BDWallPos = Vector2.Lerp(new Vector2(1575, 175), new Vector2(1400, 225), amount);
+
+            if (map.WallBD == true)
+            {
+                spriteBatch.Draw(BackgroundWall1, BDWallPos, null, Color.White, 0f, new Vector2(BackgroundWall1.Width / 2f , BackgroundWall1.Height / 2f), 1f, SpriteEffects.None, 0.99f);
+            }
+
+            //EH wall
+            EHWallPos = Vector2.Lerp(new Vector2(700, 225), new Vector2(700, 625), amount);
+
+            if (map.WallEH == true)
+            {
+                spriteBatch.Draw(BackgroundWall1, EHWallPos, null, Color.White, 0f, new Vector2(BackgroundWall1.Width / 2f, BackgroundWall1.Height / 2f), 1f, SpriteEffects.None, 0.99f);
+            }
+
 
             for (int i = 0; i < gameObjects.Count; i++)
             {

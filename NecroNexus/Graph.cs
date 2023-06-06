@@ -35,6 +35,13 @@ namespace NecroNexus
 
         }
 
+        /// <summary>
+        /// Hider edges fra listen ved at sætte en væg. 
+        /// USE: From node string, To node string, og så en True eller False på om denne edge har en væg eller ej. */
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="wallBuilt"></param>
         public void BuildWall(T from, T to, bool wallBuilt)
         {
             Node<T> fromNode = NodesList.Find(x => x.Data.Equals(from));

@@ -11,8 +11,9 @@ namespace NecroNexus
 {
     public class Map
     {
-        
 
+        public bool WallBD { get; set; }
+        public bool WallEH { get; set; }
         public List<Node<string>> Graph1()
         {
 
@@ -51,8 +52,26 @@ namespace NecroNexus
             graph1.AddNewEdge("G", "H", false);
 
             //Building walls:
-            graph1.BuildWall("B", "D", true);
-            graph1.BuildWall("E", "H", true);
+            //Set one of the properties to true.
+            //The path will get fixed and walls will be drawn.
+            //Ex
+            WallEH = false;
+            WallBD = false;
+
+            if (WallBD == true)
+            {
+                graph1.BuildWall("B", "D", true);
+            }
+
+            if (WallEH == true)
+            {
+                graph1.BuildWall("E", "H", true);
+            }
+
+
+            
+            
+
 
             Node<string> n = BFS<string>(graph1.NodesList.Find(x => x.Data == "A"),
                                          graph1.NodesList.Find(x => x.Data == "I"));
@@ -146,6 +165,7 @@ namespace NecroNexus
         }
 
         
+       
 
 
     }
