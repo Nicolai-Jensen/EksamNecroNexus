@@ -33,13 +33,15 @@ namespace NecroNexus
         // Makes a new ButtonEvent variable for Inputhandler to use
         private ButtonEvent buttonEvent = new ButtonEvent();
 
+        Necromancer player;
+
         /// <summary>
         /// The Constructor for the Inputhandler
         /// </summary>
         public InputHandler()
         {
             //Creates a player variable and finds the player object within the LevelOne list
-            Necromancer player = (Necromancer)LevelOne.FindObjectOfType<Necromancer>();
+            player = (Necromancer)LevelOne.FindObjectOfType<Necromancer>();
 
             //Attaches ButtonEvent to the player reference
             buttonEvent.Attach(player);
@@ -82,5 +84,10 @@ namespace NecroNexus
             }
         }
 
+        public void AttachPlayer(Necromancer necromancer)
+        {
+            player = necromancer;
+            buttonEvent.Attach(player);
+        }
     }
 }

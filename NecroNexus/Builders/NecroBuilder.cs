@@ -14,6 +14,7 @@ namespace NecroNexus
         //Creates a GameObject variable for reference
         private GameObject gameObject;
 
+
         /// <summary>
         /// A method used for building the player GameObject
         /// </summary>

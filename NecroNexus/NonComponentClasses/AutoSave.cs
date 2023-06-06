@@ -16,16 +16,16 @@ namespace NecroNexus
     {
         private Thread thread;
         private bool isRunning;
-        GameSaveLevelOne lvlOne;
+        SaveSystem save;
         private int currentSave;
 
-        public AutoSave(GameSaveLevelOne lvlOne) 
+        public AutoSave(SaveSystem save) 
         {
             isRunning = false; 
-            this.lvlOne = lvlOne;
+            this.save = save;
             thread = new Thread(ThreadMethod);
             thread.IsBackground = true;//Sets the Thread to be a background thread so that we can close the game without needing to close this thread first
-            currentSave = this.lvlOne.CurrentWave;
+            
         }
 
         /// <summary>
@@ -36,6 +36,7 @@ namespace NecroNexus
             if (!isRunning)
             {
                 isRunning = true;
+                currentSave = this.save.Level.Wave;
                 thread.Start();
             }
         }
@@ -62,12 +63,12 @@ namespace NecroNexus
             
             while (isRunning)
             {
-                if (lvlOne.ReturnWaveState() == false)
+                if (save.LevelEnemies.ReturnWaveState() == false)
                 {
-                    if(lvlOne.CurrentWave != currentSave)
+                    if(save.LevelEnemies.CurrentWave != currentSave)
                     {
-                        lvlOne.SaveGame(); //Calls Savegame automatically when if currentwave is swapped
-                        currentSave = lvlOne.CurrentWave;
+                        save.SaveGame(); //Calls Savegame automatically when if currentwave is swapped
+                        currentSave = save.LevelEnemies.CurrentWave;
                     }
                 }
             }
