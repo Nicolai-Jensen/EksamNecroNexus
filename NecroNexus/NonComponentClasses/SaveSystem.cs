@@ -68,25 +68,33 @@ namespace NecroNexus
                 //Checks if the Save Exists already then either Updates the save or Adds a new Save
                 if (repo.CheckLevel(gameLevel.CurrentUser) == 1) //Update
                 {
-                    Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
+                    UpdateValues();
                     repo.UpdateLevel(Level.LevelID, level.UserID, level.Plevel, level.BaseHP, level.Score, level.Souls, level.Wave);
+                    repo.DeleteTowerSave(Level.LevelID, Level.UserID);
                     foreach (var item in LevelOne.gameObjects)
                     {
-                        if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
+                        if (item.Transform.Position.X > -5000)
                         {
-                            repo.AddTowerSave(level.UserID, level.LevelID, item.Tag, item.Transform.Position.X, item.Transform.Position.Y, CheckComponents(item));
+                            if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
+                            {
+                                repo.AddTowerSave(level.UserID, level.LevelID, item.Tag, item.Transform.Position.X, item.Transform.Position.Y, CheckComponents(item));
+                            }
                         }
                     }
                 }
                 else //Add
                 {
-                    Necromancer nc = (Necromancer)gameLevel.GetChar().GetComponent<Necromancer>();
+                    UpdateValues();
                     repo.AddLevel(Level.LevelID, level.UserID, Level.LvlName, level.Plevel, level.BaseHP, level.Score, level.Souls, level.Wave);
+                    repo.DeleteTowerSave(Level.LevelID, Level.UserID);
                     foreach (var item in LevelOne.gameObjects)
                     {
-                        if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
+                        if (item.Transform.Position.X > -5000)
                         {
-                            repo.AddTowerSave(level.UserID, level.LevelID, item.Tag, item.Transform.Position.X, item.Transform.Position.Y, CheckComponents(item));
+                            if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
+                            {
+                                repo.AddTowerSave(level.UserID, level.LevelID, item.Tag, item.Transform.Position.X, item.Transform.Position.Y, CheckComponents(item));
+                            }
                         }
                     }
                 }
@@ -104,54 +112,15 @@ namespace NecroNexus
             //We start with if statements to check which savefile you are on 
             if (level.UserID == 1)//Checks user 1
             {
-                if (repo.CheckLevel(Level.LevelID) == 1)//Checks which Level the user is playing on
-                {
-                    //Applies all of the Databases data to this classes variables
-                    level = repo.ReadLevel(Level.LevelID, level.UserID);
-
-                    Necromancer nec = (Necromancer)LevelOne.FindObjectOfType<Necromancer>();
-                    nec.Tier = level.Plevel;
-                    DrawingLevel.GetSouls = (int)level.Souls;
-                    DrawingLevel.GetCriptHealth = (int)level.BaseHP;
-
-                    //Reads the TowerSave Database and tries to spawn each one
-                    TowerSaveList = repo.ReadTowerSaves();
-                    SummonFactory fac = new SummonFactory();
-                    foreach (var item in TowerSaveList)
-                    {
-                        GameObject go = fac.Create(CheckType(item.TowerType), new Vector2(item.TowerPosX, item.TowerPosY));
-                        if (CheckType(item.TowerType) == SummonType.SkeletonArcher)
-                        {
-                            SkeletonArcher summon;
-                            summon = (SkeletonArcher)go.GetComponent<SkeletonArcher>();
-                            summon.SetTier(item.TowerLvl);
-                        }
-                        else if (CheckType(item.TowerType) == SummonType.SkeletonBrute)
-                        {
-                            SkeletonBrute summon;
-                            summon = (SkeletonBrute)go.GetComponent<SkeletonBrute>();
-                            summon.SetTier(item.TowerLvl);
-                        }
-                        else if (CheckType(item.TowerType) == SummonType.Hex)
-                        {
-                            Hex summon;
-                            summon = (Hex)go.GetComponent<Hex>();
-                            summon.SetTier(item.TowerLvl);
-                        }
-                        else if (CheckType(item.TowerType) == SummonType.Demon)
-                        {
-                            Demon summon;
-                            summon = (Demon)go.GetComponent<Demon>();
-                            summon.SetTier(item.TowerLvl);
-                        }
-                        LevelOne.AddObject(go);
-                    }
-                }
-                else
-                {
-
-                }
-
+                LoadLogic();
+            }
+            if (level.UserID == 2)
+            {
+                LoadLogic();
+            }
+            if (level.UserID == 3)
+            {
+                LoadLogic();
             }
         }
 
@@ -210,5 +179,95 @@ namespace NecroNexus
             }
             return 0;
         }
+
+        public void LoadLogic()
+        {
+            if (repo.CheckLevel(Level.LevelID) == 1)//Checks which Level the user is playing on
+            {
+                //Applies all of the Databases data to this classes variables
+                level = repo.ReadLevel(Level.LevelID, level.UserID);
+
+                Necromancer nec = (Necromancer)LevelOne.FindObjectOfType<Necromancer>();
+                nec.Tier = level.Plevel;
+                DrawingLevel.GetSouls = (int)level.Souls;
+                DrawingLevel.GetCriptHealth = (int)level.BaseHP;
+                LevelEnemies.CurrentWave = level.Wave;
+
+                //Reads the TowerSave Database and tries to spawn each one
+                TowerSaveList = repo.ReadTowerSaves();
+                SummonFactory fac = new SummonFactory();
+                foreach (var item in TowerSaveList)
+                {
+                    Vector2 pos = new Vector2(item.TowerPosX, item.TowerPosY);
+                    GameObject go = fac.CreateFromLoad(CheckType(item.TowerType), pos);
+                    if (CheckType(item.TowerType) == SummonType.SkeletonArcher)
+                    {
+                        SkeletonArcher summon;
+                        summon = (SkeletonArcher)go.GetComponent<SkeletonArcher>();
+                        summon.SetTier(item.TowerLvl);
+                        go.Transform.Translate(pos);
+
+                        foreach (var obj in LevelOne.gameObjects)
+                        {
+                            if (obj.Tag == "Archer")
+                            {
+                                SkeletonArcher archer = (SkeletonArcher)obj.GetComponent<SkeletonArcher>();
+                                archer.SetTier(item.TowerLvl);
+                            }
+                        }
+                    }
+                    else if (CheckType(item.TowerType) == SummonType.SkeletonBrute)
+                    {
+                        SkeletonBrute summon;
+                        summon = (SkeletonBrute)go.GetComponent<SkeletonBrute>();
+                        summon.SetTier(item.TowerLvl);
+                        go.Transform.Translate(pos);
+
+                        foreach (var obj in LevelOne.gameObjects)
+                        {
+                            if (obj.Tag == "Brute")
+                            {
+                                SkeletonBrute brute = (SkeletonBrute)obj.GetComponent<SkeletonBrute>();
+                                brute.SetTier(item.TowerLvl);
+                            }
+                        }
+                    }
+                    else if (CheckType(item.TowerType) == SummonType.Hex)
+                    {
+                        Hex summon;
+                        summon = (Hex)go.GetComponent<Hex>();
+                        summon.SetTier(item.TowerLvl);
+                        go.Transform.Translate(pos);
+
+                        foreach (var obj in LevelOne.gameObjects)
+                        {
+                            if (obj.Tag == "Hex")
+                            {
+                                Hex hex = (Hex)obj.GetComponent<Hex>();
+                                hex.SetTier(item.TowerLvl);
+                            }
+                        }
+                    }
+                    else if (CheckType(item.TowerType) == SummonType.Demon)
+                    {
+                        Demon summon;
+                        summon = (Demon)go.GetComponent<Demon>();
+                        summon.SetTier(item.TowerLvl);
+                        go.Transform.Translate(pos);
+
+                        foreach (var obj in LevelOne.gameObjects)
+                        {
+                            if (obj.Tag == "Demon")
+                            {
+                                Demon demon = (Demon)obj.GetComponent<Demon>();
+                                demon.SetTier(item.TowerLvl);
+                            }
+                        }
+                    }
+                    LevelOne.AddObject(go);
+                }
+            }
+        }
+
     }
 }

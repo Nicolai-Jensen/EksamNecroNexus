@@ -113,12 +113,14 @@ namespace NecroNexus
 
         protected override void Initialize()
         {
+            repository.Open();
+
             //Sets up all the Audio files
             AudioEffect.LoadAudio();
 
             //Sets up all our States
             menu = new Menu(this, _graphics.GraphicsDevice, Content);
-            levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);
+            //levelOne = new LevelOne(this, _graphics.GraphicsDevice, Content);
             newCharState = new NewCharState(this, _graphics.GraphicsDevice, Content);
             pausedMenuState = new PauseMenuState(this, _graphics.GraphicsDevice, Content);
             lostGame = new LostGame(this, _graphics.GraphicsDevice, Content);

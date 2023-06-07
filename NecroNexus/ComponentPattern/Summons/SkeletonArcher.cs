@@ -12,6 +12,7 @@ namespace NecroNexus
 
         //Used to calculate attackspeed
         private float attackTimer;
+        private bool loaded;
 
         
         ArrowFactory arrowFactory = new ArrowFactory();
@@ -40,6 +41,13 @@ namespace NecroNexus
             EnemiesInRange = new List<GameObject>();
             SetTier(0);
 
+        }
+
+        public SkeletonArcher(bool load, Vector2 position, float attackRangeRadius, float attackspeed) : base(position, attackRangeRadius, attackspeed)
+        {
+            loaded = load;
+            AttackRangeRadius = attackRangeRadius;
+            EnemiesInRange = new List<GameObject>();
         }
 
         /// <summary>
@@ -76,7 +84,10 @@ namespace NecroNexus
 
         public override void Start()
         {
-            GameObject.Transform.Translate(Position);
+            if (loaded == false)
+            {
+                GameObject.Transform.Translate(Position);
+            }
             GameObject.Tag = "Archer";
             base.Start();
         }
