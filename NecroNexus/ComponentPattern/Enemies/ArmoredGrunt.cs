@@ -26,7 +26,7 @@ namespace NecroNexus
         /// <param name="pos">The SpawnPosition of the Object</param>
         public ArmoredGrunt(Board board, Vector2 pos)
         {
-            speed = 90;
+            Speed = 90;
             baseDamage = 2;
             this.board = board;
             position = pos;
@@ -76,6 +76,14 @@ namespace NecroNexus
                 trueValue.Value = damage.Value / 4 * 3;
             }
             base.TakeDamage(trueValue);
+        }
+        public override void BecomeSlowed(Slow slow)
+        {
+            if (Speed >= 50)
+            {
+                base.BecomeSlowed(slow);
+            }
+
         }
     }
 }

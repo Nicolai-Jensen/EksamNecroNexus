@@ -83,7 +83,7 @@ namespace NecroNexus
         {
             speed = 400f;
 
-            damage = new Damage(DamageType.Magical, 1f);
+            damage = new Damage(DamageType.Magical, 3f);
             slow = new Slow(SlowType.Slowed, 10f);
         }
 
@@ -91,7 +91,7 @@ namespace NecroNexus
         {
             speed = 450f;
 
-            damage = new Damage(DamageType.Magical, 1f);
+            damage = new Damage(DamageType.Magical, 6f);
             slow = new Slow(SlowType.Slowed, 15f);
 
 
@@ -101,7 +101,7 @@ namespace NecroNexus
         {
             speed = 500f;
 
-            damage = new Damage(DamageType.Magical, 1);
+            damage = new Damage(DamageType.Magical, 10f);
             slow = new Slow(SlowType.Slowed, 20f);
 
 
@@ -111,7 +111,7 @@ namespace NecroNexus
         {
             speed = 550f;
 
-            damage = new Damage(DamageType.Magical, 1f);
+            damage = new Damage(DamageType.Magical, 15f);
             slow = new Slow(SlowType.Slowed, 25f);
 
 

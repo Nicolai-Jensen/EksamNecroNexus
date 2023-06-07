@@ -25,7 +25,7 @@ namespace NecroNexus
         /// <param name="pos">The SpawnPosition of the Object</param>
         public Knight(Board board, Vector2 pos)
         {
-            speed = 110;
+            Speed = 110;
             baseDamage = 3;
             this.board = board;
             position = pos;
@@ -75,6 +75,14 @@ namespace NecroNexus
                 trueValue.Value = damage.Value / 2;
             }
             base.TakeDamage(trueValue);
+        }
+        public override void BecomeSlowed(Slow slow)
+        {
+            if (Speed >= 55)
+            {
+                base.BecomeSlowed(slow);
+            }
+
         }
     }
 }
