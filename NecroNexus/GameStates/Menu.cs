@@ -44,7 +44,6 @@ namespace NecroNexus
         public Menu(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
 
-
         }
         /// <summary>
         /// When a player starts the game up it trys to make a database if there isnt one.
@@ -173,9 +172,7 @@ namespace NecroNexus
                             if (placeHolderName[0] != "Empty")
                             {
                                 game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
-                                game.LevelOne.CurrentUser = 1;
                                 game.LevelOne.Loaded = true;
-                                game.Repository.Close();
                                 game.ChangeState(game.LevelOne);
                             }
                             break;
@@ -183,9 +180,7 @@ namespace NecroNexus
                             if (placeHolderName[1] != "Empty")
                             {
                                 game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
-                                game.LevelOne.CurrentUser = 2;
                                 game.LevelOne.Loaded = true;
-                                game.Repository.Close();
                                 game.ChangeState(game.LevelOne);
                             }
                             break;
@@ -193,9 +188,7 @@ namespace NecroNexus
                             if (placeHolderName[2] != "Empty")
                             {
                                 game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
-                                game.LevelOne.CurrentUser = 3;
                                 game.LevelOne.Loaded = true;
-                                game.Repository.Close();
                                 game.ChangeState(game.LevelOne);
                             }
                             break;

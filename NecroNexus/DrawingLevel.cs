@@ -660,7 +660,7 @@ namespace NecroNexus
                                 case 3:
                                     spriteBatch.Draw(upgradeSpritesArray[3], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                                     spriteBatch.DrawString(showLevelInfo, sk.skDamage.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                                    spriteBatch.DrawString(showLevelInfo, "Max Tier", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
                                     break;
                             }
                             break;
@@ -691,7 +691,7 @@ namespace NecroNexus
                                 case 3:
                                     spriteBatch.Draw(upgradeSpritesArray[7], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                                     spriteBatch.DrawString(showLevelInfo, hx.hexDamge.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                                    spriteBatch.DrawString(showLevelInfo, "Max Tier".ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max".ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
                                     break;
                             }
                             break;
@@ -741,7 +741,7 @@ namespace NecroNexus
                                 case 3:
                                     spriteBatch.Draw(upgradeSpritesArray[15], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                                     spriteBatch.DrawString(showLevelInfo, dm.demonDamge.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                                    spriteBatch.DrawString(showLevelInfo, "Max Tier", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
                                     break;
                             }
                             break;
@@ -762,7 +762,7 @@ namespace NecroNexus
                                     break;
                                 case 3:
                                     spriteBatch.Draw(upgradeSpritesArray[19], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
-                                    spriteBatch.DrawString(showLevelInfo, "Max Tier", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
                                     break;
                             }
                             break;
