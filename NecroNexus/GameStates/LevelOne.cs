@@ -59,7 +59,7 @@ namespace NecroNexus
         /// <summary>
         /// The States Constructor which applies the picture that is shown
         /// </summary>
-        public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
+        public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content, int user) : base(game, graphicsDevice, content)
         {
             map = new Map(); //Adds the map
             boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2)); //Adds a Board
@@ -75,6 +75,7 @@ namespace NecroNexus
                 RemoveObject(item);
             }
             Cleanup();
+            CurrentUser = user;
         }
 
         public override void Initialize()
@@ -88,15 +89,15 @@ namespace NecroNexus
             gameObjects.Add(director.Construct());
             InputHandler.Instance.AttachPlayer((Necromancer)FindObjectOfType<Necromancer>());
 
-            game.Repository.Open();//Opens the Repository Connection
+            levelSave.UpdateValues();
+
+            //game.Repository.Open();//Opens the Repository Connection
             if (Loaded == true) //Loads a game if you chose Load
             {
                 levelSave.LoadGame();
+                Cleanup();
             }
-            else
-            {
-                levelSave.UpdateValues();
-            }
+            
             autoSave.Start(); //Starts the AutoSave Thread
 
             for (int i = 0; i < gameObjects.Count; i++)

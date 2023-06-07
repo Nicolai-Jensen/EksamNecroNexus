@@ -8,7 +8,7 @@ namespace NecroNexus
     {
         //List of enemies inside the range of the summon
         public List<GameObject> EnemiesInRange { get; private set; }
-
+        private bool loaded;
 
 
 
@@ -42,6 +42,14 @@ namespace NecroNexus
             SetTier(0);
 
         }
+
+        public Demon(bool load, Vector2 position, float attackRangeRadius, float attackspeed) : base(position, attackRangeRadius, attackspeed)
+        {
+            loaded = load;
+            AttackRangeRadius = attackRangeRadius;
+            EnemiesInRange = new List<GameObject>();
+        }
+
         /// <summary>
         /// Sets the Damage value, so it can be written to UI.
         /// </summary>
@@ -76,7 +84,10 @@ namespace NecroNexus
 
         public override void Start()
         {
-            GameObject.Transform.Translate(Position);
+            if (loaded == false)
+            {
+                GameObject.Transform.Translate(Position);
+            }
             GameObject.Tag = "Demon";
             base.Start();
         }

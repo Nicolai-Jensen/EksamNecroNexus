@@ -418,7 +418,7 @@ namespace NecroNexus
         private void PauseingGame()
         {
             AudioEffect.ButtonClickingSound();
-            game.Repository.Close();
+            //game.Repository.Close();
             game.ChangeState(game.PauseMenuState);
         }
         /// <summary>
@@ -858,6 +858,9 @@ namespace NecroNexus
         {
             GetCriptHealth -= value;
         }
+
+
+
     }
 
 }
