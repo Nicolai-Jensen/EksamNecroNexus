@@ -15,9 +15,9 @@ namespace NecroNexus
         private Vector2 position;
         private Vector2 velocity;
         private Damage damage;
+        private Slow slow;
 
 
-        private float Speed { get; set; }
         public override bool ToRemove { get; set; }
 
         //Used for determening which applytier() method to call in the switch case below.
@@ -83,14 +83,17 @@ namespace NecroNexus
         {
             speed = 400f;
 
-            damage = new Damage(DamageType.Magical, 3f);
+            damage = new Damage(DamageType.Magical, 1f);
+            slow = new Slow(SlowType.Slowed, 10f);
         }
 
         private void ApplyTier1()
         {
             speed = 450f;
 
-            damage = new Damage(DamageType.Magical, 6f);
+            damage = new Damage(DamageType.Magical, 1f);
+            slow = new Slow(SlowType.Slowed, 15f);
+
 
         }
 
@@ -98,7 +101,9 @@ namespace NecroNexus
         {
             speed = 500f;
 
-            damage = new Damage(DamageType.Magical, 10);
+            damage = new Damage(DamageType.Magical, 1);
+            slow = new Slow(SlowType.Slowed, 20f);
+
 
         }
 
@@ -106,7 +111,9 @@ namespace NecroNexus
         {
             speed = 550f;
 
-            damage = new Damage(DamageType.Magical, 15f);
+            damage = new Damage(DamageType.Magical, 1f);
+            slow = new Slow(SlowType.Slowed, 25f);
+
 
         }
 
@@ -128,6 +135,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
                     }
                 }
@@ -138,8 +146,8 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
-
                     }
                 }
                 else if (other.HasComponent<Knight>())
@@ -148,6 +156,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
                     }
                 }
@@ -157,6 +166,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
                     }
                 }
@@ -166,6 +176,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
                     }
                 }
@@ -175,6 +186,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        //no slow method : cannot be slowed
                         ToRemove = true;
                     }
                 }
@@ -184,6 +196,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
                     }
                 }

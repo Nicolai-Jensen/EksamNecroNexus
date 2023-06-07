@@ -16,6 +16,7 @@ namespace NecroNexus
         
         public override bool ToRemove { get; set; }
         public override float Health { get; set; }
+        public override float Speed { get; set; }
 
         public override float SoulDrop { get; set; }
 
@@ -27,7 +28,7 @@ namespace NecroNexus
         /// <param name="pos">The SpawnPosition of the Object</param>
         public Grunt(Board board, Vector2 pos)
         {
-            speed = 70;
+            this.Speed = 70;
             baseDamage = 1;
             this.board = board;
             position = pos;
@@ -69,6 +70,9 @@ namespace NecroNexus
         {
             base.TakeDamage(damage); 
         }
-
+        public override void BecomeSlowed(Slow slow)
+        {
+            base.BecomeSlowed(slow);
+        }
     }
 }

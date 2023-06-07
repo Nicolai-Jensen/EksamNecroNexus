@@ -18,6 +18,8 @@ namespace NecroNexus
 
         public override float SoulDrop { get; set; }
 
+        public override float Speed {get; set;}
+
         /// <summary>
         /// Applies a Speed, basedamage, health, board, souldrop and adds the boards list to the Objects pathlist
         /// </summary>
@@ -76,6 +78,15 @@ namespace NecroNexus
                 trueValue.Value = 0;
             }
             base.TakeDamage(trueValue);
+        }
+        public override void BecomeSlowed(Slow slow)
+        {
+            Slow trueValue = slow;
+            if (slow.Type == SlowType.Slowed)
+            {
+                trueValue.Value = 0;
+            }
+            base.BecomeSlowed(trueValue);
         }
     }
 }
