@@ -156,38 +156,9 @@ namespace NecroNexus
             //Only checks which boxs contains the mouse after you have clicked, then i doesnt have to check very statement very time.
             if (previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
-                //For pressing the LoadGameButton
-                if (WhichMenuClicked == 0 && menuRec[1].Contains(currentMouse.X, currentMouse.Y))
+                //LoadGame
+                if (whichMenuClicked ==0 && menuRec[1].Contains(currentMouse.X, currentMouse.Y))
                 {
-
-                    case 4:
-                        if (placeHolderName[0] != "Empty")
-                        {
-                            game.LevelOne = new LevelOne(this.game, graphicsDevice, content, 1);
-                            game.LevelOne.Loaded = true;
-                            //game.Repository.Close();
-                            game.ChangeState(game.LevelOne);
-                        }
-                        break;
-                    case 5:
-                        if (placeHolderName[1] != "Empty")
-                        {
-                            game.LevelOne = new LevelOne(this.game, graphicsDevice, content, 2);
-                            game.LevelOne.Loaded = true;
-                            //game.Repository.Close();
-                            game.ChangeState(game.LevelOne);
-                        }
-                        break;
-                    case 6:
-                        if (placeHolderName[2] != "Empty")
-                        {
-                            game.LevelOne = new LevelOne(this.game, graphicsDevice, content, 3);
-                            game.LevelOne.Loaded = true;
-                            //game.Repository.Close();
-                            game.ChangeState(game.LevelOne);
-                        }
-                        break;
-
                     AudioEffect.ButtonClickingSound();
                     clickedStuff = 1;
                     whichMenuClicked = 1;
@@ -200,7 +171,7 @@ namespace NecroNexus
                         case 4:
                             if (placeHolderName[0] != "Empty")
                             {
-                                game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
+                                game.LevelOne = new LevelOne(this.game, graphicsDevice, content,1);
                                 game.LevelOne.Loaded = true;
                                 game.ChangeState(game.LevelOne);
                             }
@@ -208,7 +179,7 @@ namespace NecroNexus
                         case 5:
                             if (placeHolderName[1] != "Empty")
                             {
-                                game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
+                                game.LevelOne = new LevelOne(this.game, graphicsDevice, content,2);
                                 game.LevelOne.Loaded = true;
                                 game.ChangeState(game.LevelOne);
                             }
@@ -216,7 +187,7 @@ namespace NecroNexus
                         case 6:
                             if (placeHolderName[2] != "Empty")
                             {
-                                game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
+                                game.LevelOne = new LevelOne(this.game, graphicsDevice, content,3);
                                 game.LevelOne.Loaded = true;
                                 game.ChangeState(game.LevelOne);
                             }
@@ -243,13 +214,8 @@ namespace NecroNexus
                 // For pressing the tutorial button
                 if (whichMenuClicked == 0 && menuRec[15].Contains(currentMouse.X, currentMouse.Y))
                 {
-
-                    //game.Repository.Close();
-                    game.ChangeState(game.NewCharState);
-
                     clickedStuff = 4;
                     whichMenuClicked = 4;
-
                 }
                 //For pressing the Quit
                 if (WhichMenuClicked == 0 && menuRec[4].Contains(currentMouse.X, currentMouse.Y))
@@ -307,7 +273,6 @@ namespace NecroNexus
                     AudioEffect.ButtonClickingSound();
                     if (drawdiffent == 7 || drawdiffent == 8 || drawdiffent == 9)
                     {
-                        game.Repository.Close();
                         game.ChangeState(game.NewCharState);
                     }
 
