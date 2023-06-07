@@ -104,7 +104,7 @@ namespace NecroNexus
             menuRec[2] = new Rectangle(menuXPos + 100, menuYPos + 200, 600, 150);// 2 is for newgame.
             menuRec[3] = new Rectangle(menuXPos + 100, menuYPos + 375, 600, 150);// 3 is for options.
             menuRec[4] = new Rectangle(menuXPos + 100, menuYPos + 725, 600, 150);// 4 is for quitbutton
-            
+
             menuRec[5] = new Rectangle(menuXPos + 125, menuYPos + 750, 200, 100);//Backbutton
             menuRec[6] = new Rectangle(menuXPos + 475, menuYPos + 750, 200, 100);//LoadUser
             menuRec[7] = new Rectangle(menuXPos + 475, menuYPos + 750, 200, 100);//NewUser
@@ -475,6 +475,23 @@ namespace NecroNexus
                 case 4:
                     if (menuRec[5].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[6], menuRec[5], Color.LightGray); }//Back
                     else { spriteBatch.Draw(menuSprites[6], menuRec[5], Color.White); }//Back
+
+                    //WASD icons
+                    spriteBatch.Draw(menuSprites[18], new Vector2(560, 120), null, Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 0.91f);
+                    spriteBatch.DrawString(spriteFont, "Movement", new Vector2(850, 220), Color.White,0f, new Vector2(0,0),1f,SpriteEffects.None,0.91f );
+
+                    //Spacebar
+                    spriteBatch.Draw(menuSprites[19], new Vector2(560, 250), null, Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 0.91f);
+                    spriteBatch.DrawString(spriteFont, "Press and Hold to fire", new Vector2(850, 350), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.91f);
+
+                    //Mouse
+                    spriteBatch.Draw(menuSprites[20], new Vector2(650, 500), null, Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 0.91f);
+                    spriteBatch.DrawString(spriteFont, "Shooting Direction", new Vector2(600, 750), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.91f);
+
+                     //Mouse click
+                    spriteBatch.Draw(menuSprites[21], new Vector2(1050, 500), null, Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 0.91f);
+                    spriteBatch.DrawString(spriteFont, "Interation", new Vector2(1100, 750), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.91f);
+
                     break;
             }
 
