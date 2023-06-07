@@ -15,6 +15,7 @@ namespace NecroNexus
         private Vector2 position;
         private Vector2 velocity;
         private Damage damage;
+        private int hits;
 
         public override bool ToRemove { get; set; }
 
@@ -27,6 +28,7 @@ namespace NecroNexus
             this.tier = tier;
             this.position = position;
             this.velocity = velocity;
+            hits = 0;
 
             switch (this.tier)
             {
@@ -57,6 +59,10 @@ namespace NecroNexus
         public override void Update()
         {
             Move();
+            if (hits >=3) //Removes the explosion on a certain frame of its animation
+            {
+                ToRemove = true;
+            }
         }
 
         /// <summary>
@@ -82,12 +88,15 @@ namespace NecroNexus
         /// </summary>
         public void ApplyTierZero()
         {
+            
+            hits = 1;
             speed = 400f;
             damage = new Damage(DamageType.Physical, 1f);
         }
 
         private void ApplyTier1()
         {
+            hits = 0;
             speed = 450f;
             damage = new Damage(DamageType.Physical, 2f);
 
@@ -95,6 +104,7 @@ namespace NecroNexus
 
         private void ApplyTier2()
         {
+            hits = -1;
             speed = 500f;
             damage = new Damage(DamageType.Physical, 3f);
 
@@ -102,6 +112,7 @@ namespace NecroNexus
 
         private void ApplyTier3()
         {
+            hits = -2;
             speed = 550f;
             damage = new Damage(DamageType.Physical, 4f);
 
@@ -130,6 +141,7 @@ namespace NecroNexus
                         {
                             enemy.TakeDamage(damage);
                             enemy.AddToList(this.GameObject);
+                            hits++;
                         }
                     }
                     
@@ -140,6 +152,8 @@ namespace NecroNexus
                         {
                             enemy.TakeDamage(damage);
                             enemy.AddToList(this.GameObject);
+                            hits++;
+
                         }
                     }
                     else if (other.HasComponent<Knight>())
@@ -149,6 +163,8 @@ namespace NecroNexus
                         {
                             enemy.TakeDamage(damage);
                             enemy.AddToList(this.GameObject);
+                            hits++;
+
                         }
                     }
                     else if (other.HasComponent<HorseRider>())
@@ -158,6 +174,8 @@ namespace NecroNexus
                         {
                             enemy.TakeDamage(damage);
                             enemy.AddToList(this.GameObject);
+                            hits++;
+
                         }
                     }
                     else if (other.HasComponent<Cleric>())
@@ -167,6 +185,8 @@ namespace NecroNexus
                         {
                             enemy.TakeDamage(damage);
                             enemy.AddToList(this.GameObject);
+                            hits++;
+
                         }
                     }
                     else if (other.HasComponent<Paladin>())
@@ -176,6 +196,8 @@ namespace NecroNexus
                         {
                             enemy.TakeDamage(damage);
                             enemy.AddToList(this.GameObject);
+                            hits++;
+
                         }
                     }
                     else if (other.HasComponent<Valkyrie>())
@@ -185,6 +207,8 @@ namespace NecroNexus
                         {
                             enemy.TakeDamage(damage);
                             enemy.AddToList(this.GameObject);
+                            hits++;
+
                         }
                     }
                 }
