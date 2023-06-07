@@ -53,7 +53,7 @@ namespace NecroNexus
             AudioEffect.PlayBackgroundMus();
             try
             {
-                this.game.Repository.Open();
+                //this.game.Repository.Open();
                 game.Repository.CreateDatabaseTables();
             }
             catch (System.Exception)
@@ -159,6 +159,35 @@ namespace NecroNexus
                 //For pressing the LoadGameButton
                 if (WhichMenuClicked == 0 && menuRec[1].Contains(currentMouse.X, currentMouse.Y))
                 {
+
+                    case 4:
+                        if (placeHolderName[0] != "Empty")
+                        {
+                            game.LevelOne = new LevelOne(this.game, graphicsDevice, content, 1);
+                            game.LevelOne.Loaded = true;
+                            //game.Repository.Close();
+                            game.ChangeState(game.LevelOne);
+                        }
+                        break;
+                    case 5:
+                        if (placeHolderName[1] != "Empty")
+                        {
+                            game.LevelOne = new LevelOne(this.game, graphicsDevice, content, 2);
+                            game.LevelOne.Loaded = true;
+                            //game.Repository.Close();
+                            game.ChangeState(game.LevelOne);
+                        }
+                        break;
+                    case 6:
+                        if (placeHolderName[2] != "Empty")
+                        {
+                            game.LevelOne = new LevelOne(this.game, graphicsDevice, content, 3);
+                            game.LevelOne.Loaded = true;
+                            //game.Repository.Close();
+                            game.ChangeState(game.LevelOne);
+                        }
+                        break;
+
                     AudioEffect.ButtonClickingSound();
                     clickedStuff = 1;
                     whichMenuClicked = 1;
@@ -194,6 +223,7 @@ namespace NecroNexus
                             break;
                     }
                     return;
+
                 }
 
                 //For pressing new game
@@ -213,6 +243,10 @@ namespace NecroNexus
                 // For pressing the tutorial button
                 if (whichMenuClicked == 0 && menuRec[15].Contains(currentMouse.X, currentMouse.Y))
                 {
+
+                    //game.Repository.Close();
+                    game.ChangeState(game.NewCharState);
+
                     clickedStuff = 4;
                     whichMenuClicked = 4;
 
@@ -276,6 +310,7 @@ namespace NecroNexus
                         game.Repository.Close();
                         game.ChangeState(game.NewCharState);
                     }
+
                 }
             }
         }
@@ -288,7 +323,7 @@ namespace NecroNexus
         /// <param name="saveName"></param>
         public void ChangeNameLoadoneSaveone(string saveName)
         {
-            game.Repository.Open();
+            //game.Repository.Open();
             placeHolderName[0] = saveName;
             User user;
 
@@ -315,7 +350,7 @@ namespace NecroNexus
         /// <param name="saveName"></param>
         public void ChangeNameLoadtwoSavetwo(string saveName)
         {
-            game.Repository.Open();
+            //game.Repository.Open();
             placeHolderName[1] = saveName;
             User user;
             try
@@ -342,7 +377,7 @@ namespace NecroNexus
         /// <param name="saveName"></param>
         public void ChangeNameLoadthreeSavethree(string saveName)
         {
-            game.Repository.Open();
+            //game.Repository.Open();
             placeHolderName[2] = saveName;
             User user;
             try
