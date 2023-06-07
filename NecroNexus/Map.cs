@@ -55,8 +55,8 @@ namespace NecroNexus
             //Set one of the properties to true.
             //The path will get fixed and walls will be drawn.
             //Ex
-            WallEH = false;
-            WallBD = false;
+            WallEH = true;
+            WallBD = true;
 
             if (WallBD == true)
             {
@@ -69,16 +69,10 @@ namespace NecroNexus
             }
 
 
-            
-            
-
-
             Node<string> n = BFS<string>(graph1.NodesList.Find(x => x.Data == "A"),
                                          graph1.NodesList.Find(x => x.Data == "I"));
 
             
-            
-
             List<Node<string>> pathList = TrackPath<string>(n, graph1.NodesList.Find(x => x.Data == "A"));
             foreach (Node<string> pathNode in pathList)
             {

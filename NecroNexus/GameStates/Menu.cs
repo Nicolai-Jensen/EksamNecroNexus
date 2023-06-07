@@ -17,9 +17,9 @@ namespace NecroNexus
     public class Menu : State
     {
         //A Texture variable for our background
-        private Texture2D[] menuSprites = new Texture2D[17];
+        private Texture2D[] menuSprites = new Texture2D[24];
         //Rectangel array for all the menu items used for size and placement
-        private Rectangle[] menuRec = new Rectangle[16];
+        private Rectangle[] menuRec = new Rectangle[18];
         private SpriteFont spriteFont;// for the text
         private string[] placeHolderName = { "Empty", "Empty", "Empty" };//Where the username is stored
         private int clickedStuff = 0;// Which menu has been clicked 
@@ -34,7 +34,7 @@ namespace NecroNexus
         //Used to see which newgame or loadgame has been clicked
         public int Drawdiffent { get { return drawdiffent; } }
         //Used to reset the menu when called from PauseMenuState
-        public int ClickedStuff{get { return clickedStuff; } set { clickedStuff = value; }}
+        public int ClickedStuff { get { return clickedStuff; } set { clickedStuff = value; } }
         //Used to reset the menu when called from PauseMenuState
         public int WhichMenuClicked { get { return whichMenuClicked; } set { whichMenuClicked = value; } }
 
@@ -43,7 +43,7 @@ namespace NecroNexus
         /// </summary>
         public Menu(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
-            
+
 
         }
         /// <summary>
@@ -99,12 +99,12 @@ namespace NecroNexus
             menuSprites[6] = content.Load<Texture2D>("placeholdersprites/UI/BackBut");//Go back in the menu Button
             menuSprites[7] = content.Load<Texture2D>("placeholdersprites/UI/LoadBut");//Load the user Button.
             menuSprites[8] = content.Load<Texture2D>("placeholdersprites/UI/NewBut");//Make a new user Button.
-            int preYpos = menuYPos;
-            for (int i = 1; i <= 4; i++)//places the first 4 buttons
-            {
-                preYpos += 175;
-                menuRec[i] = new Rectangle(menuXPos + 100, preYpos, 600, 150); // 1 is for loadgame. 2 is for newgame. 3 is for options. 4 is for quitbutton
-            }
+
+            menuRec[1] = new Rectangle(menuXPos + 100, menuYPos + 25, 600, 150);// 1 is for loadgame.
+            menuRec[2] = new Rectangle(menuXPos + 100, menuYPos + 200, 600, 150);// 2 is for newgame.
+            menuRec[3] = new Rectangle(menuXPos + 100, menuYPos + 375, 600, 150);// 3 is for options.
+            menuRec[4] = new Rectangle(menuXPos + 100, menuYPos + 725, 600, 150);// 4 is for quitbutton
+
             menuRec[5] = new Rectangle(menuXPos + 125, menuYPos + 750, 200, 100);//Backbutton
             menuRec[6] = new Rectangle(menuXPos + 475, menuYPos + 750, 200, 100);//LoadUser
             menuRec[7] = new Rectangle(menuXPos + 475, menuYPos + 750, 200, 100);//NewUser
@@ -131,6 +131,13 @@ namespace NecroNexus
             }
             //Background for the menu, placeholder for now, change if we get another picture.
             menuSprites[16] = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedPlain");
+            menuSprites[17] = content.Load<Texture2D>("placeholdersprites/UI/UITextElements/TutorialBut");
+            //TutorialBut
+            menuRec[15] = new Rectangle(menuXPos + 100, menuYPos + 550, 600, 150);
+            menuSprites[18] = content.Load<Texture2D>("placeholdersprites/UI/UITextElements/WASD-Keys-Image");
+            menuSprites[19] = content.Load<Texture2D>("placeholdersprites/UI/UITextElements/Space-Keys-Image");
+            menuSprites[20] = content.Load<Texture2D>("placeholdersprites/UI/UITextElements/Mouse-Image");
+            menuSprites[21] = content.Load<Texture2D>("placeholdersprites/UI/UITextElements/Mouse-Clicked-Image");
         }
 
         /// <summary>
@@ -147,18 +154,13 @@ namespace NecroNexus
         /// </summary>
         private void ClickingOnMenu()
         {
-            //For pressing the LoadGameButton
-            if (WhichMenuClicked == 0 && menuRec[1].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+            //Only checks which boxs contains the mouse after you have clicked, then i doesnt have to check very statement very time.
+            if (previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
-                AudioEffect.ButtonClickingSound();
-                clickedStuff = 1;
-                whichMenuClicked = 1;
-            }
-            // Loading the game with a user name and for pressing the LoadGameButton
-            if (WhichMenuClicked == 1 && menuRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                switch (drawdiffent)
+                //For pressing the LoadGameButton
+                if (WhichMenuClicked == 0 && menuRec[1].Contains(currentMouse.X, currentMouse.Y))
                 {
+
                     case 4:
                         if (placeHolderName[0] != "Empty")
                         {
@@ -186,82 +188,130 @@ namespace NecroNexus
                             game.ChangeState(game.LevelOne);
                         }
                         break;
-                }
-                return;
-            }
 
-            //For pressing new game
-            if (WhichMenuClicked == 0 && menuRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                clickedStuff = 2;
-                whichMenuClicked = 2;
-            }
-            //For pressing options.
-            if (WhichMenuClicked == 0 && menuRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                clickedStuff = 3;
-                whichMenuClicked = 3;
-            }
-            //For pressing the Quit
-            if (WhichMenuClicked == 0 && menuRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                game.Repository.Close();
-                game.Exit();
-            }
-            //For pressing the back Button
-            if (menuRec[5].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                clickedStuff = 0;
-                whichMenuClicked = 0;
-            }
-            //1 loadGameBut
-            if (WhichMenuClicked == 1 && menuRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                drawdiffent = 4;
-            }
-            //2 loadGameBut
-            if (WhichMenuClicked == 1 && menuRec[10].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                drawdiffent = 5;
-            }
-            //3 loadGamebut
-            if (WhichMenuClicked == 1 && menuRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                drawdiffent = 6;
-            }
-            //1 newGameBut
-            if (WhichMenuClicked == 2 && menuRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                drawdiffent = 7;
-            }
-            //2 newGameBut
-            if (WhichMenuClicked == 2 && menuRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                drawdiffent = 8;
-            }
-            //3 newGameBut
-            if (WhichMenuClicked == 2 && menuRec[14].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                drawdiffent = 9;
-            }
-            // when pressing new button in newgame
-            if (menuRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                AudioEffect.ButtonClickingSound();
-                if (drawdiffent == 7 || drawdiffent == 8 || drawdiffent == 9)
+                    AudioEffect.ButtonClickingSound();
+                    clickedStuff = 1;
+                    whichMenuClicked = 1;
+                }
+                // Loading the game with a user name and for pressing the LoadGameButton
+                if (WhichMenuClicked == 1 && menuRec[6].Contains(currentMouse.X, currentMouse.Y))
                 {
+                    switch (drawdiffent)
+                    {
+                        case 4:
+                            if (placeHolderName[0] != "Empty")
+                            {
+                                game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
+                                game.LevelOne.Loaded = true;
+                                game.ChangeState(game.LevelOne);
+                            }
+                            break;
+                        case 5:
+                            if (placeHolderName[1] != "Empty")
+                            {
+                                game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
+                                game.LevelOne.Loaded = true;
+                                game.ChangeState(game.LevelOne);
+                            }
+                            break;
+                        case 6:
+                            if (placeHolderName[2] != "Empty")
+                            {
+                                game.LevelOne = new LevelOne(this.game, graphicsDevice, content);
+                                game.LevelOne.Loaded = true;
+                                game.ChangeState(game.LevelOne);
+                            }
+                            break;
+                    }
+                    return;
+
+                }
+
+                //For pressing new game
+                if (WhichMenuClicked == 0 && menuRec[2].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    clickedStuff = 2;
+                    whichMenuClicked = 2;
+                }
+                //For pressing options.
+                if (WhichMenuClicked == 0 && menuRec[3].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    clickedStuff = 3;
+                    whichMenuClicked = 3;
+                }
+                // For pressing the tutorial button
+                if (whichMenuClicked == 0 && menuRec[15].Contains(currentMouse.X, currentMouse.Y))
+                {
+
                     //game.Repository.Close();
                     game.ChangeState(game.NewCharState);
+
+                    clickedStuff = 4;
+                    whichMenuClicked = 4;
+
+                }
+                //For pressing the Quit
+                if (WhichMenuClicked == 0 && menuRec[4].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    game.Repository.Close();
+                    game.Exit();
+                }
+                //For pressing the back Button
+                if (menuRec[5].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    clickedStuff = 0;
+                    whichMenuClicked = 0;
+                }
+                //1 loadGameBut
+                if (WhichMenuClicked == 1 && menuRec[9].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    drawdiffent = 4;
+                }
+                //2 loadGameBut
+                if (WhichMenuClicked == 1 && menuRec[10].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    drawdiffent = 5;
+                }
+                //3 loadGamebut
+                if (WhichMenuClicked == 1 && menuRec[11].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    drawdiffent = 6;
+                }
+                //1 newGameBut
+                if (WhichMenuClicked == 2 && menuRec[12].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    drawdiffent = 7;
+                }
+                //2 newGameBut
+                if (WhichMenuClicked == 2 && menuRec[13].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    drawdiffent = 8;
+                }
+                //3 newGameBut
+                if (WhichMenuClicked == 2 && menuRec[14].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    drawdiffent = 9;
+                }
+                // when pressing new button in newgame
+                if (menuRec[7].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    AudioEffect.ButtonClickingSound();
+                    if (drawdiffent == 7 || drawdiffent == 8 || drawdiffent == 9)
+                    {
+                        game.Repository.Close();
+                        game.ChangeState(game.NewCharState);
+                    }
+
                 }
             }
         }
@@ -277,7 +327,7 @@ namespace NecroNexus
             //game.Repository.Open();
             placeHolderName[0] = saveName;
             User user;
-            
+
             try
             {
                 user = game.Repository.ReadUser(1);
@@ -291,7 +341,7 @@ namespace NecroNexus
             {
                 game.Repository.UpdateUser(1, saveName);
             }
-            else { game.Repository.AddUser(placeHolderName[0]); }   
+            else { game.Repository.AddUser(placeHolderName[0]); }
         }
         /// <summary>
         /// When called it takes the second slot and changes the name.
@@ -318,7 +368,7 @@ namespace NecroNexus
                 game.Repository.UpdateUser(2, saveName);
             }
             else { game.Repository.AddUser(placeHolderName[1]); }
-            
+
         }
         /// <summary>
         /// When called it takes the thrid slot and changes the name.
@@ -345,7 +395,7 @@ namespace NecroNexus
                 game.Repository.UpdateUser(3, saveName);
             }
             else { game.Repository.AddUser(placeHolderName[2]); }
-            
+
         }
         /// <summary>
         /// Handels the drawing of the UI. It calls another methode, DrawingMenu to make it eaiser on the eyes to read.
@@ -374,6 +424,8 @@ namespace NecroNexus
                         if (menuRec[i].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[i], menuRec[i], Color.LightGray); }
                         else { spriteBatch.Draw(menuSprites[i], menuRec[i], Color.White); }
                     }
+                    if (menuRec[15].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[17], menuRec[15], Color.LightGray); }
+                    else { spriteBatch.Draw(menuSprites[17], menuRec[15], Color.White); }
                     break;
                 #region LoadGame Button
                 case 1://LoadGame
@@ -446,7 +498,28 @@ namespace NecroNexus
                     break;
                 #endregion
                 case 3://Options
-                    spriteBatch.Draw(menuSprites[6], menuRec[5], Color.White);
+                    if (menuRec[5].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[6], menuRec[5], Color.LightGray); }//Back
+                    else { spriteBatch.Draw(menuSprites[6], menuRec[5], Color.White); }//Back
+                    break;
+                case 4:
+                    if (menuRec[5].Contains(currentMouse.X, currentMouse.Y)) { spriteBatch.Draw(menuSprites[6], menuRec[5], Color.LightGray); }//Back
+                    else { spriteBatch.Draw(menuSprites[6], menuRec[5], Color.White); }//Back
+
+                    //WASD icons
+                    spriteBatch.Draw(menuSprites[18], new Vector2(560, 120), null, Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 0.91f);
+                    spriteBatch.DrawString(spriteFont, "Movement", new Vector2(850, 220), Color.White,0f, new Vector2(0,0),1f,SpriteEffects.None,0.91f );
+
+                    //Spacebar
+                    spriteBatch.Draw(menuSprites[19], new Vector2(560, 250), null, Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 0.91f);
+                    spriteBatch.DrawString(spriteFont, "Press and Hold to fire", new Vector2(850, 350), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.91f);
+
+                    //Mouse
+                    spriteBatch.Draw(menuSprites[20], new Vector2(650, 500), null, Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 0.91f);
+                    spriteBatch.DrawString(spriteFont, "Shooting Direction", new Vector2(600, 750), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.91f);
+
+                     //Mouse click
+                    spriteBatch.Draw(menuSprites[21], new Vector2(1050, 500), null, Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 0.91f);
+                    spriteBatch.DrawString(spriteFont, "Interation", new Vector2(1100, 750), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.91f);
 
                     break;
             }

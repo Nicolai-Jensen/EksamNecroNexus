@@ -175,7 +175,7 @@ namespace NecroNexus
 
             if (map.WallBD == true)
             {
-                spriteBatch.Draw(BackgroundWall1, BDWallPos, null, Color.White, 0f, new Vector2(BackgroundWall1.Width / 2f , BackgroundWall1.Height / 2f), 1f, SpriteEffects.None, 0.99f);
+                spriteBatch.Draw(BackgroundWall1, BDWallPos, null, Color.White, 0f, new Vector2(BackgroundWall1.Width / 2f , BackgroundWall1.Height / 2f), 1f, SpriteEffects.None, 0.61f);
             }
 
             //EH wall
@@ -183,7 +183,7 @@ namespace NecroNexus
 
             if (map.WallEH == true)
             {
-                spriteBatch.Draw(BackgroundWall1, EHWallPos, null, Color.White, 0f, new Vector2(BackgroundWall1.Width / 2f, BackgroundWall1.Height / 2f), 1f, SpriteEffects.None, 0.99f);
+                spriteBatch.Draw(BackgroundWall1, EHWallPos, null, Color.White, 0f, new Vector2(BackgroundWall1.Width / 2f, BackgroundWall1.Height / 2f), 1f, SpriteEffects.None, 0.61f);
             }
 
 

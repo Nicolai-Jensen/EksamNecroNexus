@@ -2529,6 +2529,66 @@
 /processorParam:TextureFormat=Compressed
 /build:placeholdersprites/UI/UITextElements/File.spritefont
 
+#begin placeholdersprites/UI/UITextElements/Mouse-Clicked-Image.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UITextElements/Mouse-Clicked-Image.png
+
+#begin placeholdersprites/UI/UITextElements/Mouse-Image.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UITextElements/Mouse-Image.png
+
+#begin placeholdersprites/UI/UITextElements/Space-Keys-Image.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UITextElements/Space-Keys-Image.png
+
+#begin placeholdersprites/UI/UITextElements/TutorialBut.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UITextElements/TutorialBut.png
+
+#begin placeholdersprites/UI/UITextElements/WASD-Keys-Image.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:placeholdersprites/UI/UITextElements/WASD-Keys-Image.png
+
 #begin placeholdersprites/UI/UpgradeLevelOne.png
 /importer:TextureImporter
 /processor:TextureProcessor
