@@ -42,10 +42,10 @@ namespace NecroNexus
         }
         public override void Start()
         {
-            if (loaded == false)
-            {
-                GameObject.Transform.Translate(Position);
-            }
+            //if (loaded == false)
+            //{
+            //    GameObject.Transform.Translate(Position);
+            //}
             GameObject.Tag = "Brute";
 
             base.Start();
