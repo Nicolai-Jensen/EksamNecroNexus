@@ -174,15 +174,13 @@ namespace NecroNexus
                 {
                     AudioEffect.ButtonClickingSound();
                     if (GetSouls >= 20) { GetSouls -= 20; menuButClicked = 0; presseddowntopleft[1] = true; } else { return; }
-
                 }
-                //Brute
-                if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-                {
-                    AudioEffect.ButtonClickingSound();
-                    if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; } else { return; }
-
-                }
+                ////Brute
+                //if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                //{
+                //    AudioEffect.ButtonClickingSound();
+                //    if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; } else { return; }
+                //}
                 //Demon
                 if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
@@ -243,7 +241,6 @@ namespace NecroNexus
                     }
                     else // if an icon and the upgrade button has been clicked
                     {
-                        menuButClicked = 0;
                         switch (whichUpgradeClicked)
                         {
                             case 1://Skeleton Archer Upgrade.
@@ -253,6 +250,7 @@ namespace NecroNexus
                                         if (GetSouls >= 10)
                                         {
                                             GetSouls -= 10;
+                                            menuButClicked = 0;
                                             foreach (var item in LevelOne.gameObjects)
                                             {
                                                 if (item.Tag == "Archer")
@@ -267,6 +265,7 @@ namespace NecroNexus
                                         if (GetSouls >= 20)
                                         {
                                             GetSouls -= 20;
+                                            menuButClicked = 0;
                                             foreach (var item in LevelOne.gameObjects)
                                             {
                                                 if (item.Tag == "Archer")
@@ -281,6 +280,7 @@ namespace NecroNexus
                                         if (GetSouls >= 30)
                                         {
                                             GetSouls -= 30;
+                                            menuButClicked = 0;
                                             foreach (var item in LevelOne.gameObjects)
                                             {
                                                 if (item.Tag == "Archer")
@@ -293,7 +293,6 @@ namespace NecroNexus
                                         break;
                                 }
                                 break;
-
                             case 2: //Hex Upgrade.
                                 switch (hx.Tier)
                                 {
@@ -301,6 +300,7 @@ namespace NecroNexus
                                         if (GetSouls >= 10)
                                         {
                                             GetSouls -= 10;
+                                            menuButClicked = 0;
                                             foreach (var item in LevelOne.gameObjects)
                                             {
                                                 if (item.Tag == "Hex")
@@ -315,6 +315,7 @@ namespace NecroNexus
                                         if (GetSouls >= 20)
                                         {
                                             GetSouls -= 20;
+                                            menuButClicked = 0;
                                             foreach (var item in LevelOne.gameObjects)
                                             {
                                                 if (item.Tag == "Hex")
@@ -329,6 +330,7 @@ namespace NecroNexus
                                         if (GetSouls >= 30)
                                         {
                                             GetSouls -= 30;
+                                            menuButClicked = 0;
                                             foreach (var item in LevelOne.gameObjects)
                                             {
                                                 if (item.Tag == "Hex")
@@ -342,55 +344,58 @@ namespace NecroNexus
 
                                 }
                                 break;
-                            case 3: //Skeleton Brute Upgrade.
-                                bt = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
-                                switch (bt.Tier)
-                                {
+                            //case 3: //Skeleton Brute Upgrade.
+                            //    bt = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
+                            //    switch (bt.Tier)
+                            //    {
 
-                                    case 0: //level 0 to 1.
-                                        if (GetSouls >= 20)
-                                        {
-                                            GetSouls -= 20;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Brute")
-                                                {
-                                                    bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
-                                                    bt.SetTier(1);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    case 1: //level 1 to 2.
-                                        if (GetSouls >= 30)
-                                        {
-                                            GetSouls -= 30;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Brute")
-                                                {
-                                                    bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
-                                                    bt.SetTier(2);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    case 2: //level 2 to 3.
-                                        if (GetSouls >= 50)
-                                        {
-                                            GetSouls -= 50;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Brute")
-                                                {
-                                                    bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
-                                                    bt.SetTier(3);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                }
-                                break;
+                            //        case 0: //level 0 to 1.
+                            //            if (GetSouls >= 20)
+                            //            {
+                            //                GetSouls -= 20;
+                            //                menuButClicked = 0;
+                            //                foreach (var item in LevelOne.gameObjects)
+                            //                {
+                            //                    if (item.Tag == "Brute")
+                            //                    {
+                            //                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                            //                        bt.SetTier(1);
+                            //                    }
+                            //                }
+                            //            }
+                            //            break;
+                            //        case 1: //level 1 to 2.
+                            //            if (GetSouls >= 30)
+                            //            {
+                            //                GetSouls -= 30;
+                            //                menuButClicked = 0;
+                            //                foreach (var item in LevelOne.gameObjects)
+                            //                {
+                            //                    if (item.Tag == "Brute")
+                            //                    {
+                            //                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                            //                        bt.SetTier(2);
+                            //                    }
+                            //                }
+                            //            }
+                            //            break;
+                            //        case 2: //level 2 to 3.
+                            //            if (GetSouls >= 50)
+                            //            {
+                            //                GetSouls -= 50;
+                            //                menuButClicked = 0;
+                            //                foreach (var item in LevelOne.gameObjects)
+                            //                {
+                            //                    if (item.Tag == "Brute")
+                            //                    {
+                            //                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                            //                        bt.SetTier(3);
+                            //                    }
+                            //                }
+                            //            }
+                            //            break;
+                            //    }
+                            //    break;
                             case 4: //Demon Upgrade.
                                 switch (dm.Tier)
                                 {
@@ -399,6 +404,7 @@ namespace NecroNexus
                                         if (GetSouls >= 20)
                                         {
                                             GetSouls -= 20;
+                                            menuButClicked = 0;
                                             foreach (var item in LevelOne.gameObjects)
                                             {
                                                 if (item.Tag == "Demon")
@@ -413,6 +419,7 @@ namespace NecroNexus
                                         if (GetSouls >= 30)
                                         {
                                             GetSouls -= 30;
+                                            menuButClicked = 0;
                                             foreach (var item in LevelOne.gameObjects)
                                             {
                                                 if (item.Tag == "Demon")
@@ -427,6 +434,7 @@ namespace NecroNexus
                                         if (GetSouls >= 50)
                                         {
                                             GetSouls -= 50;
+                                            menuButClicked = 0;
                                             foreach (var item in LevelOne.gameObjects)
                                             {
                                                 if (item.Tag == "Demon")
@@ -443,13 +451,14 @@ namespace NecroNexus
                                 switch (nc.Tier)
                                 {
                                     case 0: //level 0 to 1.
-                                        if (GetSouls >= 10) { GetSouls -= 10; nc.Tier = 1; } else { menuButClicked = 3; }
+                                        if (GetSouls >= 10) { GetSouls -= 10; nc.Tier = 1; menuButClicked = 0; }
                                         break;
                                     case 1: //level 1 to 2.
-                                        if (GetSouls >= 20) { GetSouls -= 20; nc.Tier = 2; } else { menuButClicked = 3; }
+
+                                        if (GetSouls >= 20) { GetSouls -= 20; nc.Tier = 2; menuButClicked = 0; }
                                         break;
                                     case 2: //level 2 to 3.
-                                        if (GetSouls >= 30) { GetSouls -= 30; nc.Tier = 3; } else { menuButClicked = 3; }
+                                        if (GetSouls >= 30) { GetSouls -= 30; nc.Tier = 3; menuButClicked = 0; }
                                         break;
                                 }
                                 break;
@@ -749,7 +758,7 @@ namespace NecroNexus
                             }
                             break;
                         case 3://Brute
-                            spriteBatch.DrawString(showLevelInfo, "Unavaible", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, "Unavaible", new Vector2(1200, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
 
                             switch (brute.Tier)
                             {
@@ -804,14 +813,18 @@ namespace NecroNexus
                                 case 0:
                                     spriteBatch.Draw(upgradeSpritesArray[16], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                                     spriteBatch.DrawString(showLevelInfo, 10.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "+ Homing", new Vector2(950, 625), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                                     break;
                                 case 1:
                                     spriteBatch.Draw(upgradeSpritesArray[17], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                                     spriteBatch.DrawString(showLevelInfo, 20.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "+ Damage", new Vector2(950, 625), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "+ Double", new Vector2(950, 650), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                                     break;
                                 case 2:
                                     spriteBatch.Draw(upgradeSpritesArray[18], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                                     spriteBatch.DrawString(showLevelInfo, 30.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "+ Damage", new Vector2(950, 625), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                                     break;
                                 case 3:
                                     spriteBatch.Draw(upgradeSpritesArray[19], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
