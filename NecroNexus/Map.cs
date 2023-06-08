@@ -4,28 +4,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace NecroNexus
 {
     public class Map
     {
-        
 
-        /*  Vi bygger graph1 instansen af Graph, som mapper ruten for bane nr 1. 
-            Det er rammen som holder på vores noder og edges i denne bane.
-            dvs at både noder og edges også bliver kreeret i denne metode.
-            Heads up: Graph klassen er generisk.
-            
-
-            
-        */
+        public bool WallBD { get; set; }
+        public bool WallEH { get; set; }
         public List<Node<string>> Graph1()
         {
+
+
             //instans af graph:
             Graph<string> graph1 = new Graph<string>();
 
+
             //nye nodes bundet op på den nye instans:
-            
+
             graph1.AddNode("A", new Vector2(1725, 0)); //0 - Spawn
             graph1.AddNode("B", new Vector2(1575, 175)); //1
             graph1.AddNode("C", new Vector2(1700, 500)); //2 (off track triangle)
@@ -38,24 +36,43 @@ namespace NecroNexus
 
             //Nye edges med udgangspunkt i noderne:
             //Main track (No walls on map) Nodes:(A,B,D,E,H,I)
-            graph1.AddNewEdge("A", "B");
-            graph1.AddNewEdge("B", "D");
-            graph1.AddNewEdge("D", "E");
-            graph1.AddNewEdge("E", "H");
-            graph1.AddNewEdge("H", "I");
+            graph1.AddNewEdge("A", "B", false);
+            graph1.AddNewEdge("B", "D", false);
+            graph1.AddNewEdge("D", "E", false);
+            graph1.AddNewEdge("E", "H", false);
+            graph1.AddNewEdge("H", "I", false);
 
             //off track Triangle (B,D Wall) Nodes:(C)
-            graph1.AddNewEdge("B", "C");
-            graph1.AddNewEdge("C", "D");
+            graph1.AddNewEdge("B", "C", false);
+            graph1.AddNewEdge("C", "D", false);
 
             //off track Rectangle (E,H Wall) Nodes: (F,G)
-            graph1.AddNewEdge("E", "F");
-            graph1.AddNewEdge("F", "G");
-            graph1.AddNewEdge("G", "H");
+            graph1.AddNewEdge("E", "F", false);
+            graph1.AddNewEdge("F", "G", false);
+            graph1.AddNewEdge("G", "H", false);
+
+            //Building walls:
+            //Set one of the properties to true.
+            //The path will get fixed and walls will be drawn.
+            //Ex
+            WallEH = true;
+            WallBD = true;
+
+            if (WallBD == true)
+            {
+                graph1.BuildWall("B", "D", true);
+            }
+
+            if (WallEH == true)
+            {
+                graph1.BuildWall("E", "H", true);
+            }
+
 
             Node<string> n = BFS<string>(graph1.NodesList.Find(x => x.Data == "A"),
                                          graph1.NodesList.Find(x => x.Data == "I"));
 
+            
             List<Node<string>> pathList = TrackPath<string>(n, graph1.NodesList.Find(x => x.Data == "A"));
             foreach (Node<string> pathNode in pathList)
             {
@@ -92,12 +109,13 @@ namespace NecroNexus
         private static Node<T> BFS<T>(Node<T> start, Node<T> goal)
         {
             Queue<Edge<T>> edgesStack = new Queue<Edge<T>>();
-            edgesStack.Enqueue(new Edge<T>(start, start));
+            edgesStack.Enqueue(new Edge<T>(start, start, false));
 
             while (edgesStack.Count > 0)
             {
                 Edge<T> edge = edgesStack.Dequeue();
                 
+                //edited
                 if (!edge.To.Discovered)
                 {
                     // Er edgen discovered og hvem er dens parent?:
@@ -111,7 +129,7 @@ namespace NecroNexus
 
                 foreach (Edge<T> e in edge.To.EdgesList)
                 {
-                    if (!e.To.Discovered)
+                    if (!e.To.Discovered && !e.WallBuilt)
                     {
                         edgesStack.Enqueue(e);
                     }
@@ -139,6 +157,9 @@ namespace NecroNexus
 
             return pathList;
         }
+
+        
+       
 
 
     }

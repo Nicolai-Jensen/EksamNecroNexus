@@ -13,10 +13,21 @@ namespace NecroNexus
         //A Texture variable for our background
         private Texture2D BackgroundFront;
         private Texture2D BackgroundPlain;
+        private Texture2D BackgroundWall1;
+        
+
+        //Drawing walls
+
+        public Vector2 BDWallPos;
+        public Vector2 EHWallPos;
+        float amount = 0.5f;
+
 
         //Adds the needed classes to LevelOne
         public static Board boardOne;
-        public static GameSaveLevelOne level;
+        public LvlOneEnemies level;
+        public SaveSystem levelSave;
+        //public static GameSaveLevelOne level;
         private Map map;
         private AutoSave autoSave;
         private SummonFactory summons;
@@ -42,34 +53,33 @@ namespace NecroNexus
         private KeyboardState currentKey;
         private KeyboardState previousKey;
 
+        public int LevelID { get; set; } = 1;
+        public string LevelName { get; set; } = "Graveyard";
 
         /// <summary>
         /// The States Constructor which applies the picture that is shown
         /// </summary>
-        public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
+        public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content, int user) : base(game, graphicsDevice, content)
         {
             map = new Map(); //Adds the map
             boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2)); //Adds a Board
             summons = new SummonFactory(); //Adds a SummonFactory
-            boardOne.LevelOneBoard(map.ReturnPos(map.Graph1())); //Sets the the board by adding the correct vector2 list gotten through pathfinding the nodes
-            level = new GameSaveLevelOne(boardOne, game.Repository, this); //Adds the Levels save
-            autoSave = new AutoSave(level); //Instaniates the AutoSave
+            boardOne.LevelOneBoard(map.ReturnPos(map.Graph1())); //Sets the board by adding the correct vector2 list gotten through pathfinding the nodes
+            level = new LvlOneEnemies(boardOne);
+            levelSave = new SaveSystem(level, game.Repository, this);
+            //level = new GameSaveLevelOne(boardOne, game.Repository, this); //Adds the Levels save
+            autoSave = new AutoSave(levelSave); //Instaniates the AutoSave
             drawingLevel = new DrawingLevel(game,this);
             foreach (var item in gameObjects)//Removes any lasting gameObjects from previous iterations of LevelOne
             {
                 RemoveObject(item);
             }
+            Cleanup();
+            CurrentUser = user;
         }
 
         public override void Initialize()
         {
-            game.Repository.Open();//Opens the Repository Connection
-            if (Loaded == true) //Loads a game if you chose Load
-            {
-                level.LoadGame();
-            }
-            autoSave.Start(); //Starts the AutoSave Thread
-
             //Builds the Necromancer and sets one of each tower outside of the screen to reference
             Director director = new Director(new NecroBuilder());
             gameObjects.Add(summons.Create(SummonType.SkeletonArcher, new Vector2(-3000, -3000)));
@@ -77,7 +87,18 @@ namespace NecroNexus
             gameObjects.Add(summons.Create(SummonType.Hex, new Vector2(-3000, -3000)));
             gameObjects.Add(summons.Create(SummonType.Demon, new Vector2(-3000, -3000)));
             gameObjects.Add(director.Construct());
+            InputHandler.Instance.AttachPlayer((Necromancer)FindObjectOfType<Necromancer>());
 
+            levelSave.UpdateValues();
+
+            //game.Repository.Open();//Opens the Repository Connection
+            if (Loaded == true) //Loads a game if you chose Load
+            {
+                levelSave.LoadGame();
+                Cleanup();
+            }
+            
+            autoSave.Start(); //Starts the AutoSave Thread
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -89,8 +110,11 @@ namespace NecroNexus
         /// </summary>
         public override void LoadContent()
         {
+           
+
             BackgroundFront = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedFront");
             BackgroundPlain = content.Load<Texture2D>("Backgrounds/NecroBackgroundUpdatedPlain");
+            BackgroundWall1 = content.Load<Texture2D>("Backgrounds/NecroWall");
 
             drawingLevel.LoadContent(content);
 
@@ -145,6 +169,23 @@ namespace NecroNexus
             drawingLevel.DrawingUI(spriteBatch);
 
             spriteBatch.Draw(BackgroundPlain, new Vector2(0, 0), null, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.1f);
+
+            //BD wall
+            BDWallPos = Vector2.Lerp(new Vector2(1575, 175), new Vector2(1400, 225), amount);
+
+            if (map.WallBD == true)
+            {
+                spriteBatch.Draw(BackgroundWall1, BDWallPos, null, Color.White, 0f, new Vector2(BackgroundWall1.Width / 2f , BackgroundWall1.Height / 2f), 1f, SpriteEffects.None, 0.61f);
+            }
+
+            //EH wall
+            EHWallPos = Vector2.Lerp(new Vector2(700, 225), new Vector2(700, 625), amount);
+
+            if (map.WallEH == true)
+            {
+                spriteBatch.Draw(BackgroundWall1, EHWallPos, null, Color.White, 0f, new Vector2(BackgroundWall1.Width / 2f, BackgroundWall1.Height / 2f), 1f, SpriteEffects.None, 0.61f);
+            }
+
 
             for (int i = 0; i < gameObjects.Count; i++)
             {

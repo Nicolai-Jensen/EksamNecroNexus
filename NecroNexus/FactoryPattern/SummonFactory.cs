@@ -66,6 +66,44 @@ namespace NecroNexus
             return go;
 
         }
+
+        public GameObject CreateFromLoad(Enum type, Vector2 position)
+        {
+            GameObject go = new GameObject();
+            SpriteRenderer sr = (SpriteRenderer)go.AddComponent(new SpriteRenderer());
+            Animator animator = (Animator)go.AddComponent(new Animator());
+
+            switch (type)
+            {
+                case SummonType.SkeletonArcher:
+                    sr.SetSprite("Summons/SkeletonArcher/tile000", 2.5f, 0, 0.6f);
+                    animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/SkeletonArcher/tile000", "Summons/SkeletonArcher/tile001", "Summons/SkeletonArcher/tile002", "Summons/SkeletonArcher/tile003" }));
+                    go.AddComponent(new SkeletonArcher(true, position, 250f, 1f));
+                    break;
+
+                case SummonType.SkeletonBrute:
+                    sr.SetSprite("Summons/SkeletonBrute/tile000", 2f, 0, 0.6f);
+                    animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/SkeletonBrute/tile000", "Summons/SkeletonBrute/tile001", "Summons/SkeletonBrute/tile002", "Summons/SkeletonBrute/tile003" }));
+                    go.AddComponent(new SkeletonBrute(position, 0f, 0f));
+                    break;
+
+                case SummonType.Hex:
+                    sr.SetSprite("Summons/Hex/tile000", 2.5f, 0, 0.6f);
+                    animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/Hex/tile000", "Summons/Hex/tile001", "Summons/Hex/tile002", "Summons/Hex/tile003" }));
+                    go.AddComponent(new Hex(position, 175f, 2f));
+                    break;
+
+                case SummonType.Demon:
+                    sr.SetSprite("Summons/Demon/tile000", 2.5f, 0, 0.6f);
+                    animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/Demon/tile000", "Summons/Demon/tile001", "Summons/Demon/tile002", "Summons/Demon/tile003", "Summons/Demon/tile004", "Summons/Demon/tile005", "Summons/Demon/tile005", "Summons/Demon/tile006", "Summons/Demon/tile007" }));
+                    go.AddComponent(new Demon(position, 200f, 4f));
+                    break;
+
+            }
+
+            return go;
+        }
+
         /// <summary>
         /// A method used for Building our animation for when we add an animation to our animator for our GameObject
         /// </summary>

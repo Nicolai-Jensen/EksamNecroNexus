@@ -31,6 +31,7 @@ namespace NecroNexus
         private Necromancer nc;
         private SkeletonArcher sk;
         private Hex hx;
+        private SkeletonBrute brute;
         private Demon dm;
         private SkeletonBrute bt;
         private SummonFactory summons;
@@ -125,6 +126,12 @@ namespace NecroNexus
             currentMouse = Mouse.GetState();//enables you to click with the currentMouse
             CheckingIfClicked();
 
+            nc = (Necromancer)levelone.GetChar().GetComponent<Necromancer>();
+            sk = (SkeletonArcher)GetSummonGo(1).GetComponent<SkeletonArcher>();
+            hx = (Hex)GetSummonGo(2).GetComponent<Hex>();
+            brute = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
+            dm = (Demon)GetSummonGo(4).GetComponent<Demon>();
+
             if (menuButClicked != 0 && Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 menuButClicked = 0;
@@ -195,7 +202,7 @@ namespace NecroNexus
                 if (timer > 0.5f)
                 {
                     AudioEffect.ButtonClickingSound();
-                    LevelOne.level.StartNextWave();
+                    levelone.level.StartNextWave();
                     menuButClicked = 0;
                     timer = 0;
                 }
@@ -235,7 +242,6 @@ namespace NecroNexus
                         switch (whichUpgradeClicked)
                         {
                             case 1://Skeleton Archer Upgrade.
-                                sk = (SkeletonArcher)GetSummonGo(1).GetComponent<SkeletonArcher>();
                                 switch (sk.Tier)
                                 {
                                     case 0: //level 0 to 1.
@@ -284,7 +290,6 @@ namespace NecroNexus
                                 break;
 
                             case 2: //Hex Upgrade.
-                                hx = (Hex)GetSummonGo(2).GetComponent<Hex>();
                                 switch (hx.Tier)
                                 {
                                     case 0: //level 0 to 1.
@@ -382,7 +387,6 @@ namespace NecroNexus
                                 }
                                 break;
                             case 4: //Demon Upgrade.
-                                dm = (Demon)GetSummonGo(4).GetComponent<Demon>();
                                 switch (dm.Tier)
                                 {
 
@@ -431,7 +435,6 @@ namespace NecroNexus
                                 }
                                 break;
                             case 5: //Player Upgrade.
-                                nc = (Necromancer)levelone.GetChar().GetComponent<Necromancer>();
                                 switch (nc.Tier)
                                 {
                                     case 0: //level 0 to 1.
@@ -463,7 +466,7 @@ namespace NecroNexus
         private void PauseingGame()
         {
             AudioEffect.ButtonClickingSound();
-            game.Repository.Close();
+            //game.Repository.Close();
             game.ChangeState(game.PauseMenuState);
         }
         /// <summary>
@@ -545,12 +548,11 @@ namespace NecroNexus
             spriteBatch.Draw(UISprites[8], clickableButRec[17], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Health, Souls and Wave count
             spriteBatch.DrawString(showLevelInfo, GetCriptHealth.ToString(), new Vector2(205, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
             spriteBatch.DrawString(showLevelInfo, GetSouls.ToString(), new Vector2(315, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(showLevelInfo, LevelOne.level.CurrentWave.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(showLevelInfo, levelone.level.CurrentWave.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
             spriteBatch.Draw(UISprites[9], clickableButRec[18], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ActivLevelPauseButton
 
             //for showing the player level
-            nc = (Necromancer)levelone.GetChar().GetComponent<Necromancer>();
             switch (nc.Tier)
             {
                 case 0:
@@ -598,7 +600,6 @@ namespace NecroNexus
                     spriteBatch.Draw(UISprites[5], clickableButRec[2], Color.DarkGray);//SummonBut
                     spriteBatch.Draw(UISprites[0], clickableButRec[5], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//Backgroundboxs for selection of summons
 
-                    SkeletonArcher sk = (SkeletonArcher)GetSummonGo(1).GetComponent<SkeletonArcher>();
                     if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y))
                     {
                         spriteBatch.Draw(UISprites[10], clickableButRec[6], null, Color.LightGray, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Archer TopLeft.
@@ -608,7 +609,6 @@ namespace NecroNexus
                     spriteBatch.DrawString(showLevelInfo, sk.Range.ToString(), new Vector2(765, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, sk.FireRate.ToString(), new Vector2(765, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
-                    Hex hx = (Hex)GetSummonGo(2).GetComponent<Hex>();
                     if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y))
                     {
                         spriteBatch.Draw(UISprites[11], clickableButRec[7], null, Color.LightGray, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//ButtomLeft.
@@ -618,7 +618,6 @@ namespace NecroNexus
                     spriteBatch.DrawString(showLevelInfo, hx.Range.ToString(), new Vector2(770, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, hx.FireRate.ToString(), new Vector2(770, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
-                    SkeletonBrute brute = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
                     if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y))
                     {
                         spriteBatch.Draw(UISprites[12], clickableButRec[8], null, Color.LightGray, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Topright.
@@ -628,15 +627,14 @@ namespace NecroNexus
                     spriteBatch.DrawString(showLevelInfo, brute.Range.ToString(), new Vector2(1260, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, brute.FireRate.ToString(), new Vector2(1260, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
-                    Demon demon = (Demon)GetSummonGo(4).GetComponent<Demon>();
                     if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y))
                     {
                         spriteBatch.Draw(UISprites[13], clickableButRec[9], null, Color.LightGray, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//ButtomRight.
                     }
                     else { spriteBatch.Draw(UISprites[13], clickableButRec[9], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f); }//ButtomRight.
-                    spriteBatch.DrawString(showLevelInfo, demon.demonDamge.ToString(), new Vector2(1260, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(showLevelInfo, demon.Range.ToString(), new Vector2(1260, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                    spriteBatch.DrawString(showLevelInfo, demon.FireRate.ToString(), new Vector2(1260, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, dm.demonDamge.ToString(), new Vector2(1260, 575), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, dm.Range.ToString(), new Vector2(1260, 630), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, dm.FireRate.ToString(), new Vector2(1260, 685), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
                     if (isHoveringOverIcon[0] == true)
                     {
@@ -684,7 +682,6 @@ namespace NecroNexus
                     switch (whichUpgradeClicked)
                     {
                         case 1://Archer
-                            sk = (SkeletonArcher)GetSummonGo(1).GetComponent<SkeletonArcher>();
                             spriteBatch.DrawString(showLevelInfo, sk.skDamage.ToString(), new Vector2(730, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                             spriteBatch.DrawString(showLevelInfo, sk.Range.ToString(), new Vector2(730, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                             spriteBatch.DrawString(showLevelInfo, sk.FireRate.ToString(), new Vector2(730, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
@@ -711,12 +708,11 @@ namespace NecroNexus
                                 case 3:
                                     spriteBatch.Draw(upgradeSpritesArray[3], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                                     spriteBatch.DrawString(showLevelInfo, sk.skDamage.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                                    spriteBatch.DrawString(showLevelInfo, "Max Tier", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
                                     break;
                             }
                             break;
                         case 2://Hex
-                            hx = (Hex)GetSummonGo(2).GetComponent<Hex>();
                             spriteBatch.DrawString(showLevelInfo, hx.hexDamge.ToString(), new Vector2(730, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                             spriteBatch.DrawString(showLevelInfo, hx.Range.ToString(), new Vector2(730, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                             spriteBatch.DrawString(showLevelInfo, hx.FireRate.ToString(), new Vector2(730, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
@@ -743,12 +739,11 @@ namespace NecroNexus
                                 case 3:
                                     spriteBatch.Draw(upgradeSpritesArray[7], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                                     spriteBatch.DrawString(showLevelInfo, hx.hexDamge.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                                    spriteBatch.DrawString(showLevelInfo, "Max Tier".ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max".ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
                                     break;
                             }
                             break;
                         case 3://Brute
-                            brute = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
                             spriteBatch.DrawString(showLevelInfo, "Unavaible", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
 
                             switch (brute.Tier)
@@ -768,14 +763,13 @@ namespace NecroNexus
                             }
                             break;
                         case 4:// Demon
-                            demon = (Demon)GetSummonGo(4).GetComponent<Demon>();
-                            spriteBatch.DrawString(showLevelInfo, demon.demonDamge.ToString(), new Vector2(730, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                            spriteBatch.DrawString(showLevelInfo, demon.Range.ToString(), new Vector2(730, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                            spriteBatch.DrawString(showLevelInfo, demon.FireRate.ToString(), new Vector2(730, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, dm.demonDamge.ToString(), new Vector2(730, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, dm.Range.ToString(), new Vector2(730, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, dm.FireRate.ToString(), new Vector2(730, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
-                            spriteBatch.DrawString(showLevelInfo, demon.Range.ToString(), new Vector2(1030, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                            spriteBatch.DrawString(showLevelInfo, demon.FireRate.ToString(), new Vector2(1030, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                            switch (demon.Tier)
+                            spriteBatch.DrawString(showLevelInfo, dm.Range.ToString(), new Vector2(1030, 605), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            spriteBatch.DrawString(showLevelInfo, dm.FireRate.ToString(), new Vector2(1030, 660), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                            switch (dm.Tier)
                             {
                                 case 0:
                                     spriteBatch.Draw(upgradeSpritesArray[12], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
@@ -794,8 +788,8 @@ namespace NecroNexus
                                     break;
                                 case 3:
                                     spriteBatch.Draw(upgradeSpritesArray[15], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
-                                    spriteBatch.DrawString(showLevelInfo, demon.demonDamge.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
-                                    spriteBatch.DrawString(showLevelInfo, "Max Tier", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, dm.demonDamge.ToString(), new Vector2(1030, 550), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
                                     break;
                             }
                             break;
@@ -816,7 +810,7 @@ namespace NecroNexus
                                     break;
                                 case 3:
                                     spriteBatch.Draw(upgradeSpritesArray[19], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
-                                    spriteBatch.DrawString(showLevelInfo, "Max Tier", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "Max", new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
                                     break;
                             }
                             break;
@@ -912,6 +906,9 @@ namespace NecroNexus
         {
             GetCriptHealth -= value;
         }
+
+
+
     }
 
 }
