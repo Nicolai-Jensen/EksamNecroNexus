@@ -140,6 +140,7 @@ namespace NecroNexus
 
             if (escPressed == false && MenuButClicked == 0 && Keyboard.GetState().IsKeyDown(Keys.Escape)) { PauseingGame(); }
         }
+
         /// <summary>
         /// This class handles the entire interation between the user and the UI, the information here is then used down in DrawingUI
         /// menuButClicked == 2 is for the summons menu

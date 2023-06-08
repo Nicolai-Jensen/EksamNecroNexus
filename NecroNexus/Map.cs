@@ -14,6 +14,12 @@ namespace NecroNexus
 
         public bool WallBD { get; set; }
         public bool WallEH { get; set; }
+
+         /*  Vi bygger graph1 instansen af Graph, som mapper ruten for bane nr 1. 
+            Det er rammen som holder på vores noder og edges i denne bane.
+            dvs at både noder og edges også bliver kreeret i denne metode.
+            Heads up: Graph klassen er generisk. */
+
         public List<Node<string>> Graph1()
         {
 
