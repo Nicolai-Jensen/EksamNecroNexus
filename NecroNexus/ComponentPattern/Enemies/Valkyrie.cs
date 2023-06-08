@@ -18,6 +18,7 @@ namespace NecroNexus
 
         public override float SoulDrop { get; set; }
 
+
         /// <summary>
         /// Applies a Speed, basedamage, health, board, souldrop and adds the boards list to the Objects pathlist
         /// </summary>
@@ -25,7 +26,7 @@ namespace NecroNexus
         /// <param name="pos">The SpawnPosition of the Object</param>
         public Valkyrie(Board board, Vector2 pos)
         {
-            speed = 170;
+            Speed = 170;
             baseDamage = 7;
             this.board = board;
             position = pos;
@@ -76,6 +77,14 @@ namespace NecroNexus
                 trueValue.Value = 0;
             }
             base.TakeDamage(trueValue);
+        }
+        public override void BecomeSlowed(Slow slow)
+        {
+            if (Speed >= 85)
+            {
+                base.BecomeSlowed(slow);
+            }
+
         }
     }
 }

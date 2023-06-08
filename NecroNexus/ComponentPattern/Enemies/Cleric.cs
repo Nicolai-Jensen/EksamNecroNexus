@@ -25,7 +25,7 @@ namespace NecroNexus
         /// <param name="pos">The SpawnPosition of the Object</param>
         public Cleric(Board board, Vector2 pos)
         {
-            speed = 60;
+            Speed = 60;
             baseDamage = 5;
             this.board = board;
             position = pos;
@@ -75,6 +75,14 @@ namespace NecroNexus
                 trueValue.Value = 0;
             }
             base.TakeDamage(trueValue);
+        }
+        public override void BecomeSlowed(Slow slow)
+        {
+            if (Speed >= 45)
+            {
+                base.BecomeSlowed(slow);
+            }
+
         }
     }
 }

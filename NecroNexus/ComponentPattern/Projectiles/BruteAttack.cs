@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +8,22 @@ using System.Threading.Tasks;
 namespace NecroNexus
 {
     //***********//KASPER KNUDSEN//***********//
-    public class HexBall : Component, IGameListener
+    public class BruteAttack : Component, IGameListener
     {
         private float speed;
         private Vector2 position;
         private Vector2 velocity;
         private Damage damage;
-        private Slow slow;
 
-
+        private float Speed { get; set; }
         public override bool ToRemove { get; set; }
 
         //Used for determening which applytier() method to call in the switch case below.
         private int tier;
 
 
-        public HexBall(int tier, Vector2 position, Vector2 velocity)
+
+        public BruteAttack(int tier, Vector2 position, Vector2 velocity)
         {
             this.tier = tier;
             this.position = position;
@@ -83,17 +82,14 @@ namespace NecroNexus
         {
             speed = 400f;
 
-            damage = new Damage(DamageType.Magical, 3f);
-            slow = new Slow(SlowType.Slowed, 10f);
+            damage = new Damage(DamageType.Both, 5f);
         }
 
         private void ApplyTier1()
         {
             speed = 450f;
 
-            damage = new Damage(DamageType.Magical, 6f);
-            slow = new Slow(SlowType.Slowed, 15f);
-
+            damage = new Damage(DamageType.Both, 10f);
 
         }
 
@@ -101,9 +97,7 @@ namespace NecroNexus
         {
             speed = 500f;
 
-            damage = new Damage(DamageType.Magical, 10f);
-            slow = new Slow(SlowType.Slowed, 20f);
-
+            damage = new Damage(DamageType.Both, 15f);
 
         }
 
@@ -111,9 +105,7 @@ namespace NecroNexus
         {
             speed = 550f;
 
-            damage = new Damage(DamageType.Magical, 15f);
-            slow = new Slow(SlowType.Slowed, 25f);
-
+            damage = new Damage(DamageType.Both, 25f);
 
         }
 
@@ -135,8 +127,8 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
-                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
+
                     }
                 }
 
@@ -146,8 +138,8 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
-                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
+
                     }
                 }
                 else if (other.HasComponent<Knight>())
@@ -156,8 +148,8 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
-                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
+
                     }
                 }
                 else if (other.HasComponent<HorseRider>())
@@ -166,8 +158,8 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
-                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
+
                     }
                 }
                 else if (other.HasComponent<Cleric>())
@@ -176,8 +168,6 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
-                        enemy.BecomeSlowed(slow);
-                        ToRemove = true;
                     }
                 }
                 else if (other.HasComponent<Paladin>())
@@ -186,8 +176,8 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
-                        //no slow method : cannot be slowed
                         ToRemove = true;
+
                     }
                 }
                 else if (other.HasComponent<Valkyrie>())
@@ -196,8 +186,8 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
-                        enemy.BecomeSlowed(slow);
                         ToRemove = true;
+
                     }
                 }
             }

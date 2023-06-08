@@ -26,7 +26,7 @@ namespace NecroNexus
         /// <param name="pos">The SpawnPosition of the Object</param>
         public HorseRider(Board board, Vector2 pos)
         {
-            speed = 250;
+            Speed = 250;
             baseDamage = 4;
             this.board = board;
             position = pos;
@@ -67,6 +67,14 @@ namespace NecroNexus
         public override void TakeDamage(Damage damage)
         {
             base.TakeDamage(damage);
+        }
+        public override void BecomeSlowed(Slow slow)
+        {
+            if (Speed >= 125)
+            {
+                base.BecomeSlowed(slow);
+            }
+
         }
     }
 }

@@ -33,6 +33,7 @@ namespace NecroNexus
         private Hex hx;
         private SkeletonBrute brute;
         private Demon dm;
+        private SkeletonBrute bt;
         private SummonFactory summons;
         private SpriteFont showLevelInfo;
         private LevelOne levelone;
@@ -173,12 +174,12 @@ namespace NecroNexus
                     if (GetSouls >= 20) { GetSouls -= 20; menuButClicked = 0; presseddowntopleft[1] = true; } else { return; }
 
                 }
-                //if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-                //{
-                //    AudioEffect.ButtonClickingSound();
-                //    if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; } else { return; }
+                if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                {
+                    AudioEffect.ButtonClickingSound();
+                    if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; } else { return; }
 
-                //}
+                }
                 if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     AudioEffect.ButtonClickingSound();
@@ -221,7 +222,7 @@ namespace NecroNexus
                 if (clickableButRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 2; }
 
                 //Skeleton Brute Upgrade icon.
-                //if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 3; }
+                if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 3; }
                 //Demon Upgrade icon.
                 if (clickableButRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 4; }
 
@@ -338,6 +339,53 @@ namespace NecroNexus
                                 }
                                 break;
                             case 3: //Skeleton Brute Upgrade.
+                                bt = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
+                                switch (bt.Tier)
+                                {
+
+                                    case 0: //level 0 to 1.
+                                        if (GetSouls >= 20)
+                                        {
+                                            GetSouls -= 20;
+                                            foreach (var item in LevelOne.gameObjects)
+                                            {
+                                                if (item.Tag == "Brute")
+                                                {
+                                                    bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                                                    bt.SetTier(1);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case 1: //level 1 to 2.
+                                        if (GetSouls >= 30)
+                                        {
+                                            GetSouls -= 30;
+                                            foreach (var item in LevelOne.gameObjects)
+                                            {
+                                                if (item.Tag == "Brute")
+                                                {
+                                                    bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                                                    bt.SetTier(2);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case 2: //level 2 to 3.
+                                        if (GetSouls >= 50)
+                                        {
+                                            GetSouls -= 50;
+                                            foreach (var item in LevelOne.gameObjects)
+                                            {
+                                                if (item.Tag == "Brute")
+                                                {
+                                                    bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                                                    bt.SetTier(3);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                }
                                 break;
                             case 4: //Demon Upgrade.
                                 switch (dm.Tier)
@@ -576,7 +624,7 @@ namespace NecroNexus
                         spriteBatch.Draw(UISprites[12], clickableButRec[8], null, Color.LightGray, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Topright.
                     }
                     else { spriteBatch.Draw(UISprites[12], clickableButRec[8], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f); }//Topright.
-                    spriteBatch.DrawString(showLevelInfo, brute.skDamge.ToString(), new Vector2(1260, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.DrawString(showLevelInfo, brute.BruteDamge.ToString(), new Vector2(1260, 330), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, brute.Range.ToString(), new Vector2(1260, 385), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                     spriteBatch.DrawString(showLevelInfo, brute.FireRate.ToString(), new Vector2(1260, 440), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 

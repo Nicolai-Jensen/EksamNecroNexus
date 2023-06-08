@@ -25,7 +25,7 @@ namespace NecroNexus
         /// <param name="pos">The SpawnPosition of the Object</param>
         public Paladin(Board board, Vector2 pos)
         {
-            speed = 40;
+            Speed = 40;
             baseDamage = 10;
             this.board = board;
             position = pos;
@@ -76,5 +76,6 @@ namespace NecroNexus
             }
             base.TakeDamage(trueValue);
         }
+        
     }
 }

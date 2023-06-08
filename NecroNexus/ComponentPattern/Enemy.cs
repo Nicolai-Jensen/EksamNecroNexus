@@ -26,6 +26,7 @@ namespace NecroNexus
         protected bool hit;
 
         //Speed Value, used for velocity in the Move method
+        protected bool speedModified;
         protected float speed;
 
         //Timers used for certain methods
@@ -47,6 +48,7 @@ namespace NecroNexus
         //Virtual Resources to inheret 
         public virtual float Health { get; set; }
         public virtual float SoulDrop { get; set; }
+        public virtual float Speed { get; set; }
 
         //A List of objects that have recently damaged the unit
         public List<GameObject> damagedList = new List<GameObject>();
@@ -102,7 +104,7 @@ namespace NecroNexus
                 velocity.Normalize();
             }
 
-            velocity *= speed;
+            velocity *= Speed;
             GameObject.Transform.Translate(velocity * GameWorld.DeltaTime);
 
             currentPosition = GameObject.Transform.Position;
@@ -137,6 +139,7 @@ namespace NecroNexus
                 AudioEffect.HitDamageSound();
                 healthModified = false;
             }
+            
             if (hit == true) //The Timer for returning the Object to its correct color from red
             {
                 timerForFeedBack += GameWorld.DeltaTime;
@@ -194,6 +197,11 @@ namespace NecroNexus
         {
             this.Health -= damage.Value;
             healthModified = true;
+        } 
+        public virtual void BecomeSlowed(Slow slow)
+        {
+            this.Speed -= slow.Value;
+            speedModified = true;
         }
     }
 }
