@@ -53,6 +53,7 @@ namespace NecroNexus
         private KeyboardState currentKey;
         private KeyboardState previousKey;
 
+
         public int LevelID { get; set; } = 1;
         public string LevelName { get; set; } = "Graveyard";
 
