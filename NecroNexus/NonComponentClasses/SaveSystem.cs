@@ -73,7 +73,7 @@ namespace NecroNexus
                     repo.DeleteTowerSave(Level.LevelID, Level.UserID);
                     foreach (var item in LevelOne.gameObjects)
                     {
-                        if (item.Transform.Position.X > -5000)
+                        if (item.Transform.Position.X > -2999)
                         {
                             if (item.Tag == "Archer" || item.Tag == "Brute" || item.Tag == "Hex" || item.Tag == "Demon")
                             {

@@ -116,10 +116,7 @@ namespace DatabaseRepository
 
         }
 
-        public void Commit()
-        {
-            
-        }
+      
 
         //Adding USER
         public void AddUser(string userName)

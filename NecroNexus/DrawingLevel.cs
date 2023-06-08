@@ -161,24 +161,28 @@ namespace NecroNexus
                 //So you can close the summons menu if clicked on again.
                 if (timer >= 0.25f && menuButClicked == 2 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; timer = 0; }
 
+                //archer
                 if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     AudioEffect.ButtonClickingSound();
-                    if (GetSouls >= 10) { GetSouls -= 10; menuButClicked = 0; presseddowntopleft[0] = true; } else { return; }
+                    if (GetSouls >= 15) { GetSouls -= 15; menuButClicked = 0; presseddowntopleft[0] = true; } else { return; }
 
                 }
+                //Hex
                 if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     AudioEffect.ButtonClickingSound();
                     if (GetSouls >= 20) { GetSouls -= 20; menuButClicked = 0; presseddowntopleft[1] = true; } else { return; }
 
                 }
+                //Brute
                 if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     AudioEffect.ButtonClickingSound();
                     if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; } else { return; }
 
                 }
+                //Demon
                 if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
                 {
                     AudioEffect.ButtonClickingSound();
@@ -638,19 +642,19 @@ namespace NecroNexus
 
                     if (isHoveringOverIcon[0] == true)
                     {
-                        spriteBatch.DrawString(showLevelInfo, "\n10", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                        spriteBatch.DrawString(showLevelInfo, "\n15", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1.75f, SpriteEffects.None, 1f);
                     }
                     else if (isHoveringOverIcon[1] == true)
                     {
-                        spriteBatch.DrawString(showLevelInfo, "\n20", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                        spriteBatch.DrawString(showLevelInfo, "\n20", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1.75f, SpriteEffects.None, 1f);
                     }
                     else if (isHoveringOverIcon[2] == true)
                     {
-                        spriteBatch.DrawString(showLevelInfo, "\nUnavailable", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                        spriteBatch.DrawString(showLevelInfo, "\nUnavailable", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1.75f, SpriteEffects.None, 1f);
                     }
                     else if (isHoveringOverIcon[3] == true)
                     {
-                        spriteBatch.DrawString(showLevelInfo, "\n40", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                        spriteBatch.DrawString(showLevelInfo, "\n40", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1.75f, SpriteEffects.None, 1f);
                     }
                     break;
                 #endregion
