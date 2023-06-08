@@ -61,6 +61,8 @@ namespace NecroNexus
         /// </summary>
         public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content, int user) : base(game, graphicsDevice, content)
         {
+            DrawingLevel.GetCriptHealth = 100;
+            DrawingLevel.GetSouls = 15;
             map = new Map(); //Adds the map
             boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2)); //Adds a Board
             summons = new SummonFactory(); //Adds a SummonFactory
