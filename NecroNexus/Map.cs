@@ -64,6 +64,7 @@ namespace NecroNexus
             WallEH = true;
             WallBD = true;
 
+
             if (WallBD == true)
             {
                 graph1.BuildWall("B", "D", true);
