@@ -151,53 +151,316 @@ namespace NecroNexus
         /// </summary>
         private void CheckingIfClicked()
         {
-            //Open the summons menu
-            if (clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { AudioEffect.ButtonClickingSound(); menuButClicked = 2; } else return; }
-            //buy summons menu.
-            if (menuButClicked == 2)
+            if (previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
-                timer += GameWorld.DeltaTime;
-
-                //So you can close the summons menu if clicked on again.
-                if (timer >= 0.25f && menuButClicked == 2 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { menuButClicked = 0; timer = 0; }
-
-                //archer
-                if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                //Open the summons menu
+                if (menuButClicked == 0 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) 
+                    || menuButClicked == 3 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y))
+                { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3])
+                    { AudioEffect.ButtonClickingSound(); menuButClicked = 2; } else return; }
+                else if (menuButClicked == 2 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y)) { menuButClicked = 0; }
+                //buy summons menu.
+                if (menuButClicked == 2)
                 {
-                    AudioEffect.ButtonClickingSound();
-                    if (GetSouls >= 15) { GetSouls -= 15; menuButClicked = 0; presseddowntopleft[0] = true; } else { return; }
+                    timer += GameWorld.DeltaTime;
 
+                    //So you can close the summons menu if clicked on again.
+                    if (timer >= 0.25f && menuButClicked == 2 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y)) { menuButClicked = 0; timer = 0; }
+
+                    //archer
+                    if (clickableButRec[6].Contains(currentMouse.X, currentMouse.Y))
+                    {
+                        if (GetSouls >= 15) { GetSouls -= 15; menuButClicked = 0; presseddowntopleft[0] = true; AudioEffect.ButtonClickingSound(); } else { return; }
+                    }
+                    //Hex
+                    if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y))
+                    {
+                        if (GetSouls >= 20) { GetSouls -= 20; menuButClicked = 0; presseddowntopleft[1] = true; AudioEffect.ButtonClickingSound(); } else { return; }
+                    }
+                    ////Brute
+                    //if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                    //{
+                    //    AudioEffect.ButtonClickingSound();
+                    //    if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; } else { return; }
+                    //}
+                    //Demon
+                    if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y))
+                    {
+                        if (GetSouls >= 40) { GetSouls -= 40; menuButClicked = 0; presseddowntopleft[3] = true; AudioEffect.ButtonClickingSound(); } else { return; }
+                    }
                 }
-                //Hex
-                if (clickableButRec[7].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-                {
-                    AudioEffect.ButtonClickingSound();
-                    if (GetSouls >= 20) { GetSouls -= 20; menuButClicked = 0; presseddowntopleft[1] = true; } else { return; }
-                }
-                ////Brute
-                //if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-                //{
-                //    AudioEffect.ButtonClickingSound();
-                //    if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; } else { return; }
-                //}
-                //Demon
-                if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-                {
-                    AudioEffect.ButtonClickingSound();
-                    if (GetSouls >= 40) { GetSouls -= 40; menuButClicked = 0; presseddowntopleft[3] = true; } else { return; }
+                //Open the upgrade menu
+                if (menuButClicked == 0 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) 
+                    || menuButClicked == 2 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y))
+                { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) 
+                    { AudioEffect.ButtonClickingSound(); menuButClicked = 3; } else return; }
+                else if (menuButClicked == 3 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y)) { menuButClicked = 0; }
 
+
+
+                //Choose upgrade
+                if (menuButClicked == 3)
+                {
+                    timer += GameWorld.DeltaTime;
+                    //So you can close the upgrade menu if clicked on again.
+                    if (timer >= 0.5f && menuButClicked == 3 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y)) { AudioEffect.ButtonClickingSound(); menuButClicked = 0; timer = 0; }
+                    //Skeleton arhcer Upgrade icon.
+                    if (clickableButRec[10].Contains(currentMouse.X, currentMouse.Y)) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 1; }
+
+                    //Hex Upgrade icon
+                    if (clickableButRec[11].Contains(currentMouse.X, currentMouse.Y)) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 2; }
+
+                    //Skeleton Brute Upgrade icon.
+                    if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y)) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 3; }
+                    //Demon Upgrade icon.
+                    if (clickableButRec[13].Contains(currentMouse.X, currentMouse.Y)) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 4; }
+
+                    //Player Upgrade icon.
+                    if (clickableButRec[14].Contains(currentMouse.X, currentMouse.Y)) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 5; }
+
+                    //UpgradeButtonClicked
+                    if (clickableButRec[16].Contains(currentMouse.X, currentMouse.Y))
+                    {
+                        AudioEffect.ButtonClickingSound();
+                        if (whichUpgradeClicked == 0)
+                        {
+                            return;
+                        }
+                        else // if an icon and the upgrade button has been clicked
+                        {
+                            switch (whichUpgradeClicked)
+                            {
+                                case 1://Skeleton Archer Upgrade.
+                                    switch (sk.Tier)
+                                    {
+                                        case 0: //level 0 to 1.
+                                            if (GetSouls >= 10)
+                                            {
+                                                GetSouls -= 10;
+                                                menuButClicked = 0;
+                                                foreach (var item in LevelOne.gameObjects)
+                                                {
+                                                    if (item.Tag == "Archer")
+                                                    {
+                                                        sk = (SkeletonArcher)item.GetComponent<SkeletonArcher>();
+                                                        sk.SetTier(1);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        case 1: //level 1 to 2.
+                                            if (GetSouls >= 20)
+                                            {
+                                                GetSouls -= 20;
+                                                menuButClicked = 0;
+                                                foreach (var item in LevelOne.gameObjects)
+                                                {
+                                                    if (item.Tag == "Archer")
+                                                    {
+                                                        sk = (SkeletonArcher)item.GetComponent<SkeletonArcher>();
+                                                        sk.SetTier(2);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        case 2: //level 2 to 3.
+                                            if (GetSouls >= 30)
+                                            {
+                                                GetSouls -= 30;
+                                                menuButClicked = 0;
+                                                foreach (var item in LevelOne.gameObjects)
+                                                {
+                                                    if (item.Tag == "Archer")
+                                                    {
+                                                        sk = (SkeletonArcher)item.GetComponent<SkeletonArcher>();
+                                                        sk.SetTier(3);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 2: //Hex Upgrade.
+                                    switch (hx.Tier)
+                                    {
+                                        case 0: //level 0 to 1.
+                                            if (GetSouls >= 10)
+                                            {
+                                                GetSouls -= 10;
+                                                menuButClicked = 0;
+                                                foreach (var item in LevelOne.gameObjects)
+                                                {
+                                                    if (item.Tag == "Hex")
+                                                    {
+                                                        hx = (Hex)item.GetComponent<Hex>();
+                                                        hx.SetTier(1);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        case 1: //level 1 to 2.
+                                            if (GetSouls >= 20)
+                                            {
+                                                GetSouls -= 20;
+                                                menuButClicked = 0;
+                                                foreach (var item in LevelOne.gameObjects)
+                                                {
+                                                    if (item.Tag == "Hex")
+                                                    {
+                                                        hx = (Hex)item.GetComponent<Hex>();
+                                                        hx.SetTier(2);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        case 2: //level 2 to 3.
+                                            if (GetSouls >= 30)
+                                            {
+                                                GetSouls -= 30;
+                                                menuButClicked = 0;
+                                                foreach (var item in LevelOne.gameObjects)
+                                                {
+                                                    if (item.Tag == "Hex")
+                                                    {
+                                                        hx = (Hex)item.GetComponent<Hex>();
+                                                        hx.SetTier(3);
+                                                    }
+                                                }
+                                            }
+                                            break;
+
+                                    }
+                                    break;
+                                //case 3: //Skeleton Brute Upgrade.
+                                //    bt = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
+                                //    switch (bt.Tier)
+                                //    {
+
+                                //        case 0: //level 0 to 1.
+                                //            if (GetSouls >= 20)
+                                //            {
+                                //                GetSouls -= 20;
+                                //                menuButClicked = 0;
+                                //                foreach (var item in LevelOne.gameObjects)
+                                //                {
+                                //                    if (item.Tag == "Brute")
+                                //                    {
+                                //                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                                //                        bt.SetTier(1);
+                                //                    }
+                                //                }
+                                //            }
+                                //            break;
+                                //        case 1: //level 1 to 2.
+                                //            if (GetSouls >= 30)
+                                //            {
+                                //                GetSouls -= 30;
+                                //                menuButClicked = 0;
+                                //                foreach (var item in LevelOne.gameObjects)
+                                //                {
+                                //                    if (item.Tag == "Brute")
+                                //                    {
+                                //                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                                //                        bt.SetTier(2);
+                                //                    }
+                                //                }
+                                //            }
+                                //            break;
+                                //        case 2: //level 2 to 3.
+                                //            if (GetSouls >= 50)
+                                //            {
+                                //                GetSouls -= 50;
+                                //                menuButClicked = 0;
+                                //                foreach (var item in LevelOne.gameObjects)
+                                //                {
+                                //                    if (item.Tag == "Brute")
+                                //                    {
+                                //                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                                //                        bt.SetTier(3);
+                                //                    }
+                                //                }
+                                //            }
+                                //            break;
+                                //    }
+                                //    break;
+                                case 4: //Demon Upgrade.
+                                    switch (dm.Tier)
+                                    {
+
+                                        case 0: //level 0 to 1.
+                                            if (GetSouls >= 20)
+                                            {
+                                                GetSouls -= 20;
+                                                menuButClicked = 0;
+                                                foreach (var item in LevelOne.gameObjects)
+                                                {
+                                                    if (item.Tag == "Demon")
+                                                    {
+                                                        dm = (Demon)item.GetComponent<Demon>();
+                                                        dm.SetTier(1);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        case 1: //level 1 to 2.
+                                            if (GetSouls >= 30)
+                                            {
+                                                GetSouls -= 30;
+                                                menuButClicked = 0;
+                                                foreach (var item in LevelOne.gameObjects)
+                                                {
+                                                    if (item.Tag == "Demon")
+                                                    {
+                                                        dm = (Demon)item.GetComponent<Demon>();
+                                                        dm.SetTier(2);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        case 2: //level 2 to 3.
+                                            if (GetSouls >= 50)
+                                            {
+                                                GetSouls -= 50;
+                                                menuButClicked = 0;
+                                                foreach (var item in LevelOne.gameObjects)
+                                                {
+                                                    if (item.Tag == "Demon")
+                                                    {
+                                                        dm = (Demon)item.GetComponent<Demon>();
+                                                        dm.SetTier(3);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 5: //Player Upgrade.
+                                    switch (nc.Tier)
+                                    {
+                                        case 0: //level 0 to 1.
+                                            if (GetSouls >= 10) { GetSouls -= 10; nc.Tier = 1; menuButClicked = 0; }
+                                            break;
+                                        case 1: //level 1 to 2.
+
+                                            if (GetSouls >= 20) { GetSouls -= 20; nc.Tier = 2; menuButClicked = 0; }
+                                            break;
+                                        case 2: //level 2 to 3.
+                                            if (GetSouls >= 30) { GetSouls -= 30; nc.Tier = 3; menuButClicked = 0; }
+                                            break;
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                }
+                //Checks to see if you click the pause button.
+                if (clickableButRec[18].Contains(currentMouse.X, currentMouse.Y))
+                {
+                    PauseingGame();
                 }
             }
-
-            HoveringSummons();
-
-            //Open the upgrade menu
-            if (clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) { AudioEffect.ButtonClickingSound(); menuButClicked = 3; } else return; }
-
             //Checks to see if you have clicked the nextwave
-            if (menuButClicked == 4 || clickableButRec[4].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+            if (menuButClicked == 4 || clickableButRec[4].Contains(currentMouse.X, currentMouse.Y) && (previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released))
             {
                 menuButClicked = 4;
                 //Start next wave
@@ -210,267 +473,8 @@ namespace NecroNexus
                     timer = 0;
                 }
             }
+            HoveringSummons();
 
-            //Choose upgrade
-            if (menuButClicked == 3)
-            {
-                timer += GameWorld.DeltaTime;
-                //So you can close the upgrade menu if clicked on again.
-                if (timer >= 0.5f && menuButClicked == 3 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); menuButClicked = 0; timer = 0; }
-                //Skeleton arhcer Upgrade icon.
-                if (clickableButRec[10].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 1; }
-
-                //Hex Upgrade icon
-                if (clickableButRec[11].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 2; }
-
-                //Skeleton Brute Upgrade icon.
-                if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 3; }
-                //Demon Upgrade icon.
-                if (clickableButRec[13].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 4; }
-
-                //Player Upgrade icon.
-                if (clickableButRec[14].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 5; }
-
-                //UpgradeButtonClicked
-                if (clickableButRec[16].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-                {
-                    AudioEffect.ButtonClickingSound();
-                    if (whichUpgradeClicked == 0)
-                    {
-                        return;
-                    }
-                    else // if an icon and the upgrade button has been clicked
-                    {
-                        switch (whichUpgradeClicked)
-                        {
-                            case 1://Skeleton Archer Upgrade.
-                                switch (sk.Tier)
-                                {
-                                    case 0: //level 0 to 1.
-                                        if (GetSouls >= 10)
-                                        {
-                                            GetSouls -= 10;
-                                            menuButClicked = 0;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Archer")
-                                                {
-                                                    sk = (SkeletonArcher)item.GetComponent<SkeletonArcher>();
-                                                    sk.SetTier(1);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    case 1: //level 1 to 2.
-                                        if (GetSouls >= 20)
-                                        {
-                                            GetSouls -= 20;
-                                            menuButClicked = 0;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Archer")
-                                                {
-                                                    sk = (SkeletonArcher)item.GetComponent<SkeletonArcher>();
-                                                    sk.SetTier(2);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    case 2: //level 2 to 3.
-                                        if (GetSouls >= 30)
-                                        {
-                                            GetSouls -= 30;
-                                            menuButClicked = 0;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Archer")
-                                                {
-                                                    sk = (SkeletonArcher)item.GetComponent<SkeletonArcher>();
-                                                    sk.SetTier(3);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 2: //Hex Upgrade.
-                                switch (hx.Tier)
-                                {
-                                    case 0: //level 0 to 1.
-                                        if (GetSouls >= 10)
-                                        {
-                                            GetSouls -= 10;
-                                            menuButClicked = 0;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Hex")
-                                                {
-                                                    hx = (Hex)item.GetComponent<Hex>();
-                                                    hx.SetTier(1);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    case 1: //level 1 to 2.
-                                        if (GetSouls >= 20)
-                                        {
-                                            GetSouls -= 20;
-                                            menuButClicked = 0;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Hex")
-                                                {
-                                                    hx = (Hex)item.GetComponent<Hex>();
-                                                    hx.SetTier(2);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    case 2: //level 2 to 3.
-                                        if (GetSouls >= 30)
-                                        {
-                                            GetSouls -= 30;
-                                            menuButClicked = 0;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Hex")
-                                                {
-                                                    hx = (Hex)item.GetComponent<Hex>();
-                                                    hx.SetTier(3);
-                                                }
-                                            }
-                                        }
-                                        break;
-
-                                }
-                                break;
-                            //case 3: //Skeleton Brute Upgrade.
-                            //    bt = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
-                            //    switch (bt.Tier)
-                            //    {
-
-                            //        case 0: //level 0 to 1.
-                            //            if (GetSouls >= 20)
-                            //            {
-                            //                GetSouls -= 20;
-                            //                menuButClicked = 0;
-                            //                foreach (var item in LevelOne.gameObjects)
-                            //                {
-                            //                    if (item.Tag == "Brute")
-                            //                    {
-                            //                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
-                            //                        bt.SetTier(1);
-                            //                    }
-                            //                }
-                            //            }
-                            //            break;
-                            //        case 1: //level 1 to 2.
-                            //            if (GetSouls >= 30)
-                            //            {
-                            //                GetSouls -= 30;
-                            //                menuButClicked = 0;
-                            //                foreach (var item in LevelOne.gameObjects)
-                            //                {
-                            //                    if (item.Tag == "Brute")
-                            //                    {
-                            //                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
-                            //                        bt.SetTier(2);
-                            //                    }
-                            //                }
-                            //            }
-                            //            break;
-                            //        case 2: //level 2 to 3.
-                            //            if (GetSouls >= 50)
-                            //            {
-                            //                GetSouls -= 50;
-                            //                menuButClicked = 0;
-                            //                foreach (var item in LevelOne.gameObjects)
-                            //                {
-                            //                    if (item.Tag == "Brute")
-                            //                    {
-                            //                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
-                            //                        bt.SetTier(3);
-                            //                    }
-                            //                }
-                            //            }
-                            //            break;
-                            //    }
-                            //    break;
-                            case 4: //Demon Upgrade.
-                                switch (dm.Tier)
-                                {
-
-                                    case 0: //level 0 to 1.
-                                        if (GetSouls >= 20)
-                                        {
-                                            GetSouls -= 20;
-                                            menuButClicked = 0;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Demon")
-                                                {
-                                                    dm = (Demon)item.GetComponent<Demon>();
-                                                    dm.SetTier(1);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    case 1: //level 1 to 2.
-                                        if (GetSouls >= 30)
-                                        {
-                                            GetSouls -= 30;
-                                            menuButClicked = 0;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Demon")
-                                                {
-                                                    dm = (Demon)item.GetComponent<Demon>();
-                                                    dm.SetTier(2);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    case 2: //level 2 to 3.
-                                        if (GetSouls >= 50)
-                                        {
-                                            GetSouls -= 50;
-                                            menuButClicked = 0;
-                                            foreach (var item in LevelOne.gameObjects)
-                                            {
-                                                if (item.Tag == "Demon")
-                                                {
-                                                    dm = (Demon)item.GetComponent<Demon>();
-                                                    dm.SetTier(3);
-                                                }
-                                            }
-                                        }
-                                        break;
-                                }
-                                break;
-                            case 5: //Player Upgrade.
-                                switch (nc.Tier)
-                                {
-                                    case 0: //level 0 to 1.
-                                        if (GetSouls >= 10) { GetSouls -= 10; nc.Tier = 1; menuButClicked = 0; }
-                                        break;
-                                    case 1: //level 1 to 2.
-
-                                        if (GetSouls >= 20) { GetSouls -= 20; nc.Tier = 2; menuButClicked = 0; }
-                                        break;
-                                    case 2: //level 2 to 3.
-                                        if (GetSouls >= 30) { GetSouls -= 30; nc.Tier = 3; menuButClicked = 0; }
-                                        break;
-                                }
-                                break;
-                        }
-                    }
-                }
-            }
-            //Checks to see if you click the pause button.
-            if (clickableButRec[18].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-            {
-                PauseingGame();
-            }
             //Checks to see if you have lost the game.
             if (GetCriptHealth <= 0)
             {
@@ -480,7 +484,6 @@ namespace NecroNexus
         private void PauseingGame()
         {
             AudioEffect.ButtonClickingSound();
-            //game.Repository.Close();
             game.ChangeState(game.PauseMenuState);
         }
         /// <summary>
@@ -559,12 +562,14 @@ namespace NecroNexus
         public void DrawingUI(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(UISprites[0], clickableButRec[0], Color.White);
-            spriteBatch.Draw(UISprites[8], clickableButRec[17], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);//Health, Souls and Wave count
+            //Health, Souls and Wave count
+            spriteBatch.Draw(UISprites[8], clickableButRec[17], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.91f);
             spriteBatch.DrawString(showLevelInfo, GetCriptHealth.ToString(), new Vector2(205, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
             spriteBatch.DrawString(showLevelInfo, GetSouls.ToString(), new Vector2(315, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
             spriteBatch.DrawString(showLevelInfo, levelone.level.CurrentWave.ToString() + " / 10", new Vector2(540, 20), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
 
-            spriteBatch.Draw(UISprites[9], clickableButRec[18], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);//ActivLevelPauseButton
+            //ActivLevelPauseButton
+            spriteBatch.Draw(UISprites[9], clickableButRec[18], null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0.9f);
 
             //for showing the player level
             switch (nc.Tier)
@@ -825,6 +830,7 @@ namespace NecroNexus
                                     spriteBatch.Draw(upgradeSpritesArray[18], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);
                                     spriteBatch.DrawString(showLevelInfo, 30.ToString(), new Vector2(1250, 550), Color.White, 0f, new Vector2(0, 0), 2f, SpriteEffects.None, 1f);
                                     spriteBatch.DrawString(showLevelInfo, "+ Damage", new Vector2(950, 625), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+                                    spriteBatch.DrawString(showLevelInfo, "+ Explosion", new Vector2(950, 650), Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
                                     break;
                                 case 3:
                                     spriteBatch.Draw(upgradeSpritesArray[19], clickableButRec[15], null, Color.White, 0f, new Vector2(0), SpriteEffects.None, 0.91f);

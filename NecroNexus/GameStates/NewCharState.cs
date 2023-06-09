@@ -96,6 +96,10 @@ namespace NecroNexus
                         // Remove the last character from currentText
                         currentText = currentText.Substring(0, currentText.Length - 1);
                     }
+                    else if (firstPressedKey == Keys.Space && currentText.Length > 0)
+                    {
+                        currentText += " ";
+                    }
                     else
                     {
                         string keyString = firstPressedKey.ToString();
