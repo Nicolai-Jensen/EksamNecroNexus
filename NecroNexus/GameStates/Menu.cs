@@ -53,7 +53,6 @@ namespace NecroNexus
             AudioEffect.PlayBackgroundMus();
             try
             {
-                //this.game.Repository.Open();
                 game.Repository.CreateDatabaseTables();
             }
             catch (System.Exception)
@@ -298,7 +297,6 @@ namespace NecroNexus
             }
             catch (System.Exception)
             {
-
                 user = null;
             }
             if (user != null)
