@@ -60,16 +60,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    hexDamge = 3;
+                    hexDamge = 0.5f;
                     break;
                 case 1:
-                    hexDamge = 6;
+                    hexDamge = 1f;
                     break;
                 case 2:
-                    hexDamge = 10;
+                    hexDamge = 1.5f;
                     break;
                 case 3:
-                    hexDamge = 15;
+                    hexDamge = 2f;
                     break;
             }
         }
@@ -108,7 +108,23 @@ namespace NecroNexus
                     ePos = Globals.FindClosestObject(LevelOne.gameObjects, GameObject.Transform.Position).Transform.Position;
                     Attack();
                     attackTimer = 0f;
+
                 }
+            }
+            switch (Tier)
+            {
+                case (0):
+                    AttackSpeed = 0.7f;
+                    break;
+                case (1):
+                    AttackSpeed = 0.6f;
+                    break;
+                case (2):
+                    AttackSpeed = 0.5f;
+                    break;
+                case (3):
+                    AttackSpeed = 0.3f;
+                    break;
             }
             SetValues(Tier);
             base.Update();

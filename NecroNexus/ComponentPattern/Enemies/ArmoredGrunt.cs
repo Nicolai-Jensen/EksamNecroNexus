@@ -79,7 +79,7 @@ namespace NecroNexus
         }
         public override void BecomeSlowed(Slow slow)
         {
-            if (Speed >= 50)
+            if (Speed >= Speed/2)
             {
                 base.BecomeSlowed(slow);
             }
