@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace NecroNexus
 
         public override float SoulDrop { get; set; }
 
+        public bool HasFallen { get; set; } = false;
 
         /// <summary>
         /// Applies a Speed, basedamage, health, board, souldrop and adds the boards list to the Objects pathlist
@@ -44,6 +46,7 @@ namespace NecroNexus
             GameObject.Transform.Position = position;
             currentPosition = GameObject.Transform.Position;
             animator = (Animator)GameObject.GetComponent<Animator>();
+            animator.PlayAnimation("Idle");
         }
 
         /// <summary>
@@ -51,17 +54,62 @@ namespace NecroNexus
         /// </summary>
         public override void Update()
         {
-
-            animator.PlayAnimation("Idle");
             FindPath();
             Move();
             UpdateDamagedList();
             Death();
+
+            if (sr.Sprite == Globals.Content.Load<Texture2D>("Enemies/Rider/Death/Knight_death11"))
+            {
+                animator.PlayAnimation("Walk");
+                Speed = 60;
+                GameObject.Tag = "Enemy";
+            }
+
         }
 
         public override void FindPath()
         {
             base.FindPath();
+        }
+
+        /// <summary>
+        /// This Method is used to track if an Enemy has Died or taken damage
+        /// </summary>
+        public override void Death()
+        {
+            if (Health <= 0 && HasFallen == false) //Object has Died, gets removed and drops its souls
+            {
+                GameObject.Tag = "Dead";
+                Speed = 0;
+                Health = 20;
+                animator.PlayAnimation("Death");
+                DrawingLevel.UpdateSouls(SoulDrop);
+                HasFallen = true;
+            }
+            else if (Health <= 0 && HasFallen == true)
+            {
+                ToRemove = true;
+                DrawingLevel.UpdateSouls(SoulDrop);
+            }
+            if (healthModified == true) //Object has been hit, initiate hit feedback
+            {
+                hit = true;
+                sr.Color = Color.Red;
+                AudioEffect.HitDamageSound();
+                healthModified = false;
+            }
+
+            if (hit == true) //The Timer for returning the Object to its correct color from red
+            {
+                timerForFeedBack += GameWorld.DeltaTime;
+                if (timerForFeedBack > 0.1f)
+                {
+                    sr.Color = Color.White;
+                    hit = false;
+                    timerForFeedBack = 0;
+                }
+            }
         }
 
         public override void TakeDamage(Damage damage)
