@@ -106,15 +106,16 @@ namespace NecroNexus
             #region Updrage Sprite
             for (int i = 0; i < 20; i++)
             {
-                upgradeSpritesArray[i] = content.Load<Texture2D>($"placeholdersprites/UI/UpgradeUIelements/UpgradeSpritesTier{i}");
                 /*
                 0 - 3 is Archer
                 4 - 7 is Hex
                 8 - 11 is Brute
                 12 - 15 is Demon
                 16 - 19 is player
-                 */
-                //Üse clickablebutrec 15 for size
+                Üse clickablebutrec 15 for size
+                */
+                upgradeSpritesArray[i] = content.Load<Texture2D>($"placeholdersprites/UI/UpgradeUIelements/UpgradeSpritesTier{i}");
+
             }
             #endregion
 
@@ -132,14 +133,15 @@ namespace NecroNexus
             brute = (SkeletonBrute)GetSummonGo(3).GetComponent<SkeletonBrute>();
             dm = (Demon)GetSummonGo(4).GetComponent<Demon>();
 
+            //Close Menu
             if (menuButClicked != 0 && Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 menuButClicked = 0;
                 escPressed = true;
             }
             else if (escPressed == true && Keyboard.GetState().IsKeyUp(Keys.Escape)) { escPressed = false; }
-
-            if (escPressed == false && MenuButClicked == 0 && Keyboard.GetState().IsKeyDown(Keys.Escape)) { PauseingGame(); }
+            //If menu closed call method PausingGame
+            if (escPressed == false && MenuButClicked == 0 && Keyboard.GetState().IsKeyDown(Keys.Escape)) { PausingGame(); }
         }
 
         /// <summary>
@@ -154,10 +156,13 @@ namespace NecroNexus
             if (previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
             {
                 //Open the summons menu
-                if (menuButClicked == 0 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y) 
+                if (menuButClicked == 0 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y)
                     || menuButClicked == 3 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y))
-                { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3])
-                    { AudioEffect.ButtonClickingSound(); menuButClicked = 2; } else return; }
+                {
+                    if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3])
+                    { AudioEffect.ButtonClickingSound(); menuButClicked = 2; }
+                    else return;
+                }
                 else if (menuButClicked == 2 && clickableButRec[2].Contains(currentMouse.X, currentMouse.Y)) { menuButClicked = 0; }
                 //buy summons menu.
                 if (menuButClicked == 2)
@@ -190,10 +195,13 @@ namespace NecroNexus
                     }
                 }
                 //Open the upgrade menu
-                if (menuButClicked == 0 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y) 
+                if (menuButClicked == 0 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y)
                     || menuButClicked == 2 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y))
-                { if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3]) 
-                    { AudioEffect.ButtonClickingSound(); menuButClicked = 3; } else return; }
+                {
+                    if (!presseddowntopleft[0] && !presseddowntopleft[1] && !presseddowntopleft[2] && !presseddowntopleft[3])
+                    { AudioEffect.ButtonClickingSound(); menuButClicked = 3; }
+                    else return;
+                }
                 else if (menuButClicked == 3 && clickableButRec[3].Contains(currentMouse.X, currentMouse.Y)) { menuButClicked = 0; }
 
 
@@ -456,7 +464,7 @@ namespace NecroNexus
                 //Checks to see if you click the pause button.
                 if (clickableButRec[18].Contains(currentMouse.X, currentMouse.Y))
                 {
-                    PauseingGame();
+                    PausingGame();
                 }
             }
             //Checks to see if you have clicked the nextwave
@@ -481,7 +489,7 @@ namespace NecroNexus
                 game.ChangeState(game.LostGame);
             }
         }
-        private void PauseingGame()
+        private void PausingGame()
         {
             AudioEffect.ButtonClickingSound();
             game.ChangeState(game.PauseMenuState);

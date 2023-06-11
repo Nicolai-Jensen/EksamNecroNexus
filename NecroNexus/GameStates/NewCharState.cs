@@ -90,12 +90,13 @@ namespace NecroNexus
                     keyReleased = false;
 
                     Keys firstPressedKey = pressedKeys[0];
-
+                    //BackSpace
                     if (firstPressedKey == Keys.Back && currentText.Length > 0)
                     {
                         // Remove the last character from currentText
                         currentText = currentText.Substring(0, currentText.Length - 1);
                     }
+                    //Space
                     else if (firstPressedKey == Keys.Space && currentText.Length > 0)
                     {
                         currentText += " ";
