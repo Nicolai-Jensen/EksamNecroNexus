@@ -24,7 +24,7 @@ namespace NecroNexus
         /// </summary>
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get { return AttackSpeed; } }
-        public float demonDamge { get; set; }
+        public float DemonDamage { get; set; }
         public int Tier { get; set; } = 0;
 
         /// <summary>
@@ -59,16 +59,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    demonDamge = 10f;
+                    DemonDamage = 10f;
                     break;
                 case 1:
-                    demonDamge = 15f;
+                    DemonDamage = 15f;
                     break;
                 case 2:
-                    demonDamge = 20f;
+                    DemonDamage = 20f;
                     break;
                 case 3:
-                    demonDamge = 40f;
+                    DemonDamage = 40f;
                     break;
             }
         }

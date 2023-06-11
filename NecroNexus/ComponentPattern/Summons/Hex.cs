@@ -21,7 +21,7 @@ namespace NecroNexus
         /// <summary>
         /// Properties that the UI gets, so the player can see the stats of the summon.
         /// </summary>
-        public float hexDamge { get; set; }
+        public float HexDamage { get; set; }
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get { return AttackSpeed; } }
 
@@ -60,16 +60,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    hexDamge = 3;
+                    HexDamage = 3;
                     break;
                 case 1:
-                    hexDamge = 6;
+                    HexDamage = 6;
                     break;
                 case 2:
-                    hexDamge = 10;
+                    HexDamage = 10;
                     break;
                 case 3:
-                    hexDamge = 15;
+                    HexDamage = 15;
                     break;
             }
         }

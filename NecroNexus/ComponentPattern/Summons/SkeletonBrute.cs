@@ -17,6 +17,7 @@ namespace NecroNexus
 
         //Used to calculate attackspeed
         private float attackTimer;
+        private bool loaded;
 
 
         BruteAttackFactory bruteAttackFactory = new BruteAttackFactory();
@@ -27,7 +28,7 @@ namespace NecroNexus
         /// <summary>
         /// Properties that the UI gets, so the player can see the stats of the summon.
         /// </summary>
-        public float BruteDamge { get; set; } //skDamage = SkeletonDamage
+        public float BruteDamage { get; set; } //SkDamage = SkeletonDamage
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get { return AttackSpeed; } }
         public int Tier { get; set; } = 0;
@@ -40,15 +41,12 @@ namespace NecroNexus
             SetTier(0);
 
         }
-        public override void Start()
-        {
-            //if (loaded == false)
-            //{
-            //    GameObject.Transform.Translate(Position);
-            //}
-            GameObject.Tag = "Brute";
 
-            base.Start();
+        public SkeletonBrute(bool load, Vector2 position, float attackRangeRadius, float attackspeed) : base(position, attackRangeRadius, attackspeed)
+        {
+            loaded = load;
+            AttackRangeRadius = attackRangeRadius;
+            EnemiesInRange = new List<GameObject>();
         }
 
         public void SetValues(int i)
@@ -56,16 +54,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    BruteDamge = 1f;
+                    BruteDamage = 1f;
                     break;
                 case 1:
-                    BruteDamge = 2f;
+                    BruteDamage = 2f;
                     break;
                 case 2:
-                    BruteDamge = 3f;
+                    BruteDamage = 3f;
                     break;
                 case 3:
-                    BruteDamge = 4f;
+                    BruteDamage = 4f;
                     break;
             }
         }
@@ -73,6 +71,18 @@ namespace NecroNexus
         {
             this.Tier = i;
         }
+        public override void Start()
+        {
+            if (loaded == false)
+            {
+                GameObject.Transform.Translate(Position);
+            }
+            GameObject.Tag = "Brute";
+            base.Start();
+        }
+
+        
+        
         /// <summary>
         /// Updated method that contains an if statement, that find the closest object via the FindClosestObject(),
         /// and then sets the individual summons attack timer.

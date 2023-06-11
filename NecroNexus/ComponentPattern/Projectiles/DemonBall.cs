@@ -171,6 +171,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        ToRemove = true;
                     }
                 }
                 else if (other.HasComponent<Paladin>())

@@ -47,6 +47,7 @@ namespace NecroNexus
             Collider c;
 
             BruteAttack b;
+            go.Tag = "BruteAttack";
 
 
             switch (type)

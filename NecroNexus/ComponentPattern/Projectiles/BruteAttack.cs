@@ -14,6 +14,7 @@ namespace NecroNexus
         private Vector2 position;
         private Vector2 velocity;
         private Damage damage;
+    
 
         private float Speed { get; set; }
         public override bool ToRemove { get; set; }
@@ -82,14 +83,14 @@ namespace NecroNexus
         {
             speed = 400f;
 
-            damage = new Damage(DamageType.Both, 5f);
+            damage = new Damage(DamageType.Physical, 0f);
         }
 
         private void ApplyTier1()
         {
             speed = 450f;
 
-            damage = new Damage(DamageType.Both, 10f);
+            damage = new Damage(DamageType.Physical, 0f);
 
         }
 
@@ -97,7 +98,7 @@ namespace NecroNexus
         {
             speed = 500f;
 
-            damage = new Damage(DamageType.Both, 15f);
+            damage = new Damage(DamageType.Physical, 0f);
 
         }
 
@@ -105,7 +106,7 @@ namespace NecroNexus
         {
             speed = 550f;
 
-            damage = new Damage(DamageType.Both, 25f);
+            damage = new Damage(DamageType.Physical, 0f);
 
         }
 
@@ -128,7 +129,6 @@ namespace NecroNexus
                     {
                         enemy.TakeDamage(damage);
                         ToRemove = true;
-
                     }
                 }
 
@@ -168,6 +168,7 @@ namespace NecroNexus
                     if (enemy.IsInDamagedList(this.GameObject) == false)
                     {
                         enemy.TakeDamage(damage);
+                        ToRemove = true;
                     }
                 }
                 else if (other.HasComponent<Paladin>())
@@ -192,5 +193,6 @@ namespace NecroNexus
                 }
             }
         }
+
     }
 }
