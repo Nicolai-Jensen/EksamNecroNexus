@@ -178,10 +178,10 @@ namespace NecroNexus
                         if (GetSouls >= 20) { GetSouls -= 20; menuButClicked = 0; presseddowntopleft[1] = true; AudioEffect.ButtonClickingSound(); } else { return; }
                     }
                     ////Brute
-                    if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
-                    {
-                        if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; AudioEffect.ButtonClickingSound(); } else { return; }
-                    }
+                    //if (clickableButRec[8].Contains(currentMouse.X, currentMouse.Y) && previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released)
+                    //{
+                    //    if (GetSouls >= 30) { GetSouls -= 30; menuButClicked = 0; presseddowntopleft[2] = true; AudioEffect.ButtonClickingSound(); } else { return; }
+                    //}
                     //Demon
                     if (clickableButRec[9].Contains(currentMouse.X, currentMouse.Y))
                     {
@@ -210,7 +210,7 @@ namespace NecroNexus
                     if (clickableButRec[11].Contains(currentMouse.X, currentMouse.Y)) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 2; }
 
                     //Skeleton Brute Upgrade icon.
-                    if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y)) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 3; }
+                    //if (clickableButRec[12].Contains(currentMouse.X, currentMouse.Y)) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 3; }
                     //Demon Upgrade icon.
                     if (clickableButRec[13].Contains(currentMouse.X, currentMouse.Y)) { AudioEffect.ButtonClickingSound(); whichUpgradeClicked = 4; }
 
@@ -331,56 +331,56 @@ namespace NecroNexus
                                     }
                                     break;
                                 case 3: //Skeleton Brute Upgrade.
-                                    switch (bt.Tier)
-                                    {
+                                    //switch (bt.Tier)
+                                    //{
 
-                                        case 0: //level 0 to 1.
-                                            if (GetSouls >= 20)
-                                            {
-                                                GetSouls -= 20;
-                                                menuButClicked = 0;
-                                                foreach (var item in LevelOne.gameObjects)
-                                                {
-                                                    if (item.Tag == "Brute")
-                                                    {
-                                                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
-                                                        bt.SetTier(1);
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        case 1: //level 1 to 2.
-                                            if (GetSouls >= 30)
-                                            {
-                                                GetSouls -= 30;
-                                                menuButClicked = 0;
-                                                foreach (var item in LevelOne.gameObjects)
-                                                {
-                                                    if (item.Tag == "Brute")
-                                                    {
-                                                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
-                                                        bt.SetTier(2);
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        case 2: //level 2 to 3.
-                                            if (GetSouls >= 50)
-                                            {
-                                                GetSouls -= 50;
-                                                menuButClicked = 0;
-                                                foreach (var item in LevelOne.gameObjects)
-                                                {
-                                                    if (item.Tag == "Brute")
-                                                    {
-                                                        bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
-                                                        bt.SetTier(3);
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                    }
-                                    break;
+                                    //    case 0: //level 0 to 1.
+                                    //        if (GetSouls >= 20)
+                                    //        {
+                                    //            GetSouls -= 20;
+                                    //            menuButClicked = 0;
+                                    //            foreach (var item in LevelOne.gameObjects)
+                                    //            {
+                                    //                if (item.Tag == "Brute")
+                                    //                {
+                                    //                    bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                                    //                    bt.SetTier(1);
+                                    //                }
+                                    //            }
+                                    //        }
+                                    //        break;
+                                    //    case 1: //level 1 to 2.
+                                    //        if (GetSouls >= 30)
+                                    //        {
+                                    //            GetSouls -= 30;
+                                    //            menuButClicked = 0;
+                                    //            foreach (var item in LevelOne.gameObjects)
+                                    //            {
+                                    //                if (item.Tag == "Brute")
+                                    //                {
+                                    //                    bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                                    //                    bt.SetTier(2);
+                                    //                }
+                                    //            }
+                                    //        }
+                                    //        break;
+                                    //    case 2: //level 2 to 3.
+                                    //        if (GetSouls >= 50)
+                                    //        {
+                                    //            GetSouls -= 50;
+                                    //            menuButClicked = 0;
+                                    //            foreach (var item in LevelOne.gameObjects)
+                                    //            {
+                                    //                if (item.Tag == "Brute")
+                                    //                {
+                                    //                    bt = (SkeletonBrute)item.GetComponent<SkeletonBrute>();
+                                    //                    bt.SetTier(3);
+                                    //                }
+                                    //            }
+                                    //        }
+                                    //        break;
+                                    //}
+                                    //break;
                                 case 4: //Demon Upgrade.
                                     switch (dm.Tier)
                                     {
@@ -663,7 +663,7 @@ namespace NecroNexus
                     }
                     else if (isHoveringOverIcon[2] == true)
                     {
-                        spriteBatch.DrawString(showLevelInfo, "\n30", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1.75f, SpriteEffects.None, 1f);
+                        spriteBatch.DrawString(showLevelInfo, "\nUnavailable :(", new Vector2(currentMouse.X, currentMouse.Y), Color.White, 0f, new Vector2(0, 0), 1.75f, SpriteEffects.None, 1f);
                     }
                     else if (isHoveringOverIcon[3] == true)
                     {
