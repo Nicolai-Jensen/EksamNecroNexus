@@ -60,16 +60,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    hexDamge = 0.5f;
+                    HexDamage = 0.5f;
                     break;
                 case 1:
-                    hexDamge = 1f;
+                    HexDamage = 1f;
                     break;
                 case 2:
-                    hexDamge = 1.5f;
+                    HexDamage = 1.5f;
                     break;
                 case 3:
-                    hexDamge = 2f;
+                    HexDamage = 2f;
                     break;
             }
         }
