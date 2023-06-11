@@ -53,6 +53,7 @@ namespace NecroNexus
         private KeyboardState currentKey;
         private KeyboardState previousKey;
 
+
         public int LevelID { get; set; } = 1;
         public string LevelName { get; set; } = "Graveyard";
 
@@ -61,6 +62,8 @@ namespace NecroNexus
         /// </summary>
         public LevelOne(GameWorld game, GraphicsDevice graphicsDevice, ContentManager content, int user) : base(game, graphicsDevice, content)
         {
+            DrawingLevel.GetCriptHealth = 100;
+            DrawingLevel.GetSouls = 1500;
             map = new Map(); //Adds the map
             boardOne = new Board(new Vector2(700, GameWorld.ScreenSize.Y / 2)); //Adds a Board
             summons = new SummonFactory(); //Adds a SummonFactory

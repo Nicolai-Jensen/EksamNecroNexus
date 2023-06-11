@@ -59,7 +59,7 @@ namespace NecroNexus
         public override void Update()
         {
             Move();
-            if (hits >=3) //Removes the explosion on a certain frame of its animation
+            if (hits >=3)
             {
                 ToRemove = true;
             }

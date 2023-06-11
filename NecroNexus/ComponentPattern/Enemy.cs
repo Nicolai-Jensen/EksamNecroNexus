@@ -125,7 +125,7 @@ namespace NecroNexus
         /// <summary>
         /// This Method is used to track if an Enemy has Died or taken damage
         /// </summary>
-        public void Death()
+        public virtual void Death()
         {
             if (Health <= 0) //Object has Died, gets removed and drops its souls
             {

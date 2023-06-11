@@ -43,7 +43,7 @@ namespace NecroNexus
                 case SummonType.SkeletonBrute:
                     sr.SetSprite("Summons/SkeletonBrute/tile000", 2f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/SkeletonBrute/tile000", "Summons/SkeletonBrute/tile001", "Summons/SkeletonBrute/tile002", "Summons/SkeletonBrute/tile003" }));
-                    go.AddComponent(new SkeletonBrute(position, 0f, 0f));
+                    go.AddComponent(new SkeletonBrute(position, 50f, 2.3f));
                     LevelOne.AddObject(go);
                     break;
 
@@ -84,7 +84,7 @@ namespace NecroNexus
                 case SummonType.SkeletonBrute:
                     sr.SetSprite("Summons/SkeletonBrute/tile000", 2f, 0, 0.6f);
                     animator.AddAnimation(BuildAnimation("Idle", new string[] { "Summons/SkeletonBrute/tile000", "Summons/SkeletonBrute/tile001", "Summons/SkeletonBrute/tile002", "Summons/SkeletonBrute/tile003" }));
-                    go.AddComponent(new SkeletonBrute(position, 0f, 0f));
+                    go.AddComponent(new SkeletonBrute(position, 50f, 2.3f));
                     break;
 
                 case SummonType.Hex:

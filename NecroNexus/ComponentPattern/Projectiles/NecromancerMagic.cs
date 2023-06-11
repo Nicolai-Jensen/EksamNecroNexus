@@ -197,7 +197,7 @@ namespace NecroNexus
         {
             speed = 700f;
             damage = new Damage(DamageType.Magical, 1.5f);
-            homing = true;
+            willHome = true;
         }
 
         public void Tier2()
