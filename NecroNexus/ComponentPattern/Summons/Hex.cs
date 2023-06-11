@@ -21,7 +21,7 @@ namespace NecroNexus
         /// <summary>
         /// Properties that the UI gets, so the player can see the stats of the summon.
         /// </summary>
-        public float hexDamge { get; set; }
+        public float HexDamage { get; set; }
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get { return AttackSpeed; } }
 
@@ -60,16 +60,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    hexDamge = 3;
+                    HexDamage = 0.5f;
                     break;
                 case 1:
-                    hexDamge = 6;
+                    HexDamage = 1f;
                     break;
                 case 2:
-                    hexDamge = 10;
+                    HexDamage = 1.5f;
                     break;
                 case 3:
-                    hexDamge = 15;
+                    HexDamage = 2f;
                     break;
             }
         }
@@ -108,7 +108,23 @@ namespace NecroNexus
                     ePos = Globals.FindClosestObject(LevelOne.gameObjects, GameObject.Transform.Position).Transform.Position;
                     Attack();
                     attackTimer = 0f;
+
                 }
+            }
+            switch (Tier)
+            {
+                case (0):
+                    AttackSpeed = 0.7f;
+                    break;
+                case (1):
+                    AttackSpeed = 0.6f;
+                    break;
+                case (2):
+                    AttackSpeed = 0.5f;
+                    break;
+                case (3):
+                    AttackSpeed = 0.3f;
+                    break;
             }
             SetValues(Tier);
             base.Update();

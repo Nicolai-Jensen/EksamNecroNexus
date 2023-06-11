@@ -82,17 +82,17 @@ namespace NecroNexus
         public void ApplyTierZero()
         {
             speed = 400f;
-
-            damage = new Damage(DamageType.Magical, 3f);
-            slow = new Slow(SlowType.Slowed, 10f);
+            
+            damage = new Damage(DamageType.Magical, 0.5f);
+            slow = new Slow(SlowType.Slowed, 5f);
         }
 
         private void ApplyTier1()
         {
             speed = 450f;
 
-            damage = new Damage(DamageType.Magical, 6f);
-            slow = new Slow(SlowType.Slowed, 15f);
+            damage = new Damage(DamageType.Magical, 1f);
+            slow = new Slow(SlowType.Slowed, 8f);
 
 
         }
@@ -101,8 +101,8 @@ namespace NecroNexus
         {
             speed = 500f;
 
-            damage = new Damage(DamageType.Magical, 10f);
-            slow = new Slow(SlowType.Slowed, 20f);
+            damage = new Damage(DamageType.Magical, 1.5f);
+            slow = new Slow(SlowType.Slowed, 12f);
 
 
         }
@@ -111,8 +111,8 @@ namespace NecroNexus
         {
             speed = 550f;
 
-            damage = new Damage(DamageType.Magical, 15f);
-            slow = new Slow(SlowType.Slowed, 25f);
+            damage = new Damage(DamageType.Magical, 2f);
+            slow = new Slow(SlowType.Slowed, 15f);
 
 
         }

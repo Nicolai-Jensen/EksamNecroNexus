@@ -22,7 +22,7 @@ namespace NecroNexus
         /// <summary>
         /// Properties that the UI gets, so the player can see the stats of the summon.
         /// </summary>
-        public float skDamage { get; set; } //skDamage = SkeletonDamage
+        public float SkDamage { get; set; } //SkDamage = SkeletonDamage
         public float Range { get { return AttackRangeRadius; } }
         public float FireRate { get{ return AttackSpeed; } }
         public int Tier { get; set; } = 0;
@@ -59,16 +59,16 @@ namespace NecroNexus
             switch (i)
             {
                 case 0:
-                    skDamage = 1f;
+                    SkDamage = 1f;
                     break;
                 case 1:
-                    skDamage = 2f;
+                    SkDamage = 2f;
                     break;
                 case 2:
-                    skDamage = 3f;
+                    SkDamage = 3f;
                     break;
                 case 3:
-                    skDamage = 4f;
+                    SkDamage = 4f;
                     break;
             }
         }
