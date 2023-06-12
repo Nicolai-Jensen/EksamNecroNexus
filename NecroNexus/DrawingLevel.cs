@@ -41,7 +41,7 @@ namespace NecroNexus
 
         public int MenuButClicked { get { return menuButClicked; } set { menuButClicked = value; } }
         public static int GetCriptHealth { get; set; } = 100;
-        public static int GetSouls { get; set; } = 1000;
+        public static int GetSouls { get; set; } = 15;
 
 
         public DrawingLevel(GameWorld game, LevelOne levelone)
