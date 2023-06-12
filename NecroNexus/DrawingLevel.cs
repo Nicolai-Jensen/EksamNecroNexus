@@ -465,8 +465,10 @@ namespace NecroNexus
                     PausingGame();
                 }
             }
+
             //Checks to see if you have clicked the nextwave
-            if (menuButClicked == 4 || clickableButRec[4].Contains(currentMouse.X, currentMouse.Y) && (previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released))
+            if (menuButClicked == 4 || clickableButRec[4].Contains(currentMouse.X, currentMouse.Y) 
+                && (previousMouse.LeftButton == ButtonState.Pressed && currentMouse.LeftButton == ButtonState.Released))
             {
                 menuButClicked = 4;
                 //Start next wave
